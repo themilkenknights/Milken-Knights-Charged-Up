@@ -185,13 +185,21 @@ public class MkSwerveTrain
     {
         DeltaAirlines.getInstance().updateDeltaTime();
         
-        SmartDashboard.putNumber("distancetopright", vars.posInchTR);
-        SmartDashboard.putNumber("distancetbotleft", vars.posInchBL);
-        SmartDashboard.putNumber("distancetbotright", vars.posInchBR);
-        SmartDashboard.putNumber("brdeg", brDeg());
-        SmartDashboard.putNumber("brcider", brCoder());
-        SmartDashboard.putNumber("avgDistTest", vars.avgDistTest * AUTO.measToPredictRatio);
-        SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
+        //SmartDashboard.putNumber("distancetopright", vars.posInchTR);
+        //SmartDashboard.putNumber("distancetbotleft", vars.posInchBL);
+        //SmartDashboard.putNumber("distancetbotright", vars.posInchBR);
+        //SmartDashboard.putNumber("brdeg", brDeg());
+        //SmartDashboard.putNumber("brcider", brCoder());
+        //SmartDashboard.putNumber("avgDistTest", vars.avgDistTest * AUTO.measToPredictRatio);
+        //SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
+
+        SmartDashboard.putNumber("topleftcan", tlCoder());
+        SmartDashboard.putNumber("toprightcan", trCoder());
+        SmartDashboard.putNumber("botleftcan", blCoder());
+        SmartDashboard.putNumber("botrightcan", brCoder());
+        SmartDashboard.putNumber("topleftcantonative", MathFormulas.degreesToNative(trCoder(), MKTURN.greerRatio));
+        SmartDashboard.putNumber("topturnleftmotorposnative", topTurnLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217, MKTURN.greerRatio));
         
         vars.yaw = navx.getInstance().getNavxYaw();
         

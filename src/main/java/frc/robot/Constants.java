@@ -65,19 +65,19 @@ public final class Constants {
 
         public static final NeutralMode mode = NeutralMode.Coast;
 
-        public static final boolean inverted = false;
+        public static final boolean inverted = true;
 
         public static final int scurve = 6;
 
-        public static final double greerRatio = 150/7;
+        public static final double greerRatio = 12.8;
     }
 
     public static class MKCANCODER
     {
-        public static final double topLeftOffset = -115.224609375;
-        public static final double topRightOffset = -84.19921875;
-        public static final double bottomLeftOffset = -87.099609375;
-        public static final double bottomRightOffset = -128.232421875 + 180;
+        public static final double topLeftOffset = -145.72265625;
+        public static final double topRightOffset = 135.615234375;
+        public static final double bottomLeftOffset = -117.861328125;
+        public static final double bottomRightOffset = 104.765625;
         
         public static final double[] offset = {MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset, MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset};
 
@@ -88,8 +88,8 @@ public final class Constants {
 
     public static class MKTRAIN 
     {
-        public static final double L = 22.75;
-        public static final double W = 22.75;
+        public static final double L = 19.75;
+        public static final double W = 25.75;
 
         public static final double widthInches = 28;
         public static final double heightInches = 28;
@@ -160,25 +160,25 @@ public final class Constants {
     public static class CANID 
     {
         //drive motors
-        public static final int topDriveLeftCANID = 3; 
-        public static final int topDriveRightCANID = 5; 
-        public static final int bottomDriveLeftCANID = 2; 
-        public static final int bottomDriveRightCANID = 7;
+        public static final int topDriveLeftCANID = 5; 
+        public static final int topDriveRightCANID = 7; 
+        public static final int bottomDriveLeftCANID = 9; 
+        public static final int bottomDriveRightCANID = 3;
 
         //turn motors
-        public static final int topTurnLeftCANID = 4; 
-        public static final int topTurnRightCANID = 6; 
+        public static final int topTurnLeftCANID = 6; 
+        public static final int topTurnRightCANID = 8; 
         public static final int bottomTurnLeftCANID = 1;
-        public static final int bottomTurnRightCANID = 8; 
+        public static final int bottomTurnRightCANID = 4; 
 
         //cancoder
-        public static final int topTurnLeftCANCoderCANID = 16; 
-        public static final int topTurnRightCANCoderCANID = 18; 
+        public static final int topTurnLeftCANCoderCANID = 18; 
+        public static final int topTurnRightCANCoderCANID = 17; 
         public static final int bottomTurnLeftCANCoderCANID = 15; 
-        public static final int bottomTurnRightCANCoderCANID = 17;
+        public static final int bottomTurnRightCANCoderCANID = 16;
 
         //revh ph
-        public static final int revphCANID = 1; //MUST MAKE SURE IT IS ON RIO NOT CANIVORE 
+        public static final int revphCANID = 2; //MUST MAKE SURE IT IS ON RIO NOT CANIVORE 
     }
 
     public static class AUTO

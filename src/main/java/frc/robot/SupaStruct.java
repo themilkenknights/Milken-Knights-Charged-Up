@@ -22,7 +22,7 @@ public class SupaStruct {
     private Limelight lime = Limelight.getInstance();
     private boolean resetNavx, shootTimerFirst, supportTimerFirst, elevatorOvveride, ballEnterOvverride, colorCheckStartTimer, resetDrive, xbutton, ybutton,rbbutton,rbbutton2, lbbutton2, lbbutton,abutton, ltrigger, rtrigger,  pov, /*povToggled,*/ itsreal = false;
     private boolean isRCWrunningWithNavx = false; 
-    private AprilTags april = AprilTags.getInstance();
+    //private AprilTags april = AprilTags.getInstance();
 
 
     private Timer turntesttimer = new Timer();
@@ -48,10 +48,10 @@ public class SupaStruct {
         //  UPDATES
         //--------------------------------------------------------------------//
         train.updateSwerve();
-        april.updateApril();
+        //april.updateApril();
         //ultra.updateUltra();
-        lime.updateSensors();
-        april.aprilSmartDashboard();
+        //lime.updateSensors();
+        //april.aprilSmartDashboard();
         //ultra.ultraSmartDashboard();
         //lime.limeSmartDashboard();
 
@@ -156,7 +156,8 @@ public class SupaStruct {
         if((fwd != 0 || str != 0 || rcw != 0))
         {//+,-,+
             train.etherSwerve(fwd/MKBABY.fwdBABY, -str/MKBABY.strBABY, rcw/MKBABY.rcwBABY, ControlMode.PercentOutput); //+,-,+
-          
+            ///train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
+            //train.setModuleTurn(0, 0, 0, 0);
         }
         else
         {

@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 
 import frc.robot.Constants.MKCANCODER;
@@ -33,7 +34,7 @@ public class Motor {
 
     public TalonFX turnMotor(int canid)
     {
-        TalonFX turn = new TalonFX(canid, "train");
+        TalonFX turn = new TalonFX(canid, "rio");
         turn.configFactoryDefault();
         turn.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         turn.setNeutralMode(MKTURN.mode);
@@ -57,7 +58,7 @@ public class Motor {
 
     public TalonFX driveMotor(int canid)
     {
-        TalonFX drive = new TalonFX(canid, "train");
+        TalonFX drive = new TalonFX(canid, "rio");
         drive.configFactoryDefault();
         drive.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         drive.setNeutralMode(MKDRIVE.mode);
@@ -103,10 +104,13 @@ public class Motor {
 
     public CANCoder cancoder(int canid, double offset)
     {
-        CANCoder encoder = new CANCoder(canid, "train");
+        CANCoder encoder = new CANCoder(canid, "rio");
+        encoder.configFactoryDefault();
+        encoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
         encoder.configAbsoluteSensorRange(MKCANCODER.range);
         encoder.configSensorDirection(MKCANCODER.inverted);
         encoder.configMagnetOffset(offset);
+        //encoder.setPositionToAbsolute();
 
         return encoder;
     }

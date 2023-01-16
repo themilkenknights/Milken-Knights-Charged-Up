@@ -1,0 +1,35 @@
+------------------------NEW------------------------
+
+set offset to 0, run turn motor to 0 and drive to full
+
+turn motor so that if motor was driving, it would be driving forward
+
+set that position as offset.
+
+if things fuck up, make sure that falcon ticks and cancoder ticks move in the same direction when wheel is tured 
+
+if they move in the opposite direction, flip only falcon motor
+
+if that doesnt work, flip only cancoder
+
+if that doesnt work, flip both
+
+if that doesnt work, try old way
+
+---------------------------------------------------
+
+
+
+
+------------------------OLD------------------------
+
+set offset to 0, turn motor ccw, set offset
+
+if it doesnt work, set offset back to zero, turn motor cw, set offset,
+
+if works, redeploy code and test if it works, then turn robot on and 
+off and re deploy to test if it works
+
+DONT INVERT CANCODER OR DRIVING WHEEL UNLESS NOTHING WORKS
+
+---------------------------------------------------

@@ -5,6 +5,8 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class EtherTurnCommand extends CommandBase {
@@ -25,6 +27,7 @@ public class EtherTurnCommand extends CommandBase {
   @Override
   public void execute() {
     train.etherSwerve(0, 0, train.moveToAngy(angle)/5, ControlMode.PercentOutput);
+    SmartDashboard.putNumber("move to angy", train.moveToAngy(angle));
   }
 
   // Called once the command ends or is interrupted.

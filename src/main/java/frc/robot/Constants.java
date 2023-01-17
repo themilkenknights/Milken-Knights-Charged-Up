@@ -130,7 +130,7 @@ public final class Constants {
     {
         public static final double fwdBABY = 2;
         public static final double strBABY = 2;
-        public static final double rcwBABY = 2;
+        public static final double rcwBABY = 4;
     }
 
     public static class CONTROLLERS 

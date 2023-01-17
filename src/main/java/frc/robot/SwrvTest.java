@@ -15,14 +15,28 @@ public class SwrvTest extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      deadline(new EtherTurnCommand(90 + 90).withTimeout(5)),
       deadline(new Turn(0)).withTimeout(1),
-      deadline(new EtherAutoCommand(DISTANGLE.distanceA, DISTANGLE.lengthB, DISTANGLE.distance, ((DISTANGLE.angle)), 90)).withTimeout(6),
+      deadline(new EtherAutoCommand(DISTANGLE.distanceA, DISTANGLE.lengthB, DISTANGLE.distance, ((DISTANGLE.angle)), 360,1)).withTimeout(6),
+
       deadline(new Turn(0)).withTimeout(1),
-      deadline(new EtherTurnCommand(-90 + 90).withTimeout(5)),
+      deadline(new EtherAutoCommand(50, 20, MathFormulas.calculateArcOfPath(50, 20), MathFormulas.calculateAngleOfPath(50, 20), -90,-1)).withTimeout(6),
+
       deadline(new Turn(0)).withTimeout(1),
-      deadline(new EtherAutoCommand(DISTANGLE.distanceA, DISTANGLE.lengthB, DISTANGLE.distance, ((DISTANGLE.angle)), -90)).withTimeout(6),
+      deadline(new EtherAutoCommand(DISTANGLE.distanceA, DISTANGLE.lengthB, DISTANGLE.distance, ((DISTANGLE.angle)), -360,-1)).withTimeout(6),
+
       deadline(new Turn(0)).withTimeout(1),
-      deadline(new EtherStraightCommand(80, 0, -0.3, 90).withTimeout(6)));
+      deadline(new EtherAutoCommand(50, 20, MathFormulas.calculateArcOfPath(50, 20), MathFormulas.calculateAngleOfPath(50, 20), 90,-1)).withTimeout(6),
+
+      deadline(new Turn(0)).withTimeout(1),
+      deadline(new EtherAutoCommand(50, 20, MathFormulas.calculateArcOfPath(50, 20), MathFormulas.calculateAngleOfPath(50, 20), -90,1)).withTimeout(6),
+
+      deadline(new Turn(0)).withTimeout(1),
+      deadline(new EtherAutoCommand(DISTANGLE.distanceA, DISTANGLE.lengthB, DISTANGLE.distance, ((DISTANGLE.angle)), 180,-1)).withTimeout(6),
+      
+      deadline(new Turn(0)).withTimeout(1),
+      deadline(new EtherAutoCommand(50, 20, MathFormulas.calculateArcOfPath(50, 20), MathFormulas.calculateAngleOfPath(50, 20), -90,-1)).withTimeout(6),
+
+      deadline(new Turn(0)).withTimeout(1),
+      deadline(new EtherAutoCommand(DISTANGLE.distanceA, DISTANGLE.lengthB, DISTANGLE.distance, ((DISTANGLE.angle)), 180,-1)).withTimeout(6));
   }
 }

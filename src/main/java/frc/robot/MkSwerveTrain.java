@@ -193,16 +193,20 @@ public class MkSwerveTrain
         //SmartDashboard.putNumber("avgDistTest", vars.avgDistTest * AUTO.measToPredictRatio);
         //SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
 
-        SmartDashboard.putNumber("topleftcan", tlCoder());
-        SmartDashboard.putNumber("toprightcan", trCoder());
-        SmartDashboard.putNumber("botleftcan", blCoder());
-        SmartDashboard.putNumber("botrightcan", brCoder());
-        SmartDashboard.putNumber("topleftcantonative", MathFormulas.degreesToNative(trCoder(), MKTURN.greerRatio));
-        SmartDashboard.putNumber("topturnleftmotorposnative", topTurnLeft.getSelectedSensorPosition());
-        SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217, MKTURN.greerRatio));
+        //SmartDashboard.putNumber("topleftcan", tlCoder());
+        //SmartDashboard.putNumber("toprightcan", trCoder());
+        //SmartDashboard.putNumber("botleftcan", blCoder());
+        //SmartDashboard.putNumber("botrightcan", brCoder());
+        //SmartDashboard.putNumber("topleftcantonative", MathFormulas.degreesToNative(trCoder(), MKTURN.greerRatio));
+        //SmartDashboard.putNumber("topturnleftmotorposnative", topTurnLeft.getSelectedSensorPosition());
+        //SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217, MKTURN.greerRatio));
+
         
         vars.yaw = navx.getInstance().getNavxYaw();
-        
+
+        SmartDashboard.putNumber("navx", vars.yaw);
+        SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
+
         vars.posInchTL = MathFormulas.nativeToInches(topDriveLeft.getSelectedSensorPosition());
         vars.posInchTR = MathFormulas.nativeToInches(topDriveRight.getSelectedSensorPosition());
         vars.posInchBL = MathFormulas.nativeToInches(bottomDriveLeft.getSelectedSensorPosition());
@@ -283,6 +287,9 @@ public class MkSwerveTrain
         vars.C = FWD - RCW*(MKTRAIN.W/MKTRAIN.R);
         vars.D = FWD + RCW*(MKTRAIN.W/MKTRAIN.R);
 
+        SmartDashboard.putNumber("FWD", FWD);
+        SmartDashboard.putNumber("STR", STR);
+
         vars.mod2[1] = Math.atan2(vars.B,vars.C)*180/Constants.kPi;
         vars.mod1[1] = Math.atan2(vars.B,vars.D)*180/Constants.kPi;
         vars.mod3[1] = Math.atan2(vars.A,vars.D)*180/Constants.kPi;
@@ -309,7 +316,7 @@ public class MkSwerveTrain
             vars.mod4[0] = Math.signum(vars.mod4[0]) * vars.autoDist;
         }
 
-        etherRCWFinder(FWD, -STR, RCW);
+        //etherRCWFinder(FWD, -STR, RCW);
         setModuleDrive(mode, vars.mod1[0], vars.mod2[0], vars.mod3[0], vars.mod4[0]);
         setModuleTurn(vars.mod1[1], vars.mod2[1], vars.mod3[1], vars.mod4[1]);
     }
@@ -477,12 +484,12 @@ public class MkSwerveTrain
      * @param turny Specific or Infinite
      * @param turnyAuto (if using specific for turny) angle that robot tries to keep when moving
     */
-    public void etherAutoUpdate(double thetaTurn, double heading)
+    public void etherAutoUpdate(double thetaTurn, double heading, double side)
     {        
         //numbers fall short of high by 3ish inches and short of length by 4ish inches
-        double calcangle = ((heading) + (((-thetaTurn/2)+(((vars.avgDistTest * AUTO.measToPredictRatio)/(vars.totalDistance))*(thetaTurn)))));
+        double calcangle = side * ((heading) + (((-thetaTurn/2)+(((vars.avgDistTest * AUTO.measToPredictRatio)/(vars.totalDistance))*(thetaTurn)))));
         
-        vars.RCWtemp = moveToAngy(heading+90);
+        vars.RCWtemp = moveToAngy(180);
         vars.FWDauto = (-1* Math.cos(calcangle* (Constants.kPi/180)))/5;
         vars.STRauto = (Math.sin(calcangle* (Constants.kPi/180)))/5;
         
@@ -567,6 +574,14 @@ public class MkSwerveTrain
         double err = vars.magicDistance - vars.avgDistInches;
         return Math.abs(err) < 0.5 && Math.abs(vars.avgVelInches) < 0.1;
     }
+
+
+
+
+
+
+
+    
 
 
 

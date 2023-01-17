@@ -12,15 +12,17 @@ public class EtherAutoCommand extends CommandBase {
   private double distanceA;
   private double lengthB;
   private double heading;
+  private double side;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   
-  public EtherAutoCommand(double distanceA, double lengthB, double dist, double ang, double heading)
+  public EtherAutoCommand(double distanceA, double lengthB, double dist, double ang, double heading, double side)
   {
     this.totalDistance = dist;
     this.thetaTurn = ang;
     this.distanceA = distanceA;
     this.heading = heading;
     this.lengthB = lengthB;
+    this.side = side;
   }
   // youre doing a great job - josh
   // Called when the command is initially scheduled.
@@ -33,7 +35,7 @@ public class EtherAutoCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    train.etherAutoUpdate(thetaTurn, heading);
+    train.etherAutoUpdate(thetaTurn, heading, side);
   }
 
   // Called once the command ends or is interrupted.

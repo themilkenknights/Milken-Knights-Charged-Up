@@ -206,6 +206,7 @@ public class MkSwerveTrain
 
         SmartDashboard.putNumber("navx", vars.yaw);
         SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
+        SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
 
         vars.posInchTL = MathFormulas.nativeToInches(topDriveLeft.getSelectedSensorPosition());
         vars.posInchTR = MathFormulas.nativeToInches(topDriveRight.getSelectedSensorPosition());

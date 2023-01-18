@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() 
   {
     train.vars.avgDistTest=0;
-    m_autonomousCommand = new SwrvTest();
+    m_autonomousCommand = new Ramp();
     train.startTrain();
     navx.getInstance().reset();
     if (m_autonomousCommand != null) 
@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
   {
         System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
-    m_autonomousCommand = new SwrvTest();
+    m_autonomousCommand = new Ramp();
   }
 
   @Override

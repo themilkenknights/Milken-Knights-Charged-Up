@@ -37,6 +37,11 @@ public class navx {
         navx.zeroYaw();
     }
 
+    public boolean isAltWorking()
+    {
+        return navx.isAltitudeValid();
+    }
+
     private static class InstanceHolder
     {
         private static final navx mInstance = new navx();

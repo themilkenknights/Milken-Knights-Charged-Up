@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.net.PortForwarder;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.MKAPRIL;
 
@@ -87,6 +88,7 @@ public class AprilTags {
         SmartDashboard.putNumber("apirl", getRCWApril());
         SmartDashboard.putNumber("aprilRQANge", getRange());
         SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
+        
     }
 
     private static class InstanceHolder

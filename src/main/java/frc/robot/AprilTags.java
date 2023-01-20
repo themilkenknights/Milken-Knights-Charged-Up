@@ -14,10 +14,16 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 
-/**Not JuneTags. Not FebruaryTags.*/
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
+/**Not JuneTags. Not FebruaryTags. X is up, Y is side to side when facing directly at it*/
 public class AprilTags {
 
-    private PIDController turnPID;
+    private PIDController moveAprilX;
+    private PIDController moveAprilYRCW;
+    private PIDController moveAprilYSTR;
+
+
     // Constants such as camera and target height stored. Change per robot and goal!
     private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(24);
     private final double TARGET_HEIGHT_METERS = Units.feetToMeters(5);
@@ -32,11 +38,15 @@ public class AprilTags {
 
     private PhotonPipelineResult result;
 
+    private MkSwerveTrain train = MkSwerveTrain.getInstance();
+
     private AprilTags()
     {
         PortForwarder.add(5800, "photonvision.local", 5800);
         camera = new PhotonCamera("ShoutOutToMyStove");
-        turnPID = new PIDController(MKAPRIL.kP, MKAPRIL.kI, MKAPRIL.kD);
+        moveAprilX = new PIDController(MKAPRIL.xkP, MKAPRIL.xkI, MKAPRIL.xkD);
+        moveAprilYRCW = new PIDController(MKAPRIL.yRCWkP, MKAPRIL.yRCWkI, MKAPRIL.yRCWkD);
+        moveAprilYSTR = new PIDController(MKAPRIL.ySTRkP, MKAPRIL.ySTRkI, MKAPRIL.ySTRkD);
         camera.setPipelineIndex(0);
         // Set driver mode to off.
         camera.setDriverMode(false);
@@ -45,19 +55,6 @@ public class AprilTags {
     public static AprilTags getInstance()
     {
         return InstanceHolder.mInstance;
-    }
-
-    /**Gets yaw, calculates pid for RCW for etherSwerve*/
-    public double getRCWApril()
-    {
-        if (result.hasTargets()) {
-            // First calculate range
-            return turnPID.calculate(result.getBestTarget().getYaw(), 0); 
-        }
-        else
-        {
-            return 0.69;
-        }
     }
 
     public void updateApril()
@@ -82,11 +79,61 @@ public class AprilTags {
         }
     }
 
+    public double getAxis(String axis)
+    {
+        axis = axis.toLowerCase();
+        if (result.hasTargets()) {
+            if(axis == "x")
+            {
+                return result.getBestTarget().getBestCameraToTarget().getX();
+            }
+            else if(axis == "y")
+            {
+                return result.getBestTarget().getBestCameraToTarget().getY();
+            }
+            else if(axis == "z")
+            {
+                return result.getBestTarget().getBestCameraToTarget().getZ();
+            }
+            else if(axis == "r")
+            {
+                return Math.toDegrees(result.getBestTarget().getBestCameraToTarget().getRotation().getAngle());
+            }
+            else 
+            {
+                return 0.69;
+            }
+        }
+        else
+        {
+            return 0.69;
+        }
+    }
+
+    public void alignToTag()
+    {
+        if (result.hasTargets())
+        {
+            double xPID = moveAprilX.calculate(getAxis("x"), 1);
+            double yRCWPID = moveAprilYRCW.calculate(getAxis("y"), 0);
+            
+            SmartDashboard.putNumber("xpid", xPID);
+            SmartDashboard.putNumber("yrcwpid", yRCWPID);
+
+            train.etherSwerve(xPID, 0, yRCWPID, ControlMode.PercentOutput);
+        }
+        else 
+        {
+            train.etherSwerve(0, 0, 0, ControlMode.PercentOutput);
+        }
+    }
+
+
     public void aprilSmartDashboard()
     {
-        SmartDashboard.putNumber("apirl", getRCWApril());
         SmartDashboard.putNumber("aprilRQANge", getRange());
         SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
+        SmartDashboard.putNumber("z", getAxis("z"));
     }
 
     private static class InstanceHolder

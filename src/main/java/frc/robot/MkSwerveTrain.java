@@ -14,6 +14,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AUTO;
 import frc.robot.Constants.CANID;
+import frc.robot.Constants.MKAPRIL;
 import frc.robot.Constants.MKCANCODER;
 import frc.robot.Constants.MKDRIVE;
 import frc.robot.Constants.MKTRAIN;
@@ -575,11 +576,6 @@ public class MkSwerveTrain
         double err = vars.magicDistance - vars.avgDistInches;
         return Math.abs(err) < 0.5 && Math.abs(vars.avgVelInches) < 0.1;
     }
-
-
-
-
-
 
 
     

@@ -37,8 +37,6 @@ public class SupaStruct {
     public void initTele()
     {
         navxRotate = navx.getInstance().getNavxYaw();
-        SmartDashboard.putNumber("hoodPosSet", 0);
-        SmartDashboard.putNumber("SHOOOO", 0);
     }
 
     public void updateTele()
@@ -153,7 +151,12 @@ public class SupaStruct {
 
         
 //     applying numbers
-        if((fwd != 0 || str != 0 || rcw != 0))
+
+        if(xbutton)
+        {
+            april.alignToTag();
+        }
+        else if((fwd != 0 || str != 0 || rcw != 0))
         {//+,-,+
             train.etherSwerve(fwd/MKBABY.fwdBABY, -str/MKBABY.strBABY, rcw/MKBABY.rcwBABY, ControlMode.PercentOutput); //+,-,+
             ///train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);

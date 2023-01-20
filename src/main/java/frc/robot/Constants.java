@@ -121,9 +121,18 @@ public final class Constants {
 
     public static class MKAPRIL
     {
-        public static final double kP = 0.1;
-        public static final double kI = 0;
-        public static final double kD = 0;
+        public static final double xkP = 0.3;
+        public static final double xkI = 0;
+        public static final double xkD = 0;
+
+        public static final double yRCWkP = 0.1;
+        public static final double yRCWkI = 0;
+        public static final double yRCWkD = 0;
+
+        public static final double ySTRkP = 0;
+        public static final double ySTRkI = 0;
+        public static final double ySTRkD = 0;
+
     }
 
     public static class MKBABY

@@ -21,9 +21,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 public class AprilTags {
 
     private PIDController moveAprilX;
-    private PIDController moveAprilYRCW;
-    private PIDController moveAprilYSTR;
-
+    private PIDController moveAprilZ;
+    private PIDController moveAprilY;
 
     // Constants such as camera and target height stored. Change per robot and goal!
     private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(24);
@@ -44,11 +43,15 @@ public class AprilTags {
     private AprilTags()
     {
         PortForwarder.add(5800, "photonvision.local", 5800);
+        
         camera = new PhotonCamera("ShoutOutToMyStove");
+        
         moveAprilX = new PIDController(MKAPRIL.xkP, MKAPRIL.xkI, MKAPRIL.xkD);
-        moveAprilYRCW = new PIDController(MKAPRIL.yRCWkP, MKAPRIL.yRCWkI, MKAPRIL.yRCWkD);
-        moveAprilYSTR = new PIDController(MKAPRIL.ySTRkP, MKAPRIL.ySTRkI, MKAPRIL.ySTRkD);
+        moveAprilZ = new PIDController(MKAPRIL.zkP, MKAPRIL.zkI, MKAPRIL.zkD);
+        moveAprilY = new PIDController(MKAPRIL.ykP, MKAPRIL.ykI, MKAPRIL.ykD);
+        
         camera.setPipelineIndex(0);
+        
         // Set driver mode to off.
         camera.setDriverMode(false);
     }
@@ -64,7 +67,7 @@ public class AprilTags {
     }
 
     /**Gets distance from tag*/
-    public double getRange()
+    public double get2DRange()
     {
         if (result.hasTargets()) {
         return
@@ -116,12 +119,15 @@ public class AprilTags {
         if (result.hasTargets())
         {
             double xPID = moveAprilX.calculate(getAxis("x"), 1);
-            double yRCWPID = moveAprilYRCW.calculate(getAxis("y"), 0);
+            double zPID = moveAprilZ.calculate(getAxis("z"), 180);
             
             SmartDashboard.putNumber("xpid", xPID);
-            SmartDashboard.putNumber("yrcwpid", yRCWPID);
+            SmartDashboard.putNumber("zpid", zPID);
 
-            train.etherSwerve(xPID, 0, yRCWPID, ControlMode.PercentOutput);
+            train.etherSwerve(MathFormulas.limit(xPID, -0.5, 0.5), 
+                              MathFormulas.limit(0, -0.5, 0.5), 
+                              MathFormulas.limit(0, -0.5, 0.5),
+                              ControlMode.PercentOutput);
         }
         else 
         {
@@ -132,7 +138,7 @@ public class AprilTags {
 
     public void aprilSmartDashboard()
     {
-        SmartDashboard.putNumber("aprilRQANge", getRange());
+        SmartDashboard.putNumber("aprilRQANge", get2DRange());
         SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
         SmartDashboard.putNumber("z", getAxis("z"));
     }

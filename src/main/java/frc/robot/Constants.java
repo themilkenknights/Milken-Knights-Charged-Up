@@ -125,13 +125,13 @@ public final class Constants {
         public static final double xkI = 0;
         public static final double xkD = 0;
 
-        public static final double yRCWkP = 0.1;
-        public static final double yRCWkI = 0;
-        public static final double yRCWkD = 0;
+        public static final double zkP = 0.01;
+        public static final double zkI = 0;
+        public static final double zkD = 0;
 
-        public static final double ySTRkP = 0;
-        public static final double ySTRkI = 0;
-        public static final double ySTRkD = 0;
+        public static final double ykP = 0;
+        public static final double ykI = 0;
+        public static final double ykD = 0;
 
     }
 

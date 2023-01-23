@@ -489,7 +489,7 @@ public class MkSwerveTrain
     public void etherAutoUpdate(double thetaTurn, double heading, double side)
     {        
         //numbers fall short of high by 3ish inches and short of length by 4ish inches
-        double calcangle = side * ((heading) + (((-thetaTurn/2)+(((vars.avgDistTest * AUTO.measToPredictRatio)/(vars.totalDistance))*(thetaTurn)))));
+        double calcangle = side * ((heading) + (((-thetaTurn/2)+(((vars.avgDistInches)/(vars.totalDistance))*(thetaTurn)))));
         
         vars.RCWtemp = moveToAngy(180);
         vars.FWDauto = (-1* Math.cos(calcangle* (Constants.kPi/180)))/5;

@@ -104,7 +104,8 @@ public final class Constants {
     
     public static class NAVX 
     {
-        public static final double offset = 180;
+        public static final double offsetYaw = 180;
+        public static final double offsetPitch = 0;
     }
     
     
@@ -127,12 +128,19 @@ public final class Constants {
 
         public static final double zkP = 0.01;
         public static final double zkI = 0;
-        public static final double zkD = 0;
+        public static final double zkD = 0.1;
 
-        public static final double ykP = 0;
+        public static final double ykP = 0.1;
         public static final double ykI = 0;
         public static final double ykD = 0;
 
+    }
+    
+    public static class MKRAMP
+    {
+        public static final double kP = 0.001;
+        public static final double kI = 0;
+        public static final double kD = 0;
     }
 
     public static class MKBABY

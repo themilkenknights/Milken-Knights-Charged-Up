@@ -101,7 +101,11 @@ public class AprilTags {
             }
             else if(axis == "r")
             {
-                return Math.toDegrees(result.getBestTarget().getBestCameraToTarget().getRotation().getAngle());
+                return (Math.toDegrees(result.getBestTarget().getBestCameraToTarget().getRotation().getAngle()) - 180) %360;
+            }
+            else if(axis == "yaw")
+            {
+                return result.getBestTarget().getYaw();
             }
             else 
             {
@@ -118,15 +122,31 @@ public class AprilTags {
     {
         if (result.hasTargets())
         {
-            double xPID = moveAprilX.calculate(getAxis("x"), 1);
-            double zPID = moveAprilZ.calculate(getAxis("z"), 180);
+
+            double xPID;
+            double zPID;
+            double yPID;
+            
+            xPID = moveAprilX.calculate(getAxis("x"), 1);
+            zPID = moveAprilZ.calculate(getAxis("r"), 0);
+            yPID = 0;
+
+            if(result.getBestTarget().getPoseAmbiguity() > 0.2)
+            {
+                zPID = 0;
+            }
+            if(Math.abs(zPID) <= 0.1 && Math.abs(getAxis("r")) <= 3);
+            {
+                zPID = 0;
+                moveAprilY.calculate(getAxis("y"), 0);
+            }
+
             
             SmartDashboard.putNumber("xpid", xPID);
-            SmartDashboard.putNumber("zpid", zPID);
 
             train.etherSwerve(MathFormulas.limit(xPID, -0.5, 0.5), 
-                              MathFormulas.limit(0, -0.5, 0.5), 
-                              MathFormulas.limit(0, -0.5, 0.5),
+                              MathFormulas.limit(-yPID, -0.5, 0.5), 
+                              MathFormulas.limit(-zPID, -0.3, 0.3),
                               ControlMode.PercentOutput);
         }
         else 
@@ -140,7 +160,10 @@ public class AprilTags {
     {
         SmartDashboard.putNumber("aprilRQANge", get2DRange());
         SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
-        SmartDashboard.putNumber("z", getAxis("z"));
+        SmartDashboard.putNumber("z", getAxis("r"));
+        SmartDashboard.putNumber("z2", getAxis("yaw"));
+        SmartDashboard.putNumber("zpid", moveAprilZ.calculate(getAxis("r"), 0));
+        SmartDashboard.putNumber("ypid", moveAprilY.calculate(getAxis("y"), 0));
     }
 
     private static class InstanceHolder

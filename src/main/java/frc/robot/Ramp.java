@@ -4,17 +4,37 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Ramp extends SequentialCommandGroup {
-  /** Creates a new Ramp. */
-  public Ramp() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      deadline(new EtherStraightCommand(30, -0.3, 0, 0)).withTimeout(6));
-  }
+import edu.wpi.first.math.controller.PIDController;
+import frc.robot.Constants.MKRAMP;
+import frc.robot.Constants.MKTRAIN;
+
+/** Add your docs here. */
+public class Ramp 
+{
+
+    private PIDController rampPID;
+    
+    public static Ramp getInstance()
+    {
+        return InstanceHolder.mInstance;
+    }
+
+    private Ramp()
+    {
+        rampPID = new PIDController(MKRAMP.kP, MKRAMP.kI, MKRAMP.kD);
+    }
+
+    public void rampMove()
+    {
+        double pitch = navx.getInstance().getNavxPitch();
+        double pid = rampPID.calculate(pitch, 0);
+        MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
+    }
+
+    private static class InstanceHolder
+    {
+        private static final Ramp mInstance = new Ramp();
+    } 
 }

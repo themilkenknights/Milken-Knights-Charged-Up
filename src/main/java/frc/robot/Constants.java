@@ -88,11 +88,11 @@ public final class Constants {
 
     public static class MKTRAIN 
     {
-        public static final double L = 19.75;
-        public static final double W = 25.75;
+        public static final double L = 19.75; //18.75 mk4i
+        public static final double W = 25.75; //26.75 mk4i
 
-        public static final double widthInches = 28;
-        public static final double heightInches = 28;
+        public static final double widthInches = 32; //28 was the old drive train
+        public static final double heightInches = 24; //28 was the old drive train
 
         public static final double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
@@ -145,9 +145,9 @@ public final class Constants {
 
     public static class MKBABY
     {
-        public static final double fwdBABY = 2;
-        public static final double strBABY = 2;
-        public static final double rcwBABY = 4;
+        public static final double fwdBABY = 1;
+        public static final double strBABY = 1;
+        public static final double rcwBABY = 2;
     }
 
     public static class CONTROLLERS 

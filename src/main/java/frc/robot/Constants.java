@@ -66,7 +66,7 @@ public final class Constants {
 
         public static final NeutralMode mode = NeutralMode.Coast;
 
-        public static final boolean inverted = false;
+        public static final boolean inverted = true;
 
         public static final int scurve = 6;
 
@@ -74,22 +74,22 @@ public final class Constants {
     }
 
     public static class MKCANCODER {
-        public static final double topLeftOffset =103;
-        public static final double topRightOffset = 64;
-        public static final double bottomLeftOffset = 133.76953125-270;
-        public static final double bottomRightOffset = 90.703125;
+        public static final double topLeftOffset =-173.3203125+90;
+        public static final double topRightOffset = 153.984375+90;
+        public static final double bottomLeftOffset =-43.9453125+90;
+        public static final double bottomRightOffset =-174.375+90;
 
         public static final double[] offset = { MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset,
                 MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset };
 
         public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
 
-        public static final boolean inverted = true;
+        public static final boolean inverted = false;
     }
 
     public static class MKTRAIN {
-        public static final double L = 26.75; // 18.75 mk4i
-        public static final double W = 18.75; // 26.75 mk4i
+        public static final double L = 18.75; // 18.75 mk4i
+        public static final double W = 26.75; // 26.75 mk4i
 
         public static final double widthInches = 24; // 28 was the old drive train
         public static final double heightInches = 32; // 28 was the old drive train

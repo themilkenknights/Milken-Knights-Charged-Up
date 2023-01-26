@@ -20,9 +20,7 @@
               "_type": "Field",
               "_source0": "network_table:///SmartDashboard/Field",
               "_title": "/SmartDashboard/Field",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Game/Game": "A2023_Charged_Up",
+              "Game/Game": "A2022_Rapid_React",
               "Visuals/Robot Icon Size": 50.0,
               "Visuals/Show Outside Circles": false
             }
@@ -35,9 +33,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/distance total",
-              "_title": "distance total",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "distance total"
             }
           },
           "1,0": {
@@ -48,9 +44,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Loop Dt",
-              "_title": "Loop Dt",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "Loop Dt"
             }
           },
           "2,0": {
@@ -61,9 +55,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/topleftcan",
-              "_title": "topleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "topleftcan"
             }
           },
           "3,0": {
@@ -74,9 +66,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/toprightcan",
-              "_title": "toprightcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "toprightcan"
             }
           },
           "4,0": {
@@ -87,9 +77,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/botleftcan",
-              "_title": "botleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "botleftcan"
             }
           },
           "5,0": {
@@ -100,9 +88,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/botrightcan",
-              "_title": "botrightcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "botrightcan"
             }
           },
           "6,0": {
@@ -113,9 +99,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/navx",
-              "_title": "navx",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "navx"
             }
           },
           "7,0": {
@@ -126,9 +110,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/altitude",
-              "_title": "altitude",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "altitude"
             }
           },
           "8,0": {
@@ -140,8 +122,6 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/altitudeWORKING",
               "_title": "altitudeWORKING",
-              "_glyph": 148,
-              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -154,9 +134,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/aprilRQANge",
-              "_title": "aprilRQANge",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "aprilRQANge"
             }
           },
           "10,0": {
@@ -168,8 +146,6 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/DOYOUFUCKIGSEEEE",
               "_title": "DOYOUFUCKIGSEEEE",
-              "_glyph": 148,
-              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -182,9 +158,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/z",
-              "_title": "z",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "z"
             }
           },
           "1,1": {
@@ -195,9 +169,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/z2",
-              "_title": "z2",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "z2"
             }
           },
           "2,1": {
@@ -208,9 +180,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/zpid",
-              "_title": "zpid",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "zpid"
             }
           },
           "0,2": {
@@ -221,9 +191,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/ypid",
-              "_title": "ypid",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "ypid"
             }
           },
           "1,2": {
@@ -234,9 +202,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/FWD",
-              "_title": "FWD",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "FWD"
             }
           },
           "2,2": {
@@ -247,9 +213,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/STR",
-              "_title": "STR",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "STR"
             }
           },
           "0,3": {
@@ -260,9 +224,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Jared",
-              "_title": "Jared",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "Jared"
             }
           },
           "1,3": {
@@ -273,9 +235,29 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/xpid",
-              "_title": "xpid",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "xpid"
+            }
+          },
+          "2,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/See Tag",
+              "_title": "See Tag"
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/bentest",
+              "_title": "bentest"
             }
           }
         }
@@ -300,9 +282,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/botleftcan",
-              "_title": "/SmartDashboard/botleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "/SmartDashboard/botleftcan"
             }
           },
           "5,2": {
@@ -313,9 +293,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/botrightcan",
-              "_title": "/SmartDashboard/botrightcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "/SmartDashboard/botrightcan"
             }
           },
           "4,1": {
@@ -326,9 +304,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/topleftcan",
-              "_title": "/SmartDashboard/topleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "/SmartDashboard/topleftcan"
             }
           },
           "5,1": {
@@ -339,9 +315,29 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/toprightcan",
-              "_title": "/SmartDashboard/toprightcan",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_title": "/SmartDashboard/toprightcan"
+            }
+          },
+          "4,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/navx",
+              "_title": "SmartDashboard/navx"
+            }
+          },
+          "7,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/bentest",
+              "_title": "SmartDashboard/bentest"
             }
           }
         }

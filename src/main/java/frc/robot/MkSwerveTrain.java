@@ -194,10 +194,10 @@ public class MkSwerveTrain
         //SmartDashboard.putNumber("avgDistTest", vars.avgDistTest * AUTO.measToPredictRatio);
         //SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
 
-        //SmartDashboard.putNumber("topleftcan", tlCoder());
-        //SmartDashboard.putNumber("toprightcan", trCoder());
-        //SmartDashboard.putNumber("botleftcan", blCoder());
-        //SmartDashboard.putNumber("botrightcan", brCoder());
+        SmartDashboard.putNumber("topleftcan", tlCoder());
+        SmartDashboard.putNumber("toprightcan", trCoder());
+        SmartDashboard.putNumber("botleftcan", blCoder());
+        SmartDashboard.putNumber("botrightcan", brCoder());
         //SmartDashboard.putNumber("topleftcantonative", MathFormulas.degreesToNative(trCoder(), MKTURN.greerRatio));
         //SmartDashboard.putNumber("topturnleftmotorposnative", topTurnLeft.getSelectedSensorPosition());
         //SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217, MKTURN.greerRatio));

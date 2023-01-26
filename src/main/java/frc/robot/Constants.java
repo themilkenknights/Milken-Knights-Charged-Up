@@ -6,9 +6,14 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
+
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 
 
 /**All variables that remain constant stored here*/
@@ -74,10 +79,10 @@ public final class Constants {
 
     public static class MKCANCODER
     {
-        public static final double topLeftOffset = -145.72265625;
-        public static final double topRightOffset = 135.615234375;
-        public static final double bottomLeftOffset = -117.861328125;
-        public static final double bottomRightOffset = 104.765625;
+        public static final double topLeftOffset = 0;
+        public static final double topRightOffset = 0;
+        public static final double bottomLeftOffset= 0;
+        public static final double bottomRightOffset =0;
         
         public static final double[] offset = {MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset, MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset};
 
@@ -88,8 +93,8 @@ public final class Constants {
 
     public static class MKTRAIN 
     {
-        public static final double L = 19.75; //18.75 mk4i
-        public static final double W = 25.75; //26.75 mk4i
+        public static final double L = 18.75; //18.75 mk4i
+        public static final double W = 26.75; //26.75 mk4i
 
         public static final double widthInches = 32; //28 was the old drive train
         public static final double heightInches = 24; //28 was the old drive train
@@ -104,7 +109,7 @@ public final class Constants {
     
     public static class NAVX 
     {
-        public static final double offsetYaw = 180;
+        public static final double offsetYaw = 90;
         public static final double offsetPitch = 0;
     }
     
@@ -133,6 +138,14 @@ public final class Constants {
         public static final double ykP = 0.1;
         public static final double ykI = 0;
         public static final double ykD = 0;
+        public static final Transform3d robotToCam =
+                    new Transform3d(
+                            new Translation3d(Units.inchesToMeters(17.5), 0,Units.inchesToMeters(6)),
+                            new Rotation3d(
+                                    0, 0,
+                                    0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+            // from center.
+            static final String cameraName = "ShoutOutToMyStove";
 
     }
     

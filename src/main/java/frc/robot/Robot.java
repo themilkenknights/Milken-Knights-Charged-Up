@@ -4,10 +4,16 @@
 
 package frc.robot;
 
+import java.io.IOException;
+import java.util.Optional;
+
+import org.photonvision.EstimatedRobotPose;
+
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -27,6 +33,9 @@ public class Robot extends TimedRobot {
   private SupaStruct supaKoopa = SupaStruct.getInstance();
   private Timer timer;
 
+  private PhotonCameraWrapper austin;
+  private final Field2d mField2d = new Field2d();
+
   @Override
   public void robotInit() 
   {
@@ -41,12 +50,31 @@ public class Robot extends TimedRobot {
 
     train.startTrain();
     navx.getInstance().reset();
+    try {
+      austin = new PhotonCameraWrapper();
+      SmartDashboard.putData(mField2d);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
+
 
   @Override
   public void robotPeriodic() 
   {
     CommandScheduler.getInstance().run();
+    if(austin!=null){
+    Optional<EstimatedRobotPose> swerdlow = austin.photonPoseEstimator.update();
+    if(swerdlow.isPresent()){
+      SmartDashboard.putString("Jared",swerdlow.get().estimatedPose.toString());
+      mField2d.setRobotPose(swerdlow.get().estimatedPose.toPose2d());
+    }
+    else{
+      SmartDashboard.putString("Jared","nada");
+
+    }
+  }
   }
 
   @Override

@@ -65,13 +65,13 @@ public class Robot extends TimedRobot {
   {
     CommandScheduler.getInstance().run();
     if(austin!=null){
-    Optional<EstimatedRobotPose> swerdlow = austin.photonPoseEstimator.update();
-    if(swerdlow.isPresent()){
-      SmartDashboard.putString("Jared",swerdlow.get().estimatedPose.toString());
-      mField2d.setRobotPose(swerdlow.get().estimatedPose.toPose2d());
+    Optional<EstimatedRobotPose> tag = austin.photonPoseEstimator.update();
+    if(tag.isPresent()){
+      SmartDashboard.putString("See Tag",tag.get().estimatedPose.toString());
+      mField2d.setRobotPose(tag.get().estimatedPose.toPose2d());
     }
     else{
-      SmartDashboard.putString("Jared","nada");
+      SmartDashboard.putString("See Tag","nada");
 
     }
   }

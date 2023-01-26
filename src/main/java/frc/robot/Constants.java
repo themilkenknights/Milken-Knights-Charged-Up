@@ -15,15 +15,13 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 
-
-/**All variables that remain constant stored here*/
+/** All variables that remain constant stored here */
 public final class Constants {
 
     public static final double kPi = 3.14159265359;
-    public static final double[] nullPID = {0,0,0,0};
+    public static final double[] nullPID = { 0, 0, 0, 0 };
 
-    public static class MKFALCON 
-    {
+    public static class MKFALCON {
         public static final int velocityMeasAmount = 26;
         public static final int statusOneMeas = 20;
         public static final int statusTwoMeas = 20;
@@ -31,21 +29,20 @@ public final class Constants {
         public static final double oneEncoderRotation = 2048;
     }
 
-    public static class MKDRIVE 
-    {
+    public static class MKDRIVE {
         public static final double kS = 0.1;
         public static final double kA = 0.1;
         public static final double kV = 0.1;
 
         public static final double maxNativeVelocity = 21600;
         public static final double maxNativeAcceleration = maxNativeVelocity / 8;
-        
+
         public static final double kP = 0.21;
         public static final double kI = 0;
         public static final double kD = 0 * kP;
         public static final double kF = 0;
 
-        public static final double[] pidf = {kP, kI, kD, kF};
+        public static final double[] pidf = { kP, kI, kD, kF };
 
         public static final NeutralMode mode = NeutralMode.Brake;
 
@@ -55,49 +52,47 @@ public final class Constants {
 
         public static final double greerRatio = 6.75;
 
-        public static final double wheelDiameterInches = 4; 
-        public static final double wheelCircumference = wheelDiameterInches * kPi;    
+        public static final double wheelDiameterInches = 4;
+        public static final double wheelCircumference = wheelDiameterInches * kPi;
     }
 
-    public static class MKTURN 
-    {
+    public static class MKTURN {
         public static final double kP = 0.087;
         public static final double kI = 0;
         public static final double kD = 0.00000001;
         public static final double kF = 0;
-        
-        public static final double[] pidf = {kP, kI, kD, kF};
+
+        public static final double[] pidf = { kP, kI, kD, kF };
 
         public static final NeutralMode mode = NeutralMode.Coast;
 
-        public static final boolean inverted = true;
+        public static final boolean inverted = false;
 
         public static final int scurve = 6;
 
-        public static final double greerRatio = 12.8;
+        public static final double greerRatio = 150 / 7;
     }
 
-    public static class MKCANCODER
-    {
+    public static class MKCANCODER {
         public static final double topLeftOffset = 0;
         public static final double topRightOffset = 0;
-        public static final double bottomLeftOffset= 0;
-        public static final double bottomRightOffset =0;
-        
-        public static final double[] offset = {MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset, MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset};
+        public static final double bottomLeftOffset = 0;
+        public static final double bottomRightOffset = 0;
+
+        public static final double[] offset = { MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset,
+                MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset };
 
         public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
 
         public static final boolean inverted = true;
     }
 
-    public static class MKTRAIN 
-    {
-        public static final double L = 18.75; //18.75 mk4i
-        public static final double W = 26.75; //26.75 mk4i
+    public static class MKTRAIN {
+        public static final double L = 18.75; // 18.75 mk4i
+        public static final double W = 26.75; // 26.75 mk4i
 
-        public static final double widthInches = 32; //28 was the old drive train
-        public static final double heightInches = 24; //28 was the old drive train
+        public static final double widthInches = 32; // 28 was the old drive train
+        public static final double heightInches = 24; // 28 was the old drive train
 
         public static final double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
@@ -106,17 +101,12 @@ public final class Constants {
         public static final double speedLimit = 5;
     }
 
-    
-    public static class NAVX 
-    {
-        public static final double offsetYaw = 90;
+    public static class NAVX {
+        public static final double offsetYaw = -90;
         public static final double offsetPitch = 0;
     }
-    
-    
 
-    public static class MKLIME
-    {
+    public static class MKLIME {
         public static final int pipeline = 0;
         public static final double limeHeightInches = 33.5;
         public static final double goalHeightInches = 104;
@@ -125,8 +115,7 @@ public final class Constants {
         public static final double maxTX = 25;
     }
 
-    public static class MKAPRIL
-    {
+    public static class MKAPRIL {
         public static final double xkP = 0.3;
         public static final double xkI = 0;
         public static final double xkD = 0;
@@ -138,43 +127,38 @@ public final class Constants {
         public static final double ykP = 0.1;
         public static final double ykI = 0;
         public static final double ykD = 0;
-        public static final Transform3d robotToCam =
-                    new Transform3d(
-                            new Translation3d(Units.inchesToMeters(17.5), 0,Units.inchesToMeters(6)),
-                            new Rotation3d(
-                                    0, 0,
-                                    0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
-            // from center.
-            static final String cameraName = "ShoutOutToMyStove";
+        public static final Transform3d robotToCam = new Transform3d(
+                new Translation3d(Units.inchesToMeters(17.5), 0, Units.inchesToMeters(6)),
+                new Rotation3d(
+                        0, 0,
+                        0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+        // from center.
+        static final String cameraName = "ShoutOutToMyStove";
 
     }
-    
-    public static class MKRAMP
-    {
+
+    public static class MKRAMP {
         public static final double kP = 0.001;
         public static final double kI = 0;
         public static final double kD = 0;
     }
 
-    public static class MKBABY
-    {
+    public static class MKBABY {
         public static final double fwdBABY = 1;
         public static final double strBABY = 1;
         public static final double rcwBABY = 2;
     }
 
-    public static class CONTROLLERS 
-    {
+    public static class CONTROLLERS {
         public static final int driverPort = 0;
         public static final int opPort = 1;
 
-        public static class DriveInput 
-        {
+        public static class DriveInput {
             public static final int fwd = 1;
             public static final int str = 0;
             public static final int rcwX = 4;
             public static final int rcwY = 5;
-            //1 a, 2 b, 3 x, 4 y
+            // 1 a, 2 b, 3 x, 4 y
             public static final int resetNavxButton = 4;
             public static final int resetDriveButton = 2;
         }
@@ -187,37 +171,34 @@ public final class Constants {
         public static final int leftPOV = 270;
     }
 
-    public static class CANID 
-    {
-        //drive motors
-        public static final int topDriveLeftCANID = 5; 
-        public static final int topDriveRightCANID = 7; 
-        public static final int bottomDriveLeftCANID = 9; 
+    public static class CANID {
+        // drive motors
+        public static final int topDriveLeftCANID = 5;
+        public static final int topDriveRightCANID = 7;
+        public static final int bottomDriveLeftCANID = 9;
         public static final int bottomDriveRightCANID = 3;
 
-        //turn motors
-        public static final int topTurnLeftCANID = 6; 
-        public static final int topTurnRightCANID = 8; 
+        // turn motors
+        public static final int topTurnLeftCANID = 6;
+        public static final int topTurnRightCANID = 8;
         public static final int bottomTurnLeftCANID = 1;
-        public static final int bottomTurnRightCANID = 4; 
+        public static final int bottomTurnRightCANID = 4;
 
-        //cancoder
-        public static final int topTurnLeftCANCoderCANID = 18; 
-        public static final int topTurnRightCANCoderCANID = 17; 
-        public static final int bottomTurnLeftCANCoderCANID = 15; 
+        // cancoder
+        public static final int topTurnLeftCANCoderCANID = 18;
+        public static final int topTurnRightCANCoderCANID = 17;
+        public static final int bottomTurnLeftCANCoderCANID = 15;
         public static final int bottomTurnRightCANCoderCANID = 16;
 
-        //revh ph
-        public static final int revphCANID = 2; //MUST MAKE SURE IT IS ON RIO NOT CANIVORE 
+        // revh ph
+        public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
     }
 
-    public static class AUTO
-    {
+    public static class AUTO {
 
-        public static final double measToPredictRatio = 0.823270434926127; //0.93320900560016;
+        public static final double measToPredictRatio = 0.823270434926127; // 0.93320900560016;
 
-        public static class DISTANGLE 
-        {                             
+        public static class DISTANGLE {
             public static final double distanceA = 80;
             public static final double lengthB = 30;
 
@@ -248,7 +229,8 @@ public final class Constants {
             public static final double angle = MathFormulas.calculateAngleOfPath(distanceA, lengthB);
 
         }
-        //for wpi
+
+        // for wpi
         public static final double turnSwerveControlKp = 1;
         public static final double driveSwerveControlKpY = 1;
         public static final double driveSwerveControlKpX = 1;
@@ -256,56 +238,47 @@ public final class Constants {
         public static final double heightMeters = MathFormulas.inchesToMeters(MKTRAIN.heightInches / 2);
         public static final double widthMeters = MathFormulas.inchesToMeters(MKTRAIN.widthInches / 2);
 
-        public static final SwerveDriveKinematics kDriveKinematics =
-        new SwerveDriveKinematics(
-        new Translation2d(heightMeters, widthMeters),
-        new Translation2d(heightMeters, -widthMeters),
-        new Translation2d(-heightMeters, widthMeters),
-        new Translation2d(-heightMeters, -widthMeters));
-      
-        
-        //actual drive module stats
+        public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
+                new Translation2d(heightMeters, widthMeters),
+                new Translation2d(heightMeters, -widthMeters),
+                new Translation2d(-heightMeters, widthMeters),
+                new Translation2d(-heightMeters, -widthMeters));
+
+        // actual drive module stats
         public static final double maxModuleTurnVelo = kPi;
         public static final double maxModuleTurnAccel = kPi;
-        
-        //actual drive module stats
+
+        // actual drive module stats
         public static final double maxModuleDriveVelo = 1;
         public static final double maxModuleDriveAccel = 1;
-        
 
-        //for turning constraints
+        // for turning constraints
         public static final double maxAutoTurnVelo = kPi;
         public static final double maxAutoTurnAccel = kPi;
-        
-        //for trajectory config
-        public static final double maxAutoDriveVelo = 1; //2;
-        public static final double maxAutoDriveAccel = 1; //2;
 
+        // for trajectory config
+        public static final double maxAutoDriveVelo = 1; // 2;
+        public static final double maxAutoDriveAccel = 1; // 2;
 
         public static final double maxDriveVelo = 1;
 
-        public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-        new TrapezoidProfile.Constraints(
-            maxAutoTurnVelo, maxAutoTurnAccel);
+        public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
+                maxAutoTurnVelo, maxAutoTurnAccel);
     }
 
-
-    public static class ODO 
-    {
+    public static class ODO {
         public static final double goalXInches = 120;
         public static final double goalYInches = 120;
         public static final double goalRadius = 60;
     }
 
-    public static class LIGHTS 
-    {
-        public static final int PWMPORT = 0; 
-        public static final int bufferNum = 151; 
+    public static class LIGHTS {
+        public static final int PWMPORT = 0;
+        public static final int bufferNum = 151;
         public static final int MaxRGBValue = 60;
     }
 
-    public static class LOGS
-    {
-      public static final int maxSizeThreshold = 100000;
+    public static class LOGS {
+        public static final int maxSizeThreshold = 100000;
     }
 }

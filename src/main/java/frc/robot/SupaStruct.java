@@ -20,7 +20,7 @@ public class SupaStruct {
             povValue, navxRotate = 0;
     private MkSwerveTrain train = MkSwerveTrain.getInstance();
     private Limelight lime = Limelight.getInstance();
-    private boolean resetNavx, shootTimerFirst, supportTimerFirst, elevatorOvveride, ballEnterOvverride,
+    private boolean resetNavx, shootTimerFirst, supportTimerFirst, elevatorOvveride, ballEnterOvverride,resetTurn,
             colorCheckStartTimer, resetDrive, xbutton, ybutton, rbbutton, rbbutton2, lbbutton2, lbbutton, abutton,
             ltrigger, rtrigger, pov, /* povToggled, */ itsreal = false;
     private boolean isRCWrunningWithNavx = false;
@@ -66,6 +66,7 @@ public class SupaStruct {
         rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
         resetNavx = xbox.getRawButton(DriveInput.resetNavxButton);
         resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
+        resetTurn = xbox.getRawButton(DriveInput.resetTurnbutton);
         xbutton = xbox.getXButton();
         abutton = xbox.getAButtonPressed();
         rbbutton = xbox.getRightBumper();
@@ -91,13 +92,13 @@ public class SupaStruct {
 
         if (resetNavx) {
             navx.getInstance().reset();
-            povValue = 0;
+            povValue = 00;
             inverseTanAngleOG = 0;
             train.vars.avgDistTest = 0;
             train.vars.avgDistInches = 0;
-            train.startDrive();
-        }
-
+            train.startDrive();           
+}
+    
         // --------------------------------------------------------------------//
         // POV ROTATION
         // --------------------------------------------------------------------//

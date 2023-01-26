@@ -13,7 +13,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AUTO;
 import frc.robot.Constants.CANID;
-import frc.robot.Constants.MKAPRIL;
 import frc.robot.Constants.MKCANCODER;
 import frc.robot.Constants.MKDRIVE;
 import frc.robot.Constants.MKTRAIN;
@@ -94,11 +93,12 @@ public class MkSwerveTrain {
                 MathFormulas.degreesToNative(bottomRightCoder.getAbsolutePosition(), MKTURN.greerRatio));
     }
 
-    public void zeroTurn() {
-        topTurnLeft.setSelectedSensorPosition(0);
-        topTurnRight.setSelectedSensorPosition(0);
-        bottomTurnLeft.setSelectedSensorPosition(0);
-        bottomTurnRight.setSelectedSensorPosition(0);
+    public void resetDrive()
+    {
+        topDriveLeft.setSelectedSensorPosition(0);
+        topDriveRight.setSelectedSensorPosition(0);
+        bottomDriveLeft.setSelectedSensorPosition(0);
+        bottomDriveRight.setSelectedSensorPosition(0);
     }
 
     /** Zero drive */

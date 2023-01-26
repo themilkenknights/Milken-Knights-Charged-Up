@@ -74,10 +74,10 @@ public final class Constants {
     }
 
     public static class MKCANCODER {
-        public static final double topLeftOffset = 0;
-        public static final double topRightOffset = 0;
-        public static final double bottomLeftOffset = 0;
-        public static final double bottomRightOffset = 0;
+        public static final double topLeftOffset =103;
+        public static final double topRightOffset = 64;
+        public static final double bottomLeftOffset = 133.76953125-270;
+        public static final double bottomRightOffset = 90.703125;
 
         public static final double[] offset = { MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset,
                 MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset };
@@ -88,11 +88,11 @@ public final class Constants {
     }
 
     public static class MKTRAIN {
-        public static final double L = 18.75; // 18.75 mk4i
-        public static final double W = 26.75; // 26.75 mk4i
+        public static final double L = 26.75; // 18.75 mk4i
+        public static final double W = 18.75; // 26.75 mk4i
 
-        public static final double widthInches = 32; // 28 was the old drive train
-        public static final double heightInches = 24; // 28 was the old drive train
+        public static final double widthInches = 24; // 28 was the old drive train
+        public static final double heightInches = 32; // 28 was the old drive train
 
         public static final double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 
@@ -102,7 +102,7 @@ public final class Constants {
     }
 
     public static class NAVX {
-        public static final double offsetYaw = -90;
+        public static final double offsetYaw = 90;
         public static final double offsetPitch = 0;
     }
 
@@ -161,6 +161,7 @@ public final class Constants {
             // 1 a, 2 b, 3 x, 4 y
             public static final int resetNavxButton = 4;
             public static final int resetDriveButton = 2;
+            public static final int resetTurnbutton = 3;
         }
 
         public static final int fakeLimelight = 1;

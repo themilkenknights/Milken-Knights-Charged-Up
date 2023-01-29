@@ -74,10 +74,10 @@ public final class Constants {
     }
 
     public static class MKCANCODER {
-        public static final double topLeftOffset =-173.3203125+90;
+        public static final double topLeftOffset =-174.375+90;//-173.3203125+90
         public static final double topRightOffset = 153.984375+90;
         public static final double bottomLeftOffset =-43.9453125+90;
-        public static final double bottomRightOffset =-174.375+90;
+        public static final double bottomRightOffset =-173.3203125+90;//-174.375+90
 
         public static final double[] offset = { MKCANCODER.topLeftOffset, MKCANCODER.topRightOffset,
                 MKCANCODER.bottomLeftOffset, MKCANCODER.bottomRightOffset };
@@ -174,22 +174,22 @@ public final class Constants {
 
     public static class CANID {
         // drive motors
-        public static final int topDriveLeftCANID = 5;
+        public static final int topDriveLeftCANID = 3;//5
         public static final int topDriveRightCANID = 7;
         public static final int bottomDriveLeftCANID = 9;
-        public static final int bottomDriveRightCANID = 3;
+        public static final int bottomDriveRightCANID = 5;//3
 
         // turn motors
-        public static final int topTurnLeftCANID = 6;
+        public static final int topTurnLeftCANID = 4; //6
         public static final int topTurnRightCANID = 8;
         public static final int bottomTurnLeftCANID = 1;
-        public static final int bottomTurnRightCANID = 4;
+        public static final int bottomTurnRightCANID = 6;//4
 
         // cancoder
-        public static final int topTurnLeftCANCoderCANID = 18;
+        public static final int topTurnLeftCANCoderCANID = 16;//18
         public static final int topTurnRightCANCoderCANID = 17;
         public static final int bottomTurnLeftCANCoderCANID = 15;
-        public static final int bottomTurnRightCANCoderCANID = 16;
+        public static final int bottomTurnRightCANCoderCANID = 18;//16
 
         // revh ph
         public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE

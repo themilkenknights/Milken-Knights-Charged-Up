@@ -45,7 +45,7 @@ public class PhotonCameraWrapper {
                 .loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
         // Create pose estimator
         photonPoseEstimator = new PhotonPoseEstimator(
-                apriltagfieldlayout, PoseStrategy.CLOSEST_TO_REFERENCE_POSE, photonCamera,
+                apriltagfieldlayout, PoseStrategy.AVERAGE_BEST_TARGETS, photonCamera,
                 Constants.MKAPRIL.robotToCam);
 
     }

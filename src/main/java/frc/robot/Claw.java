@@ -3,40 +3,35 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants.CANID;
 
 public class Claw {
-    private Solenoid Claw;
+  private Solenoid Claw;
 
-    private Claw()
-    {
-        Claw = new Solenoid(PneumaticsModuleType.REVPH, CANID.CLAWCANID);
-    }
+  private Claw() {
+    Claw = new Solenoid(PneumaticsModuleType.REVPH, CANID.CLAWCANID);
+  }
 
-    public static Claw getInstance()
-    {
-        return InstanceHolder.mInstance;
-    }
+  public static Claw getInstance() {
+    return InstanceHolder.mInstance;
+  }
 
-    public void ClawSet(boolean state)
-    {
-        Claw.set(state);
-    }
+  public void ClawSet(boolean state) {
+    Claw.set(state);
+  }
 
-    public void clawToggle()
-    {
-        Claw.toggle();
-    }
+  public void clawToggle() {
+    Claw.toggle();
+  }
 
-    public boolean getClawState()
-    {
-        return Claw.get();
-    }
+  public boolean getClawState() {
+    return Claw.get();
+  }
 
-    private static class InstanceHolder
-    {
-        private static final Claw mInstance = new Claw();
-    } 
+  private static class InstanceHolder {
+    private static final Claw mInstance = new Claw();
+  }
 }

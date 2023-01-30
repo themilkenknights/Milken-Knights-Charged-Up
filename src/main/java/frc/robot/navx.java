@@ -5,50 +5,41 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
-
 import frc.robot.Constants.NAVX;
 
 /** Add your docs here. */
 public class navx {
-    private AHRS navx = new AHRS();
+  private AHRS navx = new AHRS();
 
-    public static navx getInstance()
-    {
-        return InstanceHolder.mInstance;
-    }
+  public static navx getInstance() {
+    return InstanceHolder.mInstance;
+  }
 
-    public double getNavxYaw()
-    {
-        return NAVX.offsetYaw - navx.getYaw();
-    }
+  public double getNavxYaw() {
+    return NAVX.offsetYaw - navx.getYaw();
+  }
 
-    public double getNavxPitch()
-    {
-        return NAVX.offsetPitch - navx.getPitch();
-    }
+  public double getNavxPitch() {
+    return NAVX.offsetPitch - navx.getPitch();
+  }
 
-    public AHRS getNavx()
-    {
-        return navx;
-    }
+  public AHRS getNavx() {
+    return navx;
+  }
 
-    public double getNavxAltitude()
-    {
-        return navx.getAltitude();
-    }
+  public double getNavxAltitude() {
+    return navx.getAltitude();
+  }
 
-    public void reset()
-    {
-        navx.zeroYaw();
-    }
+  public void reset() {
+    navx.zeroYaw();
+  }
 
-    public boolean isAltWorking()
-    {
-        return navx.isAltitudeValid();
-    }
+  public boolean isAltWorking() {
+    return navx.isAltitudeValid();
+  }
 
-    private static class InstanceHolder
-    {
-        private static final navx mInstance = new navx();
-    } 
+  private static class InstanceHolder {
+    private static final navx mInstance = new navx();
+  }
 }

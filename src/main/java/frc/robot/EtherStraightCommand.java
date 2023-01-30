@@ -5,13 +5,13 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class EtherStraightCommand extends CommandBase {
   private double dist, FWD, STR, angle;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
+
   public EtherStraightCommand(double dist, double FWD, double STR, double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.dist = dist;

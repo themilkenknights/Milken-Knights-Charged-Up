@@ -8,31 +8,28 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**The UltraSensor class contains everything relating to the ultrasonic sensor*/
+/** The UltraSensor class contains everything relating to the ultrasonic sensor */
 public class UltraSensor {
-    private final AnalogInput ultrasonic = new AnalogInput(0);
-    private double rawValue, voltageFactor, currentDistanceInches;
-    public static UltraSensor getInstance()
-    {
-        return InstanceHolder.mInstance;
-    }
+  private final AnalogInput ultrasonic = new AnalogInput(0);
+  private double rawValue, voltageFactor, currentDistanceInches;
 
-    public void updateUltra()
-    {
-        rawValue = ultrasonic.getValue();
-        voltageFactor = 5 / RobotController.getVoltage5V();
-        currentDistanceInches = rawValue * voltageFactor * 0.125;
-    }
+  public static UltraSensor getInstance() {
+    return InstanceHolder.mInstance;
+  }
 
-    public void ultraSmartDashboard()
-    {
-        SmartDashboard.putNumber("inchesrounded", Math.round(currentDistanceInches));
-        SmartDashboard.putNumber("rawvalue", rawValue);
-        SmartDashboard.putNumber("inchesdistthingy", currentDistanceInches);
-    }
-    
-    private static class InstanceHolder
-    {
-        private static final UltraSensor mInstance = new UltraSensor();
-    } 
+  public void updateUltra() {
+    rawValue = ultrasonic.getValue();
+    voltageFactor = 5 / RobotController.getVoltage5V();
+    currentDistanceInches = rawValue * voltageFactor * 0.125;
+  }
+
+  public void ultraSmartDashboard() {
+    SmartDashboard.putNumber("inchesrounded", Math.round(currentDistanceInches));
+    SmartDashboard.putNumber("rawvalue", rawValue);
+    SmartDashboard.putNumber("inchesdistthingy", currentDistanceInches);
+  }
+
+  private static class InstanceHolder {
+    private static final UltraSensor mInstance = new UltraSensor();
+  }
 }

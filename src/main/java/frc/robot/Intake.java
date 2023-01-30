@@ -11,45 +11,40 @@ import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKINTAKE;
 
-/**The Intake class contains everything relating to the intake mechanism*/
+/** The Intake class contains everything relating to the intake mechanism */
 public class Intake {
-    private Motor mMotor = Motor.getInstance();
-    private TalonFX roller;
-    private Solenoid intake;
+  private Motor mMotor = Motor.getInstance();
+  private TalonFX roller;
+  private Solenoid intake;
 
-    private Intake()
-    {
-        roller = mMotor.motor(CANID.rollerCANID, MKINTAKE.rollerNeutralMode, 0, MKINTAKE.pidf, MKINTAKE.inverted);
-        intake = new Solenoid(PneumaticsModuleType.REVPH, CANID.intakeCANID);
-    }
+  private Intake() {
+    roller =
+        mMotor.motor(
+            CANID.rollerCANID, MKINTAKE.rollerNeutralMode, 0, MKINTAKE.pidf, MKINTAKE.inverted);
+    intake = new Solenoid(PneumaticsModuleType.REVPH, CANID.intakeCANID);
+  }
 
-    public static Intake getInstance()
-    {
-        return InstanceHolder.mInstance;
-    }
+  public static Intake getInstance() {
+    return InstanceHolder.mInstance;
+  }
 
-    public void rollerSet(double setpoint)
-    {
-        roller.set(ControlMode.PercentOutput, setpoint);
-    }
+  public void rollerSet(double setpoint) {
+    roller.set(ControlMode.PercentOutput, setpoint);
+  }
 
-    public void intakeSet(boolean state)
-    {
-        intake.set(state);
-    }
+  public void intakeSet(boolean state) {
+    intake.set(state);
+  }
 
-    public void intakeToggle()
-    {
-        intake.toggle();
-    }
+  public void intakeToggle() {
+    intake.toggle();
+  }
 
-    public boolean getIntakeState()
-    {
-        return intake.get();
-    }
+  public boolean getIntakeState() {
+    return intake.get();
+  }
 
-    private static class InstanceHolder
-    {
-        private static final Intake mInstance = new Intake();
-    } 
+  private static class InstanceHolder {
+    private static final Intake mInstance = new Intake();
+  }
 }

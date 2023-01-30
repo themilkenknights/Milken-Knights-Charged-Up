@@ -14,6 +14,6 @@ public class SwrvStraight extends SequentialCommandGroup {
   public SwrvStraight() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(deadline(new EtherStraightCommand(20,0.5,0,0.2).withTimeout(7)));
+    addCommands(deadline(new EtherStraightCommand(20, 0.5, 0, 0.2).withTimeout(7)));
   }
 }

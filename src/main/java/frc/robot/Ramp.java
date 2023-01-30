@@ -5,36 +5,29 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.Constants.MKRAMP;
-import frc.robot.Constants.MKTRAIN;
 
 /** Add your docs here. */
-public class Ramp 
-{
+public class Ramp {
 
-    private PIDController rampPID;
-    
-    public static Ramp getInstance()
-    {
-        return InstanceHolder.mInstance;
-    }
+  private PIDController rampPID;
 
-    private Ramp()
-    {
-        rampPID = new PIDController(MKRAMP.kP, MKRAMP.kI, MKRAMP.kD);
-    }
+  public static Ramp getInstance() {
+    return InstanceHolder.mInstance;
+  }
 
-    public void rampMove()
-    {
-        double pitch = navx.getInstance().getNavxPitch();
-        double pid = rampPID.calculate(pitch, 0);
-        MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
-    }
+  private Ramp() {
+    rampPID = new PIDController(MKRAMP.kP, MKRAMP.kI, MKRAMP.kD);
+  }
 
-    private static class InstanceHolder
-    {
-        private static final Ramp mInstance = new Ramp();
-    } 
+  public void rampMove() {
+    double pitch = navx.getInstance().getNavxPitch();
+    double pid = rampPID.calculate(pitch, 0);
+    MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
+  }
+
+  private static class InstanceHolder {
+    private static final Ramp mInstance = new Ramp();
+  }
 }

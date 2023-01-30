@@ -14,9 +14,9 @@ public class EtherAutoCommand extends CommandBase {
   private double heading;
   private double side;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
-  
-  public EtherAutoCommand(double distanceA, double lengthB, double dist, double ang, double heading, double side)
-  {
+
+  public EtherAutoCommand(
+      double distanceA, double lengthB, double dist, double ang, double heading, double side) {
     this.totalDistance = dist;
     this.thetaTurn = ang;
     this.distanceA = distanceA;
@@ -29,7 +29,8 @@ public class EtherAutoCommand extends CommandBase {
   @Override
   public void initialize() {
     train.startDrive();
-    train.setEtherAuto(totalDistance, distanceA, MathFormulas.calculateCircleRadius(distanceA, lengthB));
+    train.setEtherAuto(
+        totalDistance, distanceA, MathFormulas.calculateCircleRadius(distanceA, lengthB));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

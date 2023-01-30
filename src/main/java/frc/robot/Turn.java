@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Turn extends CommandBase {
   /** Creates a new Turn. */
   private double angle;
+
   public Turn(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.angle = angle;
@@ -24,7 +25,7 @@ public class Turn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    MkSwerveTrain.getInstance().setModuleTurn(angle,angle,angle,angle);
+    MkSwerveTrain.getInstance().setModuleTurn(angle, angle, angle, angle);
   }
 
   // Called once the command ends or is interrupted.

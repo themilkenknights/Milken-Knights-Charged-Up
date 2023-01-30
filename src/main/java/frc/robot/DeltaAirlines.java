@@ -9,44 +9,43 @@ import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**Handles all dt related activities*/
+/** Handles all dt related activities */
 public class DeltaAirlines {
   private int loopOverrunWarning;
   private int loopCounter;
   private double lastTime = Timer.getFPGATimestamp();
   private double dt = 0;
 
-  public static DeltaAirlines getInstance()
-  {
+  public static DeltaAirlines getInstance() {
     return InstanceHolder.mInstance;
   }
 
-    public void updateDeltaTime() {
-        loopCounter++;
-        double time = Timer.getFPGATimestamp();
-        dt = (time - lastTime) * 1e3;
-        SmartDashboard.putNumber("Loop Dt", dt);
-        lastTime = time;
-    
-        if (dt > 22) {
-          loopOverrunWarning++;
-        }
-    
-        if (loopCounter == 500) {
-          if (loopOverrunWarning > 10) {
-            Shuffleboard.addEventMarker("Loop Time Over 22ms for more than 10 loops in the past 5 seconds.", EventImportance.kHigh);
-            loopCounter = 0;
-          }
-        }
-      }
+  public void updateDeltaTime() {
+    loopCounter++;
+    double time = Timer.getFPGATimestamp();
+    dt = (time - lastTime) * 1e3;
+    SmartDashboard.putNumber("Loop Dt", dt);
+    lastTime = time;
 
-      public double getDT()
-      {
-        return dt;
-      }
+    if (dt > 22) {
+      loopOverrunWarning++;
+    }
 
-    private static class InstanceHolder
-    {
-        private static final DeltaAirlines mInstance = new DeltaAirlines();
-    } 
+    if (loopCounter == 500) {
+      if (loopOverrunWarning > 10) {
+        Shuffleboard.addEventMarker(
+            "Loop Time Over 22ms for more than 10 loops in the past 5 seconds.",
+            EventImportance.kHigh);
+        loopCounter = 0;
+      }
+    }
+  }
+
+  public double getDT() {
+    return dt;
+  }
+
+  private static class InstanceHolder {
+    private static final DeltaAirlines mInstance = new DeltaAirlines();
+  }
 }

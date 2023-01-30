@@ -26,6 +26,7 @@ public class SupaStruct {
     private boolean isRCWrunningWithNavx = false;
     private AprilTags april = AprilTags.getInstance();
     private Intake intake = Intake.getInstance();
+    private Claw claw = Claw.getInstance();
     private Timer turntesttimer = new Timer();
     private Timer turntesttimertwo = new Timer();
     private double count = 0;
@@ -162,6 +163,11 @@ public class SupaStruct {
         if(abutton)
         {
             intake.intakeSet(!intake.getIntakeState());
+        }
+
+        if(ybutton)
+        {
+            claw.ClawSet(!claw.getClawState());
         }
         // applying numbers
 

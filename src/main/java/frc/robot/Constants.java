@@ -190,10 +190,31 @@ public final class Constants {
         public static final int topTurnRightCANCoderCANID = 17;
         public static final int bottomTurnLeftCANCoderCANID = 15;
         public static final int bottomTurnRightCANCoderCANID = 18;//16
+        public static final int intakeCANID = 0;
+        public static final int rollerCANID = 21;
 
         // revh ph
         public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
     }
+    public static class MKINTAKE 
+    {
+        public static final double maxIntakeNativePosition = 7350;
+        public static final NeutralMode rollerNeutralMode = NeutralMode.Coast;
+        
+        public static final double kP = 0.04;
+        public static final double kI = 0;
+        public static final double kD = kP * 0.6;
+        public static final double kF = 0;
+
+        public static final double[] pidf = {kP, kI, kD, kF};
+
+        public static final boolean inverted = false;
+
+        public static final int scurve = 0;
+
+        public static final double rollerPercentSpeed = 0.5;
+    }
+
 
     public static class AUTO {
 

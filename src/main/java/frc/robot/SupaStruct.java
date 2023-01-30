@@ -25,7 +25,7 @@ public class SupaStruct {
             ltrigger, rtrigger, pov, /* povToggled, */ itsreal = false;
     private boolean isRCWrunningWithNavx = false;
     private AprilTags april = AprilTags.getInstance();
-
+    private Intake intake = Intake.getInstance();
     private Timer turntesttimer = new Timer();
     private Timer turntesttimertwo = new Timer();
     private double count = 0;
@@ -141,6 +141,28 @@ public class SupaStruct {
             str = 0;
         }
 
+        if(rbbutton)
+        {
+            intake.rollerSet(-.3);
+            
+        }
+        else if(lbbutton)
+        {
+            intake.rollerSet(.3);
+            
+        }
+        else
+        {
+            intake.rollerSet(0);
+        }
+
+        //--------------------------------------------------------------------//
+        //  INTAKE DEPLOY CONTROL
+        //--------------------------------------------------------------------//
+        if(abutton)
+        {
+            intake.intakeSet(!intake.getIntakeState());
+        }
         // applying numbers
 
         if (xbutton) {

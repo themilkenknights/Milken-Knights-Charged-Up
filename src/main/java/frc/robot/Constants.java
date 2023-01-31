@@ -198,7 +198,8 @@ public final class Constants {
    // public static final int rollerCANID = 21;
 
     // revh ph
-    public static final int revphCANID = 22; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
+    public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
+    public static final int revpdhCANID = 23; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
   }
 
   public static class MKINTAKE {

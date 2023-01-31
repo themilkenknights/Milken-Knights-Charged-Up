@@ -5,8 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.hal.util.UncleanStatusException;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -16,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import java.io.IOException;
 import java.util.Optional;
 import org.photonvision.EstimatedRobotPose;
+import frc.robot.Constants.CANID;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,6 +36,8 @@ public class Robot extends TimedRobot {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
   private Timer timer;
+  
+  private Compressor mCompressor;//= new Compressor(CANID.revphCANID, PneumaticsModuleType.REVPH);
 
   private PhotonCameraWrapper austin;
   private final Field2d mField2d = new Field2d();
@@ -59,6 +64,14 @@ public class Robot extends TimedRobot {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+
+    try {
+      mCompressor = new Compressor(CANID.revphCANID, PneumaticsModuleType.REVPH);
+  
+    } catch (UncleanStatusException ex) {
+      DriverStation.reportError("Error creating Solenoid", ex.getStackTrace());
+    }
+    mCompressor.enableDigital();
   }
 
   @Override
@@ -114,6 +127,7 @@ public class Robot extends TimedRobot {
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
     m_autonomousCommand = null;
+    mCompressor.disable();
   }
 
   @Override

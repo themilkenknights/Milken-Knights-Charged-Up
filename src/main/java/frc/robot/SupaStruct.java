@@ -51,7 +51,7 @@ public class SupaStruct {
       itsreal = false;
   private boolean isRCWrunningWithNavx = false;
   private AprilTags april = AprilTags.getInstance();
-  private Intake intake = Intake.getInstance();
+  //private Intake intake = Intake.getInstance();
   private Claw claw = Claw.getInstance();
   private Timer turntesttimer = new Timer();
   private Timer turntesttimertwo = new Timer();
@@ -170,7 +170,7 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-
+/* 
     if (rbbutton) {
       intake.rollerSet(-.3);
 
@@ -187,7 +187,7 @@ public class SupaStruct {
     if (abutton) {
       intake.intakeSet(!intake.getIntakeState());
     }
-
+*/
     if (ybutton) {
       claw.ClawSet(!claw.getClawState());
     }

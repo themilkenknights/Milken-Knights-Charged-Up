@@ -195,7 +195,7 @@ public final class Constants {
     public static final int bottomTurnRightCANCoderCANID = 18; // 16
     public static final int intakeCANID = 0;
     public static final int CLAWCANID = 1;
-    public static final int rollerCANID = 21;
+   // public static final int rollerCANID = 21;
 
     // revh ph
     public static final int revphCANID = 22; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE

@@ -127,7 +127,7 @@ public class Robot extends TimedRobot {
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
     m_autonomousCommand = null;
-    mCompressor.disable();
+    //mCompressor.disable();
   }
 
   @Override

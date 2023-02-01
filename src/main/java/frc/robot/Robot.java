@@ -7,15 +7,15 @@ package frc.robot;
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.CANID;
 import java.io.IOException;
-import java.util.Optional;
-import org.photonvision.EstimatedRobotPose;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
    */
   private Command m_autonomousCommand;
 
+  PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
   private Timer timer;
@@ -39,6 +40,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
+    SmartDashboard.setDefaultBoolean("Disable Compressor", false);
+
+    // Add number inputs for minimum and maximum pressure
+    SmartDashboard.setDefaultNumber("Minimum Pressure (PSI)", 100.0);
+    SmartDashboard.setDefaultNumber("Maximum Pressure (PSI)", 120.0);
     System.out.println("Robot enabled");
     // Starts recording to data log
     DataLogManager.start();
@@ -56,22 +63,25 @@ public class Robot extends TimedRobot {
       austin = new PhotonCameraWrapper();
       SmartDashboard.putData(mField2d);
     } catch (IOException e) {
-      // TODO Auto-generated catch block
+
       e.printStackTrace();
     }
   }
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run();
-    if (austin != null) {
-      Optional<EstimatedRobotPose> tag = austin.photonPoseEstimator.update();
-      if (tag.isPresent()) {
-        SmartDashboard.putString("See Tag", tag.get().estimatedPose.toString());
-        mField2d.setRobotPose(tag.get().estimatedPose.toPose2d());
-      } else {
-        SmartDashboard.putString("See Tag", "nada");
-      }
+    SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
+    SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
+    if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
+      SmartDashboard.putBoolean("Enable Compressor Analog", false);
+      double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
+      double maxPressure = SmartDashboard.getNumber("Maximum Pressure (PSI)", 0.0);
+      m_ph.enableCompressorAnalog(minPressure, maxPressure);
+    }
+    if (SmartDashboard.getBoolean("Disable Compressor", false)) {
+      SmartDashboard.putBoolean("Disable Compressor", false);
+      m_ph.disableCompressor();
+      CommandScheduler.getInstance().run();
     }
   }
 

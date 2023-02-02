@@ -93,9 +93,7 @@ public class SupaStruct {
     rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
     resetNavx = xbox.getRawButton(DriveInput.resetNavxButton);
     resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
-    resetTurn = xbox.getRawButton(DriveInput.resetTurnbutton);
-    xbutton = xbox.getXButton();
-    ybutton = xbox.getYButton();
+    xbutton = xbox.getXButtonPressed();
     abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
     lbbutton = xbox.getLeftBumper();
@@ -186,7 +184,7 @@ public class SupaStruct {
         //  INTAKE DEPLOY CONTROL
         // --------------------------------------------------------------------//
     
-if(ybutton){
+if(xbutton){
   SmartDashboard.putBoolean("ypressed", ybutton);
   claw.toggle();
 }

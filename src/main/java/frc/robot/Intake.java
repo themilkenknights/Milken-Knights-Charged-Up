@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKINTAKE;
 
- //The Intake class contains everything relating to the intake mechanism
+// The Intake class contains everything relating to the intake mechanism
 public class Intake {
   private Motor mMotor = Motor.getInstance();
   private TalonFX roller;
@@ -48,4 +48,3 @@ public class Intake {
     private static final Intake mInstance = new Intake();
   }
 }
-

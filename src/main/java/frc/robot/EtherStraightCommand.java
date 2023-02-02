@@ -5,7 +5,6 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class EtherStraightCommand extends CommandBase {
@@ -36,7 +35,7 @@ public class EtherStraightCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("FINISHED RAMP", true);
+    // SmartDashboard.putBoolean("FINISHED RAMP", true);
   }
 
   // Returns true when the command should end.

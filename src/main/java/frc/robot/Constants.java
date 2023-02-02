@@ -200,7 +200,6 @@ public final class Constants {
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
     public static final int revpdhCANID = 23; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
-   
   }
 
   public static class MKINTAKE {

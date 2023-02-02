@@ -192,8 +192,8 @@ public class MkSwerveTrain {
     vars.yaw = navx.getInstance().getNavxYaw();
 
     SmartDashboard.putNumber("navx", vars.yaw);
-    SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
-    SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
+    // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
+    // SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
 
     vars.posInchTL = MathFormulas.nativeToInches(topDriveLeft.getSelectedSensorPosition());
     vars.posInchTR = MathFormulas.nativeToInches(topDriveRight.getSelectedSensorPosition());
@@ -275,8 +275,8 @@ public class MkSwerveTrain {
     vars.C = FWD - RCW * (MKTRAIN.W / MKTRAIN.R);
     vars.D = FWD + RCW * (MKTRAIN.W / MKTRAIN.R);
 
-    SmartDashboard.putNumber("FWD", FWD);
-    SmartDashboard.putNumber("STR", STR);
+    // SmartDashboard.putNumber("FWD", FWD);
+    // SmartDashboard.putNumber("STR", STR);
 
     vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180 / Constants.kPi;
     vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180 / Constants.kPi;
@@ -326,8 +326,8 @@ public class MkSwerveTrain {
             + STR * Math.cos(Math.toRadians(vars.yawTest));
     FWD = vars.tempTest;
 
-    SmartDashboard.putNumber("FWD", FWD);
-    SmartDashboard.putNumber("STR", STR);
+    // SmartDashboard.putNumber("FWD", FWD);
+    // SmartDashboard.putNumber("STR", STR);
 
     vars.ATest = STR - RCW * (MKTRAIN.L / MKTRAIN.R);
     vars.BTest = STR + RCW * (MKTRAIN.L / MKTRAIN.R);
@@ -373,9 +373,9 @@ public class MkSwerveTrain {
     STR = -FWD * Math.sin(Math.toRadians(vars.yaw)) + STR * Math.cos(Math.toRadians(vars.yaw));
     FWD = vars.temp;
 
-    SmartDashboard.putNumber("FWDreal", FWD);
-    SmartDashboard.putNumber("STRreal", STR);
-    SmartDashboard.putNumber("RCWreal", RCW);
+    // SmartDashboard.putNumber("FWDreal", FWD);
+    // SmartDashboard.putNumber("STRreal", STR);
+    // SmartDashboard.putNumber("RCWreal", RCW);
 
     vars.A = STR - RCW * (MKTRAIN.L / MKTRAIN.R);
     vars.B = STR + RCW * (MKTRAIN.L / MKTRAIN.R);
@@ -408,12 +408,12 @@ public class MkSwerveTrain {
     vars.mod3 = setDirection(blDeg(), vars.mod3);
     vars.mod4 = setDirection(brDeg(), vars.mod4);
 
-    SmartDashboard.putNumber("a", vars.A);
-    SmartDashboard.putNumber("b", vars.B);
-    SmartDashboard.putNumber("c", vars.C);
-    SmartDashboard.putNumber("d", vars.D);
-    SmartDashboard.putNumber("topdrileftvelo", topDriveLeft.getSelectedSensorVelocity());
-
+    // SmartDashboard.putNumber("a", vars.A);
+    // SmartDashboard.putNumber("b", vars.B);
+    // SmartDashboard.putNumber("c", vars.C);
+    // SmartDashboard.putNumber("d", vars.D);
+    // SmartDashboard.putNumber("topdrileftvelo", topDriveLeft.getSelectedSensorVelocity());
+    //
     setModuleDrive(mode, vars.mod1[0], vars.mod2[0], vars.mod3[0], vars.mod4[0]);
     setModuleTurn(vars.mod1[1], vars.mod2[1], vars.mod3[1], vars.mod4[1]);
   }
@@ -507,7 +507,7 @@ public class MkSwerveTrain {
 
     etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5, ControlMode.PercentOutput);
     etherRCWFinder(vars.FWDauto, -vars.STRauto, 0);
-
+    /*
     SmartDashboard.putNumber(
         "avgdistsimilarity", vars.avgDistInches - (vars.avgDistTest * AUTO.measToPredictRatio));
     SmartDashboard.putNumber(
@@ -519,7 +519,7 @@ public class MkSwerveTrain {
     SmartDashboard.putNumber("FWDauto", vars.FWDauto);
     SmartDashboard.putNumber("STRauto", vars.STRauto);
     SmartDashboard.putNumber("calcangle", calcangle % 360);
-    SmartDashboard.putBoolean("isfinished", isFinished());
+    SmartDashboard.putBoolean("isfinished", isFinished());*/
   }
 
   public boolean isFinished() {

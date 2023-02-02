@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.MKBABY;
 import frc.robot.Constants.MKLIME;
 
@@ -63,9 +62,9 @@ public class Limelight {
   }
 
   public void limeSmartDashboard() {
-    SmartDashboard.putNumber("distance to gowl", distance);
-    SmartDashboard.putNumber(
-        "visionyayayay", MathFormulas.limit(visionYaw / MKLIME.maxTX, -.5, .5));
+    // SmartDashboard.putNumber("distance to gowl", distance);
+    // SmartDashboard.putNumber(
+    //    "visionyayayay", MathFormulas.limit(visionYaw / MKLIME.maxTX, -.5, .5));
   }
 
   public double getDistance() {

@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.net.PortForwarder;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.MKAPRIL;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
@@ -118,7 +117,7 @@ public class AprilTags {
         moveAprilY.calculate(getAxis("y"), 0);
       }
 
-      SmartDashboard.putNumber("xpid", xPID);
+      // SmartDashboard.putNumber("xpid", xPID);
 
       train.etherSwerve(
           MathFormulas.limit(xPID, -0.5, 0.5),
@@ -131,12 +130,12 @@ public class AprilTags {
   }
 
   public void aprilSmartDashboard() {
-    SmartDashboard.putNumber("aprilRQANge", get2DRange());
+    /*SmartDashboard.putNumber("aprilRQANge", get2DRange());
     SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
     SmartDashboard.putNumber("z", getAxis("r"));
     SmartDashboard.putNumber("z2", getAxis("yaw"));
     SmartDashboard.putNumber("zpid", moveAprilZ.calculate(getAxis("r"), 0));
-    SmartDashboard.putNumber("ypid", moveAprilY.calculate(getAxis("y"), 0));
+    SmartDashboard.putNumber("ypid", moveAprilY.calculate(getAxis("y"), 0));*/
   }
 
   private static class InstanceHolder {

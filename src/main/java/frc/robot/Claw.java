@@ -10,32 +10,28 @@ import frc.robot.Constants.CANID;
 
 /** Add your docs here. */
 public class Claw {
-    private Solenoid claw;
+  private Solenoid claw;
 
-    private Claw()
-    {
-        claw = new Solenoid(CANID.revphCANID, PneumaticsModuleType.REVPH, CANID.CLAWPORT);
-    }
+  private Claw() {
+    claw = new Solenoid(CANID.revphCANID, PneumaticsModuleType.REVPH, CANID.CLAWPORT);
+  }
 
-    public static Claw getInstance() {
-        return InstanceHolder.mInstance;
-      }
+  public static Claw getInstance() {
+    return InstanceHolder.mInstance;
+  }
 
-    public void toggle()
-    {
-        claw.toggle();
-    }
+  public void toggle() {
+    claw.toggle();
+  }
 
-    public void extend()
-    {
-        claw.set(true);
-    }
+  public void extend() {
+    claw.set(true);
+  }
 
-    public void retract()
-    {
-        claw.set(false);
-    }
-    
+  public void retract() {
+    claw.set(false);
+  }
+
   private static class InstanceHolder {
     private static final Claw mInstance = new Claw();
   }

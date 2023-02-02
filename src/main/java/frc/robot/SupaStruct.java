@@ -169,25 +169,24 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-    /* 
-        if (rbbutton) {
-          intake.rollerSet(-.3);
+    /*
+            if (rbbutton) {
+              intake.rollerSet(-.3);
 
-        } else if (lbbutton) {
-          intake.rollerSet(.3);
+            } else if (lbbutton) {
+              intake.rollerSet(.3);
 
-        } else {
-          intake.rollerSet(0);
-        }
-*/
-        // --------------------------------------------------------------------//
-        //  INTAKE DEPLOY CONTROL
-        // --------------------------------------------------------------------//
-    
-if(xbutton){
-  SmartDashboard.putBoolean("ypressed", ybutton);
-  claw.toggle();
-}
+            } else {
+              intake.rollerSet(0);
+            }
+    */
+    // --------------------------------------------------------------------//
+    //  INTAKE DEPLOY CONTROL
+    // --------------------------------------------------------------------//
+
+    if (xbutton) {
+      claw.toggle();
+    }
     // applying numbers
 
     if (xbutton) {

@@ -21,7 +21,9 @@ public class Intake {
     roller =
         mMotor.motor(
             CANID.rollerCANID, MKINTAKE.rollerNeutralMode, 0, MKINTAKE.pidf, MKINTAKE.inverted);
-    intake = new Solenoid(PneumaticsModuleType.REVPH, CANID.intakeCANID);
+            
+
+              intake = new Solenoid(CANID.revphCANID, PneumaticsModuleType.REVPH, CANID.intakePORT);
   }
 
   public static Intake getInstance() {
@@ -32,16 +34,16 @@ public class Intake {
     roller.set(ControlMode.PercentOutput, setpoint);
   }
 
-  public void intakeSet(boolean state) {
-    intake.set(state);
-  }
-
-  public void intakeToggle() {
+  public void toggle() {
     intake.toggle();
   }
 
-  public boolean getIntakeState() {
-    return intake.get();
+  public void extend() {
+    intake.set(true);
+  }
+
+  public void retract() {
+    intake.set(false);
   }
 
   private static class InstanceHolder {

@@ -108,7 +108,6 @@ public final class Constants {
     public static final double offsetYaw = 90;
     public static final double offsetPitch = 0;
   }
-
   public static class MKLIME {
     public static final int pipeline = 0;
     public static final double limeHeightInches = 33.5;
@@ -193,9 +192,12 @@ public final class Constants {
     public static final int topTurnRightCANCoderCANID = 17;
     public static final int bottomTurnLeftCANCoderCANID = 15;
     public static final int bottomTurnRightCANCoderCANID = 18; // 16
-    public static final int intakeCANID = 1;
+    //
+    public static final int intakePORT = 9;
     public static final int CLAWPORT = 8;
     public static final int rollerCANID = 21;
+    public static final int leftPivotCANID = 24;
+    public static final int rightPivotCANID = 25;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -217,6 +219,7 @@ public final class Constants {
     public static final int scurve = 0;
 
     public static final double rollerPercentSpeed = 0.5;
+
   }
 
   public static class AUTO {

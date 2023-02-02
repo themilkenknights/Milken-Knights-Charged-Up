@@ -41,6 +41,7 @@ public class SupaStruct {
       xbutton,
       ybutton,
       rbbutton,
+      bbutton,
       rbbutton2,
       lbbutton2,
       lbbutton,
@@ -51,7 +52,7 @@ public class SupaStruct {
       itsreal = false;
   private boolean isRCWrunningWithNavx = false;
   private AprilTags april = AprilTags.getInstance();
-  // private Intake intake = Intake.getInstance();
+   private Intake intake = Intake.getInstance();
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
   private Timer turntesttimertwo = new Timer();
@@ -96,6 +97,7 @@ public class SupaStruct {
     xbutton = xbox.getXButtonPressed();
     abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
+    bbutton = xbox.getBButtonPressed();
     lbbutton = xbox.getLeftBumper();
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
@@ -169,22 +171,24 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-    /*
+    
             if (rbbutton) {
-              intake.rollerSet(-.3);
+              intake.rollerSet(-.7);
 
             } else if (lbbutton) {
-              intake.rollerSet(.3);
+              intake.rollerSet(.7);
 
             } else {
               intake.rollerSet(0);
             }
-    */
+            if (abutton) {
+              intake.toggle();
+            }
     // --------------------------------------------------------------------//
     //  INTAKE DEPLOY CONTROL
     // --------------------------------------------------------------------//
 
-    if (xbutton) {
+    if (ybutton) {
       claw.toggle();
     }
     // applying numbers

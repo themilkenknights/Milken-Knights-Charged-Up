@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-/*
+
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKINTAKE;
 
-/** The Intake class contains everything relating to the intake mechanism
+ //The Intake class contains everything relating to the intake mechanism
 public class Intake {
   private Motor mMotor = Motor.getInstance();
   private TalonFX roller;
@@ -48,4 +48,4 @@ public class Intake {
     private static final Intake mInstance = new Intake();
   }
 }
-*/
+

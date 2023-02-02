@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CONTROLLERS.DriveInput;
 import frc.robot.Constants.MKBABY;
+import frc.robot.GrabberSubsystem;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -52,8 +53,8 @@ public class SupaStruct {
   private boolean isRCWrunningWithNavx = false;
   private AprilTags april = AprilTags.getInstance();
   // private Intake intake = Intake.getInstance();
-  private Claw claw = Claw.getInstance();
   private Timer turntesttimer = new Timer();
+  private GrabberSubsystem claw = new GrabberSubsystem();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
 
@@ -95,6 +96,7 @@ public class SupaStruct {
     resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
     resetTurn = xbox.getRawButton(DriveInput.resetTurnbutton);
     xbutton = xbox.getXButton();
+    ybutton = xbox.getYButton();
     abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
     lbbutton = xbox.getLeftBumper();
@@ -170,7 +172,7 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-    /*
+    /* 
         if (rbbutton) {
           intake.rollerSet(-.3);
 
@@ -180,17 +182,16 @@ public class SupaStruct {
         } else {
           intake.rollerSet(0);
         }
-
+*/
         // --------------------------------------------------------------------//
         //  INTAKE DEPLOY CONTROL
         // --------------------------------------------------------------------//
-        if (abutton) {
-          intake.intakeSet(!intake.getIntakeState());
-        }
-    */
-    if (ybutton) {
-      claw.ClawSet(!claw.getClawState());
-    }
+    
+if(ybutton){
+  SmartDashboard.putBoolean("ypressed", ybutton);
+  claw.toggle();
+ 
+}
     // applying numbers
 
     if (xbutton) {

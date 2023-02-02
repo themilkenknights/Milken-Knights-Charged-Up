@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CONTROLLERS.DriveInput;
 import frc.robot.Constants.MKBABY;
-import frc.robot.GrabberSubsystem;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -54,7 +53,7 @@ public class SupaStruct {
   private AprilTags april = AprilTags.getInstance();
   // private Intake intake = Intake.getInstance();
   private Timer turntesttimer = new Timer();
-  private GrabberSubsystem claw = new GrabberSubsystem();
+  private Claw claw = Claw.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
 
@@ -190,7 +189,6 @@ public class SupaStruct {
 if(ybutton){
   SmartDashboard.putBoolean("ypressed", ybutton);
   claw.toggle();
- 
 }
     // applying numbers
 

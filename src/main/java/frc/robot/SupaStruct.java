@@ -117,7 +117,7 @@ public class SupaStruct {
             % 360;
 
     // --------------------------------------------------------------------//
-    // BUTTONS
+    // NAVX RESET
     // --------------------------------------------------------------------//
 
     if (resetNavx) {
@@ -171,7 +171,10 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-    
+  
+    // --------------------------------------------------------------------//
+    // INTAKE
+    // --------------------------------------------------------------------//
             if (rbbutton) {
               intake.rollerSet(-.7);
 
@@ -185,18 +188,19 @@ public class SupaStruct {
               intake.toggle();
             }
     // --------------------------------------------------------------------//
-    //  INTAKE DEPLOY CONTROL
+    //  CLAW AND ARM
     // --------------------------------------------------------------------//
-  if(xbutton){
-  intake.toggle();
-
-}
-    if (ybutton) {
+    if (xbutton) {
       claw.toggle();
     }
+
+    
+    // --------------------------------------------------------------------//
+    // OTHER
+    // --------------------------------------------------------------------//
     // applying numbers
 
-    if (xbutton) {
+   /*  if (xbutton) {
       april.alignToTag();
     } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
       train.etherSwerve(
@@ -208,7 +212,7 @@ public class SupaStruct {
       // train.setModuleTurn(0, 0, 0, 0);
     } else {
       train.stopEverything();
-    }
+    }*/
   }
 
   public void teleopDisabled() {

@@ -187,7 +187,10 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     //  INTAKE DEPLOY CONTROL
     // --------------------------------------------------------------------//
+  if(xbutton){
+  intake.toggle();
 
+}
     if (ybutton) {
       claw.toggle();
     }

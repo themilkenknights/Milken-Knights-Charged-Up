@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.CANID;
 import java.io.IOException;
+import java.util.Optional;
+
+import org.photonvision.EstimatedRobotPose;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -82,6 +85,17 @@ public class Robot extends TimedRobot {
       SmartDashboard.putBoolean("Disable Compressor", false);
       m_ph.disableCompressor();
       CommandScheduler.getInstance().run();
+    }
+    if(austin!=null){
+      Optional<EstimatedRobotPose> swerdlow = austin.photonPoseEstimator.update();
+      if(swerdlow.isPresent()){
+        SmartDashboard.putString("Jared",swerdlow.get().estimatedPose.toString());
+        mField2d.setRobotPose(swerdlow.get().estimatedPose.toPose2d());
+      }
+      else{
+        SmartDashboard.putString("Jared","nada");
+  
+      }
     }
   }
 

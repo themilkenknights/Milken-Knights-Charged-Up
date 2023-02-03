@@ -192,12 +192,12 @@ public final class Constants {
     public static final int topTurnRightCANCoderCANID = 17;
     public static final int bottomTurnLeftCANCoderCANID = 15;
     public static final int bottomTurnRightCANCoderCANID = 18; // 16
-    //
-    public static final int intakePORT = 9;
-    public static final int CLAWPORT = 8;
+    // 
+    public static final int intakePORT = 8;
+    public static final int CLAWPORT = 9;
     public static final int rollerCANID = 21;
-    public static final int leftPivotCANID = 24;
-    public static final int rightPivotCANID = 25;
+    public static final int leftarmCANID = 24;
+    public static final int rightarmCANID = 25;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE

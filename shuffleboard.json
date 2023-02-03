@@ -23,11 +23,11 @@
               "_glyph": 148,
               "_showGlyph": false,
               "Game/Game": "A2023_Charged_Up",
-              "Visuals/Robot Icon Size": 50.0,
+              "Visuals/Robot Icon Size": 40.0,
               "Visuals/Show Outside Circles": false
             }
           },
-          "0,0": {
+          "5,0": {
             "size": [
               1,
               1
@@ -40,20 +40,7 @@
               "_showGlyph": false
             }
           },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Loop Dt",
-              "_title": "Loop Dt",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,0": {
+          "9,0": {
             "size": [
               1,
               1
@@ -66,7 +53,7 @@
               "_showGlyph": false
             }
           },
-          "3,0": {
+          "6,0": {
             "size": [
               1,
               1
@@ -79,7 +66,7 @@
               "_showGlyph": false
             }
           },
-          "4,0": {
+          "7,0": {
             "size": [
               1,
               1
@@ -92,7 +79,7 @@
               "_showGlyph": false
             }
           },
-          "5,0": {
+          "8,0": {
             "size": [
               1,
               1
@@ -105,7 +92,7 @@
               "_showGlyph": false
             }
           },
-          "6,0": {
+          "10,0": {
             "size": [
               1,
               1
@@ -118,180 +105,7 @@
               "_showGlyph": false
             }
           },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/altitude",
-              "_title": "altitude",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/altitudeWORKING",
-              "_title": "altitudeWORKING",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "9,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/aprilRQANge",
-              "_title": "aprilRQANge",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/DOYOUFUCKIGSEEEE",
-              "_title": "DOYOUFUCKIGSEEEE",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/z",
-              "_title": "z",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/z2",
-              "_title": "z2",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/zpid",
-              "_title": "zpid",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ypid",
-              "_title": "ypid",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FWD",
-              "_title": "FWD",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/STR",
-              "_title": "STR",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Jared",
-              "_title": "Jared",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/xpid",
-              "_title": "xpid",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/See Tag",
-              "_title": "See Tag",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,4": {
+          "9,5": {
             "size": [
               1,
               1
@@ -300,6 +114,98 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/bentest",
               "_title": "bentest",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "8,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Pressure",
+              "_title": "/SmartDashboard/Pressure",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Enable Compressor Analog",
+              "_title": "Enable Compressor Analog",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Disable Compressor",
+              "_title": "Disable Compressor",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "5,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Compressor Running",
+              "_title": "Compressor Running",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,1": {
+            "size": [
+              3,
+              4
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://photonvision_Port_1182_MJPEG_Server",
+              "_title": "photonvision_Port_1182_MJPEG_Server",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Jared",
+              "_title": "Jared",
               "_glyph": 148,
               "_showGlyph": false
             }

@@ -190,7 +190,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     //  CLAW AND ARM
     // --------------------------------------------------------------------//
-    if (xbutton) {
+    if (bbutton) {
       claw.toggle();
     }
 
@@ -200,7 +200,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // applying numbers
 
-   /*  if (xbutton) {
+     if (xbutton) {
       april.alignToTag();
     } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
       train.etherSwerve(
@@ -212,7 +212,7 @@ public class SupaStruct {
       // train.setModuleTurn(0, 0, 0, 0);
     } else {
       train.stopEverything();
-    }*/
+    }
   }
 
   public void teleopDisabled() {

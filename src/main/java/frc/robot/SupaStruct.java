@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CONTROLLERS.DriveInput;
 import frc.robot.Constants.MKBABY;
+import frc.robot.Constants.MKTELE;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -100,8 +101,8 @@ public class SupaStruct {
     rbbutton = xbox.getRightBumper();
     bbutton = xbox.getBButtonPressed();
     lbbutton = xbox.getLeftBumper();
-    dpaddown = xbox.getPOV() == 0;
-    dpadup = xbox.getPOV() == 180;
+    dpaddown = xbox.getPOV() == 180;
+    dpadup = xbox.getPOV() == 0;
     SmartDashboard.putNumber("pov", xbox.getPOV());
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
@@ -121,14 +122,12 @@ public class SupaStruct {
 
     if (resetNavx) {
       navx.getInstance().reset();
-
+      Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
       povValue = 00;
       inverseTanAngleOG = 0;
       train.vars.avgDistTest = 0;
       train.vars.avgDistInches = 0;
       train.startDrive();
-
-      arm.setTelescope(0);
     }
 
     // --------------------------------------------------------------------//
@@ -225,13 +224,13 @@ public class SupaStruct {
       arm.moveArm(0, 0);
     }
 
-    if(dpaddown && !dpadup)
+    if(dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope)
     {
-      arm.moveTele(.1);
+      arm.moveTele(-.23);
     }
-    else if(dpadup && !dpaddown)
+    else if(dpadup && !dpaddown && arm.getTelescope() < MKTELE.maxNativePositionTelescope)
     {
-      arm.moveTele(-.1);
+      arm.moveTele(.23);
     }
     else 
     {

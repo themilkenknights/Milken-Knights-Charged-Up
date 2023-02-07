@@ -214,8 +214,8 @@ public final class Constants {
   }
 
   public static class MKTELE {
-    public static final double maxNativePositionTelescope = 290000;
-    public static final double minNativePositionTelescope = 7000;
+    public static final double maxNativePositionTelescope = 212262;
+    public static final double minNativePositionTelescope = 150;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 

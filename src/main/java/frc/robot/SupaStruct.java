@@ -47,6 +47,10 @@ public class SupaStruct {
       rtrigger,
       pov, /* povToggled, */
       itsreal = false;
+  int dpadleft;
+  int dpadright;
+  int dpaddown;
+  int dpadup;
   private boolean isRCWrunningWithNavx = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
@@ -55,6 +59,7 @@ public class SupaStruct {
   private Arm arm = Arm.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
+  private Tele tele = Tele.getInstance();
 
   public static SupaStruct getInstance() {
     return InstanceHolder.mInstance;
@@ -72,7 +77,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     train.updateSwerve();
     april.updateApril();
-
+    tele.teleUpdate();
     // lime.updateSensors();
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
@@ -98,6 +103,10 @@ public class SupaStruct {
     rbbutton = xbox.getRightBumper();
     bbutton = xbox.getBButtonPressed();
     lbbutton = xbox.getLeftBumper();
+    dpadup = xbox.getPOV(0);
+    dpaddown = xbox.getPOV(180);
+    dpadright = xbox.getPOV(90);
+    dpadleft = xbox.getPOV(270);
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
     pov = xbox.getPOV() != -1;
@@ -144,9 +153,30 @@ public class SupaStruct {
      */
 
     // --------------------------------------------------------------------//
-    // ELSE STATEMENTS
+    // Telescope STATEMENTS
     // --------------------------------------------------------------------//
 
+    if(xbox.getRawButton(dpadright))
+    {
+        tele.zeroVTelescope();
+        tele.zeroVTelescope();
+    }
+    
+    if(xbox.getRawButton(dpaddown))
+    {
+        tele.telescopePercent(-0.5);
+    }
+    else if(xbox.getRawButton(dpadup))
+    {
+        tele.telescopePercent(0.5);
+    }
+    else
+    {
+      tele.telescopePercent(0);
+    }
+    // --------------------------------------------------------------------//
+    // drive STATEMENTS
+    // --------------------------------------------------------------------//
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
         && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1) {
       rcw = 0;
@@ -182,10 +212,19 @@ public class SupaStruct {
       intake.toggle();
     }
     // --------------------------------------------------------------------//
-    // CLAW AND ARM
+    // CLAW AND ARM STATEMENTS
     // --------------------------------------------------------------------//
     if (bbutton) {
       claw.toggle();
+    }
+    if (rtrigger && !ltrigger) {
+      arm.move(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
+          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
+    } else if (ltrigger && !rtrigger) {
+      arm.move(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
+          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
+    } else {
+      arm.move(0, 0);
     }
 
     // --------------------------------------------------------------------//
@@ -207,15 +246,7 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (rtrigger && !ltrigger) {
-      arm.move(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
-          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
-    } else if (ltrigger && !rtrigger) {
-      arm.move(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
-          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
-    } else {
-      arm.move(0, 0);
-    }
+   
   }
 
   public void teleopDisabled() {

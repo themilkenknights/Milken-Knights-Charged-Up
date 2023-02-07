@@ -38,6 +38,36 @@ public class Arm {
     telescope.set(ControlMode.PercentOutput, setpoint);
   }
 
+  public double getLeft()
+  {
+    return armLeft.getSelectedSensorPosition() * MKARM.greerRatio;
+  }
+
+  public double getRight()
+  {
+    return armRight.getSelectedSensorPosition() * MKARM.greerRatio;
+  }
+
+  public double getTelescope()
+  {
+    return telescope.getSelectedSensorPosition();
+  }
+
+  public void setLeft(double setpoint)
+  {
+    armLeft.setSelectedSensorPosition(setpoint);
+  }
+
+  public void setRight(double setpoint)
+  {
+    armRight.setSelectedSensorPosition(setpoint);
+  }
+
+  public void setTelescope(double setpoint)
+  {
+    telescope.setSelectedSensorPosition(setpoint);
+  }
+
   public void pidArm(double setpoint)
   {
     armLeft.set(ControlMode.Position, setpoint);
@@ -46,9 +76,9 @@ public class Arm {
 
   public void updateSmartdashboard()
   {
-    SmartDashboard.putNumber("leftarm", armLeft.getSelectedSensorPosition() * MKARM.greerRatio);
-    SmartDashboard.putNumber("rightarm", armRight.getSelectedSensorPosition() * MKARM.greerRatio);
-    SmartDashboard.putNumber("Telescope", telescope.getSelectedSensorPosition());
+    SmartDashboard.putNumber("leftarm", getLeft());
+    SmartDashboard.putNumber("rightarm", getRight());
+    SmartDashboard.putNumber("Telescope", getTelescope());
   }
 
 

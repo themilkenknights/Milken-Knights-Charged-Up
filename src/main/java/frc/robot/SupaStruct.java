@@ -127,6 +127,8 @@ public class SupaStruct {
       train.vars.avgDistTest = 0;
       train.vars.avgDistInches = 0;
       train.startDrive();
+
+      arm.setTelescope(0);
     }
 
     // --------------------------------------------------------------------//

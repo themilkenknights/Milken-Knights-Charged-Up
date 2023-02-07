@@ -8,14 +8,17 @@ import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKARM;
+import frc.robot.Constants.MKTELE;
 
 public class Arm {
 
   private TalonFX armLeft;
   private TalonFX armRight;
+  private TalonFX telescope;
   private Motor motor = Motor.getInstance();
   private Arm()
   {
+    telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, false);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, Constants.nullPID, false);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, Constants.nullPID, true);
   }
@@ -24,10 +27,21 @@ public class Arm {
     return InstanceHolder.mInstance;
   }
 
-  public void move(double l, double r)
+  public void moveArm(double l, double r)
   {
     armLeft.set(ControlMode.PercentOutput, l);
     armRight.set(ControlMode.PercentOutput, r);
+  }
+
+  public void moveTele(double setpoint)
+  {
+    telescope.set(ControlMode.PercentOutput, setpoint);
+  }
+
+  public void pidArm(double setpoint)
+  {
+    armLeft.set(ControlMode.Position, setpoint);
+    armRight.set(ControlMode.Position, setpoint);
   }
 
   public void updateSmartdashboard()

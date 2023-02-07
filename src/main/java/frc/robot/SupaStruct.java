@@ -31,6 +31,8 @@ public class SupaStruct {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
 
   private boolean resetNavx,
+      dpadup,
+      dpaddown,
       intakeOvveride,
       ballEnterOvverride,
       resetTurn,
@@ -98,8 +100,11 @@ public class SupaStruct {
     rbbutton = xbox.getRightBumper();
     bbutton = xbox.getBButtonPressed();
     lbbutton = xbox.getLeftBumper();
+    dpaddown = xbox.getPOV() == 90;
+    dpadup = xbox.getPOV() == 270;
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
+    
     pov = xbox.getPOV() != -1;
 
     // i dont remember how i got this lol
@@ -208,13 +213,26 @@ public class SupaStruct {
     }
 
     if (rtrigger && !ltrigger) {
-      arm.move(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
+      arm.moveArm(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
           MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
     } else if (ltrigger && !rtrigger) {
-      arm.move(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
+      arm.moveArm(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
           -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
     } else {
-      arm.move(0, 0);
+      arm.moveArm(0, 0);
+    }
+
+    if(dpaddown && !dpadup)
+    {
+      arm.moveTele(.1);
+    }
+    else if(dpadup && !dpaddown)
+    {
+      arm.moveTele(-.1);
+    }
+    else 
+    {
+      arm.moveTele(0);
     }
   }
 

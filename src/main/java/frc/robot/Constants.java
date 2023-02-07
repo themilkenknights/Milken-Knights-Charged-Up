@@ -197,6 +197,7 @@ public final class Constants {
     public static final int rollerCANID = 21;
     public static final int leftarmCANID = 24;
     public static final int rightarmCANID = 25;
+    public static final int telescopeCANID = 26;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -205,6 +206,30 @@ public final class Constants {
 
   public static class MKARM {
     public static final double greerRatio = .0125;
+    public static final double kP = 0.000001;
+    public static final double kI = 0;
+    public static final double kD = 0;
+    public static final double minA = 0;
+    public static final double maxA = 0;
+  }
+
+  public static class MKTELE {
+    public static final double maxNativePositionTelescope = 290000;
+    public static final double minNativePositionTelescope = 7000;
+    public static final boolean isinverted = false;
+    public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
+
+    public static final double kP = 0;
+    public static final double kI = 0;
+    public static final double kD = 0;
+    public static final double kF = 0;
+
+    public static final double[] pidf = { kP, kI, kD, kF };
+
+    public static final int scurve = 0;
+
+    public static final double UpSpeed = 0.1;
+    public static final double DownSpeed = -0.1;
   }
 
   public static class MKINTAKE {
@@ -222,7 +247,6 @@ public final class Constants {
     public static final int scurve = 0;
 
     public static final double rollerPercentSpeed = 0.5;
-
   }
 
   public static class AUTO {

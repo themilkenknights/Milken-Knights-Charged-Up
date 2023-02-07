@@ -102,6 +102,7 @@ public class SupaStruct {
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 90;
     dpadup = xbox.getPOV() == 270;
+    SmartDashboard.putNumber("pov", xbox.getPOV());
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
     

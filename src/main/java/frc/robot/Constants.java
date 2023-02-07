@@ -113,7 +113,6 @@ public final class Constants {
     public static final double limeHeightInches = 33.5;
     public static final double goalHeightInches = 104;
     public static final double limeAngle = 32;
-    public static final double shootTolerance = 3.5;
     public static final double maxTX = 25;
   }
 
@@ -166,7 +165,7 @@ public final class Constants {
       public static final int resetTurnbutton = 3;
     }
 
-    public static final int fakeLimelight = 1;
+
 
     public static final int topPOV = 0;
     public static final int rightPOV = 90;
@@ -202,6 +201,10 @@ public final class Constants {
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
     public static final int revpdhCANID = 23; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
+  }
+
+  public static class MKARM {
+    public static final double greerRatio = .0125;
   }
 
   public static class MKINTAKE {

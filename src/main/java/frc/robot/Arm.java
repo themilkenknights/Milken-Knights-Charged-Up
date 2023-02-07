@@ -1,6 +1,95 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.CANID;
+import frc.robot.Constants.MKARM;
+
 public class Arm {
+
+  private TalonFX armLeft;
+  private TalonFX armRight;
+  private Motor motor = Motor.getInstance();
+  private Arm()
+  {
+    armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, Constants.nullPID, false);
+    armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, Constants.nullPID, true);
+  }
+
+  public static Arm getInstance() {
+    return InstanceHolder.mInstance;
+  }
+
+  public void move(double l, double r)
+  {
+    armLeft.set(ControlMode.PercentOutput, l);
+    armRight.set(ControlMode.PercentOutput, r);
+  }
+
+  public void updateSmartdashboard()
+  {
+    SmartDashboard.putNumber("leftarm", armLeft.getSelectedSensorPosition() * MKARM.greerRatio);
+    SmartDashboard.putNumber("rightarm", armRight.getSelectedSensorPosition() * MKARM.greerRatio);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
    * This function assumes that the base of the arm is at the origin (0,0) and the angles are
    * measured from the horizontal line. To account for gravity, you can add a third link that is
@@ -126,4 +215,9 @@ public class Arm {
 
   // https://www.chiefdelphi.com/t/velocity-limiting-pid/164908/22
   // feed forward for arm
+
+
+  private static class InstanceHolder {
+    private static final Arm mInstance = new Arm();
+  }
 }

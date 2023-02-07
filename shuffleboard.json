@@ -11,7 +11,7 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "3,1": {
+          "3,0": {
             "size": [
               8,
               4
@@ -27,72 +27,7 @@
               "Visuals/Show Outside Circles": false
             }
           },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/distance total",
-              "_title": "distance total",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/topleftcan",
-              "_title": "topleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/toprightcan",
-              "_title": "toprightcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/botleftcan",
-              "_title": "botleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/botrightcan",
-              "_title": "botrightcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "10,0": {
+          "9,5": {
             "size": [
               1,
               1
@@ -101,19 +36,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/navx",
               "_title": "navx",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/bentest",
-              "_title": "bentest",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -176,7 +98,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "0,1": {
+          "0,0": {
             "size": [
               3,
               4
@@ -197,7 +119,111 @@
               "imageHeight": -1
             }
           },
-          "0,0": {
+          "4,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/rightarm",
+              "_title": "/SmartDashboard/rightarm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "3,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/leftarm",
+              "_title": "/SmartDashboard/leftarm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/distance total",
+              "_title": "distance total",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/topleftcan",
+              "_title": "topleftcan",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/toprightcan",
+              "_title": "toprightcan",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "3,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/botleftcan",
+              "_title": "botleftcan",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/botrightcan",
+              "_title": "botrightcan",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/bentest",
+              "_title": "bentest",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,4": {
             "size": [
               1,
               1

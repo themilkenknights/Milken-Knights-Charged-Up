@@ -29,14 +29,11 @@ public class SupaStruct {
       povValue,
       navxRotate = 0;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
-  private Limelight lime = Limelight.getInstance();
+
   private boolean resetNavx,
-      shootTimerFirst,
-      supportTimerFirst,
-      elevatorOvveride,
+      intakeOvveride,
       ballEnterOvverride,
       resetTurn,
-      colorCheckStartTimer,
       resetDrive,
       xbutton,
       ybutton,
@@ -52,9 +49,10 @@ public class SupaStruct {
       itsreal = false;
   private boolean isRCWrunningWithNavx = false;
   private AprilTags april = AprilTags.getInstance();
-   private Intake intake = Intake.getInstance();
+  private Intake intake = Intake.getInstance();
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
+  private Arm arm = Arm.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
 
@@ -74,10 +72,11 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     train.updateSwerve();
     april.updateApril();
-    // ultra.updateUltra();
+
     // lime.updateSensors();
     april.aprilSmartDashboard();
-    // ultra.ultraSmartDashboard();
+    arm.updateSmartdashboard();
+
     // lime.limeSmartDashboard();
 
     // --------------------------------------------------------------------//
@@ -104,17 +103,11 @@ public class SupaStruct {
     pov = xbox.getPOV() != -1;
 
     // i dont remember how i got this lol
-    inverseTanAngleOG =
-        ((((((Math.toDegrees(Math.atan(rcwY / rcwX)) + 360)) + (MathFormulas.signumV4(rcwX))) % 360)
-                    - MathFormulas.signumAngleEdition(rcwX, rcwY))
-                + 360)
-            % 360;
 
-    inverseTanAngleDrive =
-        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-                    - MathFormulas.signumAngleEdition(str, fwd))
-                + 360)
-            % 360;
+    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+        - MathFormulas.signumAngleEdition(str, fwd))
+        + 360)
+        % 360;
 
     // --------------------------------------------------------------------//
     // NAVX RESET
@@ -134,29 +127,30 @@ public class SupaStruct {
     // POV ROTATION
     // --------------------------------------------------------------------//
 
-    if (Math.abs(xbox.getRawAxis(DriveInput.rcwX)) >= 0.1) {
-      rcw = rcwX;
-    }
-    if (Math.abs(rcwX) >= 0.1) {
-      navxRotate = navx.getInstance().getNavxYaw();
-    } else if (!ltrigger && isRCWrunningWithNavx) {
-      rcw = train.moveToAngy(navxRotate);
-    }
+    if (Math.abs(xbox.getRawAxis(DriveInput.rcwX)) >= 0.1 && Math.abs(xbox.getRawAxis(DriveInput.rcwY)) >= 0.1) {
+      inverseTanAngleOG = ((((((Math.toDegrees(Math.atan(rcwY / rcwX)) + 360)) + (MathFormulas.signumV4(rcwX))) % 360)
+          - MathFormulas.signumAngleEdition(rcwX, rcwY))
+          + 360)
+          % 360;
 
-    // this is useless, remove entire variable if you want
-    // else statements (should be at bottom but what the heck ill do it next season)
-    if (!ltrigger
-        && Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
-        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1) {
-      rcw = 0;
+      rcw = train.moveToAngy(inverseTanAngleOG);
     }
-
-    // no rcw<0.1 = rcw = 0 because they want rcw running constantly for heading
-    // correction for navx, only ovverride is shooter for now
+    /*
+     * if (Math.abs(rcwX) >= 0.1) {
+     * navxRotate = navx.getInstance().getNavxYaw();
+     * } else if (!ltrigger && isRCWrunningWithNavx) {
+     * rcw = train.moveToAngy(navxRotate);
+     * }
+     */
 
     // --------------------------------------------------------------------//
     // ELSE STATEMENTS
     // --------------------------------------------------------------------//
+
+    if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
+        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1) {
+      rcw = 0;
+    }
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1) {
       rcwY = 0;
@@ -171,36 +165,35 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-  
+
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-            if (rbbutton) {
-              intake.rollerSet(-.7);
+    if (rbbutton) {
+      intake.rollerSet(-.7);
 
-            } else if (lbbutton) {
-              intake.rollerSet(.7);
+    } else if (lbbutton) {
+      intake.rollerSet(.7);
 
-            } else {
-              intake.rollerSet(0);
-            }
-            if (abutton) {
-              intake.toggle();
-            }
+    } else {
+      intake.rollerSet(0);
+    }
+    if (abutton) {
+      intake.toggle();
+    }
     // --------------------------------------------------------------------//
-    //  CLAW AND ARM
+    // CLAW AND ARM
     // --------------------------------------------------------------------//
     if (bbutton) {
       claw.toggle();
     }
 
-    
     // --------------------------------------------------------------------//
     // OTHER
     // --------------------------------------------------------------------//
     // applying numbers
 
-     if (xbutton) {
+    if (xbutton) {
       april.alignToTag();
     } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
       train.etherSwerve(
@@ -212,6 +205,16 @@ public class SupaStruct {
       // train.setModuleTurn(0, 0, 0, 0);
     } else {
       train.stopEverything();
+    }
+
+    if (rtrigger && !ltrigger) {
+      arm.move(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
+          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
+    } else if (ltrigger && !rtrigger) {
+      arm.move(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
+          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
+    } else {
+      arm.move(0, 0);
     }
   }
 

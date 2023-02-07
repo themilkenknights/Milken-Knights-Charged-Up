@@ -76,22 +76,22 @@ public class Motor {
   }
 
   public TalonFX motor(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted) {
-    TalonFX elevator = new TalonFX(canid, "rio");
-    elevator.configFactoryDefault();
-    elevator.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    elevator.setNeutralMode(mode);
-    elevator.config_kP(pidslot, pidf[0]);
-    elevator.config_kI(pidslot, pidf[1]);
-    elevator.config_kD(pidslot, pidf[2]);
-    elevator.config_kF(pidslot, pidf[3]);
-    elevator.setInverted(inverted);
-    elevator.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
-    elevator.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
-    elevator.configVoltageCompSaturation(MKFALCON.voltComp);
-    elevator.enableVoltageCompensation(true);
-    elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
-    elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
-    return elevator;
+    TalonFX intake = new TalonFX(canid, "rio");
+    intake.configFactoryDefault();
+    intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    intake.setNeutralMode(mode);
+    intake.config_kP(pidslot, pidf[0]);
+    intake.config_kI(pidslot, pidf[1]);
+    intake.config_kD(pidslot, pidf[2]);
+    intake.config_kF(pidslot, pidf[3]);
+    intake.setInverted(inverted);
+    intake.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
+    intake.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
+    intake.configVoltageCompSaturation(MKFALCON.voltComp);
+    intake.enableVoltageCompensation(true);
+    intake.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
+    intake.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
+    return intake;
   }
 
   public CANCoder cancoder(int canid, double offset) {

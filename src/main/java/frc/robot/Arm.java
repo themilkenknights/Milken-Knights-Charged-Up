@@ -48,6 +48,7 @@ public class Arm {
   {
     SmartDashboard.putNumber("leftarm", armLeft.getSelectedSensorPosition() * MKARM.greerRatio);
     SmartDashboard.putNumber("rightarm", armRight.getSelectedSensorPosition() * MKARM.greerRatio);
+    SmartDashboard.putNumber("Telescope", telescope.getSelectedSensorPosition());
   }
 
 

@@ -220,10 +220,10 @@ public final class Constants {
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0.00001;
-    public static final double kI = 0;
-    public static final double kD = 0;
-    public static final double kF = 0;
+    public static final double kP = 1;
+    public static final double kI = 1;
+    public static final double kD = 1;
+    public static final double kF = 1;
 
     public static final double[] pidf = {kP, kI, kD, kF};
 

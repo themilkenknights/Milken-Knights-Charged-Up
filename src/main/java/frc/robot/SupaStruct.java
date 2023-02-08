@@ -226,13 +226,13 @@ public class SupaStruct {
 
     if(dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope)
     {
-      //arm.moveTele(-.23);
-      arm.pidTelescope(MKTELE.minNativePositionTelescope); 
+      arm.moveTele(-.23);
+      //arm.pidTelescope(MKTELE.minNativePositionTelescope); 
     }
     else if(dpadup && !dpaddown && arm.getTelescope() < MKTELE.maxNativePositionTelescope)
     {
-      //arm.moveTele(.23);
-      arm.pidTelescope(MKTELE.maxNativePositionTelescope);
+      arm.moveTele(.23);
+      //arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     }
     else 
     {

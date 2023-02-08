@@ -68,8 +68,6 @@ public class SupaStruct {
   }
 
   public void updateTele() {
-    // TODO seperate all smartdashboard update from main update in update function
-    // in all classes
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
@@ -215,22 +213,26 @@ public class SupaStruct {
     }
 
     if (rtrigger && !ltrigger) {
-      arm.moveArm(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
-          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
+      //arm.moveArm(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
+      //    MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
+      arm.pidArm(100); //TODO get max and min for arm
     } else if (ltrigger && !rtrigger) {
-      arm.moveArm(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
-          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
+      //arm.moveArm(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
+      //    -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
+      arm.pidArm(200); //TODO get max and min for arm
     } else {
       arm.moveArm(0, 0);
     }
 
     if(dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope)
     {
-      arm.moveTele(-.23);
+      //arm.moveTele(-.23);
+      arm.pidTelescope(MKTELE.minNativePositionTelescope); 
     }
     else if(dpadup && !dpaddown && arm.getTelescope() < MKTELE.maxNativePositionTelescope)
     {
-      arm.moveTele(.23);
+      //arm.moveTele(.23);
+      arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     }
     else 
     {

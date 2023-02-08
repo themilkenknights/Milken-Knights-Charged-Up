@@ -236,6 +236,11 @@ public class SupaStruct {
     {
       arm.moveTele(0);
     }
+
+    if(xbox.getRawButton(8))
+    {
+      arm.setTelescope(MKTELE.maxNativePositionTelescope);
+    }
   }
 
   public void teleopDisabled() {

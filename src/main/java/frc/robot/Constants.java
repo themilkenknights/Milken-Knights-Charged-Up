@@ -108,6 +108,7 @@ public final class Constants {
     public static final double offsetYaw = 90;
     public static final double offsetPitch = 0;
   }
+
   public static class MKLIME {
     public static final int pipeline = 0;
     public static final double limeHeightInches = 33.5;
@@ -165,8 +166,6 @@ public final class Constants {
       public static final int resetTurnbutton = 3;
     }
 
-
-
     public static final int topPOV = 0;
     public static final int rightPOV = 90;
     public static final int bottomPOV = 180;
@@ -191,7 +190,7 @@ public final class Constants {
     public static final int topTurnRightCANCoderCANID = 17;
     public static final int bottomTurnLeftCANCoderCANID = 15;
     public static final int bottomTurnRightCANCoderCANID = 18; // 16
-    // 
+    //
     public static final int intakePORT = 8;
     public static final int CLAWPORT = 15;
     public static final int rollerCANID = 21;
@@ -206,25 +205,25 @@ public final class Constants {
 
   public static class MKARM {
     public static final double greerRatio = .0125;
-    public static final double kP = 0.000001;
+    public static final double kP = 0.00001;
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double minA = 0;
-    public static final double maxA = 0;
+    public static final double maxA = 0.00001;
   }
 
   public static class MKTELE {
     public static final double maxNativePositionTelescope = 212262;
-    public static final double minNativePositionTelescope = 150;
+    public static final double minNativePositionTelescope = 300;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0;
+    public static final double kP = 0.00001;
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final int scurve = 0;
 

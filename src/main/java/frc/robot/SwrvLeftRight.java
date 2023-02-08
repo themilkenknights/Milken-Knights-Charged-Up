@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.AUTO.DISTANGLE;
 
@@ -16,8 +17,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -26,8 +27,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingele,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -36,8 +37,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingele,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -46,8 +47,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingtwel,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -56,8 +57,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingtwel,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -66,8 +67,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingthir,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -76,8 +77,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingfif,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,
@@ -86,8 +87,8 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                     DISTANGLE.headingfourt,
                     1))
             .withTimeout(6),
-        deadline(new Turn(0)).withTimeout(1),
-        deadline(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
                 new EtherAutoCommand(
                     DISTANGLE.distanceA,
                     DISTANGLE.distance,

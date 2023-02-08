@@ -3,8 +3,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKARM;
@@ -16,8 +14,8 @@ public class Arm {
   private TalonFX armRight;
   private TalonFX telescope;
   private Motor motor = Motor.getInstance();
-  private Arm()
-  {
+
+  private Arm() {
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, false);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, Constants.nullPID, false);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, Constants.nullPID, true);
@@ -27,113 +25,49 @@ public class Arm {
     return InstanceHolder.mInstance;
   }
 
-  public void moveArm(double l, double r)
-  {
+  public void moveArm(double l, double r) {
     armLeft.set(ControlMode.PercentOutput, l);
     armRight.set(ControlMode.PercentOutput, r);
   }
 
-  public void moveTele(double setpoint)
-  {
+  public void moveTele(double setpoint) {
     telescope.set(ControlMode.PercentOutput, setpoint);
   }
 
-  public double getLeft()
-  {
+  public double getLeft() {
     return armLeft.getSelectedSensorPosition() * MKARM.greerRatio;
   }
 
-  public double getRight()
-  {
+  public double getRight() {
     return armRight.getSelectedSensorPosition() * MKARM.greerRatio;
   }
 
-  public double getTelescope()
-  {
+  public double getTelescope() {
     return telescope.getSelectedSensorPosition();
   }
 
-  public void setLeft(double setpoint)
-  {
+  public void setLeft(double setpoint) {
     armLeft.setSelectedSensorPosition(setpoint);
   }
 
-  public void setRight(double setpoint)
-  {
+  public void setRight(double setpoint) {
     armRight.setSelectedSensorPosition(setpoint);
   }
 
-  public void setTelescope(double setpoint)
-  {
+  public void setTelescope(double setpoint) {
     telescope.setSelectedSensorPosition(setpoint);
   }
 
-  public void pidArm(double setpoint)
-  {
+  public void pidArm(double setpoint) {
     armLeft.set(ControlMode.Position, setpoint);
     armRight.set(ControlMode.Position, setpoint);
   }
 
-  public void updateSmartdashboard()
-  {
+  public void updateSmartdashboard() {
     SmartDashboard.putNumber("leftarm", getLeft());
     SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /**
    * This function assumes that the base of the arm is at the origin (0,0) and the angles are
@@ -260,7 +194,6 @@ public class Arm {
 
   // https://www.chiefdelphi.com/t/velocity-limiting-pid/164908/22
   // feed forward for arm
-
 
   private static class InstanceHolder {
     private static final Arm mInstance = new Arm();

@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -14,6 +15,6 @@ public class SwrvStraight extends SequentialCommandGroup {
   public SwrvStraight() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(deadline(new EtherStraightCommand(20, 0.5, 0, 0.2).withTimeout(7)));
+    addCommands(Commands.deadline(new EtherStraightCommand(20, 0.5, 0, 0.2).withTimeout(7)));
   }
 }

@@ -34,6 +34,10 @@ public class SupaStruct {
   private boolean resetNavx,
       dpadup,
       dpaddown,
+      toggleClimbUpOn,
+      toggleClimbUpPressed,
+      toggleClimbDownOn,
+      toggleClimbDownPressed,
       intakeOvveride,
       ballEnterOvverride,
       resetTurn,
@@ -77,6 +81,9 @@ public class SupaStruct {
     // lime.updateSensors();
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
+
+    updateClimbDown();
+    updateClimbUp();
 
     // lime.limeSmartDashboard();
 
@@ -224,12 +231,12 @@ public class SupaStruct {
       arm.moveArm(0, 0);
     }
 
-    if(dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope)
+    if(toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() > MKTELE.minNativePositionTelescope)
     {
       arm.moveTele(-.23);
       //arm.pidTelescope(MKTELE.minNativePositionTelescope); 
     }
-    else if(dpadup && !dpaddown && arm.getTelescope() < MKTELE.maxNativePositionTelescope)
+    else if(toggleClimbUpOn && !toggleClimbDownOn && arm.getTelescope() < MKTELE.maxNativePositionTelescope)
     {
       arm.moveTele(.23);
       //arm.pidTelescope(MKTELE.maxNativePositionTelescope);
@@ -243,6 +250,9 @@ public class SupaStruct {
     {
       arm.setTelescope(MKTELE.maxNativePositionTelescope);
     }
+
+    SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
+    SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
   }
 
   public void teleopDisabled() {
@@ -292,6 +302,32 @@ public class SupaStruct {
     SmartDashboard.putNumber(
         "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
     SmartDashboard.putNumber("delta", train.vars.avgDistTest);
+  }
+
+  public void updateClimbUp() {
+    if (dpadup) {
+      if (!toggleClimbUpPressed) {
+        toggleClimbUpOn = !toggleClimbUpOn;
+        toggleClimbDownOn = false;
+ 
+        toggleClimbUpPressed = true;
+      }
+    } else {
+      toggleClimbUpPressed = false;
+    }
+  }
+
+  public void updateClimbDown() {
+    if (dpaddown) {
+      if (!toggleClimbDownPressed) {
+        toggleClimbDownOn = !toggleClimbDownOn;
+        toggleClimbUpOn = false;
+ 
+        toggleClimbDownPressed = true;
+      }
+    } else {
+      toggleClimbDownPressed = false;
+    }
   }
 
   private static class InstanceHolder {

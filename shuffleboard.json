@@ -119,7 +119,7 @@
               "imageHeight": -1
             }
           },
-          "6,4": {
+          "7,4": {
             "size": [
               1,
               1
@@ -132,7 +132,7 @@
               "_showGlyph": false
             }
           },
-          "6,5": {
+          "7,5": {
             "size": [
               1,
               1
@@ -210,58 +210,6 @@
               "_showGlyph": false
             }
           },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/topleftcan",
-              "_title": "topleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/toprightcan",
-              "_title": "toprightcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/botleftcan",
-              "_title": "botleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/botrightcan",
-              "_title": "botrightcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "1,5": {
             "size": [
               1,
@@ -271,19 +219,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/bentest",
               "_title": "bentest",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Jared",
-              "_title": "Jared",
               "_glyph": 148,
               "_showGlyph": false
             }

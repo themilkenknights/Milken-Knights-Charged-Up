@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CONTROLLERS.DriveInput;
+import frc.robot.Constants.MKARM;
 import frc.robot.Constants.MKBABY;
 import frc.robot.Constants.MKTELE;
 
@@ -69,6 +70,7 @@ public class SupaStruct {
 
   public void initTele() {
     navxRotate = navx.getInstance().getNavxYaw();
+ 
   }
 
   public void updateTele() {
@@ -95,10 +97,10 @@ public class SupaStruct {
     fwdSignum = Math.signum(fwd) * -1;
     str = (xbox.getRawAxis(DriveInput.str) - 0.1) / (1 - 0.1);
     strSignum = Math.signum(str) * -1;
-    rcw = (xbox.getRawAxis(DriveInput.rcwY) - 0.1) / (1 - 0.1);
-    rcwY = rcw;
+    rcwY = (xbox.getRawAxis(DriveInput.rcwY) - 0.1) / (1 - 0.1);
     // Todo see if making this x breaks it
     rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
+    rcw=rcwX;
     resetNavx = xbox.getRawButton(DriveInput.resetNavxButton);
     resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
     xbutton = xbox.getXButtonPressed();
@@ -139,14 +141,15 @@ public class SupaStruct {
     // POV ROTATION
     // --------------------------------------------------------------------//
 
-    if (Math.abs(xbox.getRawAxis(DriveInput.rcwX)) >= 0.1 && Math.abs(xbox.getRawAxis(DriveInput.rcwY)) >= 0.1) {
+    /*if (Math.abs(xbox.getRawAxis(DriveInput.rcwX)) >= 0.1 && Math.abs(xbox.getRawAxis(DriveInput.rcwY)) >= 0.1) {
       inverseTanAngleOG = ((((((Math.toDegrees(Math.atan(rcwY / rcwX)) + 360)) + (MathFormulas.signumV4(rcwX))) % 360)
           - MathFormulas.signumAngleEdition(rcwX, rcwY))
           + 360)
           % 360;
 
       rcw = train.moveToAngy(inverseTanAngleOG);
-    }
+    }*/
+
     /*
      * if (Math.abs(rcwX) >= 0.1) {
      * navxRotate = navx.getInstance().getNavxYaw();
@@ -182,10 +185,10 @@ public class SupaStruct {
     // INTAKE
     // --------------------------------------------------------------------//
     if (rbbutton) {
-      intake.rollerSet(-.7);
+      intake.rollerSet(-1);
 
     } else if (lbbutton) {
-      intake.rollerSet(.7);
+      intake.rollerSet(1);
 
     } else {
       intake.rollerSet(0);
@@ -220,25 +223,25 @@ public class SupaStruct {
     }
 
     if (rtrigger && !ltrigger) {
-      //arm.moveArm(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
-      //    MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
-      arm.pidArm(100); //TODO get max and min for arm
+      arm.moveArm(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
+          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
+      //arm.pidArm(100); //TODO get max and min for arm
     } else if (ltrigger && !rtrigger) {
-      //arm.moveArm(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
-      //    -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
-      arm.pidArm(200); //TODO get max and min for arm
+      arm.moveArm(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
+          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
+     // arm.pidArm(200); //TODO get max and min for arm
     } else {
       arm.moveArm(0, 0);
     }
 
-    if(toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() > MKTELE.minNativePositionTelescope)
+    if (dpaddown && !dpadup)//(toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() //> MKTELE.minNativePositionTelescope)
     {
-      arm.moveTele(-.23);
+      arm.moveTele(-.4);
       //arm.pidTelescope(MKTELE.minNativePositionTelescope); 
     }
-    else if(toggleClimbUpOn && !toggleClimbDownOn && arm.getTelescope() < MKTELE.maxNativePositionTelescope)
+    else if(!dpaddown && dpadup)//(toggleClimbUpOn && !toggleClimbDownOn && arm.getTelescope() //< MKTELE.maxNativePositionTelescope)
     {
-      arm.moveTele(.23);
+      arm.moveTele(.4);
       //arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     }
     else 
@@ -246,14 +249,16 @@ public class SupaStruct {
       arm.moveTele(0);
     }
 
-    if(xbox.getRawButton(8))
-    {
-      arm.setTelescope(MKTELE.maxNativePositionTelescope);
+    //if(xbox.getRawButton(8))
+    //{
+    //  arm.setTelescope(MKTELE.maxNativePositionTelescope);
     }
 
-    SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
-    SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
-  }
+
+
+   /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
+   // SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
+  
 
   public void teleopDisabled() {
     resetNavx = false;

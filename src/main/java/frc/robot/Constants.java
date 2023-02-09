@@ -148,7 +148,7 @@ public final class Constants {
   public static class MKBABY {
     public static final double fwdBABY = 1;
     public static final double strBABY = 1;
-    public static final double rcwBABY = 2;
+    public static final double rcwBABY = 2;//2 very fast
   }
 
   public static class CONTROLLERS {
@@ -212,18 +212,20 @@ public final class Constants {
     public static final double[] pidf = {kP,kI,kD,kF};
     public static final double minA = 0;
     public static final double maxA = 0.00001;
+    public static final double maxNativePositionTelescope = 465;
+    public static final double minNativePositionTelescope = 0;
   }
 
   public static class MKTELE {
-    public static final double maxNativePositionTelescope = 212262;
-    public static final double minNativePositionTelescope = 300;
+    public static final double maxNativePositionTelescope = 300;
+    public static final double minNativePositionTelescope = 0;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 1;
-    public static final double kI = 1;
-    public static final double kD = 1;
-    public static final double kF = 1;
+    public static final double kP = 0;
+    public static final double kI = 0;
+    public static final double kD = 0;
+    public static final double kF = 0;
 
     public static final double[] pidf = {kP, kI, kD, kF};
 

@@ -204,7 +204,7 @@ public final class Constants {
   }
 
   public static class MKARM {
-    public static final double greerRatio = .0125;
+    public static final double greerRatio = 0.01098901098;
     public static final double kP = 0.00001;
     public static final double kI = 0;
     public static final double kD = 0;

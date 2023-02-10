@@ -27,7 +27,7 @@
               "Visuals/Show Outside Circles": false
             }
           },
-          "9,5": {
+          "10,5": {
             "size": [
               1,
               1
@@ -40,7 +40,7 @@
               "_showGlyph": false
             }
           },
-          "8,5": {
+          "1,5": {
             "size": [
               1,
               1
@@ -119,45 +119,6 @@
               "imageHeight": -1
             }
           },
-          "7,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/rightarm",
-              "_title": "/SmartDashboard/rightarm",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftarm",
-              "_title": "/SmartDashboard/leftarm",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/pov",
-              "_title": "pov",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "9,4": {
             "size": [
               1,
@@ -166,7 +127,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/pov",
-              "_title": "/SmartDashboard/pov",
+              "_title": "pov",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -184,20 +145,20 @@
               "_showGlyph": false
             }
           },
-          "10,5": {
+          "2,4": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Telescope",
-              "_title": "/SmartDashboard/Telescope",
+              "_source0": "network_table:///SmartDashboard/Jared",
+              "_title": "Jared",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "2,4": {
+          "3,4": {
             "size": [
               1,
               1
@@ -210,17 +171,73 @@
               "_showGlyph": false
             }
           },
-          "1,5": {
+          "4,4": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/bentest",
-              "_title": "bentest",
+              "_source0": "network_table:///SmartDashboard/leftarm",
+              "_title": "leftarm",
               "_glyph": 148,
               "_showGlyph": false
+            }
+          },
+          "5,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/rightarm",
+              "_title": "rightarm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arms",
+              "_title": "arms",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "7,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/toggleupon",
+              "_title": "toggleupon",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/toggledownon",
+              "_title": "toggledownon",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }

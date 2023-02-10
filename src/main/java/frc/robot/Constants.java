@@ -69,7 +69,7 @@ public final class Constants {
 
     public static final int scurve = 6;
 
-    public static final double greerRatio = 150 / 7;
+    public static final double greerRatio = 150/7;
   }
 
   public static class MKCANCODER {
@@ -91,8 +91,8 @@ public final class Constants {
   }
 
   public static class MKTRAIN {
-    public static final double L = 18.75; // 18.75 mk4i
-    public static final double W = 26.75; // 26.75 mk4i
+    public static final double L = 18.75;
+    public static final double W = 26.75;
 
     public static final double widthInches = 24; // 28 was the old drive train
     public static final double heightInches = 32; // 28 was the old drive train
@@ -148,7 +148,7 @@ public final class Constants {
   public static class MKBABY {
     public static final double fwdBABY = 1;
     public static final double strBABY = 1;
-    public static final double rcwBABY = 2;//2 very fast
+    public static final double rcwBABY = 2; // 2 very fast
   }
 
   public static class CONTROLLERS {
@@ -209,15 +209,16 @@ public final class Constants {
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double kF = 0;
-    public static final double[] pidf = {kP,kI,kD,kF};
+    public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0;
     public static final double maxA = 0.00001;
-    public static final double maxNativePositionTelescope = 465;
-    public static final double minNativePositionTelescope = 0;
+    public static final double maxNativePositionTelescope = 100000;
+    public static final double minNativePositionTelescope = -280;
   }
 
   public static class MKTELE {
-    public static final double maxNativePositionTelescope = 300;
+    public static final double greerRatio = .04938272;
+    public static final double maxNativePositionTelescope = 9350;
     public static final double minNativePositionTelescope = 0;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
@@ -230,9 +231,6 @@ public final class Constants {
     public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final int scurve = 0;
-
-    public static final double UpSpeed = 0.1;
-    public static final double DownSpeed = -0.1;
   }
 
   public static class MKINTAKE {
@@ -249,7 +247,7 @@ public final class Constants {
 
     public static final int scurve = 0;
 
-    public static final double rollerPercentSpeed = 0.5;
+    public static final double rollerPercentSpeed = 1;
   }
 
   public static class AUTO {

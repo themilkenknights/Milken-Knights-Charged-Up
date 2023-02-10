@@ -53,6 +53,14 @@ public class SupaStruct {
       abutton,
       ltrigger,
       rtrigger,
+      xbutton2,
+      ybutton2,
+      abutton2,
+      bbutton2,
+      dpadup2,
+      dpaddown2,
+      ltrigger2,
+      rtrigger2,
       pov, /* povToggled, */
       itsreal = false;
   private boolean isRCWrunningWithNavx = false;
@@ -70,7 +78,6 @@ public class SupaStruct {
 
   public void initTele() {
     navxRotate = navx.getInstance().getNavxYaw();
- 
   }
 
   public void updateTele() {
@@ -100,34 +107,48 @@ public class SupaStruct {
     rcwY = (xbox.getRawAxis(DriveInput.rcwY) - 0.1) / (1 - 0.1);
     // Todo see if making this x breaks it
     rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
-    rcw=rcwX;
+    rcw = rcwX;
+
     resetNavx = xbox.getRawButton(DriveInput.resetNavxButton);
     resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
+    // DRIVER
     xbutton = xbox.getXButtonPressed();
     abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
+    ybutton = xbox.getYButton();
     bbutton = xbox.getBButtonPressed();
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 180;
     dpadup = xbox.getPOV() == 0;
-    SmartDashboard.putNumber("pov", xbox.getPOV());
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
-    
+    // OP
+    xbutton2 = xboxOP.getXButtonPressed();
+    abutton2 = xboxOP.getAButtonPressed();
+    rbbutton2 = xboxOP.getRightBumper();
+    ybutton2 = xboxOP.getYButton();
+    bbutton2 = xboxOP.getBButtonPressed();
+    lbbutton2 = xboxOP.getLeftBumper();
+    dpaddown2 = xboxOP.getPOV() == 180;
+    dpadup2 = xboxOP.getPOV() == 0;
+    ltrigger2 = Math.abs(xbox.getRawAxis(2)) > 0.1;
+    rtrigger2 = Math.abs(xbox.getRawAxis(3)) > 0.1;
+
     pov = xbox.getPOV() != -1;
 
     // i dont remember how i got this lol
 
-    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-        - MathFormulas.signumAngleEdition(str, fwd))
-        + 360)
-        % 360;
+    inverseTanAngleDrive =
+        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+                    - MathFormulas.signumAngleEdition(str, fwd))
+                + 360)
+            % 360;
 
     // --------------------------------------------------------------------//
     // NAVX RESET
     // --------------------------------------------------------------------//
 
-    if (resetNavx) {
+    if (ybutton) {
       navx.getInstance().reset();
       Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
       povValue = 00;
@@ -222,43 +243,55 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (rtrigger && !ltrigger) {
-      arm.moveArm(MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1),
-          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .1));
-      //arm.pidArm(100); //TODO get max and min for arm
-    } else if (ltrigger && !rtrigger) {
-      arm.moveArm(-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1),
-          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .1));
-     // arm.pidArm(200); //TODO get max and min for arm
+    if (!rtrigger && ltrigger && arm.getArm() > MKARM.minNativePositionTelescope) {
+      arm.moveArm(
+          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
+          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
+      // arm.pidArm(100); //TODO get max and min for arm
+    } else if (rtrigger && !ltrigger && arm.getArm() < MKARM.maxNativePositionTelescope) {
+      arm.moveArm(
+          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
+          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
+      // arm.pidArm(200); //TODO get max and min for arm
     } else {
       arm.moveArm(0, 0);
     }
 
-    if (dpaddown && !dpadup)//(toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() //> MKTELE.minNativePositionTelescope)
-    {
-      arm.moveTele(-.4);
-      //arm.pidTelescope(MKTELE.minNativePositionTelescope); 
-    }
-    else if(!dpaddown && dpadup)//(toggleClimbUpOn && !toggleClimbDownOn && arm.getTelescope() //< MKTELE.maxNativePositionTelescope)
-    {
-      arm.moveTele(.4);
-      //arm.pidTelescope(MKTELE.maxNativePositionTelescope);
-    }
-    else 
-    {
+    if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+      arm.moveTele(-.6);
+      toggleClimbDownPressed = false;
+      toggleClimbDownOn = false;
+      toggleClimbUpPressed = false;
+      toggleClimbUpOn = false;
+      // arm.pidTelescope(MKTELE.minNativePositionTelescope);
+    } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
+      toggleClimbDownPressed = false;
+      toggleClimbDownOn = false;
+      toggleClimbUpPressed = false;
+      toggleClimbUpOn = false;
+      arm.moveTele(.6);
+      // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
+    } 
+    else if (toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+      arm.moveTele(-.6);
+      // arm.pidTelescope(MKTELE.minNativePositionTelescope);
+    } else if (!toggleClimbDownOn && toggleClimbUpOn && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
+      arm.moveTele(.6);
+      // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
+    } else {
       arm.moveTele(0);
     }
 
-    //if(xbox.getRawButton(8))
-    //{
-    //  arm.setTelescope(MKTELE.maxNativePositionTelescope);
-    }
+     if(xbox.getRawButton(8))
+     {
+      arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
+  }
+  SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
+  SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
+}
 
-
-
-   /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
-   // SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
-  
+  /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
+  // SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
 
   public void teleopDisabled() {
     resetNavx = false;
@@ -310,11 +343,11 @@ public class SupaStruct {
   }
 
   public void updateClimbUp() {
-    if (dpadup) {
+    if (xbox.getPOV() == 270) {
       if (!toggleClimbUpPressed) {
         toggleClimbUpOn = !toggleClimbUpOn;
         toggleClimbDownOn = false;
- 
+
         toggleClimbUpPressed = true;
       }
     } else {
@@ -323,11 +356,11 @@ public class SupaStruct {
   }
 
   public void updateClimbDown() {
-    if (dpaddown) {
+    if (xbox.getPOV() == 90) {
       if (!toggleClimbDownPressed) {
         toggleClimbDownOn = !toggleClimbDownOn;
         toggleClimbUpOn = false;
- 
+
         toggleClimbDownPressed = true;
       }
     } else {

@@ -17,10 +17,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKARM;
 import frc.robot.Constants.MKTELE;
-
 import java.io.IOException;
 import java.util.Optional;
-
 import org.photonvision.EstimatedRobotPose;
 
 /**
@@ -46,7 +44,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-   
+
     SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
@@ -82,7 +80,7 @@ public class Robot extends TimedRobot {
     if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
       SmartDashboard.putBoolean("Enable Compressor Analog", false);
       double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
-      double maxPressure = SmartDashboard.getNumber("Maximum Pressure (PSI)", 0.0);
+      double maxPressure = SmartDashboard.getNumber("Maximum Pressure (PSI)", 120.0);
       m_ph.enableCompressorAnalog(minPressure, maxPressure);
     }
     if (SmartDashboard.getBoolean("Disable Compressor", false)) {
@@ -90,15 +88,13 @@ public class Robot extends TimedRobot {
       m_ph.disableCompressor();
       CommandScheduler.getInstance().run();
     }
-    if(austin!=null){
+    if (austin != null) {
       Optional<EstimatedRobotPose> swerdlow = austin.photonPoseEstimator.update();
-      if(swerdlow.isPresent()){
-        SmartDashboard.putString("Jared",swerdlow.get().estimatedPose.toString());
+      if (swerdlow.isPresent()) {
+        SmartDashboard.putString("Jared", swerdlow.get().estimatedPose.toString());
         mField2d.setRobotPose(swerdlow.get().estimatedPose.toPose2d());
-      }
-      else{
-        SmartDashboard.putString("Jared","nada");
-  
+      } else {
+        SmartDashboard.putString("Jared", "nada");
       }
     }
   }
@@ -130,9 +126,9 @@ public class Robot extends TimedRobot {
     }
     train.startTrain();
     navx.getInstance().reset();
-    Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
-    //Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
-   // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
+    //Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
+    // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
+    // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }
 
   @Override

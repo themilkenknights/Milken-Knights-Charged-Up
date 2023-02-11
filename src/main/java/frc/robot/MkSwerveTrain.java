@@ -175,7 +175,20 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("avgDistTest", vars.avgDistTest *
     // AUTO.measToPredictRatio);
     // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
+    SmartDashboard.putNumber("topleftcan", tlCoder());
+    SmartDashboard.putNumber("toprightcan", trCoder());
+    SmartDashboard.putNumber("botleftcan", blCoder());
+    SmartDashboard.putNumber("botrightcan", brCoder());
 
+    SmartDashboard.putNumber("topleftnativeTURN", MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
+    SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
+    SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
+    SmartDashboard.putNumber("bottomrightnativeTURN", MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
+
+    SmartDashboard.putNumber("topleftnativeDRIVE", (topDriveLeft.getSelectedSensorVelocity()));
+    SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
+    SmartDashboard.putNumber("bottomleftnativeDRIVE", (bottomDriveLeft.getSelectedSensorVelocity()));
+    SmartDashboard.putNumber("bottomrightnativeDRIVE", (bottomDriveRight.getSelectedSensorVelocity()));
     // SmartDashboard.putNumber("topleftcan", tlCoder());
     // SmartDashboard.putNumber("toprightcan", trCoder());
     // SmartDashboard.putNumber("botleftcan", blCoder());

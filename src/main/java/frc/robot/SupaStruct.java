@@ -31,6 +31,7 @@ public class SupaStruct {
       povValue,
       navxRotate = 0;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
+  private Odometry odo = Odometry.getInstance();
 
   private boolean resetNavx,
       dpadup,
@@ -39,8 +40,6 @@ public class SupaStruct {
       toggleClimbUpPressed,
       toggleClimbDownOn,
       toggleClimbDownPressed,
-      intakeOvveride,
-      ballEnterOvverride,
       resetTurn,
       resetDrive,
       xbutton,
@@ -86,15 +85,12 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     train.updateSwerve();
     april.updateApril();
-
-    // lime.updateSensors();
+    odo.updateOdometry();
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
-
+    odo.updateSmartDashboard();
     updateClimbDown();
     updateClimbUp();
-
-    // lime.limeSmartDashboard();
 
     // --------------------------------------------------------------------//
     // VARIABLES

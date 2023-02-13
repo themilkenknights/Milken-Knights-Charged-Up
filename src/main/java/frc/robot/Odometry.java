@@ -86,8 +86,8 @@ public class Odometry {
 
     public void updateSmartDashboard()
     {
-        SmartDashboard.putNumber("x", getX());
-        SmartDashboard.putNumber("y", getY());
+        SmartDashboard.putNumber("x", MathFormulas.metersToInches(getX()));
+        SmartDashboard.putNumber("y", MathFormulas.metersToInches(getY()));
     }
 
     private static class InstanceHolder {

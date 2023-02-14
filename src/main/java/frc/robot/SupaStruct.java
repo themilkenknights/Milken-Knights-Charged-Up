@@ -4,9 +4,13 @@
 
 package frc.robot;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CONTROLLERS.DriveInput;
 import frc.robot.Constants.MKARM;
@@ -29,7 +33,8 @@ public class SupaStruct {
       inverseTanAngleOG,
       inverseTanAngleDrive,
       povValue,
-      navxRotate = 0;
+      navxRotate = 0,
+      sliderArm;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
 
@@ -77,6 +82,12 @@ public class SupaStruct {
 
   public void initTele() {
     navxRotate = navx.getInstance().getNavxYaw();
+    Shuffleboard.getTab("slida")
+    .add("slidaa", 1)
+    .withWidget(BuiltInWidgets.kNumberSlider)
+    .withProperties(Map.of("min", -1, "max", 1))
+    .getEntry();
+
   }
 
   public void updateTele() {
@@ -131,6 +142,8 @@ public class SupaStruct {
     rtrigger2 = Math.abs(xbox.getRawAxis(3)) > 0.1;
 
     pov = xbox.getPOV() != -1;
+
+    sliderArm = SmartDashboard.getNumber("slidaa", 0);
 
     // i dont remember how i got this lol
 

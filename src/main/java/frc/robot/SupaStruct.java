@@ -82,11 +82,20 @@ public class SupaStruct {
 
   public void initTele() {
     navxRotate = navx.getInstance().getNavxYaw();
+    
+    try{
     Shuffleboard.getTab("slida")
     .add("slidaa", 1)
     .withWidget(BuiltInWidgets.kNumberSlider)
     .withProperties(Map.of("min", -1, "max", 1))
     .getEntry();
+    }
+    catch(Exception e)
+    {
+      System.out.println("\n\n\n\n\n\n\n" + e +"\n\n\n\n\n\n\n");
+    }
+    
+
 
   }
 
@@ -130,7 +139,7 @@ public class SupaStruct {
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
     // OP
-    xbutton2 = xboxOP.getXButtonPressed();
+    /*xbutton2 = xboxOP.getXButtonPressed();
     abutton2 = xboxOP.getAButtonPressed();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
@@ -139,7 +148,7 @@ public class SupaStruct {
     dpaddown2 = xboxOP.getPOV() == 180;
     dpadup2 = xboxOP.getPOV() == 0;
     ltrigger2 = Math.abs(xbox.getRawAxis(2)) > 0.1;
-    rtrigger2 = Math.abs(xbox.getRawAxis(3)) > 0.1;
+    rtrigger2 = Math.abs(xbox.getRawAxis(3)) > 0.1;*/
 
     pov = xbox.getPOV() != -1;
 

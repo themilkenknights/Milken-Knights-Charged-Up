@@ -337,4 +337,37 @@ public final class Constants {
   public static class LOGS {
     public static final int maxSizeThreshold = 100000;
   }
+
+  public static class MKWEIGHTER {
+    public static final double CONE = 0.8;
+    public static final double CUBE = 0.9;
+    public static final double LOW = 2;
+    public static final double MID = 3;
+    public static final double HIGH = 5;
+    public static final double[] POINTVALUE = {LOW, MID, HIGH};
+    public static final double YESLINK = 1.5;
+    public static final double NOLINK = 0.5;
+    public static final double EMPTY = 1;
+    public static final double FULL = 0;
+    public static final double YESCOOPERTITION = 1.5;
+    public static final double NOCOOPERTITION = 0.5;
+    public static final double GRIDTHREE = 0.3;
+    public static final double GRIDTWO = 0.6;
+    public static final double GRIDONE = 0.9;
+    public static final double ROWONESPOTZERODISTANCE = 743890;
+    public static final double ROWTWOSPOTZERODISTANCE = 743890;
+    public static final double ROWTHREESPOTZERODISTANCE = 743890;
+    public static final double[][] DISTANCE = 
+    {
+      {
+        ROWONESPOTZERODISTANCE
+      },
+      {
+        ROWTWOSPOTZERODISTANCE
+      },
+      {
+        ROWTHREESPOTZERODISTANCE
+      }
+    };
+  }
 }

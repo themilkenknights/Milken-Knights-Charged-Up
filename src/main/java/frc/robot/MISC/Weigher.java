@@ -2,12 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.MISC;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import frc.robot.Constants.MKWEIGHTER;;
+
+import frc.robot.MISC.Constants.MKWEIGHTER;;
 
 /** Add your docs here. */
 public class Weigher {

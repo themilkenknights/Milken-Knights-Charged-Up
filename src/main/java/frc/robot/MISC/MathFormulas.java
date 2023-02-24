@@ -2,11 +2,11 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.MISC;
 
 import edu.wpi.first.math.util.Units;
-import frc.robot.Constants.MKDRIVE;
-import frc.robot.Constants.MKFALCON;
+import frc.robot.MISC.Constants.MKDRIVE;
+import frc.robot.MISC.Constants.MKFALCON;
 
 /** all MK math formulas */
 public class MathFormulas {

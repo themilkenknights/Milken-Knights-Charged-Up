@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.MECHANISMS.ARM;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -6,9 +6,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.CANID;
-import frc.robot.Constants.MKARM;
-import frc.robot.Constants.MKTELE;
+import frc.robot.MISC.Motor;
+import frc.robot.MISC.Constants.CANID;
+import frc.robot.MISC.Constants.MKARM;
+import frc.robot.MISC.Constants.MKTELE;
 
 public class Arm {
 

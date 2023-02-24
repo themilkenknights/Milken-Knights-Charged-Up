@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.MISC;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -13,10 +13,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
-import frc.robot.Constants.MKCANCODER;
-import frc.robot.Constants.MKDRIVE;
-import frc.robot.Constants.MKFALCON;
-import frc.robot.Constants.MKTURN;
+
+import frc.robot.MISC.Constants.MKCANCODER;
+import frc.robot.MISC.Constants.MKDRIVE;
+import frc.robot.MISC.Constants.MKFALCON;
+import frc.robot.MISC.Constants.MKTURN;
 
 /** Add your docs here. */
 public class Motor {

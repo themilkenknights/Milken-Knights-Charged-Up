@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
-package frc.robot;
+package frc.robot.CAMERA;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose2d;
+import frc.robot.MISC.Constants;
+
 import java.io.IOException;
 import java.util.Optional;
 import org.photonvision.EstimatedRobotPose;

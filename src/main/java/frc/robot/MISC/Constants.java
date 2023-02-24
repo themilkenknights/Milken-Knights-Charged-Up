@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.MISC;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
@@ -136,7 +136,7 @@ public final class Constants {
                 0, 0,
                 0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
     // from center.
-    static final String cameraName = "ShoutOutToMyStove";
+    public static final String cameraName = "ShoutOutToMyStove";
   }
 
   public static class MKRAMP {

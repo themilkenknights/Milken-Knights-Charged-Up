@@ -12,10 +12,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.CONTROLLERS.DriveInput;
-import frc.robot.Constants.MKARM;
-import frc.robot.Constants.MKBABY;
-import frc.robot.Constants.MKTELE;
+import frc.robot.CAMERA.AprilTags;
+import frc.robot.MECHANISMS.Intake;
+import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MECHANISMS.ARM.Arm;
+import frc.robot.MECHANISMS.ARM.Claw;
+import frc.robot.MISC.MathFormulas;
+import frc.robot.MISC.Odometry;
+import frc.robot.MISC.navx;
+import frc.robot.MISC.Constants.MKARM;
+import frc.robot.MISC.Constants.MKBABY;
+import frc.robot.MISC.Constants.MKTELE;
+import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 
 /** Robot stuff in here */
 public class SupaStruct {

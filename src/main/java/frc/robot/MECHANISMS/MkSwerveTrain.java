@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.MECHANISMS;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -12,12 +12,17 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.AUTO;
-import frc.robot.Constants.CANID;
-import frc.robot.Constants.MKCANCODER;
-import frc.robot.Constants.MKDRIVE;
-import frc.robot.Constants.MKTRAIN;
-import frc.robot.Constants.MKTURN;
+import frc.robot.MISC.Constants;
+import frc.robot.MISC.DeltaAirlines;
+import frc.robot.MISC.MathFormulas;
+import frc.robot.MISC.Motor;
+import frc.robot.MISC.navx;
+import frc.robot.MISC.Constants.AUTO;
+import frc.robot.MISC.Constants.CANID;
+import frc.robot.MISC.Constants.MKCANCODER;
+import frc.robot.MISC.Constants.MKDRIVE;
+import frc.robot.MISC.Constants.MKTRAIN;
+import frc.robot.MISC.Constants.MKTURN;
 
 /** The Swerve class contains everything relating to the swerve mechanism */
 public class MkSwerveTrain {

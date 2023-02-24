@@ -25,6 +25,11 @@ public class Ramp {
     double pitch = navx.getInstance().getNavxPitch();
     double pid = rampPID.calculate(pitch, 0);
     MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
+    if(Math.abs(pitch) < 0 + MKRAMP.threshold)
+    {
+      //TODO see if this good
+      MkSwerveTrain.getInstance().setModuleTurn(45, -45, 45, -45);
+    }
   }
 
   private static class InstanceHolder {

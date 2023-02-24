@@ -143,6 +143,7 @@ public final class Constants {
     public static final double kP = 0.001;
     public static final double kI = 0;
     public static final double kD = 0;
+    public static final double threshold = 0;
   }
 
   public static class MKBABY {
@@ -232,7 +233,7 @@ public final class Constants {
     public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final int scurve = 0;
-    
+
     public static final double offset = 0;
   }
 

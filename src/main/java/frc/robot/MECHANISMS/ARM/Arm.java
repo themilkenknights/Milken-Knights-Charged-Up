@@ -20,8 +20,12 @@ public class Arm {
   private Motor motor = Motor.getInstance();
 
   private Arm() {
+<<<<<<< Updated upstream:src/main/java/frc/robot/MECHANISMS/ARM/Arm.java
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
     telescopeCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKTELE.offset);
+=======
+    telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, false);
+>>>>>>> Stashed changes:src/main/java/frc/robot/Arm.java
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, MKARM.pidf, false);
   }

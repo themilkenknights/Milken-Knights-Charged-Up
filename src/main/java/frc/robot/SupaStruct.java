@@ -261,12 +261,12 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (!rtrigger && ltrigger && arm.getArm() > MKARM.minNativePositionTelescope) {
+    if (!rtrigger && ltrigger && arm.getArm() > MKARM.minNativePosition) {
       arm.moveArm(
           MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
           MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger && !ltrigger && arm.getArm() < MKARM.maxNativePositionTelescope) {
+    } else if (rtrigger && !ltrigger && arm.getArm() < MKARM.maxNativePosition) {
       arm.moveArm(
           -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
           -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));

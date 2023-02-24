@@ -197,6 +197,7 @@ public final class Constants {
     public static final int leftarmCANID = 24;
     public static final int rightarmCANID = 25;
     public static final int telescopeCANID = 26;
+    public static final int telescopeCanCoderCANID = 999;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -212,8 +213,8 @@ public final class Constants {
     public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0;
     public static final double maxA = 0.00001;
-    public static final double maxNativePositionTelescope = 100000;
-    public static final double minNativePositionTelescope = -280;
+    public static final double maxNativePosition = 100000;
+    public static final double minNativePosition = -280;
   }
 
   public static class MKTELE {
@@ -231,6 +232,8 @@ public final class Constants {
     public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final int scurve = 0;
+    
+    public static final double offset = 0;
   }
 
   public static class MKINTAKE {

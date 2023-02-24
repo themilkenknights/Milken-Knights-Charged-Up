@@ -3,6 +3,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.CANID;
 import frc.robot.Constants.MKARM;
@@ -13,10 +15,12 @@ public class Arm {
   private TalonFX armLeft;
   private TalonFX armRight;
   private TalonFX telescope;
+  private CANCoder telescopeCanCoder;
   private Motor motor = Motor.getInstance();
 
   private Arm() {
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
+    telescopeCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKTELE.offset);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, MKARM.pidf, false);
   }
@@ -80,6 +84,7 @@ public class Arm {
     SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
     SmartDashboard.putNumber("arms", getArm());
+    SmartDashboard.putNumber("cancodernumbaaa", telescopeCanCoder.getAbsolutePosition());
   }
 
   /**

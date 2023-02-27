@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKARM;
@@ -16,12 +17,12 @@ public class Arm {
   private TalonFX armLeft;
   private TalonFX armRight;
   private TalonFX telescope;
-  private CANCoder telescopeCanCoder;
+  private CANCoder armCanCoder;
   private Motor motor = Motor.getInstance();
 
   private Arm() {
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
-    telescopeCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKTELE.offset);
+    armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKTELE.offset);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, MKARM.pidf, false);
   }
@@ -55,6 +56,10 @@ public class Arm {
     return telescope.getSelectedSensorPosition() * MKTELE.greerRatio;
   }
 
+  public void getArmCanCoder(double setpoint) {
+    armCanCoder.getAbsolutePosition();
+  }
+
   public void setLeft(double setpoint) {
     armLeft.setSelectedSensorPosition(setpoint);
   }
@@ -65,6 +70,13 @@ public class Arm {
 
   public void setTelescope(double setpoint) {
     telescope.setSelectedSensorPosition(setpoint);
+  }
+
+  public void setArmToCanCoder() {
+    armLeft
+        .setSelectedSensorPosition(MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
+    armRight
+        .setSelectedSensorPosition(MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
   }
 
   public void pidArm(double setpoint) {
@@ -85,7 +97,7 @@ public class Arm {
     SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
     SmartDashboard.putNumber("arms", getArm());
-    SmartDashboard.putNumber("cancodernumbaaa", telescopeCanCoder.getAbsolutePosition());
+    SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
   }
 
   /**

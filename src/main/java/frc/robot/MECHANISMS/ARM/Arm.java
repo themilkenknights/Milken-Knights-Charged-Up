@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.MISC.Constants;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 import frc.robot.MISC.Constants.CANID;
@@ -41,15 +42,20 @@ public class Arm {
   }
 
   public double getLeft() {
-    return -armLeft.getSelectedSensorPosition() * MKARM.greerRatio;
+    return armLeft.getSelectedSensorPosition();
   }
 
   public double getRight() {
-    return -armRight.getSelectedSensorPosition() * MKARM.greerRatio;
+    return armRight.getSelectedSensorPosition();
   }
 
   public double getArm() {
     return (getRight() + getLeft()) / 2;
+  }
+
+  public double getArmDegrees()
+  {
+    return (MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio) + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))/2;
   }
 
   public double getTelescope() {
@@ -89,15 +95,16 @@ public class Arm {
   }
 
   public double armFF(double setpoint) {
-    return setpoint;
+    return MKARM.minA * Math.cos((Constants.kPi/180) * getArmDegrees());
   }
 
   public void updateSmartdashboard() {
     SmartDashboard.putNumber("leftarm", getLeft());
     SmartDashboard.putNumber("rightarm", getRight());
-    SmartDashboard.putNumber("Telescope", getTelescope());
-    SmartDashboard.putNumber("arms", getArm());
+    //SmartDashboard.putNumber("Telescope", getTelescope());
+    //SmartDashboard.putNumber("arms", getArm());
     SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
+    SmartDashboard.putNumber("POWWWWAAAAAAAAAHHHH!!!!!!!!!!!!!!", armLeft.getMotorOutputPercent());
   }
 
   /**

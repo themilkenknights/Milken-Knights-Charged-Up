@@ -7,10 +7,14 @@ package frc.robot;
 import java.util.Map;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.Intake;
@@ -20,6 +24,7 @@ import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
+import frc.robot.MISC.Constants.MKAPRIL;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
@@ -84,27 +89,24 @@ public class SupaStruct {
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
 
+  private ShuffleboardTab tab = Shuffleboard.getTab("slida");
+  private GenericEntry slidaa;
+
   public static SupaStruct getInstance() {
     return InstanceHolder.mInstance;
   }
 
   public void initTele() {
-    navxRotate = navx.getInstance().getNavxYaw();
-    
     try{
-    Shuffleboard.getTab("slida")
-    .add("slidaa", 1)
+    slidaa = tab.add("slidaa", 1)
     .withWidget(BuiltInWidgets.kNumberSlider)
-    .withProperties(Map.of("min", -1, "max", 1))
-    .getEntry();
+    .withProperties(Map.of("min", -1, "max", 1)).getEntry();
     }
     catch(Exception e)
     {
-      System.out.println("\n\n\n\n\n\n\n" + e +"\n\n\n\n\n\n\n");
+      System.out.println("fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god" + e);
     }
-    
-
-
+    navxRotate = navx.getInstance().getNavxYaw();
   }
 
   public void updateTele() {
@@ -160,7 +162,8 @@ public class SupaStruct {
 
     pov = xbox.getPOV() != -1;
 
-    sliderArm = SmartDashboard.getNumber("slidaa", 0);
+    sliderArm = slidaa.getDouble(0);
+    SmartDashboard.putNumber("dzrh", sliderArm);
 
     // i dont remember how i got this lol
 
@@ -269,15 +272,15 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (!rtrigger && ltrigger && arm.getArm() > MKARM.minNativePosition) {
+    if (!rtrigger && ltrigger && arm.getArm() * MKARM.greerRatio > MKARM.minNativePosition) {
       arm.moveArm(
           MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
           MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger && !ltrigger && arm.getArm() < MKARM.maxNativePosition) {
-      arm.moveArm(
-          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
-          -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
+    } else if (rtrigger && !ltrigger && arm.getArm() * MKARM.greerRatio < MKARM.maxNativePosition) {
+      arm.moveArm(-0.045, -0.045);
+          //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
+          //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
     } else {
       arm.moveArm(0, 0);
@@ -328,6 +331,14 @@ public class SupaStruct {
     itsreal = false;
     turntesttimer.stop();
     turntesttimer.reset();
+    try{
+    slidaa.close();
+    }
+    catch(Exception e)
+    {
+      System.out.println("e");
+    }
+    //WHY DO I HAVE TO MANUALLY CLOSE IT JUST REMEMBER IT EXISTS AHHHHHHHHHHH
   }
 
   public void initTest() {

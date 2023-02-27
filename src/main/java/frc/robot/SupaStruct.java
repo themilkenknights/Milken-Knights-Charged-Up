@@ -162,8 +162,8 @@ public class SupaStruct {
 
     pov = xbox.getPOV() != -1;
 
-    sliderArm = slidaa.getDouble(0);
-    SmartDashboard.putNumber("dzrh", sliderArm);
+    //sliderArm = slidaa.getDouble(0);
+    //SmartDashboard.putNumber("dzrh", sliderArm);
 
     // i dont remember how i got this lol
 
@@ -272,13 +272,13 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (!rtrigger && ltrigger && arm.getArm() * MKARM.greerRatio > MKARM.minNativePosition) {
-      arm.moveArm(
-          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
-          MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
+    if (!rtrigger && ltrigger && arm.getArmCanCoder() > MKARM.minDegreePosition) {
+      arm.pidArm(90);
+          //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
+          //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger && !ltrigger && arm.getArm() * MKARM.greerRatio < MKARM.maxNativePosition) {
-      arm.moveArm(-0.045, -0.045);
+    } else if (rtrigger && !ltrigger && arm.getArmCanCoder()  < MKARM.maxDegreePosition) {
+      arm.pidArm(0);
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
@@ -315,8 +315,7 @@ public class SupaStruct {
      {
       arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
   }
-  SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
-  SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
+ 
 }
 
   /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
@@ -373,10 +372,10 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    SmartDashboard.putNumber("count", count);
-    SmartDashboard.putNumber(
-        "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
-    SmartDashboard.putNumber("delta", train.vars.avgDistTest);
+    //SmartDashboard.putNumber("count", count);
+   // SmartDashboard.putNumber(
+   //     "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
+   // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
   }
 
   public void updateClimbUp() {

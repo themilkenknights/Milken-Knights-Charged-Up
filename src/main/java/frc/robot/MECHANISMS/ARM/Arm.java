@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Constants;
 import frc.robot.MISC.MathFormulas;
@@ -20,10 +21,13 @@ public class Arm {
   private TalonFX telescope;
   private CANCoder armCanCoder;
   private Motor motor = Motor.getInstance();
+  private PIDController arm;
 
   private Arm() {
+    arm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
-    armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKTELE.offset);
+    armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKARM.offset);
+    armCanCoder.configSensorDirection(true);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, MKARM.pidf, false);
   }
@@ -62,8 +66,8 @@ public class Arm {
     return telescope.getSelectedSensorPosition() * MKTELE.greerRatio;
   }
 
-  public void getArmCanCoder(double setpoint) {
-    armCanCoder.getAbsolutePosition();
+  public double getArmCanCoder() {
+    return armCanCoder.getAbsolutePosition();
   }
 
   public void setLeft(double setpoint) {
@@ -86,8 +90,7 @@ public class Arm {
   }
 
   public void pidArm(double setpoint) {
-    armLeft.set(ControlMode.Position, setpoint);
-    armRight.set(ControlMode.Position, setpoint);
+    moveArm(arm.calculate(getArmCanCoder(),setpoint) + armFF(setpoint), arm.calculate(getArmCanCoder(),setpoint) + armFF(setpoint));
   }
 
   public void pidTelescope(double setpoint) {
@@ -95,16 +98,16 @@ public class Arm {
   }
 
   public double armFF(double setpoint) {
-    return MKARM.minA * Math.cos((Constants.kPi/180) * getArmDegrees());
+    return MKARM.minA * Math.cos((Constants.kPi/180) * (getArmDegrees()+90));
   }
 
   public void updateSmartdashboard() {
-    SmartDashboard.putNumber("leftarm", getLeft());
-    SmartDashboard.putNumber("rightarm", getRight());
+    //SmartDashboard.putNumber("leftarm", getLeft());
+    //SmartDashboard.putNumber("rightarm", getRight());
     //SmartDashboard.putNumber("Telescope", getTelescope());
     //SmartDashboard.putNumber("arms", getArm());
     SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
-    SmartDashboard.putNumber("POWWWWAAAAAAAAAHHHH!!!!!!!!!!!!!!", armLeft.getMotorOutputPercent());
+    SmartDashboard.putNumber("degdeg", getArmDegrees());
   }
 
   /**

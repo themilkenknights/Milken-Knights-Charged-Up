@@ -119,32 +119,6 @@
               "imageHeight": -1
             }
           },
-          "9,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/pov",
-              "_title": "pov",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "10,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Telescope",
-              "_title": "Telescope",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "2,4": {
             "size": [
               1,
@@ -204,8 +178,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arms",
-              "_title": "arms",
+              "_source0": "network_table:///SmartDashboard/POWWWWAAAAAAAAAHHHH!!!!!!!!!!!!!!",
+              "_title": "POWWWWAAAAAAAAAHHHH!!!!!!!!!!!!!!",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -216,13 +190,11 @@
               1
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/toggleupon",
-              "_title": "toggleupon",
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/x",
+              "_title": "x",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
             }
           },
           "8,4": {
@@ -231,13 +203,37 @@
               1
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/toggledownon",
-              "_title": "toggledownon",
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/y",
+              "_title": "y",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_showGlyph": false
+            }
+          },
+          "7,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/degdeg",
+              "_title": "degdeg",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/cancodernumbaaa",
+              "_title": "/SmartDashboard/cancodernumbaaa",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }

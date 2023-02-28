@@ -17,9 +17,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.CAMERA.PhotonCameraWrapper;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants;
-import frc.robot.MISC.navx;
 import frc.robot.MISC.Constants.CANID;
-
+import frc.robot.MISC.navx;
 import java.io.IOException;
 import java.util.Optional;
 import org.photonvision.EstimatedRobotPose;
@@ -129,7 +128,7 @@ public class Robot extends TimedRobot {
     }
     train.startTrain();
     navx.getInstance().reset();
-    //Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
+    // Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
     // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
     // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }

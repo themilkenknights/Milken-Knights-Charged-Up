@@ -5,7 +5,6 @@
 package frc.robot.MISC;
 
 import com.kauailabs.navx.frc.AHRS;
-
 import frc.robot.MISC.Constants.NAVX;
 
 /** Add your docs here. */

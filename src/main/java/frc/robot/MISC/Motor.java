@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
-
 import frc.robot.MISC.Constants.MKCANCODER;
 import frc.robot.MISC.Constants.MKDRIVE;
 import frc.robot.MISC.Constants.MKFALCON;

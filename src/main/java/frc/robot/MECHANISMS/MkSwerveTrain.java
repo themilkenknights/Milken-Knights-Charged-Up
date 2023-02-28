@@ -13,16 +13,16 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Constants;
-import frc.robot.MISC.DeltaAirlines;
-import frc.robot.MISC.MathFormulas;
-import frc.robot.MISC.Motor;
-import frc.robot.MISC.navx;
 import frc.robot.MISC.Constants.AUTO;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKCANCODER;
 import frc.robot.MISC.Constants.MKDRIVE;
 import frc.robot.MISC.Constants.MKTRAIN;
 import frc.robot.MISC.Constants.MKTURN;
+import frc.robot.MISC.DeltaAirlines;
+import frc.robot.MISC.MathFormulas;
+import frc.robot.MISC.Motor;
+import frc.robot.MISC.navx;
 
 /** The Swerve class contains everything relating to the swerve mechanism */
 public class MkSwerveTrain {
@@ -117,8 +117,7 @@ public class MkSwerveTrain {
   }
 
   public double tlDeg() {
-    return MathFormulas.nativeToDegrees(
-      topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio);
+    return MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio);
   }
 
   public double trDeg() {
@@ -168,49 +167,43 @@ public class MkSwerveTrain {
     return bottomDriveRight;
   }
 
-  public TalonFX turnMotor(String motor)
-  {
+  public TalonFX turnMotor(String motor) {
     motor = motor.toLowerCase();
-    if(motor == "tl")
-    {
+    if (motor == "tl") {
       return topTurnLeft;
-    }
-    else if(motor == "tr")
-    {
+    } else if (motor == "tr") {
       return topTurnRight;
-    }
-    else if(motor == "bl")
-    {
+    } else if (motor == "bl") {
       return bottomTurnLeft;
-    }
-    else if(motor == "br")
-    {
+    } else if (motor == "br") {
       return bottomTurnRight;
-    }
-    else
-    {
+    } else {
       return null;
     }
   }
 
-  public SwerveModulePosition modulePosTL()
-  {
-    return new SwerveModulePosition(MathFormulas.nativeToMeters(topDriveLeft.getSelectedSensorPosition()),Rotation2d.fromDegrees(tlDeg()));
+  public SwerveModulePosition modulePosTL() {
+    return new SwerveModulePosition(
+        MathFormulas.nativeToMeters(topDriveLeft.getSelectedSensorPosition()),
+        Rotation2d.fromDegrees(tlDeg()));
   }
 
-  public SwerveModulePosition modulePosTR()
-  {
-    return new SwerveModulePosition(MathFormulas.nativeToMeters(topDriveRight.getSelectedSensorPosition()),Rotation2d.fromDegrees(trDeg()));
+  public SwerveModulePosition modulePosTR() {
+    return new SwerveModulePosition(
+        MathFormulas.nativeToMeters(topDriveRight.getSelectedSensorPosition()),
+        Rotation2d.fromDegrees(trDeg()));
   }
 
-  public SwerveModulePosition modulePosBL()
-  {
-    return new SwerveModulePosition(MathFormulas.nativeToMeters(bottomDriveLeft.getSelectedSensorPosition()),Rotation2d.fromDegrees(blDeg()));
+  public SwerveModulePosition modulePosBL() {
+    return new SwerveModulePosition(
+        MathFormulas.nativeToMeters(bottomDriveLeft.getSelectedSensorPosition()),
+        Rotation2d.fromDegrees(blDeg()));
   }
 
-  public SwerveModulePosition modulePosBR()
-  {
-    return new SwerveModulePosition(MathFormulas.nativeToMeters(bottomDriveRight.getSelectedSensorPosition()),Rotation2d.fromDegrees(brDeg()));
+  public SwerveModulePosition modulePosBR() {
+    return new SwerveModulePosition(
+        MathFormulas.nativeToMeters(bottomDriveRight.getSelectedSensorPosition()),
+        Rotation2d.fromDegrees(brDeg()));
   }
 
   public void updateSwerve() {

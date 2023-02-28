@@ -4,31 +4,26 @@
 
 package frc.robot;
 
-import java.util.Map;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
-import frc.robot.MECHANISMS.Intake;
-import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
-import frc.robot.MISC.MathFormulas;
-import frc.robot.MISC.Odometry;
-import frc.robot.MISC.navx;
-import frc.robot.MISC.Constants.MKAPRIL;
+import frc.robot.MECHANISMS.Intake;
+import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
-import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
+import frc.robot.MISC.MathFormulas;
+import frc.robot.MISC.Odometry;
+import frc.robot.MISC.navx;
+import java.util.Map;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -97,14 +92,16 @@ public class SupaStruct {
   }
 
   public void initTele() {
-    try{
-    slidaa = tab.add("slidaa", 1)
-    .withWidget(BuiltInWidgets.kNumberSlider)
-    .withProperties(Map.of("min", -1, "max", 1)).getEntry();
-    }
-    catch(Exception e)
-    {
-      System.out.println("fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god" + e);
+    try {
+      slidaa =
+          tab.add("slidaa", 1)
+              .withWidget(BuiltInWidgets.kNumberSlider)
+              .withProperties(Map.of("min", -1, "max", 1))
+              .getEntry();
+    } catch (Exception e) {
+      System.out.println(
+          "fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god"
+              + e);
     }
     navxRotate = navx.getInstance().getNavxYaw();
   }
@@ -160,8 +157,8 @@ public class SupaStruct {
 
     pov = xbox.getPOV() != -1;
 
-    //sliderArm = slidaa.getDouble(0);
-    //SmartDashboard.putNumber("dzrh", sliderArm);
+    // sliderArm = slidaa.getDouble(0);
+    // SmartDashboard.putNumber("dzrh", sliderArm);
 
     // i dont remember how i got this lol
 
@@ -184,8 +181,6 @@ public class SupaStruct {
       train.vars.avgDistInches = 0;
       train.startDrive();
     }
-
-   
 
     // --------------------------------------------------------------------//
     // POV ROTATION
@@ -271,28 +266,21 @@ public class SupaStruct {
 
     if (!rtrigger2 && ltrigger2 && arm.getArmDegrees() > MKARM.minDegreePosition) {
       arm.pidArm(0);
-          //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
-          //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
+      // MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
+      // MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger2 && !ltrigger2 && arm.getArmDegrees()  < MKARM.maxDegreePosition) {
+    } else if (rtrigger2 && !ltrigger2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(120);
-          //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
-          //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
+      // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
+      // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
-    } 
-    else if (bbutton2 && arm.getArmDegrees()<MKARM.maxDegreePosition){
+    } else if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(90);
-    }
-
-    else if(rbbutton2 && !lbbutton2 && arm.getArmDegrees()< MKARM.maxDegreePosition) 
-    {
+    } else if (rbbutton2 && !lbbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.moveArm(-0.12, -0.12);
-    }
-    else if(!rbbutton2 && lbbutton2 && arm.getArmDegrees()> MKARM.minDegreePosition) 
-    {
+    } else if (!rbbutton2 && lbbutton2 && arm.getArmDegrees() > MKARM.minDegreePosition) {
       arm.moveArm(0.12, 0.12);
-    }
-      else {
+    } else {
       arm.moveArm(0, 0);
     }
     // --------------------------------------------------------------------//
@@ -312,34 +300,35 @@ public class SupaStruct {
       toggleClimbUpOn = false;
       arm.moveTele(.69);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
-    } 
-    else if (toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+    } else if (toggleClimbDownOn
+        && !toggleClimbUpOn
+        && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.moveTele(-.6);
       // arm.pidTelescope(MKTELE.minNativePositionTelescope);
-    } else if (!toggleClimbDownOn && toggleClimbUpOn && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
+    } else if (!toggleClimbDownOn
+        && toggleClimbUpOn
+        && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.moveTele(.6);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     } else {
       arm.moveTele(0);
     }
-   
-    if(xboxOP.getRawButton(8))
-    {
-     arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
- }
- if(xboxOP.getRawButton(9))
- {
-  arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
-}
 
+    if (xboxOP.getRawButton(8)) {
+      arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
+    }
+    if (xboxOP.getRawButton(9)) {
+      arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
+    }
   }
- //SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition);
-  //SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  < MKARM.maxDegreePosition);
-  //SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
-  //SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
-  //SmartDashboard.putNumber("feeed90", arm.armFF(90));
-  //SmartDashboard.putNumber("feeeed0", arm.armFF(0));
-  
+  // SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() >
+  // MKARM.minDegreePosition);
+  // SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  <
+  // MKARM.maxDegreePosition);
+  // SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
+  // SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
+  // SmartDashboard.putNumber("feeed90", arm.armFF(90));
+  // SmartDashboard.putNumber("feeeed0", arm.armFF(0));
 
   /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
   // SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
@@ -353,14 +342,12 @@ public class SupaStruct {
     itsreal = false;
     turntesttimer.stop();
     turntesttimer.reset();
-    try{
-    slidaa.close();
-    }
-    catch(Exception e)
-    {
+    try {
+      slidaa.close();
+    } catch (Exception e) {
       System.out.println("end");
     }
-    //WHY DO I HAVE TO MANUALLY CLOSE IT JUST REMEMBER IT EXISTS AHHHHHHHHHHH
+    // WHY DO I HAVE TO MANUALLY CLOSE IT JUST REMEMBER IT EXISTS AHHHHHHHHHHH
   }
 
   public void initTest() {
@@ -395,12 +382,11 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    //SmartDashboard.putNumber("count", count);
-   // SmartDashboard.putNumber(
-   //     "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
-   // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
+    // SmartDashboard.putNumber("count", count);
+    // SmartDashboard.putNumber(
+    //     "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
+    // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
   }
-
 
   private static class InstanceHolder {
     private static final SupaStruct mInstance = new SupaStruct();

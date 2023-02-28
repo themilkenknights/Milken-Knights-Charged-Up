@@ -8,9 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.MISC.Motor;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKINTAKE;
+import frc.robot.MISC.Motor;
 
 // The Intake class contains everything relating to the intake mechanism
 public class Intake {

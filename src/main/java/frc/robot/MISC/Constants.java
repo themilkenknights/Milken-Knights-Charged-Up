@@ -69,7 +69,7 @@ public final class Constants {
 
     public static final int scurve = 6;
 
-    public static final double greerRatio = 150/7;
+    public static final double greerRatio = 150 / 7;
   }
 
   public static class MKCANCODER {
@@ -206,7 +206,7 @@ public final class Constants {
   }
 
   public static class MKARM {
-    public static final double greerRatio = 90.90909090909090;//0.01098901098;
+    public static final double greerRatio = 90.90909090909090; // 0.01098901098;
     public static final double kP = 0.0069;
     public static final double kI = 0.00;
     public static final double kD = 0.00000;
@@ -234,8 +234,6 @@ public final class Constants {
     public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final int scurve = 0;
-
-   
   }
 
   public static class MKINTAKE {
@@ -362,17 +360,8 @@ public final class Constants {
     public static final double ROWONESPOTZERODISTANCE = 743890;
     public static final double ROWTWOSPOTZERODISTANCE = 743890;
     public static final double ROWTHREESPOTZERODISTANCE = 743890;
-    public static final double[][] DISTANCE = 
-    {
-      {
-        ROWONESPOTZERODISTANCE
-      },
-      {
-        ROWTWOSPOTZERODISTANCE
-      },
-      {
-        ROWTHREESPOTZERODISTANCE
-      }
+    public static final double[][] DISTANCE = {
+      {ROWONESPOTZERODISTANCE}, {ROWTWOSPOTZERODISTANCE}, {ROWTHREESPOTZERODISTANCE}
     };
   }
 }

@@ -4,15 +4,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.MISC.Constants;
-import frc.robot.MISC.MathFormulas;
-import frc.robot.MISC.Motor;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKTELE;
+import frc.robot.MISC.MathFormulas;
+import frc.robot.MISC.Motor;
 
 public class Arm {
 
@@ -59,9 +57,10 @@ public class Arm {
     return (getRight() + getLeft()) / 2;
   }
 
-  public double getArmDegrees()
-  {
-    return -(MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio) + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))/2;
+  public double getArmDegrees() {
+    return -(MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio)
+            + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))
+        / 2;
   }
 
   public double getTelescope() {
@@ -85,24 +84,23 @@ public class Arm {
   }
 
   public void setArmToCanCoder() {
-    armLeft
-        .setSelectedSensorPosition(MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
-    armRight
-        .setSelectedSensorPosition(MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
+    armLeft.setSelectedSensorPosition(
+        MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
+    armRight.setSelectedSensorPosition(
+        MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
   }
 
   public void pidArm(double setpoint) {
-    moveArm(-arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint),
+    moveArm(
+        -arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint),
         -arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint));
   }
 
-  public double pidArmCalc(double setpoint)
-  {
+  public double pidArmCalc(double setpoint) {
     return -arm.calculate(getArmDegrees(), setpoint);
   }
 
-  public double pidTEST(double setpoint)
-  {
+  public double pidTEST(double setpoint) {
     return testarm.calculate(getArmDegrees(), setpoint);
   }
 
@@ -115,10 +113,10 @@ public class Arm {
   }
 
   public void updateSmartdashboard() {
-    //SmartDashboard.putNumber("leftarm", getLeft());
-    //SmartDashboard.putNumber("rightarm", getRight());
+    // SmartDashboard.putNumber("leftarm", getLeft());
+    // SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
-    //SmartDashboard.putNumber("arms", getArm());
+    // SmartDashboard.putNumber("arms", getArm());
     SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
     SmartDashboard.putNumber("degdeg", getArmDegrees());
   }

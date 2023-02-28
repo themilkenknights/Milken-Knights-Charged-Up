@@ -149,7 +149,7 @@ public class SupaStruct {
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
     // OP
-    /*xbutton2 = xboxOP.getXButtonPressed();
+    xbutton2 = xboxOP.getXButtonPressed();
     abutton2 = xboxOP.getAButtonPressed();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
@@ -157,8 +157,8 @@ public class SupaStruct {
     lbbutton2 = xboxOP.getLeftBumper();
     dpaddown2 = xboxOP.getPOV() == 180;
     dpadup2 = xboxOP.getPOV() == 0;
-    ltrigger2 = Math.abs(xbox.getRawAxis(2)) > 0.1;
-    rtrigger2 = Math.abs(xbox.getRawAxis(3)) > 0.1;*/
+    ltrigger2 = Math.abs(xboxOP.getRawAxis(2)) > 0.1;
+    rtrigger2 = Math.abs(xboxOP.getRawAxis(3)) > 0.1;
 
     pov = xbox.getPOV() != -1;
 
@@ -234,16 +234,16 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-    if (rbbutton) {
+    if (rbbutton2) {
       intake.rollerSet(-1);
 
-    } else if (lbbutton) {
+    } else if (lbbutton2) {
       intake.rollerSet(1);
 
     } else {
       intake.rollerSet(0);
     }
-    if (abutton) {
+    if (abutton2) {
       intake.toggle();
     }
     // --------------------------------------------------------------------//
@@ -272,22 +272,31 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (!rtrigger && ltrigger && arm.getArmCanCoder() > MKARM.minDegreePosition) {
-      arm.pidArm(90);
+    if (!rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition) {
+      arm.pidArm(0);
           //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
           //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger && !ltrigger && arm.getArmCanCoder()  < MKARM.maxDegreePosition) {
-      arm.pidArm(0);
+    } else if (rtrigger && !ltrigger && arm.getArmDegrees()  < MKARM.maxDegreePosition) {
+      arm.pidArm(120);
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
-    } else {
+    } 
+    else if(rbbutton && !lbbutton && arm.getArmDegrees()< MKARM.maxDegreePosition) 
+    {
+      arm.moveArm(-0.12, -0.12);
+    }
+    else if(!rbbutton && lbbutton && arm.getArmDegrees()> MKARM.minDegreePosition) 
+    {
+      arm.moveArm(0.12, 0.12);
+    }
+      else {
       arm.moveArm(0, 0);
     }
 
     if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.moveTele(-.6);
+      arm.moveTele(-.69);
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
@@ -298,7 +307,7 @@ public class SupaStruct {
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
       toggleClimbUpOn = false;
-      arm.moveTele(.6);
+      arm.moveTele(.69);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     } 
     else if (toggleClimbDownOn && !toggleClimbUpOn && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
@@ -315,7 +324,22 @@ public class SupaStruct {
      {
       arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
   }
- 
+ SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition);
+  SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  < MKARM.maxDegreePosition);
+  SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
+  SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
+  SmartDashboard.putNumber("feeed90", arm.armFF(90));
+  SmartDashboard.putNumber("feeeed0", arm.armFF(0));
+
+  /*if(xboxOP.getBButton())
+  {
+    arm.setTelescope(0);
+  }
+  if(xboxOP.getAButton())
+  {
+    arm.setLeft(MathFormulas.degreesToNative(arm.getArmCanCoder(), MKARM.greerRatio));
+    arm.setRight(MathFormulas.degreesToNative(arm.getArmCanCoder(), MKARM.greerRatio));
+  }*/
 }
 
   /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);

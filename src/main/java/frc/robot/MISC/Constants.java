@@ -206,15 +206,15 @@ public final class Constants {
   }
 
   public static class MKARM {
-    public static final double greerRatio = 0.01098901098;
-    public static final double kP = 0.004;
-    public static final double kI = 0.000;
-    public static final double kD = 0.0000;
+    public static final double greerRatio = 90.90909090909090;//0.01098901098;
+    public static final double kP = 0.0069;
+    public static final double kI = 0.00;
+    public static final double kD = 0.00000;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0.045;
     public static final double maxA = 0.045;
-    public static final double maxDegreePosition = 90;
+    public static final double maxDegreePosition = 125;
     public static final double minDegreePosition = -5;
     public static final double offset = -107.490234375;
   }

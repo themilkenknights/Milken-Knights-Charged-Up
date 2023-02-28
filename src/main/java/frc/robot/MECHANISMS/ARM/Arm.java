@@ -22,9 +22,11 @@ public class Arm {
   private CANCoder armCanCoder;
   private Motor motor = Motor.getInstance();
   private PIDController arm;
+  private PIDController testarm;
 
   private Arm() {
     arm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
+    testarm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
     armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKARM.offset);
     armCanCoder.configSensorDirection(true);
@@ -59,7 +61,7 @@ public class Arm {
 
   public double getArmDegrees()
   {
-    return (MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio) + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))/2;
+    return -(MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio) + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))/2;
   }
 
   public double getTelescope() {
@@ -90,7 +92,18 @@ public class Arm {
   }
 
   public void pidArm(double setpoint) {
-    moveArm(arm.calculate(getArmCanCoder(),setpoint) + armFF(setpoint), arm.calculate(getArmCanCoder(),setpoint) + armFF(setpoint));
+    moveArm(-arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint),
+        -arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint));
+  }
+
+  public double pidArmCalc(double setpoint)
+  {
+    return -arm.calculate(getArmDegrees(), setpoint);
+  }
+
+  public double pidTEST(double setpoint)
+  {
+    return testarm.calculate(getArmDegrees(), setpoint);
   }
 
   public void pidTelescope(double setpoint) {
@@ -98,13 +111,13 @@ public class Arm {
   }
 
   public double armFF(double setpoint) {
-    return MKARM.minA * Math.cos((Constants.kPi/180) * (getArmDegrees()+90));
+    return MKARM.minA * Math.sin((Math.toRadians(getArmDegrees())));
   }
 
   public void updateSmartdashboard() {
     //SmartDashboard.putNumber("leftarm", getLeft());
     //SmartDashboard.putNumber("rightarm", getRight());
-    //SmartDashboard.putNumber("Telescope", getTelescope());
+    SmartDashboard.putNumber("Telescope", getTelescope());
     //SmartDashboard.putNumber("arms", getArm());
     SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
     SmartDashboard.putNumber("degdeg", getArmDegrees());

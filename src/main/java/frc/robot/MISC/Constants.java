@@ -192,7 +192,7 @@ public final class Constants {
     public static final int bottomTurnLeftCANCoderCANID = 15;
     public static final int bottomTurnRightCANCoderCANID = 18; // 16
     //
-    public static final int intakePORT = 9;
+    public static final int intakePORT = 15;
     public static final int CLAWPORT = 8;
     public static final int rollerCANID = 21;
     public static final int leftarmCANID = 24;

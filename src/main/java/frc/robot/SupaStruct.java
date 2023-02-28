@@ -187,6 +187,15 @@ public class SupaStruct {
       train.startDrive();
     }
 
+    if(xboxOP.getRawButton(8))
+    {
+     arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
+ }
+ if(xboxOP.getRawButton(9))
+ {
+  arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
+}
+
     // --------------------------------------------------------------------//
     // POV ROTATION
     // --------------------------------------------------------------------//
@@ -234,22 +243,22 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-    if (rbbutton2) {
+    if (rbbutton) {
       intake.rollerSet(-1);
 
-    } else if (lbbutton2) {
+    } else if (lbbutton) {
       intake.rollerSet(1);
 
     } else {
       intake.rollerSet(0);
     }
-    if (abutton2) {
+    if (abutton) {
       intake.toggle();
     }
     // --------------------------------------------------------------------//
     // CLAW AND ARM
     // --------------------------------------------------------------------//
-    if (bbutton) {
+    if (bbutton2) {
       claw.toggle();
     }
 
@@ -272,22 +281,26 @@ public class SupaStruct {
       train.stopEverything();
     }
 
-    if (!rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition) {
+    if (!rtrigger2 && ltrigger2 && arm.getArmDegrees() > MKARM.minDegreePosition) {
       arm.pidArm(0);
           //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
           //MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger && !ltrigger && arm.getArmDegrees()  < MKARM.maxDegreePosition) {
+    } else if (rtrigger2 && !ltrigger2 && arm.getArmDegrees()  < MKARM.maxDegreePosition) {
       arm.pidArm(120);
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
     } 
-    else if(rbbutton && !lbbutton && arm.getArmDegrees()< MKARM.maxDegreePosition) 
+    else if (abutton2 && arm.getArmDegrees()<MKARM.maxDegreePosition){
+      arm.pidArm(90);
+    }
+
+    else if(rbbutton2 && !lbbutton2 && arm.getArmDegrees()< MKARM.maxDegreePosition) 
     {
       arm.moveArm(-0.12, -0.12);
     }
-    else if(!rbbutton && lbbutton && arm.getArmDegrees()> MKARM.minDegreePosition) 
+    else if(!rbbutton2 && lbbutton2 && arm.getArmDegrees()> MKARM.minDegreePosition) 
     {
       arm.moveArm(0.12, 0.12);
     }
@@ -295,14 +308,14 @@ public class SupaStruct {
       arm.moveArm(0, 0);
     }
 
-    if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+    if (dpaddown2 && !dpadup2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.moveTele(-.69);
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
       toggleClimbUpOn = false;
       // arm.pidTelescope(MKTELE.minNativePositionTelescope);
-    } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
+    } else if (!dpaddown2 && dpadup2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
@@ -320,27 +333,14 @@ public class SupaStruct {
       arm.moveTele(0);
     }
 
-     if(xbox.getRawButton(8))
-     {
-      arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
   }
- SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition);
-  SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  < MKARM.maxDegreePosition);
-  SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
-  SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
-  SmartDashboard.putNumber("feeed90", arm.armFF(90));
-  SmartDashboard.putNumber("feeeed0", arm.armFF(0));
-
-  /*if(xboxOP.getBButton())
-  {
-    arm.setTelescope(0);
-  }
-  if(xboxOP.getAButton())
-  {
-    arm.setLeft(MathFormulas.degreesToNative(arm.getArmCanCoder(), MKARM.greerRatio));
-    arm.setRight(MathFormulas.degreesToNative(arm.getArmCanCoder(), MKARM.greerRatio));
-  }*/
-}
+ //SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition);
+  //SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  < MKARM.maxDegreePosition);
+  //SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
+  //SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
+  //SmartDashboard.putNumber("feeed90", arm.armFF(90));
+  //SmartDashboard.putNumber("feeeed0", arm.armFF(0));
+  
 
   /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
   // SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
@@ -359,7 +359,7 @@ public class SupaStruct {
     }
     catch(Exception e)
     {
-      System.out.println("e");
+      System.out.println("end");
     }
     //WHY DO I HAVE TO MANUALLY CLOSE IT JUST REMEMBER IT EXISTS AHHHHHHHHHHH
   }

@@ -119,8 +119,6 @@ public class SupaStruct {
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
     odo.updateSmartDashboard();
-    updateClimbDown();
-    updateClimbUp();
 
     // --------------------------------------------------------------------//
     // VARIABLES
@@ -187,14 +185,7 @@ public class SupaStruct {
       train.startDrive();
     }
 
-    if(xboxOP.getRawButton(8))
-    {
-     arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
- }
- if(xboxOP.getRawButton(9))
- {
-  arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
-}
+   
 
     // --------------------------------------------------------------------//
     // POV ROTATION
@@ -218,7 +209,7 @@ public class SupaStruct {
      */
 
     // --------------------------------------------------------------------//
-    // ELSE STATEMENTS
+    // DRIVE STATEMENTS
     // --------------------------------------------------------------------//
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
@@ -239,7 +230,19 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
-
+    if (xbutton) {
+      april.alignToTag();
+    } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
+      train.etherSwerve(
+          fwd / MKBABY.fwdBABY,
+          str / MKBABY.strBABY,
+          -rcw / MKBABY.rcwBABY,
+          ControlMode.PercentOutput); // +,-,+
+      /// train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
+      // train.setModuleTurn(0, 0, 0, 0);
+    } else {
+      train.stopEverything();
+    }
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
@@ -256,30 +259,15 @@ public class SupaStruct {
       intake.toggle();
     }
     // --------------------------------------------------------------------//
-    // CLAW AND ARM
+    // CLAW
     // --------------------------------------------------------------------//
-    if (bbutton2) {
+    if (abutton2) {
       claw.toggle();
     }
 
     // --------------------------------------------------------------------//
-    // OTHER
+    // ARM
     // --------------------------------------------------------------------//
-    // applying numbers
-
-    if (xbutton) {
-      april.alignToTag();
-    } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
-      train.etherSwerve(
-          fwd / MKBABY.fwdBABY,
-          str / MKBABY.strBABY,
-          -rcw / MKBABY.rcwBABY,
-          ControlMode.PercentOutput); // +,-,+
-      /// train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
-      // train.setModuleTurn(0, 0, 0, 0);
-    } else {
-      train.stopEverything();
-    }
 
     if (!rtrigger2 && ltrigger2 && arm.getArmDegrees() > MKARM.minDegreePosition) {
       arm.pidArm(0);
@@ -292,7 +280,7 @@ public class SupaStruct {
           //-MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
     } 
-    else if (abutton2 && arm.getArmDegrees()<MKARM.maxDegreePosition){
+    else if (bbutton2 && arm.getArmDegrees()<MKARM.maxDegreePosition){
       arm.pidArm(90);
     }
 
@@ -307,7 +295,9 @@ public class SupaStruct {
       else {
       arm.moveArm(0, 0);
     }
-
+    // --------------------------------------------------------------------//
+    // TELESCOPE
+    // --------------------------------------------------------------------//
     if (dpaddown2 && !dpadup2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.moveTele(-.69);
       toggleClimbDownPressed = false;
@@ -332,6 +322,15 @@ public class SupaStruct {
     } else {
       arm.moveTele(0);
     }
+   
+    if(xboxOP.getRawButton(8))
+    {
+     arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
+ }
+ if(xboxOP.getRawButton(9))
+ {
+  arm.setTelescope(MKTELE.maxNativePositionTelescope/MKTELE.greerRatio);
+}
 
   }
  //SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() > MKARM.minDegreePosition);
@@ -402,31 +401,6 @@ public class SupaStruct {
    // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
   }
 
-  public void updateClimbUp() {
-    if (xbox.getPOV() == 270) {
-      if (!toggleClimbUpPressed) {
-        toggleClimbUpOn = !toggleClimbUpOn;
-        toggleClimbDownOn = false;
-
-        toggleClimbUpPressed = true;
-      }
-    } else {
-      toggleClimbUpPressed = false;
-    }
-  }
-
-  public void updateClimbDown() {
-    if (xbox.getPOV() == 90) {
-      if (!toggleClimbDownPressed) {
-        toggleClimbDownOn = !toggleClimbDownOn;
-        toggleClimbUpOn = false;
-
-        toggleClimbDownPressed = true;
-      }
-    } else {
-      toggleClimbDownPressed = false;
-    }
-  }
 
   private static class InstanceHolder {
     private static final SupaStruct mInstance = new SupaStruct();

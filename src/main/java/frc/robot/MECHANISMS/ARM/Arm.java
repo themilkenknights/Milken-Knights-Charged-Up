@@ -85,9 +85,9 @@ public class Arm {
 
   public void setArmToCanCoder() {
     armLeft.setSelectedSensorPosition(
-        MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
+        -MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
     armRight.setSelectedSensorPosition(
-        MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
+        -MathFormulas.degreesToNative(armCanCoder.getAbsolutePosition(), MKARM.greerRatio));
   }
 
   public void pidArm(double setpoint) {

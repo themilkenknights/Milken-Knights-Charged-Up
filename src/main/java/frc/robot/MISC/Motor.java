@@ -76,22 +76,24 @@ public class Motor {
   }
 
   public TalonFX motor(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted) {
-    TalonFX intake = new TalonFX(canid, "rio");
-    intake.configFactoryDefault();
-    intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    intake.setNeutralMode(mode);
-    intake.config_kP(pidslot, pidf[0]);
-    intake.config_kI(pidslot, pidf[1]);
-    intake.config_kD(pidslot, pidf[2]);
-    intake.config_kF(pidslot, pidf[3]);
-    intake.setInverted(inverted);
-    intake.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
-    intake.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
-    intake.configVoltageCompSaturation(MKFALCON.voltComp);
-    intake.enableVoltageCompensation(true);
-    intake.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
-    intake.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
-    return intake;
+    TalonFX motor = new TalonFX(canid, "rio");
+    motor.configFactoryDefault();
+    motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    motor.setNeutralMode(mode);
+    motor.config_kP(pidslot, pidf[0]);
+    motor.config_kI(pidslot, pidf[1]);
+    motor.config_kD(pidslot, pidf[2]);
+    motor.config_kF(pidslot, pidf[3]);
+    motor.setInverted(inverted);
+    motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
+    motor.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
+    motor.configVoltageCompSaturation(10);
+    motor.enableVoltageCompensation(true);
+    motor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
+    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
+   motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
+    motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
+    return motor;
   }
 
   public CANCoder cancoder(int canid, double offset) {

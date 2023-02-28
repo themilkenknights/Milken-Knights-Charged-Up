@@ -98,12 +98,14 @@ public class SupaStruct {
               .withWidget(BuiltInWidgets.kNumberSlider)
               .withProperties(Map.of("min", -1, "max", 1))
               .getEntry();
+              
     } catch (Exception e) {
       System.out.println(
           "fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god"
               + e);
     }
     navxRotate = navx.getInstance().getNavxYaw();
+    arm.setArmToCanCoder();
   }
 
   public void updateTele() {
@@ -148,7 +150,7 @@ public class SupaStruct {
     abutton2 = xboxOP.getAButtonPressed();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
-    bbutton2 = xboxOP.getBButtonPressed();
+    bbutton2 = xboxOP.getBButton();
     lbbutton2 = xboxOP.getLeftBumper();
     dpaddown2 = xboxOP.getPOV() == 180;
     dpadup2 = xboxOP.getPOV() == 0;
@@ -274,15 +276,16 @@ public class SupaStruct {
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
-    } else if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(90);
-    } else if (rbbutton2 && !lbbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    } else if (bbutton2 ) {
+      arm.pidArm(89);
+    } else if (rbbutton2 && !lbbutton2) {
       arm.moveArm(-0.12, -0.12);
-    } else if (!rbbutton2 && lbbutton2 && arm.getArmDegrees() > MKARM.minDegreePosition) {
+    } else if (!rbbutton2 && lbbutton2) {
       arm.moveArm(0.12, 0.12);
     } else {
       arm.moveArm(0, 0);
     }
+
     // --------------------------------------------------------------------//
     // TELESCOPE
     // --------------------------------------------------------------------//
@@ -315,9 +318,9 @@ public class SupaStruct {
     }
 
     if (xboxOP.getRawButton(8)) {
-      arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
+      arm.setTelescope(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
     }
-    if (xboxOP.getRawButton(9)) {
+    if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
   }

@@ -105,7 +105,7 @@ public final class Constants {
   }
 
   public static class NAVX {
-    public static final double offsetYaw = 90;
+    public static final double offsetYaw = 90+180;
     public static final double offsetPitch = 0;
   }
 
@@ -207,12 +207,12 @@ public final class Constants {
 
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
-    public static final double kP = 0.0069;
+    public static final double kP = 0.006;
     public static final double kI = 0.00;
-    public static final double kD = 0.00000;
+    public static final double kD = 0.001;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
-    public static final double minA = 0.045;
+    public static final double minA =0.065;// 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 125;
     public static final double minDegreePosition = -5;

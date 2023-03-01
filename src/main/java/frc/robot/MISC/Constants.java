@@ -131,7 +131,7 @@ public final class Constants {
     public static final double ykD = 0;
     public static final Transform3d robotToCam =
         new Transform3d(
-            new Translation3d(Units.inchesToMeters(17.5), 0, Units.inchesToMeters(6)),
+            new Translation3d(Units.inchesToMeters(8), 0, Units.inchesToMeters(6)),
             new Rotation3d(
                 0, 0,
                 0)); // Cam mounted facing forward, half a meter forward of center, half a meter up

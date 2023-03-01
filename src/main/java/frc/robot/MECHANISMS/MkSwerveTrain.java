@@ -209,7 +209,7 @@ public class MkSwerveTrain {
   public void updateSwerve() {
     DeltaAirlines.getInstance().updateDeltaTime();
 
-    // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
+    SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // SmartDashboard.putNumber("distancetbotleft", vars.posInchBL);
     // SmartDashboard.putNumber("distancetbotright", vars.posInchBR);
     // SmartDashboard.putNumber("brdeg", brDeg());

@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.CAMERA.PhotonCameraWrapper;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants;
+import frc.robot.MISC.Odometry;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.navx;
 import java.io.IOException;
@@ -48,8 +49,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     CameraServer.startAutomaticCapture();
-    SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
-    SmartDashboard.setDefaultBoolean("Disable Compressor", false);
+    //SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
+    //SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
     // Add number inputs for minimum and maximum pressure
     // SmartDashboard.setDefaultNumber("Minimum Pressure (PSI)", 100.0);
@@ -94,10 +95,17 @@ public class Robot extends TimedRobot {
     if (austin != null) {
       Optional<EstimatedRobotPose> swerdlow = austin.photonPoseEstimator.update();
       if (swerdlow.isPresent()) {
-        SmartDashboard.putString("Jared", swerdlow.get().estimatedPose.toString());
+       // SmartDashboard.putString("Jared", swerdlow.get().estimatedPose.toString());
         mField2d.setRobotPose(swerdlow.get().estimatedPose.toPose2d());
       } else {
-        SmartDashboard.putString("Jared", "nada");
+        try
+        {
+        mField2d.setRobotPose(austin.getEstimatedGlobalPose(Odometry.getInstance().getPose()).get().estimatedPose.toPose2d());
+        }
+        catch(Exception e)
+        {
+        }
+    //    SmartDashboard.putString("Jared", "nada");
       }
     }
   }

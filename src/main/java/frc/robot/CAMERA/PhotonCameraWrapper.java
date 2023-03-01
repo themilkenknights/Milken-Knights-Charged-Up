@@ -38,7 +38,6 @@ import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 public class PhotonCameraWrapper {
   public PhotonCamera photonCamera;
   public PhotonPoseEstimator photonPoseEstimator;
-
   public PhotonCameraWrapper() throws IOException {
     photonCamera = new PhotonCamera(Constants.MKAPRIL.cameraName);
     final AprilTagFieldLayout apriltagfieldlayout =
@@ -47,11 +46,11 @@ public class PhotonCameraWrapper {
     photonPoseEstimator =
         new PhotonPoseEstimator(
             apriltagfieldlayout,
-            PoseStrategy. LOWEST_AMBIGUITY,
+            PoseStrategy.CLOSEST_TO_REFERENCE_POSE,
             photonCamera,
             Constants.MKAPRIL.robotToCam);
   }
-
+  
   /**
    * @param estimatedRobotPose The current best guess at robot pose
    * @return A pair of the fused camera observations to a single Pose2d on the field, and the time
@@ -61,4 +60,6 @@ public class PhotonCameraWrapper {
     photonPoseEstimator.setReferencePose(prevEstimatedRobotPose);
     return photonPoseEstimator.update();
   }
+
+  
 }

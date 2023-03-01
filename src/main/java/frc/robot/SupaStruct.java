@@ -26,6 +26,8 @@ import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
 import java.util.Map;
 
+import org.photonvision.PhotonPoseEstimator;
+
 /** Robot stuff in here */
 public class SupaStruct {
 
@@ -74,6 +76,8 @@ public class SupaStruct {
       dpaddown2,
       ltrigger2,
       rtrigger2,
+      dpadleft2,
+      dpadright2,
       pov, /* povToggled, */
       itsreal = false;
   private boolean isRCWrunningWithNavx = false;
@@ -82,11 +86,13 @@ public class SupaStruct {
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
   private Arm arm = Arm.getInstance();
+
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
 
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
   private GenericEntry slidaa;
+  private double x,y,rot;
 
   public static SupaStruct getInstance() {
     return InstanceHolder.mInstance;
@@ -119,6 +125,11 @@ public class SupaStruct {
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
     odo.updateSmartDashboard();
+
+    x = april.getAxis("x");
+    y = april.getAxis("y");
+    //yaw = april.getAxis("yaw");
+    rot = april.getAxis("r");
 
     // --------------------------------------------------------------------//
     // VARIABLES
@@ -155,6 +166,8 @@ public class SupaStruct {
     lbbutton2 = xboxOP.getLeftBumper();
     dpaddown2 = xboxOP.getPOV() == 180;
     dpadup2 = xboxOP.getPOV() == 0;
+    dpadleft2 = xboxOP.getPOV() == 90;
+    dpadright2 = xboxOP.getPOV() == 270;
     ltrigger2 = Math.abs(xboxOP.getRawAxis(2)) > 0.1;
     rtrigger2 = Math.abs(xboxOP.getRawAxis(3)) > 0.1;
 
@@ -326,7 +339,18 @@ public class SupaStruct {
     if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
-    SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
+    //SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
+
+    SmartDashboard.putNumber("x", MathFormulas.metersToInches(x));
+    SmartDashboard.putNumber("y", MathFormulas.metersToInches(y));
+    SmartDashboard.putNumber("rot", rot);
+
+    if(dpadleft2)
+    {
+      odo.reset();
+    }
+    //SmartDashboard.putNumber("yaw", yaw);
+
   }
   // SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() >
   // MKARM.minDegreePosition);

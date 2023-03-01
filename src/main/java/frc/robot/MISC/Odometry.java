@@ -78,6 +78,11 @@ public class Odometry {
             });
   }
 
+  public Pose2d getPose()
+  {
+    return m_pose;
+  }
+
   public double getX() {
     return m_pose.getX();
   }
@@ -86,9 +91,20 @@ public class Odometry {
     return m_pose.getY();
   }
 
+  public void reset()
+  {
+    MkSwerveTrain.getInstance().resetDrive();
+    m_odometry.resetPosition(Rotation2d.fromDegrees(0), new SwerveModulePosition[] {
+      MkSwerveTrain.getInstance().modulePosTL(),
+      MkSwerveTrain.getInstance().modulePosTR(),
+      MkSwerveTrain.getInstance().modulePosBL(),
+      MkSwerveTrain.getInstance().modulePosBR()
+    }, new Pose2d(new Translation2d(0,0), Rotation2d.fromDegrees(0)));
+  }
+
   public void updateSmartDashboard() {
-    SmartDashboard.putNumber("x", MathFormulas.metersToInches(getX()));
-    SmartDashboard.putNumber("y", MathFormulas.metersToInches(getY()));
+    SmartDashboard.putNumber("xodo", MathFormulas.metersToInches(getX()));
+    SmartDashboard.putNumber("yodo", MathFormulas.metersToInches(getY()));
   }
 
   private static class InstanceHolder {

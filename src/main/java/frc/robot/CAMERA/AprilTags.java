@@ -74,6 +74,7 @@ public class AprilTags {
     }
   }
 
+  
   public double getAxis(String axis) {
     axis = axis.toLowerCase();
     if (result.hasTargets()) {

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
@@ -135,18 +136,18 @@ public class SupaStruct {
     resetNavx = xbox.getRawButton(DriveInput.resetNavxButton);
     resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
     // DRIVER
-    xbutton = xbox.getXButtonPressed();
-    abutton = xbox.getAButtonPressed();
+    xbutton = xbox.getXButton();
+    abutton = xbox.getAButton();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
-    bbutton = xbox.getBButtonPressed();
+    bbutton = xbox.getBButton();
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 180;
     dpadup = xbox.getPOV() == 0;
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
     // OP
-    xbutton2 = xboxOP.getXButtonPressed();
+    xbutton2 = xboxOP.getXButton();
     abutton2 = xboxOP.getAButtonPressed();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
@@ -272,12 +273,14 @@ public class SupaStruct {
       // MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
       // arm.pidArm(100); //TODO get max and min for arm
     } else if (rtrigger2 && !ltrigger2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(120);
+      arm.pidArm(105);
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
-    } else if (bbutton2 ) {
-      arm.pidArm(89);
+    } else if (bbutton2  && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+      arm.pidArm(90);
+    } else if (ybutton2  && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+      arm.pidArm(105);
     } else if (rbbutton2 && !lbbutton2) {
       arm.moveArm(-0.12, -0.12);
     } else if (!rbbutton2 && lbbutton2) {
@@ -323,13 +326,14 @@ public class SupaStruct {
     if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
+    SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
   }
   // SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() >
   // MKARM.minDegreePosition);
   // SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  <
   // MKARM.maxDegreePosition);
   // SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
-  // SmartDashboard.putNumber("pid90", arm.pidArmCalc(90));
+  
   // SmartDashboard.putNumber("feeed90", arm.armFF(90));
   // SmartDashboard.putNumber("feeeed0", arm.armFF(0));
 

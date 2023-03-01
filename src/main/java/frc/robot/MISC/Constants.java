@@ -147,9 +147,9 @@ public final class Constants {
   }
 
   public static class MKBABY {
-    public static final double fwdBABY = 1;
-    public static final double strBABY = 1;
-    public static final double rcwBABY = 2; // 2 very fast
+    public static final double fwdBABY = 2;
+    public static final double strBABY = 2;
+    public static final double rcwBABY = 4; // 2 very fast
   }
 
   public static class CONTROLLERS {
@@ -209,19 +209,19 @@ public final class Constants {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
     public static final double kP = 0.006;
     public static final double kI = 0.00;
-    public static final double kD = 0.001;
+    public static final double kD = 0.0014;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA =0.065;// 0.065;
     public static final double maxA = 0.045;
-    public static final double maxDegreePosition = 125;
+    public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;
     public static final double offset = -107.490234375;
   }
 
   public static class MKTELE {
     public static final double greerRatio = .04938272;
-    public static final double maxNativePositionTelescope = 8750;
+    public static final double maxNativePositionTelescope = 8300;
     public static final double minNativePositionTelescope = 0;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;

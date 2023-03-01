@@ -11,9 +11,9 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "3,0": {
+          "6,0": {
             "size": [
-              8,
+              5,
               4
             ],
             "content": {
@@ -27,20 +27,7 @@
               "Visuals/Show Outside Circles": false
             }
           },
-          "10,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/navx",
-              "_title": "navx",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "1,5": {
+          "9,5": {
             "size": [
               1,
               1
@@ -53,7 +40,7 @@
               "_showGlyph": false
             }
           },
-          "0,5": {
+          "8,5": {
             "size": [
               1,
               1
@@ -68,7 +55,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "1,4": {
+          "8,4": {
             "size": [
               1,
               1
@@ -83,7 +70,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "0,4": {
+          "9,4": {
             "size": [
               1,
               1
@@ -98,16 +85,42 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
+          "10,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/degdeg",
+              "_title": "degdeg",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Telescope",
+              "_title": "Telescope",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
           "0,0": {
             "size": [
-              3,
+              4,
               4
             ],
             "content": {
               "_type": "Camera Stream",
-              "_source0": "camera_server://photonvision_Port_1182_MJPEG_Server",
-              "_title": "photonvision_Port_1182_MJPEG_Server",
-              "_glyph": 148,
+              "_source0": "camera_server://USB Camera 0",
+              "_title": "USB Camera 0",
+              "_glyph": 544,
               "_showGlyph": false,
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
@@ -115,21 +128,8 @@
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
-            }
-          },
-          "2,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Jared",
-              "_title": "Jared",
-              "_glyph": 148,
-              "_showGlyph": false
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           },
           "3,4": {
@@ -152,8 +152,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/leftarm",
-              "_title": "leftarm",
+              "_source0": "network_table:///SmartDashboard/navx",
+              "_title": "navx",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -165,26 +165,13 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/rightarm",
-              "_title": "rightarm",
+              "_source0": "network_table:///SmartDashboard/cancodernumbaaa",
+              "_title": "cancodernumbaaa",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
           "6,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/POWWWWAAAAAAAAAHHHH!!!!!!!!!!!!!!",
-              "_title": "POWWWWAAAAAAAAAHHHH!!!!!!!!!!!!!!",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,4": {
             "size": [
               1,
               1
@@ -197,7 +184,7 @@
               "_showGlyph": false
             }
           },
-          "8,4": {
+          "7,4": {
             "size": [
               1,
               1
@@ -210,28 +197,28 @@
               "_showGlyph": false
             }
           },
-          "7,5": {
+          "3,5": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/degdeg",
-              "_title": "degdeg",
+              "_source0": "network_table:///SmartDashboard/pid90",
+              "_title": "pid90",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "5,5": {
+          "4,5": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/cancodernumbaaa",
-              "_title": "/SmartDashboard/cancodernumbaaa",
+              "_source0": "network_table:///SmartDashboard/Jared",
+              "_title": "Jared",
               "_glyph": 148,
               "_showGlyph": false
             }

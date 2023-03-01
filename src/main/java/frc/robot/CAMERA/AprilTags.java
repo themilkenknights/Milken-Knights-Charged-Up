@@ -23,7 +23,7 @@ public class AprilTags {
   private PIDController moveAprilY;
 
   // Constants such as camera and target height stored. Change per robot and goal!
-  private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(24);
+  private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(27.3);
   private final double TARGET_HEIGHT_METERS = Units.feetToMeters(5);
 
   // Angle between horizontal and the camera.

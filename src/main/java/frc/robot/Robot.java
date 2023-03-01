@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -46,7 +47,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-
+    CameraServer.startAutomaticCapture();
     SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 

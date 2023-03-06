@@ -148,7 +148,7 @@ public class SupaStruct {
     resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
     // DRIVER
     xbutton = xbox.getXButton();
-    abutton = xbox.getAButton();
+    abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
     bbutton = xbox.getBButton();
@@ -291,7 +291,7 @@ public class SupaStruct {
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
     } else if (bbutton2  && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(90);
+      arm.pidArm(88);
     } else if (ybutton2  && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(105);
     } else if (rbbutton2 && !lbbutton2) {
@@ -348,6 +348,10 @@ public class SupaStruct {
     if(dpadleft2)
     {
       odo.reset();
+    }
+    if(dpadright2)
+    {
+      odo.resetToPose2D(x, y, rot);
     }
     //SmartDashboard.putNumber("yaw", yaw);
 

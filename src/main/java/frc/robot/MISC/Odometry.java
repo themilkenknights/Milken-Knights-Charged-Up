@@ -91,6 +91,16 @@ public class Odometry {
     return m_pose.getY();
   }
 
+  public void resetToPose2D(double x, double y, double rot)
+  {
+    m_odometry.resetPosition(Rotation2d.fromDegrees(rot), new SwerveModulePosition[] {
+      MkSwerveTrain.getInstance().modulePosTL(),
+      MkSwerveTrain.getInstance().modulePosTR(),
+      MkSwerveTrain.getInstance().modulePosBL(),
+      MkSwerveTrain.getInstance().modulePosBR()},
+      new Pose2d(new Translation2d(x+getX(),y+getY()), Rotation2d.fromDegrees(rot)));
+  }
+
   public void reset()
   {
     MkSwerveTrain.getInstance().resetDrive();

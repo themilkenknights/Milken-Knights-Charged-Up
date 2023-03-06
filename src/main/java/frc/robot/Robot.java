@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
       } else {
         try
         {
-        mField2d.setRobotPose(austin.getEstimatedGlobalPose(Odometry.getInstance().getPose()).get().estimatedPose.toPose2d());
+          mField2d.setRobotPose(austin.getEstimatedGlobalPose(Odometry.getInstance().getPose()).get().estimatedPose.toPose2d());
         }
         catch(Exception e)
         {

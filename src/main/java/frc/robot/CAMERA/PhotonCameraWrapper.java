@@ -46,7 +46,7 @@ public class PhotonCameraWrapper {
     photonPoseEstimator =
         new PhotonPoseEstimator(
             apriltagfieldlayout,
-            PoseStrategy.CLOSEST_TO_CAMERA_HEIGHT,
+            PoseStrategy.LOWEST_AMBIGUITY,
             photonCamera,
             Constants.MKAPRIL.robotToCam);
   }

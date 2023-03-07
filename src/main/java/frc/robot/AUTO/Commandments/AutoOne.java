@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.ArmCommand;
 import frc.robot.AUTO.Commands.ClawCommand;
+import frc.robot.AUTO.Commands.EtherStraightCommand;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -19,6 +20,6 @@ public class AutoOne extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      Commands.deadline(new MotionMagicAuto(20, 0), new ArmCommand(90).withTimeout(6), new ClawCommand(true).withTimeout(6)));
+      new ArmCommand(90).withTimeout(6));//Commands.deadline(new EtherStraightCommand(20, 0.3, 0.1, 0.1).withTimeout(6))); //new ArmCommand(90).withTimeout(6), new ClawCommand(true).withTimeout(6)));
   }
 }

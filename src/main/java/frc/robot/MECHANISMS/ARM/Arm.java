@@ -116,7 +116,7 @@ public class Arm {
     // SmartDashboard.putNumber("leftarm", getLeft());
     // SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
-    // SmartDashboard.putNumber("arms", getArm());
+    SmartDashboard.putNumber("arms", getArm());
     //SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
     //SmartDashboard.putNumber("degdeg", getArmDegrees());
   }

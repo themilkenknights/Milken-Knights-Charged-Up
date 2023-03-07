@@ -245,8 +245,9 @@ public class MkSwerveTrain {
     // MKTURN.greerRatio));
 
     vars.yaw = navx.getInstance().getNavxYaw();
-
+    SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("navx", vars.yaw);
+    SmartDashboard.putNumber("avgdist", vars.avgDistInches);
     // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
     // SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
 
@@ -627,6 +628,7 @@ public class MkSwerveTrain {
   }
 
   public void updateMotionMagic() {
+    vars.avgDistInches=0;
     setModuleDrive(
         ControlMode.MotionMagic,
         vars.magicDistance,

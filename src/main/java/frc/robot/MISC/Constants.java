@@ -47,7 +47,7 @@ public final class Constants {
 
     public static final boolean inverted = false;
 
-    public static final int scurve = 8;
+    public static final int scurve = 6;
 
     public static final double greerRatio = 6.75;
 

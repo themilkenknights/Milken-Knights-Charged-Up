@@ -37,7 +37,6 @@ public class MotionMagicAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    SmartDashboard.putBoolean("idone", MkSwerveTrain.getInstance().isMotionMagicDone());
     return MkSwerveTrain.getInstance().isMotionMagicDone();
   }
 }

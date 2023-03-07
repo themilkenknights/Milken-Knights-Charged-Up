@@ -15,8 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AUTO.Commandments.AutoOne;
 import frc.robot.CAMERA.PhotonCameraWrapper;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MISC.Constants;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.Constants.CANID;
@@ -36,7 +38,7 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  private Command m_autonomousCommand;
+  private AutoOne m_autonomousCommand;
 
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
@@ -113,7 +115,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
-    m_autonomousCommand = null;
+    m_autonomousCommand = new AutoOne();
     train.startTrain();
     navx.getInstance().reset();
     if (m_autonomousCommand != null) {
@@ -124,6 +126,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     train.updateSwerve();
+    SmartDashboard.putBoolean("ARE YOU FUCKING WORKING", m_autonomousCommand.isFinished());
+    SmartDashboard.putBoolean("ARE YOU FUCKING SCHEDULED", m_autonomousCommand.isScheduled());
   }
 
   @Override
@@ -144,6 +148,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+  
     supaKoopa.updateTele();
   }
 
@@ -151,7 +156,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
-    m_autonomousCommand = null;
+    m_autonomousCommand = new AutoOne();
   }
 
   @Override

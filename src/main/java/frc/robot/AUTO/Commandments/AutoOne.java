@@ -6,9 +6,6 @@ package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.AUTO.Commands.ArmCommand;
-import frc.robot.AUTO.Commands.ClawCommand;
-import frc.robot.AUTO.Commands.EtherStraightCommand;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

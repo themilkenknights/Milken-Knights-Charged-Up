@@ -11,6 +11,8 @@ import edu.wpi.first.net.PortForwarder;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.MKAPRIL;
 import frc.robot.MISC.MathFormulas;
+import frc.robot.MISC.navx;
+
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
@@ -107,17 +109,17 @@ public class AprilTags {
       double yPID;
 
       xPID = moveAprilX.calculate(getAxis("x"), 1);
-      zPID = moveAprilZ.calculate(getAxis("r"), 0);
+      zPID = MkSwerveTrain.getInstance().moveToAngy(0);
       yPID = 0;
 
-      if (result.getBestTarget().getPoseAmbiguity() > 0.2) {
-        zPID = 0;
-      }
-      if (Math.abs(zPID) <= 0.1 && Math.abs(getAxis("r")) <= 3)
-        ;
+      if (result.getBestTarget().getPoseAmbiguity() > 0.2) 
       {
         zPID = 0;
-        moveAprilY.calculate(getAxis("y"), 0);
+      }
+      if (Math.abs(zPID) <= 0.1)
+      {
+        zPID = 0;
+        yPID = moveAprilY.calculate(getAxis("y"), 0);
       }
 
       // SmartDashboard.putNumber("xpid", xPID);

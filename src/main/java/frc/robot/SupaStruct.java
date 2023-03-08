@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
+import frc.robot.CAMERA.UltraSonic;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MECHANISMS.Intake;
@@ -26,7 +27,6 @@ import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
 import java.util.Map;
 
-import org.photonvision.PhotonPoseEstimator;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -86,6 +86,7 @@ public class SupaStruct {
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
   private Arm arm = Arm.getInstance();
+  private UltraSonic ultra = UltraSonic.getInstance();
 
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
@@ -121,8 +122,10 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     train.updateSwerve();
     april.updateApril();
+    ultra.updateUltra();
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
+    ultra.ultraSmartDashboard();
 
     x = april.getAxis("x");
     y = april.getAxis("y");

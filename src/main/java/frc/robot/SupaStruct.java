@@ -27,7 +27,6 @@ import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
 import java.util.Map;
 
-
 /** Robot stuff in here */
 public class SupaStruct {
 
@@ -93,7 +92,7 @@ public class SupaStruct {
 
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
   private GenericEntry slidaa;
-  private double x,y,rot;
+  private double x, y, rot;
 
   public static SupaStruct getInstance() {
     return InstanceHolder.mInstance;
@@ -106,7 +105,7 @@ public class SupaStruct {
               .withWidget(BuiltInWidgets.kNumberSlider)
               .withProperties(Map.of("min", -1, "max", 1))
               .getEntry();
-              
+
     } catch (Exception e) {
       System.out.println(
           "fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god"
@@ -129,7 +128,7 @@ public class SupaStruct {
 
     x = april.getAxis("x");
     y = april.getAxis("y");
-    //yaw = april.getAxis("yaw");
+    // yaw = april.getAxis("yaw");
     rot = april.getAxis("r");
 
     // --------------------------------------------------------------------//
@@ -291,9 +290,9 @@ public class SupaStruct {
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
       // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
       // arm.pidArm(200); //TODO get max and min for arm
-    } else if (bbutton2  && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    } else if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
-    } else if (ybutton2  && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(105);
     } else if (rbbutton2 && !lbbutton2) {
       arm.moveArm(-0.12, -0.12);
@@ -340,21 +339,19 @@ public class SupaStruct {
     if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
-    //SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
+    // SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
 
     SmartDashboard.putNumber("x", MathFormulas.metersToInches(x));
     SmartDashboard.putNumber("y", MathFormulas.metersToInches(y));
     SmartDashboard.putNumber("rot", rot);
 
-    if(dpadleft2)
-    {
+    if (dpadleft2) {
       odo.reset();
     }
-    if(dpadright2)
-    {
+    if (dpadright2) {
       odo.resetToPose2D(x, y, rot);
     }
-    //SmartDashboard.putNumber("yaw", yaw);
+    // SmartDashboard.putNumber("yaw", yaw);
 
   }
   // SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() >
@@ -362,7 +359,7 @@ public class SupaStruct {
   // SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  <
   // MKARM.maxDegreePosition);
   // SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
-  
+
   // SmartDashboard.putNumber("feeed90", arm.armFF(90));
   // SmartDashboard.putNumber("feeeed0", arm.armFF(0));
 

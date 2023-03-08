@@ -19,8 +19,7 @@ public class navx {
     return NAVX.offsetYaw - navx.getYaw();
   }
 
-  public double getNavxYawREAL()
-  {
+  public double getNavxYawREAL() {
     return navx.getYaw();
   }
 

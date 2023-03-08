@@ -16,6 +16,11 @@ public class AutoOne extends SequentialCommandGroup {
   public AutoOne() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(Commands.deadline(new MotionMagicAuto(10,270)));//Commands.deadline(new EtherStraightCommand(20, 0.3, 0.1, 0.1).withTimeout(6))); //new ArmCommand(90).withTimeout(6), new ClawCommand(true).withTimeout(6)));
+    addCommands(
+        Commands.deadline(
+            new MotionMagicAuto(
+                10, 270))); // Commands.deadline(new EtherStraightCommand(20, 0.3, 0.1,
+    // 0.1).withTimeout(6))); //new ArmCommand(90).withTimeout(6), new
+    // ClawCommand(true).withTimeout(6)));
   }
 }

@@ -4,11 +4,6 @@
 
 package frc.robot.MISC;
 
-import java.io.IOException;
-import java.util.Optional;
-
-import org.photonvision.EstimatedRobotPose;
-
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -23,6 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.PhotonCameraWrapper;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.MKTRAIN;
+import java.io.IOException;
+import java.util.Optional;
+import org.photonvision.EstimatedRobotPose;
 
 /** Add your docs here. */
 public class Odometry {
@@ -36,8 +34,9 @@ public class Odometry {
   Translation2d m_backRightLocation = new Translation2d(-MKTRAIN.R, -MKTRAIN.R);
 
   // Creating my kinematics object using the module locations
-  SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(
-      m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
+  SwerveDriveKinematics m_kinematics =
+      new SwerveDriveKinematics(
+          m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
   // Convert to module states
   SwerveModuleState[] moduleStates = m_kinematics.toSwerveModuleStates(speeds);
@@ -54,27 +53,29 @@ public class Odometry {
   // Back right module state
   SwerveModuleState backRight = moduleStates[3];
 
-  SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
-      m_kinematics,
-      Rotation2d.fromDegrees(navx.getInstance().getNavxYawREAL()),
-      new SwerveModulePosition[] {
-          MkSwerveTrain.getInstance().modulePosTL(),
-          MkSwerveTrain.getInstance().modulePosTR(),
-          MkSwerveTrain.getInstance().modulePosBL(),
-          MkSwerveTrain.getInstance().modulePosBR()
-      },
-      new Pose2d(5.0, 13.5, new Rotation2d()));
+  SwerveDriveOdometry m_odometry =
+      new SwerveDriveOdometry(
+          m_kinematics,
+          Rotation2d.fromDegrees(navx.getInstance().getNavxYawREAL()),
+          new SwerveModulePosition[] {
+            MkSwerveTrain.getInstance().modulePosTL(),
+            MkSwerveTrain.getInstance().modulePosTR(),
+            MkSwerveTrain.getInstance().modulePosBL(),
+            MkSwerveTrain.getInstance().modulePosBR()
+          },
+          new Pose2d(5.0, 13.5, new Rotation2d()));
 
-  SwerveDrivePoseEstimator m_SwerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
-      m_kinematics,
-      Rotation2d.fromDegrees(navx.getInstance().getNavxYawREAL()),
-      new SwerveModulePosition[] {
-          MkSwerveTrain.getInstance().modulePosTL(),
-          MkSwerveTrain.getInstance().modulePosTR(),
-          MkSwerveTrain.getInstance().modulePosBL(),
-          MkSwerveTrain.getInstance().modulePosBR()
-      },
-      new Pose2d(5.0, 13.5, new Rotation2d()));
+  SwerveDrivePoseEstimator m_SwerveDrivePoseEstimator =
+      new SwerveDrivePoseEstimator(
+          m_kinematics,
+          Rotation2d.fromDegrees(navx.getInstance().getNavxYawREAL()),
+          new SwerveModulePosition[] {
+            MkSwerveTrain.getInstance().modulePosTL(),
+            MkSwerveTrain.getInstance().modulePosTR(),
+            MkSwerveTrain.getInstance().modulePosBL(),
+            MkSwerveTrain.getInstance().modulePosBR()
+          },
+          new Pose2d(5.0, 13.5, new Rotation2d()));
 
   private PhotonCameraWrapper austin;
   private final Field2d mField2d = new Field2d();
@@ -97,21 +98,21 @@ public class Odometry {
     m_SwerveDrivePoseEstimator.update(
         Rotation2d.fromDegrees(navx.getInstance().getNavxYawREAL()),
         new SwerveModulePosition[] {
-            MkSwerveTrain.getInstance().modulePosTL(),
-            MkSwerveTrain.getInstance().modulePosTR(),
-            MkSwerveTrain.getInstance().modulePosBL(),
-            MkSwerveTrain.getInstance().modulePosBR()
+          MkSwerveTrain.getInstance().modulePosTL(),
+          MkSwerveTrain.getInstance().modulePosTR(),
+          MkSwerveTrain.getInstance().modulePosBL(),
+          MkSwerveTrain.getInstance().modulePosBR()
         });
 
-    Optional<EstimatedRobotPose> result = austin
-        .getEstimatedGlobalPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
+    Optional<EstimatedRobotPose> result =
+        austin.getEstimatedGlobalPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
     if (result.isPresent()) {
       EstimatedRobotPose camPose = result.get();
-      m_SwerveDrivePoseEstimator.addVisionMeasurement(camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
+      m_SwerveDrivePoseEstimator.addVisionMeasurement(
+          camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
     }
 
     mField2d.setRobotPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
-
   }
 
   public Pose2d getPose() {
@@ -127,22 +128,28 @@ public class Odometry {
   }
 
   public void resetToPose2D(double x, double y, double rot) {
-    m_odometry.resetPosition(Rotation2d.fromDegrees(rot), new SwerveModulePosition[] {
-        MkSwerveTrain.getInstance().modulePosTL(),
-        MkSwerveTrain.getInstance().modulePosTR(),
-        MkSwerveTrain.getInstance().modulePosBL(),
-        MkSwerveTrain.getInstance().modulePosBR() },
+    m_odometry.resetPosition(
+        Rotation2d.fromDegrees(rot),
+        new SwerveModulePosition[] {
+          MkSwerveTrain.getInstance().modulePosTL(),
+          MkSwerveTrain.getInstance().modulePosTR(),
+          MkSwerveTrain.getInstance().modulePosBL(),
+          MkSwerveTrain.getInstance().modulePosBR()
+        },
         new Pose2d(new Translation2d(x + getX(), y + getY()), Rotation2d.fromDegrees(rot)));
   }
 
   public void reset() {
     MkSwerveTrain.getInstance().resetDrive();
-    m_odometry.resetPosition(Rotation2d.fromDegrees(0), new SwerveModulePosition[] {
-        MkSwerveTrain.getInstance().modulePosTL(),
-        MkSwerveTrain.getInstance().modulePosTR(),
-        MkSwerveTrain.getInstance().modulePosBL(),
-        MkSwerveTrain.getInstance().modulePosBR()
-    }, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(0)));
+    m_odometry.resetPosition(
+        Rotation2d.fromDegrees(0),
+        new SwerveModulePosition[] {
+          MkSwerveTrain.getInstance().modulePosTL(),
+          MkSwerveTrain.getInstance().modulePosTR(),
+          MkSwerveTrain.getInstance().modulePosBL(),
+          MkSwerveTrain.getInstance().modulePosBR()
+        },
+        new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(0)));
   }
 
   public void updateSmartDashboard() {

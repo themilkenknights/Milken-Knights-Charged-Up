@@ -105,7 +105,7 @@ public final class Constants {
   }
 
   public static class NAVX {
-    public static final double offsetYaw = 90+180;
+    public static final double offsetYaw = 90 + 180;
     public static final double offsetPitch = 0;
   }
 
@@ -212,7 +212,7 @@ public final class Constants {
     public static final double kD = 0.0014;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
-    public static final double minA =0.065;// 0.065;
+    public static final double minA = 0.065; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;

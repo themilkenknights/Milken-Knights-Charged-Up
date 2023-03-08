@@ -185,25 +185,25 @@ public class MkSwerveTrain {
   public SwerveModulePosition modulePosTL() {
     return new SwerveModulePosition(
         MathFormulas.nativeToMeters(topDriveLeft.getSelectedSensorPosition()),
-        Rotation2d.fromDegrees(tlDeg()+90));
+        Rotation2d.fromDegrees(tlDeg() + 90));
   }
 
   public SwerveModulePosition modulePosTR() {
     return new SwerveModulePosition(
         MathFormulas.nativeToMeters(topDriveRight.getSelectedSensorPosition()),
-        Rotation2d.fromDegrees(trDeg()+90));
+        Rotation2d.fromDegrees(trDeg() + 90));
   }
 
   public SwerveModulePosition modulePosBL() {
     return new SwerveModulePosition(
         MathFormulas.nativeToMeters(bottomDriveLeft.getSelectedSensorPosition()),
-        Rotation2d.fromDegrees(blDeg()+90));
+        Rotation2d.fromDegrees(blDeg() + 90));
   }
 
   public SwerveModulePosition modulePosBR() {
     return new SwerveModulePosition(
         MathFormulas.nativeToMeters(bottomDriveRight.getSelectedSensorPosition()),
-        Rotation2d.fromDegrees(brDeg()+90));
+        Rotation2d.fromDegrees(brDeg() + 90));
   }
 
   public void updateSwerve() {
@@ -628,7 +628,7 @@ public class MkSwerveTrain {
   }
 
   public void updateMotionMagic() {
-    
+
     setModuleDrive(
         ControlMode.MotionMagic,
         vars.magicDistance,

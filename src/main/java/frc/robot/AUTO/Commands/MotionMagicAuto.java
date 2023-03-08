@@ -40,6 +40,5 @@ public class MotionMagicAuto extends CommandBase {
   public boolean isFinished() {
     SmartDashboard.putBoolean("isfinished", MkSwerveTrain.getInstance().isMotionMagicDone());
     return MkSwerveTrain.getInstance().isMotionMagicDone();
-    
   }
 }

@@ -10,6 +10,7 @@ import frc.robot.MECHANISMS.ARM.Claw;
 public class ClawCommand extends CommandBase {
   /** Creates a new ClawCommand. */
   private boolean state;
+
   public ClawCommand(boolean state) {
     this.state = state;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,10 +23,8 @@ public class ClawCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(state)
-      Claw.getInstance().retract();
-    else
-      Claw.getInstance().extend();
+    if (state) Claw.getInstance().retract();
+    else Claw.getInstance().extend();
   }
 
   // Called once the command ends or is interrupted.

@@ -27,7 +27,7 @@ public class EtherTurnCommand extends CommandBase {
   @Override
   public void execute() {
     train.etherSwerve(0, 0, train.moveToAngy(angle) / 5, ControlMode.PercentOutput);
-    //SmartDashboard.putNumber("move to angy", train.moveToAngy(angle));
+    // SmartDashboard.putNumber("move to angy", train.moveToAngy(angle));
   }
 
   // Called once the command ends or is interrupted.

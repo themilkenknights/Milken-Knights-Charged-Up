@@ -28,6 +28,7 @@ public class MotionMagicAuto extends CommandBase {
   @Override
   public void execute() {
     MkSwerveTrain.getInstance().updateMotionMagic();
+    SmartDashboard.putNumber("I EXIST", 123);
   }
 
   // Called once the command ends or is interrupted.
@@ -37,6 +38,8 @@ public class MotionMagicAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    SmartDashboard.putBoolean("isfinished", MkSwerveTrain.getInstance().isMotionMagicDone());
     return MkSwerveTrain.getInstance().isMotionMagicDone();
+    
   }
 }

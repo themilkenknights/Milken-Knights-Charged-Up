@@ -121,10 +121,8 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     train.updateSwerve();
     april.updateApril();
-    odo.updateOdometry();
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
-    odo.updateSmartDashboard();
 
     x = april.getAxis("x");
     y = april.getAxis("y");

@@ -146,6 +146,12 @@ public final class Constants {
     public static final double threshold = 0;
   }
 
+  public static class MKULTRA {
+    public static final double kP = 0.00001;
+    public static final double kI = 0;
+    public static final double kD = 0;
+  }
+
   public static class MKBABY {
     public static final double fwdBABY = 2;
     public static final double strBABY = 2;

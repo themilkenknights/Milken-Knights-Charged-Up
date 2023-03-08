@@ -11,7 +11,6 @@ import edu.wpi.first.net.PortForwarder;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.MKAPRIL;
 import frc.robot.MISC.MathFormulas;
-import frc.robot.MISC.navx;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
@@ -21,7 +20,6 @@ import org.photonvision.targeting.PhotonPipelineResult;
 public class AprilTags {
 
   private PIDController moveAprilX;
-  private PIDController moveAprilZ;
   private PIDController moveAprilY;
 
   // Constants such as camera and target height stored. Change per robot and goal!
@@ -46,7 +44,6 @@ public class AprilTags {
     camera = new PhotonCamera("ShoutOutToMyStove");
 
     moveAprilX = new PIDController(MKAPRIL.xkP, MKAPRIL.xkI, MKAPRIL.xkD);
-    moveAprilZ = new PIDController(MKAPRIL.zkP, MKAPRIL.zkI, MKAPRIL.zkD);
     moveAprilY = new PIDController(MKAPRIL.ykP, MKAPRIL.ykI, MKAPRIL.ykD);
 
     camera.setPipelineIndex(0);

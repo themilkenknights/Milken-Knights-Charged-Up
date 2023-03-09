@@ -226,9 +226,9 @@ public final class Constants {
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0;
-    public static final double kI = 0;
-    public static final double kD = 0;
+    public static final double kP = 0.0007;
+    public static final double kI = 0.005;
+    public static final double kD = 0.00;
     public static final double kF = 0;
 
     public static final double[] pidf = {kP, kI, kD, kF};
@@ -239,9 +239,9 @@ public final class Constants {
   public static class MKINTAKE {
     public static final NeutralMode rollerNeutralMode = NeutralMode.Coast;
 
-    public static final double kP = 0.04;
+    public static final double kP = 0.1;
     public static final double kI = 0;
-    public static final double kD = kP * 0.6;
+    public static final double kD = kP * 0;
     public static final double kF = 0;
 
     public static final double[] pidf = {kP, kI, kD, kF};

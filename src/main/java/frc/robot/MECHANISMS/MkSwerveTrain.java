@@ -209,12 +209,7 @@ public class MkSwerveTrain {
   public void updateSwerve() {
     DeltaAirlines.getInstance().updateDeltaTime();
 
-    SmartDashboard.putNumber("distancetopright", vars.posInchTR);
-    // SmartDashboard.putNumber("distancetbotleft", vars.posInchBL);
-    // SmartDashboard.putNumber("distancetbotright", vars.posInchBR);
-    // SmartDashboard.putNumber("brdeg", brDeg());
-    // SmartDashboard.putNumber("brcider", brCoder());
-    // SmartDashboard.putNumber("avgDistTest", vars.avgDistTest *
+    //SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
     // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
     /*SmartDashboard.putNumber("topleftcan", tlCoder());
@@ -231,11 +226,6 @@ public class MkSwerveTrain {
     SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("bottomleftnativeDRIVE", (bottomDriveLeft.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("bottomrightnativeDRIVE", (bottomDriveRight.getSelectedSensorVelocity())); */
-    // SmartDashboard.putNumber("topleftcan", tlCoder());
-    // SmartDashboard.putNumber("toprightcan", trCoder());
-    // SmartDashboard.putNumber("botleftcan", blCoder());
-    // SmartDashboard.putNumber("botrightcan", brCoder());
-    // SmartDashboard.putNumber("bentest", tlCoder());
     MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio);
     // SmartDashboard.putNumber("topleftcantonative",
     // MathFormulas.degreesToNative(trCoder(), MKTURN.greerRatio));
@@ -245,9 +235,9 @@ public class MkSwerveTrain {
     // MKTURN.greerRatio));
 
     vars.yaw = navx.getInstance().getNavxYaw();
-    SmartDashboard.putBoolean("idsone", isMotionMagicDone());
+    //SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("navx", vars.yaw);
-    SmartDashboard.putNumber("avgdist", vars.avgDistInches);
+    //SmartDashboard.putNumber("avgdist", vars.avgDistInches);
     // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
     // SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
 

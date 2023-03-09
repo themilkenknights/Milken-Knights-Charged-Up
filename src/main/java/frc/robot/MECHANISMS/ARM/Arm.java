@@ -20,10 +20,12 @@ public class Arm {
   private CANCoder armCanCoder;
   private Motor motor = Motor.getInstance();
   private PIDController arm;
+  private PIDController tele;
   private PIDController testarm;
 
   private Arm() {
     arm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
+    tele = new PIDController(MKTELE.kP, MKTELE.kI, MKTELE.kD);
     testarm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
     armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKARM.offset);
@@ -105,7 +107,8 @@ public class Arm {
   }
 
   public void pidTelescope(double setpoint) {
-    telescope.set(ControlMode.Position, setpoint);
+    moveTele(
+    tele.calculate(getTelescope(), setpoint));
   }
 
   public double armFF(double setpoint) {

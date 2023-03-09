@@ -98,9 +98,9 @@ public class Odometry {
     m_SwerveDrivePoseEstimator.update(
         Rotation2d.fromDegrees(navx.getInstance().getNavxYawREAL()),
         new SwerveModulePosition[] {
-          MkSwerveTrain.getInstance().modulePosTL(),
           MkSwerveTrain.getInstance().modulePosTR(),
           MkSwerveTrain.getInstance().modulePosBL(),
+          MkSwerveTrain.getInstance().modulePosTL(),
           MkSwerveTrain.getInstance().modulePosBR()
         });
 

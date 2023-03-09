@@ -7,8 +7,11 @@ package frc.robot.CAMERA;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.MISC.MathFormulas;
 
-/** The UltraSensor class contains everything relating to the ultrasonic sensor */
+/**
+ * The UltraSensor class contains everything relating to the ultrasonic sensor
+ */
 public class UltraSonic {
   private final AnalogInput ultrasonic = new AnalogInput(0);
   private double rawValue, voltageFactor, currentDistanceInches;
@@ -21,12 +24,13 @@ public class UltraSonic {
     rawValue = ultrasonic.getValue();
     voltageFactor = 5 / RobotController.getVoltage5V();
     currentDistanceInches = rawValue * voltageFactor * 0.125;
+    // currentDistanceInches = MathFormulas.metersToInches(currentDistanceInches);
   }
 
   public void ultraSmartDashboard() {
-    SmartDashboard.putNumber("inchesrounded", Math.round(currentDistanceInches));
+    // SmartDashboard.putNumber("inchesrounded", Math.round(currentDistanceInches));
     SmartDashboard.putNumber("rawvalue", rawValue);
-    SmartDashboard.putNumber("inchesdistthingy", currentDistanceInches);
+    // SmartDashboard.putNumber("inchesdistthingy", currentDistanceInches);
   }
 
   private static class InstanceHolder {

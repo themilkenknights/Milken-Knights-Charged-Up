@@ -13,25 +13,31 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.AUTO.Commandments.AutoOne;
+import frc.robot.AUTO.Commandments.SideAuto;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MISC.Constants;
 import frc.robot.MISC.Constants.CANID;
+import frc.robot.MISC.Constants.MKTELE;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the
+ * name of this class or
+ * the package after creating this project, you must also update the
+ * build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
   /**
-   * This function is run when the robot is first started up and should be used for any
+   * This function is run when the robot is first started up and should be used
+   * for any
    * initialization code.
    */
-  private AutoOne m_autonomousCommand;
+  private SideAuto m_autonomousCommand;
 
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
@@ -84,7 +90,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
-    m_autonomousCommand = new AutoOne();
+
+    m_autonomousCommand = new SideAuto();
     train.startTrain();
     navx.getInstance().reset();
     if (m_autonomousCommand != null) {
@@ -95,8 +102,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     train.updateSwerve();
-    SmartDashboard.putBoolean("ARE YOU FUCKING WORKING", m_autonomousCommand.isFinished());
-    SmartDashboard.putBoolean("ARE YOU FUCKING SCHEDULED", m_autonomousCommand.isScheduled());
   }
 
   @Override
@@ -104,13 +109,12 @@ public class Robot extends TimedRobot {
     supaKoopa.initTele();
 
     System.out.println("Robot Teleop Init");
-    SmartDashboard.putNumber("distance total", Constants.AUTO.DISTANGLE.distance);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
     train.startTrain();
     navx.getInstance().reset();
-    // Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
+    Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
     // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
     // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }
@@ -124,11 +128,12 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
-    m_autonomousCommand = new AutoOne();
+    m_autonomousCommand = new SideAuto();
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
   public void testInit() {

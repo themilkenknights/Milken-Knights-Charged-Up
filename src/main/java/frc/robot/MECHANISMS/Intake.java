@@ -20,7 +20,7 @@ public class Intake {
 
   private Intake() {
     roller =
-        mMotor.motor(
+        mMotor.intake(
             CANID.rollerCANID, MKINTAKE.rollerNeutralMode, 0, MKINTAKE.pidf, MKINTAKE.inverted);
 
     intake = new Solenoid(CANID.revphCANID, PneumaticsModuleType.REVPH, CANID.intakePORT);

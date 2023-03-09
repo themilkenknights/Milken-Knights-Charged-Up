@@ -258,10 +258,10 @@ public class SupaStruct {
     // INTAKE
     // --------------------------------------------------------------------//
     if (rbbutton) {
-      intake.rollerSet(-1);
+      intake.rollerSet(-.55);
 
     } else if (lbbutton) {
-      intake.rollerSet(1);
+      intake.rollerSet(.55);
 
     } else {
       intake.rollerSet(0);
@@ -280,17 +280,7 @@ public class SupaStruct {
     // ARM
     // --------------------------------------------------------------------//
 
-    if (!rtrigger2 && ltrigger2 && arm.getArmDegrees() > MKARM.minDegreePosition) {
-      arm.pidArm(0);
-      // MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12),
-      // MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(2)), .12));
-      // arm.pidArm(100); //TODO get max and min for arm
-    } else if (rtrigger2 && !ltrigger2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(105);
-      // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12),
-      // -MathFormulas.limitAbsolute(Math.abs(xbox.getRawAxis(3)), .12));
-      // arm.pidArm(200); //TODO get max and min for arm
-    } else if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+     if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
     } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(105);
@@ -339,11 +329,14 @@ public class SupaStruct {
     if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
-    // SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
 
-    SmartDashboard.putNumber("x", MathFormulas.metersToInches(x));
-    SmartDashboard.putNumber("y", MathFormulas.metersToInches(y));
-    SmartDashboard.putNumber("rot", rot);
+
+    if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+      arm.pidTelescope(0);
+    } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
+      arm.pidTelescope(8000);
+    }
+     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
 
     if (dpadleft2) {
       odo.reset();

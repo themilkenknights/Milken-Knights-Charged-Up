@@ -211,8 +211,9 @@ public class MkSwerveTrain {
 
     //SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
-    // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
-    /*SmartDashboard.putNumber("topleftcan", tlCoder());
+    // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches); 
+    /* 
+    SmartDashboard.putNumber("topleftcan", tlCoder());
     SmartDashboard.putNumber("toprightcan", trCoder());
     SmartDashboard.putNumber("botleftcan", blCoder());
     SmartDashboard.putNumber("botrightcan", brCoder());
@@ -225,7 +226,8 @@ public class MkSwerveTrain {
     SmartDashboard.putNumber("topleftnativeDRIVE", (topDriveLeft.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("bottomleftnativeDRIVE", (bottomDriveLeft.getSelectedSensorVelocity()));
-    SmartDashboard.putNumber("bottomrightnativeDRIVE", (bottomDriveRight.getSelectedSensorVelocity())); */
+    SmartDashboard.putNumber("bottomrightnativeDRIVE", (bottomDriveRight.getSelectedSensorVelocity()));
+    */
     MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio);
     // SmartDashboard.putNumber("topleftcantonative",
     // MathFormulas.degreesToNative(trCoder(), MKTURN.greerRatio));

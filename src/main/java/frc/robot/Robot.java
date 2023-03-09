@@ -11,8 +11,15 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AUTO.Commandments.MiddleAuto;
 import frc.robot.AUTO.Commandments.SideAuto;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MECHANISMS.ARM.Arm;
@@ -37,8 +44,11 @@ public class Robot extends TimedRobot {
    * for any
    * initialization code.
    */
-  private SideAuto m_autonomousCommand;
+  private Command m_autonomousCommand;
 
+  private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
+  private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
+  private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
@@ -47,6 +57,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     CameraServer.startAutomaticCapture();
+    Shuffleboard.selectTab("Match");
+    positionChooser.addOption("SIDES", AutoPosition.SIDES);
+    positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
@@ -91,8 +104,14 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
     Arm.getInstance().setTelescope(0);
-
-    m_autonomousCommand = new SideAuto();
+    switch (positionChooser.getSelected()) {
+      case SIDES:
+        m_autonomousCommand = new SideAuto();
+        break;
+      case MIDDLE:
+        m_autonomousCommand = new MiddleAuto();
+        break;
+    }
     train.startTrain();
     navx.getInstance().reset();
     if (m_autonomousCommand != null) {
@@ -149,4 +168,8 @@ public class Robot extends TimedRobot {
     train.updateSwerve();
     supaKoopa.updateTest();
   }
+  public enum AutoPosition {
+    SIDES, MIDDLE
 }
+}
+

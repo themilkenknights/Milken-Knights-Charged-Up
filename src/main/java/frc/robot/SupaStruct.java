@@ -285,9 +285,9 @@ public class SupaStruct {
       arm.pidArm(88);
     } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(105);
-    } else if (rbbutton2 && !lbbutton2) {
-      arm.moveArm(-0.12, -0.12);
     } else if (!rbbutton2 && lbbutton2) {
+      arm.moveArm(-0.12, -0.12);
+    } else if (rbbutton2 && !lbbutton2) {
       arm.moveArm(0.12, 0.12);
     } else {
       arm.moveArm(0, 0);
@@ -296,14 +296,14 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // TELESCOPE
     // --------------------------------------------------------------------//
-    if (dpaddown2 && !dpadup2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+    if (rtrigger2 && !ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.moveTele(-.69);
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
       toggleClimbUpOn = false;
       // arm.pidTelescope(MKTELE.minNativePositionTelescope);
-    } else if (!dpaddown2 && dpadup2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
+    } else if (!rtrigger2 && ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;

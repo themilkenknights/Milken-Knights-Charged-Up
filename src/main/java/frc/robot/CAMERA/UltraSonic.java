@@ -4,6 +4,7 @@
 
 package frc.robot.CAMERA;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,9 +16,14 @@ import frc.robot.MISC.MathFormulas;
 public class UltraSonic {
   private final AnalogInput ultrasonic = new AnalogInput(0);
   private double rawValue, voltageFactor, currentDistanceInches;
+  private PIDController armPID;
 
   public static UltraSonic getInstance() {
     return InstanceHolder.mInstance;
+  }
+
+  private UltraSonic(){
+    armPID = new PIDController(MKULTRA.kP, MKULTRA.kI, MKULTRA.kD);
   }
 
   public void updateUltra() {
@@ -31,6 +37,12 @@ public class UltraSonic {
     // SmartDashboard.putNumber("inchesrounded", Math.round(currentDistanceInches));
     SmartDashboard.putNumber("rawvalue", rawValue);
     // SmartDashboard.putNumber("inchesdistthingy", currentDistanceInches);
+  }
+
+  public void moveToPiece() {
+    double setpoint = 4*currentDistanceInches;
+    double moveArm = armPID.calculate(Arm.getInstance().getTelescope(), setpoint);
+    Arm.getInstance().setTelescope(moveArm);
   }
 
   private static class InstanceHolder {

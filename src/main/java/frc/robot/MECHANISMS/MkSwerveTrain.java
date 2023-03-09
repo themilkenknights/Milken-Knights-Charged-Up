@@ -237,6 +237,7 @@ public class MkSwerveTrain {
     vars.yaw = navx.getInstance().getNavxYaw();
     //SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("navx", vars.yaw);
+    SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
     //SmartDashboard.putNumber("avgdist", vars.avgDistInches);
     // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
     // SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
@@ -600,6 +601,7 @@ public class MkSwerveTrain {
 
   public void setMotionMagic(double dist, double angle) {
     startDrive();
+    vars.dist = dist;
     vars.avgDistInches = 0;
     vars.magicAngle = angle;
     vars.magicDistance = MathFormulas.inchesToNative(dist);
@@ -629,7 +631,8 @@ public class MkSwerveTrain {
   }
 
   public boolean isMotionMagicDone() {
-    double err = vars.magicDistance - vars.avgDistInches;
+    double err = vars.dist - vars.avgDistInches;
+    SmartDashboard.putNumber("err", err);
     return Math.abs(err) < 0.5 && Math.abs(vars.avgVelInches) < 0.1;
   }
 
@@ -679,6 +682,8 @@ public class MkSwerveTrain {
     public double BTest;
     public double CTest;
     public double DTest;
+
+    public double dist;
 
     // ether auto turn values
     public double angle;

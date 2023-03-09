@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -125,7 +126,6 @@ public class SupaStruct {
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
     ultra.ultraSmartDashboard();
-
     x = april.getAxis("x");
     y = april.getAxis("y");
     // yaw = april.getAxis("yaw");
@@ -151,7 +151,7 @@ public class SupaStruct {
     abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
-    bbutton = xbox.getBButton();
+    bbutton = xbox.getBButtonPressed();
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 180;
     dpadup = xbox.getPOV() == 0;
@@ -188,7 +188,8 @@ public class SupaStruct {
     // NAVX RESET
     // --------------------------------------------------------------------//
 
-    if (ybutton) {
+    if (xbox.getRawButton(8))
+    {
       navx.getInstance().reset();
       Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
       povValue = 00;
@@ -343,10 +344,13 @@ public class SupaStruct {
     }
     if (dpadright2) {
       odo.resetToPose2D(x, y, rot);
-    }
+    }}
     // SmartDashboard.putNumber("yaw", yaw);
 
-  }
+
+    // --------------------------------------------------------------------//
+    // LEDS
+    // --------------------------------------------------------------------//
   // SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() >
   // MKARM.minDegreePosition);
   // SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  <

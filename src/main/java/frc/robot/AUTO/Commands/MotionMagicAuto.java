@@ -28,7 +28,7 @@ public class MotionMagicAuto extends CommandBase {
   @Override
   public void execute() {
     MkSwerveTrain.getInstance().updateMotionMagic();
-   // SmartDashboard.putNumber("I EXIST", 123);
+    SmartDashboard.putBoolean("Is finished", MkSwerveTrain.getInstance().isMotionMagicDone());
   }
 
   // Called once the command ends or is interrupted.

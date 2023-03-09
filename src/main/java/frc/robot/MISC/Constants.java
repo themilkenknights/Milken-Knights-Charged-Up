@@ -33,8 +33,8 @@ public final class Constants {
     public static final double kA = 0.1;
     public static final double kV = 0.1;
 
-    public static final double maxNativeVelocity = 21600;
-    public static final double maxNativeAcceleration = maxNativeVelocity / 8;
+    public static final double maxNativeVelocity = 22000;
+    public static final double maxNativeAcceleration = maxNativeVelocity ;
 
     public static final double kP = 0.21;
     public static final double kI = 0;
@@ -51,7 +51,7 @@ public final class Constants {
 
     public static final double greerRatio = 6.75;
 
-    public static final double wheelDiameterInches = 4;
+    public static final double wheelDiameterInches = 3.5;
     public static final double wheelCircumference = wheelDiameterInches * kPi;
   }
 
@@ -213,9 +213,9 @@ public final class Constants {
 
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
-    public static final double kP = 0.006;
+    public static final double kP = 0.0055;
     public static final double kI = 0.00;
-    public static final double kD = 0.0014;
+    public static final double kD = 0.0019;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0.065; // 0.065;
@@ -232,8 +232,8 @@ public final class Constants {
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0.0007;
-    public static final double kI = 0.005;
+    public static final double kP = 0.0006;
+    public static final double kI = 0.00;
     public static final double kD = 0.00;
     public static final double kF = 0;
 

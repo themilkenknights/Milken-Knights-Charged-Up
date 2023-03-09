@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
   private Timer timer;
-
+  private int lightMode = 0;
   @Override
   public void robotInit() {
     CameraServer.startAutomaticCapture();
@@ -90,6 +90,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
+    Arm.getInstance().setTelescope(0);
 
     m_autonomousCommand = new SideAuto();
     train.startTrain();
@@ -102,6 +103,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     train.updateSwerve();
+    Arm.getInstance().updateSmartdashboard();
   }
 
   @Override
@@ -119,6 +121,8 @@ public class Robot extends TimedRobot {
     // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }
 
+
+  
   @Override
   public void teleopPeriodic() {
     supaKoopa.updateTele();

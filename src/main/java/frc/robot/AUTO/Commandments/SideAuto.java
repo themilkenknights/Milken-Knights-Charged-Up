@@ -10,6 +10,7 @@ import frc.robot.AUTO.Commands.ArmCommand;
 import frc.robot.AUTO.Commands.ClawCommand;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 import frc.robot.AUTO.Commands.TelescopingCommand;
+import frc.robot.AUTO.Commands.Turn;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,15 +21,15 @@ public class SideAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        Commands.deadline(new MotionMagicAuto(15, 90).withTimeout(2)),
+        Commands.deadline(new MotionMagicAuto(13, 90)),
         Commands.deadline(new ArmCommand(102).withTimeout(3)),
-        Commands.deadline(new TelescopingCommand(8500).withTimeout(3)), (new ArmCommand(102).withTimeout(6)),
-        Commands.deadline(new MotionMagicAuto(2, 0).withTimeout(3)),
-        Commands.deadline(new MotionMagicAuto(9, 270).withTimeout(3)), (new ArmCommand(102).withTimeout(4)),
-        Commands.deadline(new ClawCommand(false).withTimeout(2)),
-        Commands.deadline(new ArmCommand(94).withTimeout(3)),
-        Commands.deadline(new MotionMagicAuto(20, 90)), (new ArmCommand(102).withTimeout(6)));
-    // Commands.deadline(new MotionMagicAuto( 25, 90),new
+        Commands.deadline(new TelescopingCommand(8200), (new ArmCommand(102))));
+        //Commands.deadline(new MotionMagicAuto(2, 0).withTimeout(2)),
+        //Commands.deadline(new MotionMagicAuto(9, 270),new ArmCommand(102)),
+       // Commands.deadline(new ClawCommand(false).withTimeout(0.5)));
+     //  Commands.deadline(new TelescopingCommand(0)),(new MotionMagicAuto(4, 90)),
+        //Commands.deadline(new MotionMagicAuto(20, 90) ,new ArmCommand(75)),
+        //Commands.deadline(new MotionMagicAuto( 5, 90).withTimeout(7)));   //Commands.deadline(new Turn(180).withTimeout(2)));
     // TelescopingCommand(0).withTimeout(3) ,new ArmCommand(0).withTimeout(3), new
     // ClawCommand(false).withTimeout(2)));
   }

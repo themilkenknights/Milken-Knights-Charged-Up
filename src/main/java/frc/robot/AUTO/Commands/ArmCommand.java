@@ -33,6 +33,6 @@ public class ArmCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return angle - Arm.getInstance().getArmDegrees() < 1.5;
   }
 }

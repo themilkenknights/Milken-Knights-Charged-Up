@@ -9,12 +9,9 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MECHANISMS.ARM.Arm;
-import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Constants.MKULTRA;
 
-/**
- * The UltraSensor class contains everything relating to the ultrasonic sensor
- */
+/** The UltraSensor class contains everything relating to the ultrasonic sensor */
 public class UltraSonic {
   private final AnalogInput ultrasonic = new AnalogInput(0);
   private double rawValue, voltageFactor, currentDistanceInches;
@@ -24,7 +21,7 @@ public class UltraSonic {
     return InstanceHolder.mInstance;
   }
 
-  private UltraSonic(){
+  private UltraSonic() {
     armPID = new PIDController(MKULTRA.kP, MKULTRA.kI, MKULTRA.kD);
   }
 
@@ -42,7 +39,7 @@ public class UltraSonic {
   }
 
   public void moveToPiece() {
-    double setpoint = 4*currentDistanceInches;
+    double setpoint = 4 * currentDistanceInches;
     double moveArm = armPID.calculate(Arm.getInstance().getTelescope(), setpoint);
     Arm.getInstance().setTelescope(moveArm);
   }

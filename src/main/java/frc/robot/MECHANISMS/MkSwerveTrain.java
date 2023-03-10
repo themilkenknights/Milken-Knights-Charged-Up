@@ -209,10 +209,10 @@ public class MkSwerveTrain {
   public void updateSwerve() {
     DeltaAirlines.getInstance().updateDeltaTime();
 
-    //SmartDashboard.putNumber("distancetopright", vars.posInchTR);
+    // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
-    // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches); 
-    /* 
+    // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
+    /*
     SmartDashboard.putNumber("topleftcan", tlCoder());
     SmartDashboard.putNumber("toprightcan", trCoder());
     SmartDashboard.putNumber("botleftcan", blCoder());
@@ -237,10 +237,10 @@ public class MkSwerveTrain {
     // MKTURN.greerRatio));
 
     vars.yaw = navx.getInstance().getNavxYaw();
-    //SmartDashboard.putBoolean("idsone", isMotionMagicDone());
+    // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("navx", vars.yaw);
     SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
-    //SmartDashboard.putNumber("avgdist", vars.avgDistInches);
+    // SmartDashboard.putNumber("avgdist", vars.avgDistInches);
     // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
     // SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
 

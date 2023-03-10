@@ -319,6 +319,19 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "6,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/hbugir",
+              "_title": "hbugir",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }

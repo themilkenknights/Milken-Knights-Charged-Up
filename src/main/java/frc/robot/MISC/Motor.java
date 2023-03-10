@@ -110,12 +110,13 @@ public class Motor {
     intake.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
     intake.configVoltageCompSaturation(10);
     intake.enableVoltageCompensation(true);
-    //intake.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
-    //intake.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
+    // intake.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
+    // intake.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
     intake.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     intake.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
     return intake;
   }
+
   public CANCoder cancoder(int canid, double offset) {
     CANCoder encoder = new CANCoder(canid, "rio");
     encoder.configFactoryDefault();

@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -20,9 +21,11 @@ import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
+import frc.robot.MISC.Constants.LIGHTS;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
+import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
@@ -45,6 +48,7 @@ public class SupaStruct {
       inverseTanAngleDrive,
       povValue,
       navxRotate = 0,
+      lightMode = 0,
       sliderArm;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
@@ -78,6 +82,7 @@ public class SupaStruct {
       rtrigger2,
       dpadleft2,
       dpadright2,
+      toggleLightsPressed = false,
       pov, /* povToggled, */
       itsreal = false;
   private boolean isRCWrunningWithNavx = false;
@@ -87,7 +92,7 @@ public class SupaStruct {
   private Claw claw = Claw.getInstance();
   private Arm arm = Arm.getInstance();
   private UltraSonic ultra = UltraSonic.getInstance();
-
+  private Lights mLights = Lights.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
 
@@ -134,7 +139,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // VARIABLES
     // --------------------------------------------------------------------//
-
+    updateLightsToggle();
     fwd = (xbox.getRawAxis(DriveInput.fwd) - 0.1) / (1 - 0.1);
     fwdSignum = Math.signum(fwd) * -1;
     str = (xbox.getRawAxis(DriveInput.str) - 0.1) / (1 - 0.1);
@@ -188,8 +193,7 @@ public class SupaStruct {
     // NAVX RESET
     // --------------------------------------------------------------------//
 
-    if (xbox.getRawButton(8))
-    {
+    if (xbox.getRawButton(8)) {
       navx.getInstance().reset();
       Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
       povValue = 00;
@@ -281,7 +285,7 @@ public class SupaStruct {
     // ARM
     // --------------------------------------------------------------------//
 
-     if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
     } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(105);
@@ -331,38 +335,57 @@ public class SupaStruct {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
 
-
     if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.pidTelescope(0);
     } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.pidTelescope(8000);
     }
-     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
+    SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
 
     if (dpadleft2) {
       odo.reset();
     }
     if (dpadright2) {
       odo.resetToPose2D(x, y, rot);
-    }}
-    // SmartDashboard.putNumber("yaw", yaw);
+    }
+
+SmartDashboard.putNumber("hbugir", lightMode);
+    if(lightMode == 0)
+    {
+      mLights.off();
+    }
+    else if(lightMode == 1)
+    {
+     
+    }
+    else if(lightMode == 2)
+    {
+      mLights.jackyboy();
+    }
+  }
+  // SmartDashboard.putNumber("yaw", yaw);
+
+  // --------------------------------------------------------------------//
+  // LEDS
+  // --------------------------------------------------------------------//
 
 
-    // --------------------------------------------------------------------//
-    // LEDS
-    // --------------------------------------------------------------------//
-  // SmartDashboard.putBoolean("lttt", !rtrigger && ltrigger && arm.getArmDegrees() >
-  // MKARM.minDegreePosition);
-  // SmartDashboard.putBoolean("RTTTT", rtrigger && !ltrigger && arm.getArmDegrees()  <
-  // MKARM.maxDegreePosition);
-  // SmartDashboard.putNumber("pid0", arm.pidArmCalc(0));
-
-  // SmartDashboard.putNumber("feeed90", arm.armFF(90));
-  // SmartDashboard.putNumber("feeeed0", arm.armFF(0));
-
-  /// SmartDashboard.putBoolean("toggleupon", toggleClimbUpOn);
-  // SmartDashboard.putBoolean("toggledownon", toggleClimbDownOn);
-
+public void updateLightsToggle()
+  {
+      if(bbutton){
+          if(!toggleLightsPressed)
+          {
+            lightMode++;
+            lightMode = lightMode%3;
+              
+              toggleLightsPressed = true;
+          }
+      }
+      else{
+          toggleLightsPressed = false;
+      }
+  }
+  
   public void teleopDisabled() {
     resetNavx = false;
     resetDrive = false;

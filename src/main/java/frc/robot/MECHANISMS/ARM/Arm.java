@@ -107,8 +107,7 @@ public class Arm {
   }
 
   public void pidTelescope(double setpoint) {
-    moveTele(
-    tele.calculate(getTelescope(), setpoint));
+    moveTele(tele.calculate(getTelescope(), setpoint));
   }
 
   public double armFF(double setpoint) {

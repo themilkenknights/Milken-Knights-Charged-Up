@@ -27,7 +27,7 @@ public class Arm {
     arm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
     tele = new PIDController(MKTELE.kP, MKTELE.kI, MKTELE.kD);
     testarm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
-    telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, true);
+    telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, false);
     armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKARM.offset);
     armCanCoder.configSensorDirection(true);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
@@ -71,6 +71,11 @@ public class Arm {
 
   public double getArmCanCoder() {
     return armCanCoder.getAbsolutePosition();
+  }
+
+  public TalonFX getTelescopeMotor()
+  {
+    return telescope;
   }
 
   public void setLeft(double setpoint) {

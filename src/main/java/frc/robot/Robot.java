@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.DataLogManager;
@@ -53,6 +55,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     Shuffleboard.selectTab("Match");
     positionChooser.addOption("SIDES", AutoPosition.SIDES);
@@ -100,7 +103,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
-    Arm.getInstance().setTelescope(0);
+    Arm.getInstance().setTelescope(125);
     switch (positionChooser.getSelected()) {
       case SIDES:
         m_autonomousCommand = new SideAuto();
@@ -124,6 +127,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
 
     System.out.println("Robot Teleop Init");

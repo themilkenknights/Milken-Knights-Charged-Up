@@ -19,10 +19,10 @@ public class Lights {
     private int offset;
 
     private AddressableLED LEDS = new AddressableLED(LIGHTS.PWMPORT);
-    private AddressableLED LEDStwo = new AddressableLED(4);
+    //private AddressableLED LEDStwo = new AddressableLED(4);
 
     private AddressableLEDBuffer buffer = new AddressableLEDBuffer(LIGHTS.bufferNum);    
-    private AddressableLEDBuffer buffertwo = new AddressableLEDBuffer(LIGHTS.bufferNum);
+    //private AddressableLEDBuffer buffertwo = new AddressableLEDBuffer(LIGHTS.bufferNum);
 
     private Timer timer = new Timer();
 
@@ -32,9 +32,9 @@ public class Lights {
         LEDS.setData(buffer);
         LEDS.start();
 
-        LEDStwo.setLength(LIGHTS.bufferNum);
-        LEDStwo.setData(buffertwo);
-        LEDStwo.start();
+        //LEDStwo.setLength(LIGHTS.bufferNum);
+        //LEDStwo.setData(buffertwo);
+        //LEDStwo.start();
     }
 
     public static Lights getInstance()
@@ -44,72 +44,40 @@ public class Lights {
 
 
 
-    public void jackyboy() {
-      // For every pixel
-      for (var i = 0; i < LIGHTS.bufferNum; i++) 
-      {   
-              timer.start();
-              buffer.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
-              buffertwo.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
-              if(timer.get() > 0.08)
-              {
-                  offset = (offset + 1) % LIGHTS.bufferNum;
-                  timer.reset();
-                  LEDS.setData(buffer);
-                  LEDStwo.setData(buffertwo);
-              }
-      }
-    }
-    
- /**oui oui*/
-    public void french() {
+    public void CONE() {
         // For every pixel
         for (var i = 0; i < LIGHTS.bufferNum; i++) 
         {   
                 timer.start();
-                if(i < (LIGHTS.bufferNum / 3))
-                {
-                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, 0, 0, LIGHTS.MaxRGBValue);
-                }
-                else if(i >= (LIGHTS.bufferNum / 3) && i < ((2 * LIGHTS.bufferNum) / 3))
-                {
-                    buffer.setRGB((i+offset)%LIGHTS.bufferNum, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue);
-                }
-                else
-                {
-                    buffer.setRGB((i+offset)% LIGHTS.bufferNum, LIGHTS.MaxRGBValue, 0, 0);
-                }
+                buffer.setRGB(i, 255/3, 255/3, 0);
+                //buffertwo.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
                 if(timer.get() > 0.08)
                 {
                     offset = (offset + 1) % LIGHTS.bufferNum;
                     timer.reset();
                     LEDS.setData(buffer);
+                    //LEDStwo.setData(buffertwo);
                 }
-        }
-      }
-
-   /**me version*/
-      public void lilNavX()
-      {
-          navXRot = (((navx.getInstance().getNavxYaw() + 360) % 360) * LIGHTS.bufferNum/360);
-          for(double i = 0; i < LIGHTS.bufferNum; i++)
-          {
-              buffer.setRGB(((int)i + 100) % 100, 0, 0, 0);
-              if(!(i > (((navXRot + LIGHTS.bufferNum) % LIGHTS.bufferNum) + 5) || i < (((navXRot + LIGHTS.bufferNum) % LIGHTS.bufferNum) - 5)))
-              {
-                buffer.setRGB(((int)i + 100) % 100, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue);
-              }
-              if(navXRot < 5 || navXRot > 95)
-              {
-                for(double j = navXRot - 5; j < navXRot + 5; j++)
-                {
-                    buffer.setRGB(((int)j + 100) % 100, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue, LIGHTS.MaxRGBValue);
-                }
-              } 
-                
+        
           }
-          LEDS.setData(buffer);
         }
+        public void CUBE() {
+            // For every pixel
+            for (var i = 0; i < LIGHTS.bufferNum; i++) 
+            {   
+                    timer.start();
+                    buffer.setRGB(i, 148/2, 0, 211/2);
+                    //buffertwo.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
+                    if(timer.get() > 0.08)
+                    {
+                        offset = (offset + 1) % LIGHTS.bufferNum;
+                        timer.reset();
+                        LEDS.setData(buffer);
+                        //LEDStwo.setData(buffertwo);
+                    }
+            
+              }
+            }
 
 /**
  * displays voltage on the leds
@@ -131,10 +99,10 @@ public class Lights {
         for(int i = 0; i < LIGHTS.bufferNum; i++)
         {
             buffer.setRGB(i, 0, 0, 0);
-            buffertwo.setRGB(i, 0, 0, 0);
+            //buffertwo.setRGB(i, 0, 0, 0);
         }
         LEDS.setData(buffer);
-        LEDStwo.setData(buffertwo);
+        //LEDStwo.setData(buffertwo);
 
       }
 

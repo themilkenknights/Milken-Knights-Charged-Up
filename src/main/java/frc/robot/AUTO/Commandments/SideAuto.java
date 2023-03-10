@@ -21,6 +21,7 @@ public class SideAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+        Commands.deadline(new TelescopingCommand(1).withTimeout(1)),
         Commands.deadline(new MotionMagicAuto(13, 90)),
         Commands.deadline(new ArmCommand(102).withTimeout(3)),
         Commands.deadline(new TelescopingCommand(8200), (new ArmCommand(102).withTimeout(2))),

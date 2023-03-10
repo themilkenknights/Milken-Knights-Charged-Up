@@ -193,7 +193,7 @@ public class SupaStruct {
     // NAVX RESET
     // --------------------------------------------------------------------//
 
-    if (xbox.getRawButton(8)) {
+    if (ybutton) {
       navx.getInstance().reset();
       Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
       povValue = 00;
@@ -349,19 +349,22 @@ public class SupaStruct {
       odo.resetToPose2D(x, y, rot);
     }
 
-SmartDashboard.putNumber("hbugir", lightMode);
     if(lightMode == 0)
     {
       mLights.off();
+      SmartDashboard.putString("color", "none");
     }
     else if(lightMode == 1)
     {
-     
+     mLights.CONE();
+     SmartDashboard.putString("color", "cone");
     }
     else if(lightMode == 2)
     {
-      mLights.jackyboy();
+      mLights.CUBE();
+      SmartDashboard.putString("color", "cube");
     }
+    
   }
   // SmartDashboard.putNumber("yaw", yaw);
 

@@ -4,10 +4,11 @@
 
 package frc.robot;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -16,12 +17,11 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.CAMERA.UltraSonic;
-import frc.robot.MECHANISMS.ARM.Arm;
-import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MECHANISMS.ARM.Arm;
+import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
-import frc.robot.MISC.Constants.LIGHTS;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
@@ -29,7 +29,6 @@ import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
-import java.util.Map;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -84,7 +83,15 @@ public class SupaStruct {
       dpadright2,
       toggleLightsPressed = false,
       pov, /* povToggled, */
-      itsreal = false;
+      itsreal = false,
+
+      toggleArmUpOn,
+      toggleArmMidOn,
+      toggleArmUpPressed,
+      toggleArmMidPressed,
+
+      toggleHPArmOn,
+      toggleHPArmPressed;
   private boolean isRCWrunningWithNavx = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
@@ -140,6 +147,7 @@ public class SupaStruct {
     // VARIABLES
     // --------------------------------------------------------------------//
     updateLightsToggle();
+    updateHPArmToggle();
     fwd = (xbox.getRawAxis(DriveInput.fwd) - 0.1) / (1 - 0.1);
     fwdSignum = Math.signum(fwd) * -1;
     str = (xbox.getRawAxis(DriveInput.str) - 0.1) / (1 - 0.1);
@@ -195,7 +203,6 @@ public class SupaStruct {
 
     if (ybutton) {
       navx.getInstance().reset();
-      Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
       povValue = 00;
       inverseTanAngleOG = 0;
       train.vars.avgDistTest = 0;
@@ -293,7 +300,14 @@ public class SupaStruct {
       arm.moveArm(-0.12, -0.12);
     } else if (rbbutton2 && !lbbutton2) {
       arm.moveArm(0.12, 0.12);
-    } else {
+    } 
+    else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
+    {
+      arm.pidArm(91);
+      //arm.pidTelescope(8000);
+      claw.extend();
+    }
+    else {
       arm.moveArm(0, 0);
     }
 
@@ -301,18 +315,18 @@ public class SupaStruct {
     // TELESCOPE
     // --------------------------------------------------------------------//
     if (rtrigger2 && !ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.moveTele(-.69);
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
       toggleClimbUpOn = false;
+      arm.pidTelescope(0);
       // arm.pidTelescope(MKTELE.minNativePositionTelescope);
     } else if (!rtrigger2 && ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       toggleClimbDownPressed = false;
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
       toggleClimbUpOn = false;
-      arm.moveTele(.69);
+      arm.pidTelescope(8000);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     } else if (toggleClimbDownOn
         && !toggleClimbUpOn
@@ -324,22 +338,30 @@ public class SupaStruct {
         && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.moveTele(.6);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
-    } else {
-      arm.moveTele(0);
-    }
-
-    if (xboxOP.getRawButton(8)) {
+    } else if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
     }
-    if (xboxOP.getRawButton(7)) {
+    else if (xboxOP.getRawButton(8)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     }
-
-    if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+    else if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.pidTelescope(0);
     } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.pidTelescope(8000);
     }
+    //else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
+    //{
+
+    //}
+    else {
+      
+      arm.moveTele(0);
+    }
+
+
+    
+
+    
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
 
     if (dpadleft2) {
@@ -388,6 +410,67 @@ public void updateLightsToggle()
           toggleLightsPressed = false;
       }
   }
+
+  public void updateHPArmToggle() {
+    if (xbutton2) {
+      if (!toggleHPArmPressed) {
+        toggleHPArmOn = !toggleHPArmOn;
+ 
+        toggleHPArmPressed = true;
+      }
+    } else {
+      toggleHPArmPressed = false;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public void updateArmUpToggle() {
+    if (ybutton2) {
+      if (!toggleArmUpPressed) {
+        toggleArmUpOn = !toggleArmUpOn;
+ 
+        toggleArmUpPressed = true;
+      }
+    } else {
+      toggleArmUpPressed = false;
+    }
+  }
+
+  public void updateArmMidToggle() {
+    if (bbutton2) {
+      if (!toggleArmMidPressed) {
+        toggleHPArmOn = !toggleHPArmOn;
+ 
+        toggleArmMidPressed = true;
+      }
+    } else {
+      toggleArmMidPressed = false;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   public void teleopDisabled() {
     resetNavx = false;

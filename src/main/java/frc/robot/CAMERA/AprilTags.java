@@ -104,7 +104,7 @@ public class AprilTags {
       double yPID;
 
       xPID = moveAprilX.calculate(getAxis("x"), 1);
-      zPID = MkSwerveTrain.getInstance().moveToAngy(0);
+      zPID = MkSwerveTrain.getInstance().moveToAngy(90);
       yPID = 0;
 
       if (result.getBestTarget().getPoseAmbiguity() > 0.2) {

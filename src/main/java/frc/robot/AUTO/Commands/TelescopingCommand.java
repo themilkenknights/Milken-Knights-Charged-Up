@@ -1,5 +1,6 @@
 package frc.robot.AUTO.Commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.ARM.Arm;
 
@@ -20,6 +21,8 @@ public class TelescopingCommand extends CommandBase {
   @Override
   public void execute() {
     Arm.getInstance().pidTelescope(angle);
+    SmartDashboard.putBoolean("istelefinished", isFinished());
+    SmartDashboard.putNumber("errrr,", angle - Arm.getInstance().getTelescope());
   }
 
   // Called once the command ends or is interrupted.
@@ -29,6 +32,6 @@ public class TelescopingCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return angle - Arm.getInstance().getTelescope() < 50;
+    return angle - Arm.getInstance().getTelescope() < 100;
   }
 }

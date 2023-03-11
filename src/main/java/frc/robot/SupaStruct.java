@@ -270,10 +270,10 @@ public class SupaStruct {
     // INTAKE
     // --------------------------------------------------------------------//
     if (rbbutton) {
-      intake.rollerSet(-.55);
+      intake.rollerSet(-1);
 
     } else if (lbbutton) {
-      intake.rollerSet(.55);
+      intake.rollerSet(1);
 
     } else {
       intake.rollerSet(0);
@@ -307,7 +307,7 @@ public class SupaStruct {
     } 
     else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
     {
-      arm.pidArm(91);
+      arm.pidArm(88);
       //arm.pidTelescope(8000);
       //claw.extend();
     }
@@ -363,7 +363,10 @@ public class SupaStruct {
     }
 
 
-    
+    if(xboxOP.getBButton() || xboxOP.getAButton() || ybutton2 || rbbutton2 || lbbutton2 || rtrigger2 || ltrigger2)
+    {
+      toggleHPArmOn = false;
+    }
 
     
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
@@ -422,21 +425,10 @@ public void updateLightsToggle()
  
         toggleHPArmPressed = true;
       }
-    } else {
+    } else{
       toggleHPArmPressed = false;
     }
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
   public void updateArmUpToggle() {
@@ -463,19 +455,6 @@ public void updateLightsToggle()
     }
   }*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
   public void teleopDisabled() {
     resetNavx = false;
     resetDrive = false;

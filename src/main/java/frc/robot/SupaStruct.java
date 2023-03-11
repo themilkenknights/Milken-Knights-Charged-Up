@@ -175,7 +175,7 @@ public class SupaStruct {
     abutton2 = xboxOP.getAButtonPressed();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
-    bbutton2 = xboxOP.getBButton();
+    bbutton2 = xboxOP.getBButtonPressed();
     lbbutton2 = xboxOP.getLeftBumper();
     dpaddown2 = xboxOP.getPOV() == 180;
     dpadup2 = xboxOP.getPOV() == 0;
@@ -285,16 +285,20 @@ public class SupaStruct {
     // CLAW
     // --------------------------------------------------------------------//
     if (abutton2) {
-      claw.toggle();
+      claw.extend();
+    }
+    if(bbutton2)
+    {
+      claw.retract();
     }
 
     // --------------------------------------------------------------------//
     // ARM
     // --------------------------------------------------------------------//
 
-    if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    /*if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
-    } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    } else*/ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(105);
     } else if (!rbbutton2 && lbbutton2) {
       arm.moveArm(-0.12, -0.12);
@@ -305,7 +309,7 @@ public class SupaStruct {
     {
       arm.pidArm(91);
       //arm.pidTelescope(8000);
-      claw.extend();
+      //claw.extend();
     }
     else {
       arm.moveArm(0, 0);
@@ -446,7 +450,7 @@ public void updateLightsToggle()
       toggleArmUpPressed = false;
     }
   }
-
+/* 
   public void updateArmMidToggle() {
     if (bbutton2) {
       if (!toggleArmMidPressed) {
@@ -457,7 +461,7 @@ public void updateLightsToggle()
     } else {
       toggleArmMidPressed = false;
     }
-  }
+  }*/
 
 
 

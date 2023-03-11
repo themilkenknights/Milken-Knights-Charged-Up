@@ -34,7 +34,7 @@ public final class Constants {
     public static final double kV = 0.1;
 
     public static final double maxNativeVelocity = 22000;
-    public static final double maxNativeAcceleration = maxNativeVelocity / 2;
+    public static final double maxNativeAcceleration = maxNativeVelocity / 4;
 
     public static final double kP = 0.21;
     public static final double kI = 0;
@@ -338,7 +338,7 @@ public final class Constants {
   }
 
   public static class LIGHTS {
-    public static final int PWMPORT = 3;
+    public static final int PWMPORT = 9;
     public static final int bufferNum = 151;
     public static final int MaxRGBValue = 60;
   }

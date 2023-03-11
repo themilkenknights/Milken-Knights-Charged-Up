@@ -75,8 +75,8 @@
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           },
           "10,5": {
@@ -135,7 +135,7 @@
           },
           "0,2": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -397,6 +397,47 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "8,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/istelefinished",
+              "_title": "istelefinished",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "9,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/errrr,",
+              "_title": "errrr,",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/errrr,",
+              "_title": "/SmartDashboard/errrr,",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -495,9 +536,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.333333492279053,
-    "y": -7.333333492279053,
-    "width": 1294.6666259765625,
-    "height": 694.6666870117188
+    "x": -6.666666507720947,
+    "y": 1.3333333730697632,
+    "width": 1292.0,
+    "height": 685.3333129882812
   }
 }

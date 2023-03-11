@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = new MiddleAuto();
         break;
     }
+    
     train.startTrain();
     navx.getInstance().reset();
     if (m_autonomousCommand != null) {

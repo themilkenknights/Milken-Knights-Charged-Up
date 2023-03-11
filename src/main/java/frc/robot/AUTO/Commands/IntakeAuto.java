@@ -1,15 +1,15 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.AUTO.Commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.MECHANISMS.ARM.Arm;
+import frc.robot.MECHANISMS.Intake;
 
-public class TelescopingCommand extends CommandBase {
-
-  private double angle;
-
-  public TelescopingCommand(double angle) {
-    this.angle = angle;
+public class IntakeAuto extends CommandBase {
+  /** Creates a new IntakeAuto. */
+  public IntakeAuto() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -20,9 +20,7 @@ public class TelescopingCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Arm.getInstance().pidTelescope(angle);
-    SmartDashboard.putBoolean("istelefinished", isFinished());
-    SmartDashboard.putNumber("errrr,", angle - Arm.getInstance().getTelescope());
+    Intake.getInstance().rollerSet(.6);
   }
 
   // Called once the command ends or is interrupted.
@@ -32,6 +30,6 @@ public class TelescopingCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(angle - Arm.getInstance().getTelescope()) < 100;
+    return false;
   }
 }

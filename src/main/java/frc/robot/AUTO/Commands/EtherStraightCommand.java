@@ -30,7 +30,7 @@ public class EtherStraightCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    train.etherAutoSwerve(FWD, STR, train.moveToAngy(angle), ControlMode.PercentOutput);
+    train.etherAutoSwerve(FWD, STR, 0, ControlMode.PercentOutput);
   }
 
   // Called once the command ends or is interrupted.

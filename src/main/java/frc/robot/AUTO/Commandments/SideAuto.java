@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.ArmCommand;
 import frc.robot.AUTO.Commands.ClawCommand;
+import frc.robot.AUTO.Commands.EtherStraightCommand;
 import frc.robot.AUTO.Commands.EtherTurnCommand;
 import frc.robot.AUTO.Commands.IntakeAuto;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
@@ -22,9 +23,10 @@ public class SideAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-          Commands.deadline(new IntakeAuto().withTimeout(2)),
+          Commands.deadline(new IntakeAuto().withTimeout(13)),
         //Commands.deadline(new TelescopingCommand(1).withTimeout(1)),
-        Commands.deadline(new MotionMagicAuto(160, 270).withTimeout(12)));
+        Commands.deadline(new EtherStraightCommand(155, -0.3,0, 270).withTimeout(20)));
+        //  Commands.deadline(new MotionMagicAuto(90, 270).withTimeout(20)));
         //Commands.deadline(new ArmCommand(102).withTimeout(3)),
         //Commands.deadline(new TelescopingCommand(8200), (new ArmCommand(102).withTimeout(2))),
         //Commands.deadline(new MotionMagicAuto(9, 270), new ArmCommand(102).withTimeout(1.5)),

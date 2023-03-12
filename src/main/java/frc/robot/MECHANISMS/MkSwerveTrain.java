@@ -212,7 +212,7 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
     // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
-    
+    /* 
     SmartDashboard.putNumber("topleftcan", tlCoder());
     SmartDashboard.putNumber("toprightcan", trCoder());
     SmartDashboard.putNumber("botleftcan", blCoder());
@@ -222,7 +222,8 @@ public class MkSwerveTrain {
     SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
     SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
     SmartDashboard.putNumber("bottomrightnativeTURN", MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
-/* 
+*/
+    /* 
     SmartDashboard.putNumber("topleftnativeDRIVE", (topDriveLeft.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("bottomleftnativeDRIVE", (bottomDriveLeft.getSelectedSensorVelocity()));
@@ -235,6 +236,7 @@ public class MkSwerveTrain {
     // topTurnLeft.getSelectedSensorPosition());
     // SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217,
     // MKTURN.greerRatio));
+    SmartDashboard.putNumber("magicangle", vars.magicAngle);
 
     vars.yaw = navx.getInstance().getNavxYaw();
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
@@ -603,6 +605,7 @@ public class MkSwerveTrain {
 
   public void setMotionMagic(double dist, double angle) {
     startDrive();
+    startTurn();
     vars.dist = dist;
     vars.avgDistInches = 0;
     vars.magicAngle = angle;

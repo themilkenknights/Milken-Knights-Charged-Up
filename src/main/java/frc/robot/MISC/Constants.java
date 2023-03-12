@@ -57,7 +57,7 @@ public final class Constants {
 
   public static class MKTURN {
     public static final double kP = 0.087;
-    public static final double kI = 0.0003;
+    public static final double kI = 0;//0.0003;
     public static final double kD = 0.00000001;
     public static final double kF = 0;
 

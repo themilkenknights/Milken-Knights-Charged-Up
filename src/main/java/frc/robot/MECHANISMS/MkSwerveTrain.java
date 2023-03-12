@@ -212,6 +212,11 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
     // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
+    SmartDashboard.putNumber("mod1", vars.mod1[1]);
+    SmartDashboard.putNumber("mod2", vars.mod1[1]);
+    SmartDashboard.putNumber("mod3", vars.mod1[1]);
+    SmartDashboard.putNumber("mod4", vars.mod1[1]);
+
     /* 
     SmartDashboard.putNumber("topleftcan", tlCoder());
     SmartDashboard.putNumber("toprightcan", trCoder());

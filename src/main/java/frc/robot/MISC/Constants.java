@@ -58,6 +58,7 @@ public final class Constants {
   public static class MKTURN {
     public static final double kP = 0.087;
     public static final double kI = 0; // 0.0003;
+    //TODO test i in motion magic and pid for both auto and teleop, see if it really is this
     public static final double kD = 0.00000001;
     public static final double kF = 0;
 

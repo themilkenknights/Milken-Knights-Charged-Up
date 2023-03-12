@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    positionChooser.setDefaultOption("SIDES", AutoPosition.SIDES);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     Shuffleboard.selectTab("Match");

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.ArmCommand;
 import frc.robot.AUTO.Commands.ClawCommand;
 import frc.robot.AUTO.Commands.EtherTurnCommand;
+import frc.robot.AUTO.Commands.IntakeAuto;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 import frc.robot.AUTO.Commands.TelescopingCommand;
 
@@ -21,12 +22,8 @@ public class MiddleAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        Commands.deadline(new MotionMagicAuto(13, 90)),
-        Commands.deadline(new ArmCommand(102).withTimeout(3)),
-        Commands.deadline(new TelescopingCommand(8200), (new ArmCommand(102).withTimeout(2))),
-        Commands.deadline(new MotionMagicAuto(9, 270),new ArmCommand(102).withTimeout(1.5)),
-        Commands.deadline(new ClawCommand(false), new ArmCommand(102).withTimeout(1.5)),
-        Commands.deadline(new MotionMagicAuto(155, 90).withTimeout(10),(new ArmCommand(15)),new TelescopingCommand(200),(new ClawCommand(false).withTimeout(1.5))),
-        Commands.deadline(new EtherTurnCommand(90)));
-  }
+      Commands.deadline(new IntakeAuto().withTimeout(2)),
+    Commands.deadline(new MotionMagicAuto(69, 270)));
 }
+}
+

@@ -6,6 +6,11 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -51,12 +56,42 @@ public class Robot extends TimedRobot {
   private SupaStruct supaKoopa = SupaStruct.getInstance();
   private Timer timer;
   private int lightMode = 0;
+  private UsbCamera usbCamera;
+
+
+// Creates UsbCamera and MjpegServer [1] and connects them
+
 
   @Override
   public void robotInit() {
     positionChooser.setDefaultOption("SIDES", AutoPosition.SIDES);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
+    CvSink cvSink = CameraServer.getVideo();
+    CvSource outputStreamSource = CameraServer.putVideo("Blur", 640, 480);
+    try
+    {
+    usbCamera = new UsbCamera("USB Camera 0", 0);
+    }
+    catch(Exception e)
+    {
+      System.out.println(e);
+      try
+      {
+        usbCamera = new UsbCamera("USB Camera 1", 1);
+      }
+      catch(Exception f)
+      {
+        System.out.println(f);
+      }
+    }
+MjpegServer mjpegServer1 = new MjpegServer("serve_USB Camera 0", 1181);
+mjpegServer1.setSource(usbCamera);
+cvSink.setSource(usbCamera);
+// Creates the CvSource and MjpegServer [2] and connects them
+CvSource outputStream = new CvSource("Blur", PixelFormat.kMJPEG, 640, 480, 30);
+MjpegServer mjpegServer2 = new MjpegServer("serve_Blur", 1182);
+mjpegServer2.setSource(outputStream);
     Shuffleboard.selectTab("Match");
     positionChooser.addOption("SIDES", AutoPosition.SIDES);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);

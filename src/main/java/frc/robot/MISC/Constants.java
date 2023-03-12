@@ -24,7 +24,7 @@ public final class Constants {
     public static final int velocityMeasAmount = 26;
     public static final int statusOneMeas = 20;
     public static final int statusTwoMeas = 20;
-    public static final double voltComp = 11;
+    public static final double voltComp = 12;
     public static final double oneEncoderRotation = 2048;
   }
 
@@ -43,7 +43,7 @@ public final class Constants {
 
     public static final double[] pidf = {kP, kI, kD, kF};
 
-    public static final NeutralMode mode = NeutralMode.Brake;
+    public static final NeutralMode mode = NeutralMode.Coast;
 
     public static final boolean inverted = false;
 
@@ -154,9 +154,9 @@ public final class Constants {
   }
 
   public static class MKBABY {
-    public static final double fwdBABY = 2;
-    public static final double strBABY = 2;
-    public static final double rcwBABY = 4; // 2 very fast
+    public static final double fwdBABY = 1;
+    public static final double strBABY = 1;
+    public static final double rcwBABY = 2; // 2 very fast
   }
 
   public static class CONTROLLERS {

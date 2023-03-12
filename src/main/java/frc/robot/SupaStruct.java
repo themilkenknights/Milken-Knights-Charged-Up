@@ -4,10 +4,7 @@
 
 package frc.robot;
 
-import java.util.Map;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,10 +14,10 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.CAMERA.UltraSonic;
-import frc.robot.MECHANISMS.Intake;
-import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
+import frc.robot.MECHANISMS.Intake;
+import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
@@ -29,6 +26,7 @@ import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
+import java.util.Map;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -84,12 +82,10 @@ public class SupaStruct {
       toggleLightsPressed = false,
       pov, /* povToggled, */
       itsreal = false,
-
       toggleArmUpOn,
       toggleArmMidOn,
       toggleArmUpPressed,
       toggleArmMidPressed,
-
       toggleHPArmOn,
       toggleHPArmPressed;
   private boolean isRCWrunningWithNavx = false;
@@ -287,8 +283,7 @@ public class SupaStruct {
     if (abutton2) {
       claw.extend();
     }
-    if(bbutton2)
-    {
+    if (bbutton2) {
       claw.retract();
     }
 
@@ -304,14 +299,11 @@ public class SupaStruct {
       arm.moveArm(-0.12, -0.12);
     } else if (rbbutton2 && !lbbutton2) {
       arm.moveArm(0.12, 0.12);
-    } 
-    else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
-    {
+    } else if (toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
-      //arm.pidTelescope(8000);
-      //claw.extend();
-    }
-    else {
+      // arm.pidTelescope(8000);
+      // claw.extend();
+    } else {
       arm.moveArm(0, 0);
     }
 
@@ -344,31 +336,32 @@ public class SupaStruct {
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     } else if (xboxOP.getRawButton(7)) {
       arm.setTelescope(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
-    }
-    else if (xboxOP.getRawButton(8)) {
+    } else if (xboxOP.getRawButton(8)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
-    }
-    else if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+    } else if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.pidTelescope(0);
     } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.pidTelescope(8000);
     }
-    //else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
-    //{
+    // else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
+    // {
 
-    //}
+    // }
     else {
-      
+
       arm.moveTele(0);
     }
 
-
-    if(xboxOP.getBButton() || xboxOP.getAButton() || ybutton2 || rbbutton2 || lbbutton2 || rtrigger2 || ltrigger2)
-    {
+    if (xboxOP.getBButton()
+        || xboxOP.getAButton()
+        || ybutton2
+        || rbbutton2
+        || lbbutton2
+        || rtrigger2
+        || ltrigger2) {
       toggleHPArmOn = false;
     }
 
-    
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
 
     if (dpadleft2) {
@@ -378,22 +371,16 @@ public class SupaStruct {
       odo.resetToPose2D(x, y, rot);
     }
 
-    if(lightMode == 0)
-    {
+    if (lightMode == 0) {
       mLights.off();
       SmartDashboard.putString("color", "none");
-    }
-    else if(lightMode == 1)
-    {
-     mLights.CONE();
-     SmartDashboard.putString("color", "cone");
-    }
-    else if(lightMode == 2)
-    {
+    } else if (lightMode == 1) {
+      mLights.CONE();
+      SmartDashboard.putString("color", "cone");
+    } else if (lightMode == 2) {
       mLights.CUBE();
       SmartDashboard.putString("color", "cube");
     }
-    
   }
   // SmartDashboard.putNumber("yaw", yaw);
 
@@ -401,53 +388,48 @@ public class SupaStruct {
   // LEDS
   // --------------------------------------------------------------------//
 
+  public void updateLightsToggle() {
+    if (bbutton) {
+      if (!toggleLightsPressed) {
+        lightMode++;
+        lightMode = lightMode % 3;
 
-public void updateLightsToggle()
-  {
-      if(bbutton){
-          if(!toggleLightsPressed)
-          {
-            lightMode++;
-            lightMode = lightMode%3;
-              
-              toggleLightsPressed = true;
-          }
+        toggleLightsPressed = true;
       }
-      else{
-          toggleLightsPressed = false;
-      }
+    } else {
+      toggleLightsPressed = false;
+    }
   }
 
   public void updateHPArmToggle() {
     if (xbutton2) {
       if (!toggleHPArmPressed) {
         toggleHPArmOn = !toggleHPArmOn;
- 
+
         toggleHPArmPressed = true;
       }
-    } else{
+    } else {
       toggleHPArmPressed = false;
     }
   }
-
 
   public void updateArmUpToggle() {
     if (ybutton2) {
       if (!toggleArmUpPressed) {
         toggleArmUpOn = !toggleArmUpOn;
- 
+
         toggleArmUpPressed = true;
       }
     } else {
       toggleArmUpPressed = false;
     }
   }
-/* 
+  /*
   public void updateArmMidToggle() {
     if (bbutton2) {
       if (!toggleArmMidPressed) {
         toggleHPArmOn = !toggleHPArmOn;
- 
+
         toggleArmMidPressed = true;
       }
     } else {

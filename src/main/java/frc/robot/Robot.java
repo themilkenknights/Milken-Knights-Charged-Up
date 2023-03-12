@@ -5,7 +5,6 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.DataLogManager;
@@ -112,7 +111,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = new MiddleAuto();
         break;
     }
-    
+
     train.startTrain();
     navx.getInstance().reset();
     if (m_autonomousCommand != null) {

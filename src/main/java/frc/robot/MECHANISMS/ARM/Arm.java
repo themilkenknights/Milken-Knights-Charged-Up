@@ -1,7 +1,5 @@
 package frc.robot.MECHANISMS.ARM;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -11,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKTELE;
-import frc.robot.AUTO.Commands.TelescopingCommand;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 
@@ -76,8 +73,7 @@ public class Arm {
     return armCanCoder.getAbsolutePosition();
   }
 
-  public TalonFX getTelescopeMotor()
-  {
+  public TalonFX getTelescopeMotor() {
     return telescope;
   }
 

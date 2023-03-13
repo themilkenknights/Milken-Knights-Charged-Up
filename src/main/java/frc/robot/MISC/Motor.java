@@ -69,8 +69,8 @@ public class Motor {
     drive.configMotionCruiseVelocity(MKDRIVE.maxNativeVelocity);
     drive.configMotionAcceleration(MKDRIVE.maxNativeAcceleration);
     drive.configMotionSCurveStrength(MKDRIVE.scurve);
-    drive.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
-    drive.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
+    drive.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.5));
+    drive.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.5));
 
     return drive;
   }
@@ -89,8 +89,8 @@ public class Motor {
     motor.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
     motor.configVoltageCompSaturation(10);
     motor.enableVoltageCompensation(true);
-    motor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
-    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
+    motor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.5));
+    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.5));
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
     return motor;

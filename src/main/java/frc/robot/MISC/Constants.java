@@ -24,7 +24,7 @@ public final class Constants {
     public static final int velocityMeasAmount = 26;
     public static final int statusOneMeas = 20;
     public static final int statusTwoMeas = 20;
-    public static final double voltComp = 12;
+    public static final double voltComp = 11;
     public static final double oneEncoderRotation = 2048;
   }
 
@@ -102,21 +102,12 @@ public final class Constants {
 
     public static final double hP = 0.001, hI = 0.0001, hD = hP * 0.1;
 
-    public static final double speedLimit = 5;
   }
 
   public static class NAVX {
     public static final double offsetYaw = 90 + 180;
     public static final double offsetPitch = 0;
-  }
-
-  public static class MKLIME {
-    public static final int pipeline = 0;
-    public static final double limeHeightInches = 33.5;
-    public static final double goalHeightInches = 104;
-    public static final double limeAngle = 32;
-    public static final double maxTX = 25;
-  }
+    }
 
   public static class MKAPRIL {
     public static final double xkP = 0.3;
@@ -154,8 +145,8 @@ public final class Constants {
   }
 
   public static class MKBABY {
-    public static final double fwdBABY = 1;
-    public static final double strBABY = 1;
+    public static final double fwdBABY = 1.5;
+    public static final double strBABY = 1.5;
     public static final double rcwBABY = 2; // 2 very fast
   }
 
@@ -239,8 +230,6 @@ public final class Constants {
     public static final double kF = 0;
 
     public static final double[] pidf = {kP, kI, kD, kF};
-
-    public static final int scurve = 0;
   }
 
   public static class MKINTAKE {
@@ -254,8 +243,6 @@ public final class Constants {
     public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final boolean inverted = false;
-
-    public static final int scurve = 0;
 
     public static final double rollerPercentSpeed = 1;
   }
@@ -343,32 +330,5 @@ public final class Constants {
     public static final int bufferNum = 151;
     public static final int MaxRGBValue = 60;
   }
-
-  public static class LOGS {
-    public static final int maxSizeThreshold = 100000;
-  }
-
-  public static class MKWEIGHTER {
-    public static final double CONE = 0.8;
-    public static final double CUBE = 0.9;
-    public static final double LOW = 2;
-    public static final double MID = 3;
-    public static final double HIGH = 5;
-    public static final double[] POINTVALUE = {LOW, MID, HIGH};
-    public static final double YESLINK = 1.5;
-    public static final double NOLINK = 0.5;
-    public static final double EMPTY = 1;
-    public static final double FULL = 0;
-    public static final double YESCOOPERTITION = 1.5;
-    public static final double NOCOOPERTITION = 0.5;
-    public static final double GRIDTHREE = 0.3;
-    public static final double GRIDTWO = 0.6;
-    public static final double GRIDONE = 0.9;
-    public static final double ROWONESPOTZERODISTANCE = 743890;
-    public static final double ROWTWOSPOTZERODISTANCE = 743890;
-    public static final double ROWTHREESPOTZERODISTANCE = 743890;
-    public static final double[][] DISTANCE = {
-      {ROWONESPOTZERODISTANCE}, {ROWTWOSPOTZERODISTANCE}, {ROWTHREESPOTZERODISTANCE}
-    };
-  }
 }
+

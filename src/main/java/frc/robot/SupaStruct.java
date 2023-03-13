@@ -22,6 +22,7 @@ import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
+import frc.robot.MISC.Constants.NAVX;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
@@ -249,6 +250,7 @@ public class SupaStruct {
     if (Math.abs(xbox.getRawAxis(DriveInput.str)) < 0.1) {
       str = 0;
     }
+
     if (xbutton) {
       april.alignToTag();
     } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
@@ -259,6 +261,10 @@ public class SupaStruct {
           ControlMode.PercentOutput); // +,-,+
       /// train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
       // train.setModuleTurn(0, 0, 0, 0);
+    } else if (navx.getInstance().getNavxPitch() > NAVX.pitchThreshold) {
+      fwd = train.antiTip()[0];
+      str = train.antiTip()[1];
+      //train.etherSwerve(fwd, str, 0, ControlMode.PercentOutput);
     } else {
       train.stopEverything();
     }

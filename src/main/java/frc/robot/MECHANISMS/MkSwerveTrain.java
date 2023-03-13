@@ -652,7 +652,7 @@ public class MkSwerveTrain {
   public double[] antiTip()
   {
     double setpoint = anti.calculate(navx.getInstance().getNavxPitch(), 0);
-    return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) * setpoint};
+    return new double[]{-Math.cos(vars.yaw * (Math.PI/180)) * setpoint, Math.sin(vars.yaw * (Math.PI/180)) * setpoint};
   }
 
   private static class InstanceHolder {

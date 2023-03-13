@@ -110,6 +110,8 @@ public final class Constants {
   public static class NAVX {
     public static final double offsetYaw = 90 + 180;
     public static final double offsetPitch = 0;
+
+    public static final double pitchThreshold = 10;
     }
 
   public static class MKAPRIL {

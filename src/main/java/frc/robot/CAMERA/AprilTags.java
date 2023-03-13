@@ -97,43 +97,33 @@ public class AprilTags {
   }
 
   public void alignToTag() {
+    double xPID;
+    double yPID;
+    double zPID;
+    zPID = MkSwerveTrain.getInstance().moveToAngy(90);
     if (result.hasTargets()) {
-
-      double xPID;
-      double zPID;
-      double yPID;
-
       xPID = moveAprilX.calculate(getAxis("x"), 1);
-      zPID = MkSwerveTrain.getInstance().moveToAngy(90);
-      yPID = 0;
-
-      if (result.getBestTarget().getPoseAmbiguity() > 0.2) {
-        zPID = 0;
-      }
-      if (Math.abs(zPID) <= 0.1) {
-        zPID = 0;
-        yPID = moveAprilY.calculate(getAxis("y"), 0);
-      }
-
-      // SmartDashboard.putNumber("xpid", xPID);
-
-      train.etherSwerve(
-          MathFormulas.limit(xPID, -0.5, 0.5),
-          MathFormulas.limit(-yPID, -0.5, 0.5),
-          MathFormulas.limit(-zPID, -0.3, 0.3),
-          ControlMode.PercentOutput);
+      yPID = moveAprilX.calculate(getAxis("y"), 1);
     } else {
-      train.etherSwerve(0, 0, 0, ControlMode.PercentOutput);
+      xPID = 0;
+      yPID = 0;
     }
+    train.etherSwerve(
+        MathFormulas.limit(xPID, -0.5, 0.5),
+        MathFormulas.limit(-yPID, -0.5, 0.5),
+        MathFormulas.limit(-zPID, -0.3, 0.3),
+        ControlMode.PercentOutput);
   }
 
   public void aprilSmartDashboard() {
-    /*SmartDashboard.putNumber("aprilRQANge", get2DRange());
-    SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
-    SmartDashboard.putNumber("z", getAxis("r"));
-    SmartDashboard.putNumber("z2", getAxis("yaw"));
-    SmartDashboard.putNumber("zpid", moveAprilZ.calculate(getAxis("r"), 0));
-    SmartDashboard.putNumber("ypid", moveAprilY.calculate(getAxis("y"), 0));*/
+    /*
+     * SmartDashboard.putNumber("aprilRQANge", get2DRange());
+     * SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());
+     * SmartDashboard.putNumber("z", getAxis("r"));
+     * SmartDashboard.putNumber("z2", getAxis("yaw"));
+     * SmartDashboard.putNumber("zpid", moveAprilZ.calculate(getAxis("r"), 0));
+     * SmartDashboard.putNumber("ypid", moveAprilY.calculate(getAxis("y"), 0));
+     */
   }
 
   private static class InstanceHolder {

@@ -28,7 +28,7 @@ public class Motor {
   }
 
   public TalonFX turnMotor(int canid) {
-    TalonFX turn = new TalonFX(canid, "rio");
+    TalonFX turn = new TalonFX(canid, "train");
     turn.configFactoryDefault();
     turn.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     turn.setNeutralMode(MKTURN.mode);
@@ -51,7 +51,7 @@ public class Motor {
   }
 
   public TalonFX driveMotor(int canid) {
-    TalonFX drive = new TalonFX(canid, "rio");
+    TalonFX drive = new TalonFX(canid, "train");
     drive.configFactoryDefault();
     drive.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     drive.setNeutralMode(MKDRIVE.mode);

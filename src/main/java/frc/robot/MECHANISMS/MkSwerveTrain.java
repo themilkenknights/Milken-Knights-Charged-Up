@@ -44,6 +44,7 @@ public class MkSwerveTrain {
   private CANCoder bottomRightCoder;
 
   private PIDController turn;
+  private PIDController anti;
 
   private Motor mMotor = Motor.getInstance();
 
@@ -59,6 +60,8 @@ public class MkSwerveTrain {
 
     turn = new PIDController(vars.hP, vars.hI, vars.hD);
     turn.enableContinuousInput(0, 360);
+
+    anti = new PIDController(MKTRAIN.kP, MKTRAIN.kI, MKTRAIN.kD);
 
     topTurnLeft = mMotor.turnMotor(CANID.topTurnLeftCANID);
     topTurnRight = mMotor.turnMotor(CANID.topTurnRightCANID);
@@ -644,6 +647,12 @@ public class MkSwerveTrain {
     double err = vars.dist - vars.avgDistInches;
     SmartDashboard.putNumber("err", err);
     return Math.abs(err) < 0.5 && Math.abs(vars.avgVelInches) < 0.1;
+  }
+
+  public double[] antiTip()
+  {
+    double setpoint = anti.calculate(navx.getInstance().getNavxPitch(), 0);
+    return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) * setpoint};
   }
 
   private static class InstanceHolder {

@@ -259,12 +259,13 @@ public class SupaStruct {
           str / MKBABY.strBABY,
           -rcw / MKBABY.rcwBABY,
           ControlMode.PercentOutput); // +,-,+
-      /// train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
+      // TODO why is it +,+,- and not +,-,+
+      // train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
       // train.setModuleTurn(0, 0, 0, 0);
     } else if (navx.getInstance().getNavxPitch() > NAVX.pitchThreshold) {
       fwd = train.antiTip()[0];
       str = train.antiTip()[1];
-      //train.etherSwerve(fwd, str, 0, ControlMode.PercentOutput);
+      // train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
     } else {
       train.stopEverything();
     }

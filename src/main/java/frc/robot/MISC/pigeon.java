@@ -4,6 +4,7 @@
 
 package frc.robot.MISC;
 
+import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.MISC.Constants.CANID;
@@ -11,7 +12,7 @@ import frc.robot.MISC.Constants.PIGEON;
 
 /** pigeon stuff */
 public class pigeon {
-    private PigeonIMU pig = new PigeonIMU(CANID.pigeonCANID);
+    private Pigeon2 pig = new Pigeon2(CANID.pigeonCANID);
 
     public static pigeon getInstance() {
         return InstanceHolder.mInstance;
@@ -33,7 +34,7 @@ public class pigeon {
         return PIGEON.offsetPitch - pig.getPitch();
       }
     
-      public PigeonIMU getPig() {
+      public Pigeon2 getPig() {
         return pig;
       }
     

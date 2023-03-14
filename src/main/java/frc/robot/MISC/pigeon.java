@@ -6,11 +6,12 @@ package frc.robot.MISC;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
+import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.PIGEON;
 
-/** Add your docs here. */
+/** pigeon stuff */
 public class pigeon {
-    private PigeonIMU pig = new PigeonIMU(0);
+    private PigeonIMU pig = new PigeonIMU(CANID.pigeonCANID);
 
     public static pigeon getInstance() {
         return InstanceHolder.mInstance;

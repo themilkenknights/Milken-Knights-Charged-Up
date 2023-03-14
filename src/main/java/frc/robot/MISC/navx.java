@@ -31,6 +31,10 @@ public class navx {
     return NAVX.offsetPitch - navx.getPitch();
   }
 
+  public double getNavxRoll() {
+    return NAVX.offsetRoll - navx.getRoll();
+  }
+
   public AHRS getNavx() {
     return navx;
   }
@@ -45,6 +49,11 @@ public class navx {
 
   public boolean isAltWorking() {
     return navx.isAltitudeValid();
+  }
+
+  public double getAngleOfTip()
+  {
+    return Math.atan2(getNavxPitch(), getNavxRoll());
   }
 
   private static class InstanceHolder {

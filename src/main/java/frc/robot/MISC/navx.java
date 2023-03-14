@@ -31,10 +31,6 @@ public class navx {
     return NAVX.offsetPitch - navx.getPitch();
   }
 
-  public double getNavxRoll() {
-    return NAVX.offsetRoll - navx.getRoll();
-  }
-
   public AHRS getNavx() {
     return navx;
   }

@@ -23,7 +23,7 @@ public class Ramp {
   }
 
   public void rampMove() {
-    double pitch = navx.getInstance().getNavxPitch();
+    double pitch = pigeon.getInstance().getPigPitch();
     double pid = rampPID.calculate(pitch, 0);
     MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
     if (Math.abs(pitch) < 0 + MKRAMP.threshold) {
@@ -35,7 +35,7 @@ public class Ramp {
 
 public boolean isFinished() {
   // return angle - Arm.getInstance().getArmDegrees() < 1.5;
-return Math.abs(navx.getInstance().getNavxPitch()) <=1;
+return Math.abs(pigeon.getInstance().getPigPitch()) <=1;
 
 }
   private static class InstanceHolder {

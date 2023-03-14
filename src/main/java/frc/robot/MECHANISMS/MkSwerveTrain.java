@@ -22,7 +22,8 @@ import frc.robot.MISC.Constants.MKTURN;
 import frc.robot.MISC.DeltaAirlines;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
-import frc.robot.MISC.navx;
+
+import frc.robot.MISC.pigeon;
 
 /** The Swerve class contains everything relating to the swerve mechanism */
 public class MkSwerveTrain {
@@ -246,9 +247,9 @@ public class MkSwerveTrain {
     // MKTURN.greerRatio));
     SmartDashboard.putNumber("magicangle", vars.magicAngle);
 
-    vars.yaw = navx.getInstance().getNavxYaw();
+    vars.yaw = pigeon.getInstance().getPigPitch();
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
-    SmartDashboard.putNumber("navx", vars.yaw);
+    SmartDashboard.putNumber("pigeon", vars.yaw);
     SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
     // SmartDashboard.putNumber("avgdist", vars.avgDistInches);
     // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
@@ -317,7 +318,7 @@ public class MkSwerveTrain {
    * "https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383">this
    * thread</a> for more information.
    *
-   * <p>Note - this function uses 180 minus yaw due to the positioning of our navx.
+   * <p>Note - this function uses 180 minus yaw due to the positioning of our pigeon.
    *
    * @param FWD Forward axis of controller
    * @param STR Strafe axis of controller
@@ -651,7 +652,7 @@ public class MkSwerveTrain {
 
   public double[] antiTip()
   {
-    double setpoint = anti.calculate(-navx.getInstance().getNavxPitch(), 0);
+    double setpoint = anti.calculate(-pigeon.getInstance().getPigPitch(), 0);
     //return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) * setpoint};
     return new double[]{-Math.cos(vars.yaw * (Math.PI/180)) * setpoint, Math.sin(vars.yaw * (Math.PI/180)) * setpoint};
   }

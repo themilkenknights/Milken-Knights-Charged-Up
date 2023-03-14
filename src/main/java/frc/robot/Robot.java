@@ -33,6 +33,7 @@ import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKTELE;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
+import frc.robot.MISC.pigeon;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -113,7 +114,7 @@ mjpegServer2.setSource(outputStream);
     timer.start();
 
     train.startTrain();
-    navx.getInstance().reset();
+    pigeon.getInstance().reset();
   }
 
   @Override
@@ -149,7 +150,7 @@ mjpegServer2.setSource(outputStream);
     }
 
     train.startTrain();
-    navx.getInstance().reset();
+    pigeon.getInstance().reset();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -171,7 +172,7 @@ mjpegServer2.setSource(outputStream);
       m_autonomousCommand.cancel();
     }
     train.startTrain();
-    navx.getInstance().reset();
+    pigeon.getInstance().reset();
     Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
     // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
     // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);

@@ -23,10 +23,13 @@ import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
 import frc.robot.MISC.Constants.NAVX;
+import frc.robot.MISC.Constants.PIGEON;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
 import frc.robot.MISC.navx;
+import frc.robot.MISC.pigeon;
+
 import java.util.Map;
 
 /** Robot stuff in here */
@@ -121,7 +124,7 @@ public class SupaStruct {
           "fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god"
               + e);
     }
-    navxRotate = navx.getInstance().getNavxYaw();
+    navxRotate = pigeon.getInstance().getPigYaw();
     arm.setArmToCanCoder();
   }
 
@@ -153,9 +156,6 @@ public class SupaStruct {
     // Todo see if making this x breaks it
     rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
     rcw = rcwX;
-
-    resetNavx = xbox.getRawButton(DriveInput.resetNavxButton);
-    resetDrive = xbox.getRawButton(DriveInput.resetDriveButton);
     // DRIVER
     xbutton = xbox.getXButton();
     abutton = xbox.getAButtonPressed();
@@ -195,11 +195,11 @@ public class SupaStruct {
             % 360;
 
     // --------------------------------------------------------------------//
-    // NAVX RESET
+    // PIGEON RESET
     // --------------------------------------------------------------------//
 
     if (ybutton) {
-      navx.getInstance().reset();
+      pigeon.getInstance().reset();
       povValue = 00;
       inverseTanAngleOG = 0;
       train.vars.avgDistTest = 0;
@@ -207,27 +207,7 @@ public class SupaStruct {
       train.startDrive();
     }
 
-    // --------------------------------------------------------------------//
-    // POV ROTATION
-    // --------------------------------------------------------------------//
-
-    /*if (Math.abs(xbox.getRawAxis(DriveInput.rcwX)) >= 0.1 && Math.abs(xbox.getRawAxis(DriveInput.rcwY)) >= 0.1) {
-      inverseTanAngleOG = ((((((Math.toDegrees(Math.atan(rcwY / rcwX)) + 360)) + (MathFormulas.signumV4(rcwX))) % 360)
-          - MathFormulas.signumAngleEdition(rcwX, rcwY))
-          + 360)
-          % 360;
-
-      rcw = train.moveToAngy(inverseTanAngleOG);
-    }*/
-
-    /*
-     * if (Math.abs(rcwX) >= 0.1) {
-     * navxRotate = navx.getInstance().getNavxYaw();
-     * } else if (!ltrigger && isRCWrunningWithNavx) {
-     * rcw = train.moveToAngy(navxRotate);
-     * }
-     */
-
+  
     // --------------------------------------------------------------------//
     // DRIVE STATEMENTS
     // --------------------------------------------------------------------//
@@ -263,7 +243,7 @@ public class SupaStruct {
       // TODO why is it +,+,- and not +,-,+
       // train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
       // train.setModuleTurn(0, 0, 0, 0);
-    } else if (navx.getInstance().getNavxPitch() > NAVX.pitchThreshold) {
+    } else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       fwd = train.antiTip()[1];
       str = train.antiTip()[0];
        train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);

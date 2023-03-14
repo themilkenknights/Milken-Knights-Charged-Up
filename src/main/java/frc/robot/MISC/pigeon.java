@@ -19,11 +19,11 @@ public class pigeon {
       }
     
       public double getPigYaw() {
-        return PIGEON.offsetYaw - pig.getYaw();
+        return  pig.getYaw();
       }
     
       public double getPigRoll() {
-        return PIGEON.offsetRoll - pig.getRoll();
+        return  pig.getRoll();
       }
     
       public double getPigYawREAL() {
@@ -31,7 +31,7 @@ public class pigeon {
       }
     
       public double getPigPitch() {
-        return PIGEON.offsetPitch - pig.getPitch();
+        return  pig.getPitch();
       }
     
       public Pigeon2 getPig() {

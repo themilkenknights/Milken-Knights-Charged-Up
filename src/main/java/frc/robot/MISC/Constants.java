@@ -107,21 +107,8 @@ public final class Constants {
     public static final double kI = 0;
     public static final double kD = 0;
   }
-
-  public static class NAVX {
-    public static final double offsetYaw = 90 + 180;
-    public static final double offsetPitch = 0;
-    public static final double offsetRoll = 0;
-
-    public static final double pitchThreshold = 2;
-    public static final double rollThreashold = 20;
-    }
-
     public static class PIGEON {
-      public static final double offsetYaw = 90 + 180;
-      public static final double offsetPitch = 0;
-      public static final double offsetRoll = 0;
-  
+      public static final double offsetYaw = 0;
       public static final double pitchThreshold = 2;
       public static final double rollThreashold = 20;
       }
@@ -216,7 +203,7 @@ public final class Constants {
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
     public static final int revpdhCANID = 23; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
 
-    public static final int pigeonCANID = 42;
+    public static final int pigeonCANID = 30;
   }
 
   public static class MKARM {

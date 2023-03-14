@@ -113,8 +113,8 @@ public final class Constants {
     public static final double offsetPitch = 0;
     public static final double offsetRoll = 0;
 
-    public static final double pitchThreshold = 0;
-    public static final double rollThreashold = 0;
+    public static final double pitchThreshold = 2;
+    public static final double rollThreashold = 20;
     }
 
   public static class MKAPRIL {
@@ -198,8 +198,8 @@ public final class Constants {
     public static final int bottomTurnLeftCANCoderCANID = 15;
     public static final int bottomTurnRightCANCoderCANID = 18; // 16
     //
-    public static final int intakePORT = 15;
-    public static final int CLAWPORT = 9;
+    public static final int intakePORT = 9;
+    public static final int CLAWPORT = 15;
     public static final int rollerCANID = 21;
     public static final int leftarmCANID = 24;
     public static final int rightarmCANID = 25;

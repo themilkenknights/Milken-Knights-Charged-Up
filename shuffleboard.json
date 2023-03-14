@@ -332,6 +332,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "3,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/magicangle",
+              "_title": "magicangle",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/color",
+              "_title": "color",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }

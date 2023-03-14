@@ -19,6 +19,10 @@ public class navx {
     return NAVX.offsetYaw - navx.getYaw();
   }
 
+  public double getNavxRoll() {
+    return NAVX.offsetRoll - navx.getRoll();
+  }
+
   public double getNavxYawREAL() {
     return navx.getYaw();
   }

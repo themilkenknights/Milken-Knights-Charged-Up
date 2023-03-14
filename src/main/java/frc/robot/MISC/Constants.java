@@ -43,7 +43,7 @@ public final class Constants {
 
     public static final double[] pidf = {kP, kI, kD, kF};
 
-    public static final NeutralMode mode = NeutralMode.Coast;
+    public static final NeutralMode mode = NeutralMode.Brake;
 
     public static final boolean inverted = false;
 
@@ -72,12 +72,13 @@ public final class Constants {
 
     public static final double greerRatio = 150 / 7;
   }
+//TOP LEFT AND BOTOM RIGHT NEED TO FLIPPY
 
   public static class MKCANCODER {
-    public static final double topLeftOffset = -174.375 + 90; // -173.3203125+90
-    public static final double topRightOffset = 153.984375 + 90;
-    public static final double bottomLeftOffset = -43.9453125 + 90;
-    public static final double bottomRightOffset = -173.3203125 + 90; // -174.375+90
+    public static final double topLeftOffset =-167.51953125+90;   // -173.3203125+90
+    public static final double topRightOffset = 154.511718+90;
+    public static final double bottomLeftOffset = -25.7519+90;
+    public static final double bottomRightOffset =-174.55078125+90;// -174.375+90
 
     public static final double[] offset = {
       MKCANCODER.topLeftOffset,
@@ -102,7 +103,7 @@ public final class Constants {
 
     public static final double hP = 0.001, hI = 0.0001, hD = hP * 0.1;
 
-    public static final double kP = 0;
+    public static final double kP = 2;
     public static final double kI = 0;
     public static final double kD = 0;
   }
@@ -110,8 +111,10 @@ public final class Constants {
   public static class NAVX {
     public static final double offsetYaw = 90 + 180;
     public static final double offsetPitch = 0;
+    public static final double offsetRoll = 0;
 
-    public static final double pitchThreshold = 10;
+    public static final double pitchThreshold = 0;
+    public static final double rollThreashold = 0;
     }
 
   public static class MKAPRIL {

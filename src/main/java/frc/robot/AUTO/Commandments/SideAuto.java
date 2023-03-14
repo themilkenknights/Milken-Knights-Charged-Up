@@ -20,13 +20,5 @@ public class SideAuto extends SequentialCommandGroup {
     addCommands(
           Commands.deadline(new IntakeAuto().withTimeout(2)),
         Commands.deadline(new MotionMagicAuto(155, 270)));
-        //Commands.deadline(new EtherStraightCommand(155, -0.3,0, 270).withTimeout(20)));
-        //  Commands.deadline(new MotionMagicAuto(90, 270).withTimeout(20)));
-        //Commands.deadline(new ArmCommand(102).withTimeout(3)),
-        //Commands.deadline(new TelescopingCommand(8200), (new ArmCommand(102).withTimeout(2))),
-        //Commands.deadline(new MotionMagicAuto(9, 270), new ArmCommand(102).withTimeout(1.5)),
-        //Commands.deadline(new ClawCommand(true).withTimeout(1.5)),
-        //Commands.deadline(new MotionMagicAuto(155, 270).withTimeout(10)));//,(new ArmCommand(15)), new TelescopingCommand(200), (new ClawCommand(false).withTimeout(1.5))),
-        //Commands.deadline(new EtherTurnCommand(90)));
   }
 }

@@ -215,12 +215,12 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
     // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
-    SmartDashboard.putNumber("mod1", vars.mod1[1]);
-    SmartDashboard.putNumber("mod2", vars.mod1[1]);
-    SmartDashboard.putNumber("mod3", vars.mod1[1]);
-    SmartDashboard.putNumber("mod4", vars.mod1[1]);
+  //  SmartDashboard.putNumber("mod1", vars.mod1[1]);
+   // SmartDashboard.putNumber("mod2", vars.mod1[1]);
+   // SmartDashboard.putNumber("mod3", vars.mod1[1]);
+    //SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    /*
+    
         SmartDashboard.putNumber("topleftcan", tlCoder());
         SmartDashboard.putNumber("toprightcan", trCoder());
         SmartDashboard.putNumber("botleftcan", blCoder());
@@ -230,7 +230,7 @@ public class MkSwerveTrain {
         SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomrightnativeTURN", MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
-    */
+    
     /*
     SmartDashboard.putNumber("topleftnativeDRIVE", (topDriveLeft.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
@@ -651,7 +651,8 @@ public class MkSwerveTrain {
 
   public double[] antiTip()
   {
-    double setpoint = anti.calculate(navx.getInstance().getNavxPitch(), 0);
+    double setpoint = anti.calculate(-navx.getInstance().getNavxPitch(), 0);
+    //return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) * setpoint};
     return new double[]{-Math.cos(vars.yaw * (Math.PI/180)) * setpoint, Math.sin(vars.yaw * (Math.PI/180)) * setpoint};
   }
 

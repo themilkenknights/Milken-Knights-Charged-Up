@@ -253,6 +253,7 @@ public class SupaStruct {
 
     if (xbutton) {
       april.alignToTag();
+     
     } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
       train.etherSwerve(
           fwd / MKBABY.fwdBABY,
@@ -263,9 +264,9 @@ public class SupaStruct {
       // train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
       // train.setModuleTurn(0, 0, 0, 0);
     } else if (navx.getInstance().getNavxPitch() > NAVX.pitchThreshold) {
-      fwd = train.antiTip()[0];
-      str = train.antiTip()[1];
-      // train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
+      fwd = train.antiTip()[1];
+      str = train.antiTip()[0];
+       train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
     } else {
       train.stopEverything();
     }

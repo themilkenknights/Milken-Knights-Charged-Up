@@ -118,7 +118,7 @@ public class Motor {
   }
 
   public CANCoder cancoder(int canid, double offset) {
-    CANCoder encoder = new CANCoder(canid, "rio");
+    CANCoder encoder = new CANCoder(canid, "train");
     encoder.configFactoryDefault();
     encoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
     encoder.configAbsoluteSensorRange(MKCANCODER.range);

@@ -117,6 +117,15 @@ public final class Constants {
     public static final double rollThreashold = 20;
     }
 
+    public static class PIGEON {
+      public static final double offsetYaw = 90 + 180;
+      public static final double offsetPitch = 0;
+      public static final double offsetRoll = 0;
+  
+      public static final double pitchThreshold = 2;
+      public static final double rollThreashold = 20;
+      }
+
   public static class MKAPRIL {
     public static final double xkP = 0.3;
     public static final double xkI = 0;

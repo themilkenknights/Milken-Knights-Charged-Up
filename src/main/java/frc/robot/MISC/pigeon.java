@@ -12,7 +12,7 @@ import frc.robot.MISC.Constants.PIGEON;
 
 /** pigeon stuff */
 public class pigeon {
-    private Pigeon2 pig = new Pigeon2(CANID.pigeonCANID);
+    private Pigeon2 pig = new Pigeon2(CANID.pigeonCANID, "train");
 
     public static pigeon getInstance() {
         return InstanceHolder.mInstance;

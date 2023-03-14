@@ -252,8 +252,6 @@ public class MkSwerveTrain {
     SmartDashboard.putNumber("pigeon", vars.yaw);
     SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
     // SmartDashboard.putNumber("avgdist", vars.avgDistInches);
-    // SmartDashboard.putNumber("altitude", navx.getInstance().getNavxAltitude());
-    // SmartDashboard.putBoolean("altitudeWORKING", navx.getInstance().isAltWorking());
 
     vars.posInchTL = MathFormulas.nativeToInches(topDriveLeft.getSelectedSensorPosition());
     vars.posInchTR = MathFormulas.nativeToInches(topDriveRight.getSelectedSensorPosition());

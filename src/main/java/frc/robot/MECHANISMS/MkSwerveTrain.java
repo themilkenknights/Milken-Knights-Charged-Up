@@ -247,7 +247,7 @@ public class MkSwerveTrain {
     // MKTURN.greerRatio));
     SmartDashboard.putNumber("magicangle", vars.magicAngle);
 
-    vars.yaw = pigeon.getInstance().getPigPitch();
+    vars.yaw = pigeon.getInstance().getPigYaw();
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("pigeon", vars.yaw);
     SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);

@@ -14,7 +14,7 @@ import frc.robot.MISC.Constants.LIGHTS;
 public class Lights {
   // navx vlaue thing and light offset values so i dont have to create a new variable every time the
   // function runs
-  private double navXRot = 0;
+  private double pigrot = 0;
   private int offset;
 
   private AddressableLED LEDS = new AddressableLED(LIGHTS.PWMPORT);

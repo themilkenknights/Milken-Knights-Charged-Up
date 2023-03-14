@@ -177,9 +177,6 @@ public final class Constants {
       public static final int rcwX = 4;
       public static final int rcwY = 5;
       // 1 a, 2 b, 3 x, 4 y
-      public static final int resetNavxButton = 4;
-      public static final int resetDriveButton = 2;
-      public static final int resetTurnbutton = 3;
     }
 
     public static final int topPOV = 0;

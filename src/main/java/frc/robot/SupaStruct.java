@@ -22,12 +22,10 @@ import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
 import frc.robot.MISC.Constants.MKTELE;
-import frc.robot.MISC.Constants.NAVX;
 import frc.robot.MISC.Constants.PIGEON;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
-import frc.robot.MISC.navx;
 import frc.robot.MISC.pigeon;
 
 import java.util.Map;
@@ -48,13 +46,13 @@ public class SupaStruct {
       inverseTanAngleOG,
       inverseTanAngleDrive,
       povValue,
-      navxRotate = 0,
+      pigRotate = 0,
       lightMode = 0,
       sliderArm;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
 
-  private boolean resetNavx,
+  private boolean resetpig,
       dpadup,
       dpaddown,
       toggleClimbUpOn,
@@ -92,7 +90,7 @@ public class SupaStruct {
       toggleArmMidPressed,
       toggleHPArmOn,
       toggleHPArmPressed;
-  private boolean isRCWrunningWithNavx = false;
+  private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
   private Timer turntesttimer = new Timer();
@@ -124,7 +122,7 @@ public class SupaStruct {
           "fuck you if the slider is there just have an in built system to say 'oh look its FUCKING THERE' i swear to god"
               + e);
     }
-    navxRotate = pigeon.getInstance().getPigYaw();
+    pigRotate = pigeon.getInstance().getPigYaw();
     arm.setArmToCanCoder();
   }
 
@@ -426,7 +424,7 @@ public class SupaStruct {
   }*/
 
   public void teleopDisabled() {
-    resetNavx = false;
+    resetpig = false;
     resetDrive = false;
     xbutton = false;
     ybutton = false;

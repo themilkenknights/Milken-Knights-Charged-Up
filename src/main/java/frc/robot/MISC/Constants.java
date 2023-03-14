@@ -95,11 +95,11 @@ public final class Constants {
   }
 
   public static class MKTRAIN {
-    public static final double L = 18.75;
-    public static final double W = 26.75;
+    public static final double L = 26.75;
+    public static final double W = 18.75;
 
-    public static final double widthInches = 24; // 28 was the old drive train
-    public static final double heightInches = 32; // 28 was the old drive train
+    public static final double widthInches = 32; // 28 was the old drive train
+    public static final double heightInches = 24; // 28 was the old drive train
 
     public static final double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
 

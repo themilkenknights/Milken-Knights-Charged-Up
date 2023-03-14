@@ -29,6 +29,8 @@ import frc.robot.MISC.Odometry;
 import frc.robot.MISC.pigeon;
 import java.util.Map;
 
+import javax.xml.validation.SchemaFactory;
+
 /** Robot stuff in here */
 public class SupaStruct {
 
@@ -204,12 +206,17 @@ public class SupaStruct {
       train.startDrive();
     }
 
+    if(xbox.getPOV() != -1)
+    {
+      rcw = train.moveToAngy(xbox.getPOV());
+    }
+
     // --------------------------------------------------------------------//
     // DRIVE STATEMENTS
     // --------------------------------------------------------------------//
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
-        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1) {
+        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1 && xbox.getPOV() == -1) {
       rcw = 0;
     }
 
@@ -230,11 +237,11 @@ public class SupaStruct {
     if (xbutton) {
       april.alignToTag();
 
-    } else if ((fwd != 0 || str != 0 || rcw != 0)) { // +,-,+
+    } else if ((fwd != 0 || str != 0 || rcw != 0) && (xbox.getPOV() != -1)) { // +,-,+
       train.etherSwerve(
-          fwd / MKBABY.fwdBABY,
-          str / MKBABY.strBABY,
-          -rcw / MKBABY.rcwBABY,
+          fwd ,
+          str ,
+          -rcw,
           ControlMode.PercentOutput); // +,-,+
       // TODO why is it +,+,- and not +,-,+
       // train.setModuleDrive(ControlMode.PercentOutput, 1, 1, 1, 1);
@@ -242,10 +249,12 @@ public class SupaStruct {
     } else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       fwd = train.antiTip()[1];
       str = train.antiTip()[0];
-      train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
+      //train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
     } else {
       train.stopEverything();
     }
+    SmartDashboard.putNumber("rcw", xbox.getPOV());
+  SmartDashboard.putNumber("movetoangy", train.moveToAngy(xbox.getPOV()));
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
@@ -278,11 +287,11 @@ public class SupaStruct {
     /*if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
     } else*/ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(105);
+      arm.pidArm(95);
     } else if (!rbbutton2 && lbbutton2) {
-      arm.moveArm(-0.12, -0.12);
+      arm.moveArm(-0.16, -0.16);
     } else if (rbbutton2 && !lbbutton2) {
-      arm.moveArm(0.12, 0.12);
+      arm.moveArm(0.16, 0.16);
     } else if (toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
       // arm.pidTelescope(8000);
@@ -323,9 +332,9 @@ public class SupaStruct {
     } else if (xboxOP.getRawButton(8)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     } else if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.pidTelescope(0);
+      //arm.pidTelescope(0);
     } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      arm.pidTelescope(8000);
+      //arm.pidTelescope(8000);
     }
     // else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
     // {

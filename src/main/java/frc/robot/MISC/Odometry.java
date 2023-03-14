@@ -57,7 +57,7 @@ public class Odometry {
   SwerveDriveOdometry m_odometry =
       new SwerveDriveOdometry(
           m_kinematics,
-          Rotation2d.fromDegrees(pigeon.getInstance().getPigYawREAL()),
+          Rotation2d.fromDegrees(pigeon.getInstance().getPigYaw()),
           new SwerveModulePosition[] {
             MkSwerveTrain.getInstance().modulePosTL(),
             MkSwerveTrain.getInstance().modulePosTR(),
@@ -69,7 +69,7 @@ public class Odometry {
   SwerveDrivePoseEstimator m_SwerveDrivePoseEstimator =
       new SwerveDrivePoseEstimator(
           m_kinematics,
-          Rotation2d.fromDegrees(pigeon.getInstance().getPigYawREAL()),
+          Rotation2d.fromDegrees(pigeon.getInstance().getPigYaw()),
           new SwerveModulePosition[] {
             MkSwerveTrain.getInstance().modulePosTL(),
             MkSwerveTrain.getInstance().modulePosTR(),
@@ -97,7 +97,7 @@ public class Odometry {
   public void updateOdometry() {
     // Update the pose
     m_SwerveDrivePoseEstimator.update(
-        Rotation2d.fromDegrees(pigeon.getInstance().getPigYawREAL()),
+        Rotation2d.fromDegrees(pigeon.getInstance().getPigYaw()),
         new SwerveModulePosition[] {
           MkSwerveTrain.getInstance().modulePosTR(),
           MkSwerveTrain.getInstance().modulePosBL(),

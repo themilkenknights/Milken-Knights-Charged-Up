@@ -23,10 +23,6 @@ public class pigeon {
     return pig.getRoll();
   }
 
-  public double getPigYawREAL() {
-    return pig.getYaw();
-  }
-
   public double getPigPitch() {
     return pig.getPitch();
   }

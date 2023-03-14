@@ -220,7 +220,7 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    /*
+    
         SmartDashboard.putNumber("topleftcan", tlCoder());
         SmartDashboard.putNumber("toprightcan", trCoder());
         SmartDashboard.putNumber("botleftcan", blCoder());
@@ -230,7 +230,7 @@ public class MkSwerveTrain {
         SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomrightnativeTURN", MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
-    */
+    
     /*
     SmartDashboard.putNumber("topleftnativeDRIVE", (topDriveLeft.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
@@ -356,10 +356,10 @@ public class MkSwerveTrain {
       vars.mod4[0] /= vars.max;
     }
 
-    vars.mod1 = setDirection(tlDeg(), vars.mod1);
-    vars.mod2 = setDirection(trDeg(), vars.mod2);
-    vars.mod3 = setDirection(blDeg(), vars.mod3);
-    vars.mod4 = setDirection(brDeg(), vars.mod4);
+    vars.mod2 = setDirection(tlDeg(), vars.mod2);
+    vars.mod1 = setDirection(trDeg(), vars.mod1);
+    vars.mod4 = setDirection(blDeg(), vars.mod4);
+    vars.mod3 = setDirection(brDeg(), vars.mod3);
 
     if (mode == ControlMode.MotionMagic) {
       vars.mod1[0] = Math.signum(vars.mod1[0]) * vars.autoDist;
@@ -369,8 +369,8 @@ public class MkSwerveTrain {
     }
 
     // etherRCWFinder(FWD, -STR, RCW);
-    setModuleDrive(mode, vars.mod1[0], vars.mod2[0], vars.mod3[0], vars.mod4[0]);
-    setModuleTurn(vars.mod1[1], vars.mod2[1], vars.mod3[1], vars.mod4[1]);
+    setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
+    setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
 
   public void etherRCWFinder(double FWD, double STR, double RCW) {
@@ -478,6 +478,8 @@ public class MkSwerveTrain {
   /** move robot to angle/heading */
   public double moveToAngy(double setpoint) {
     setpoint = turn.calculate(Math.abs(vars.yaw), Math.abs(setpoint % 360));
+    SmartDashboard.putNumber("yaw for move to angy", Math.abs(vars.yaw));
+    SmartDashboard.putNumber("setpoint for move to angy", Math.abs(setpoint % 360)/5);
     return setpoint;
   }
 
@@ -751,7 +753,8 @@ public class MkSwerveTrain {
 
     public variables var;
     // three degrees error babeeeee!!!!
-    public double hP = 0.017, hI = hP * 0, hD = hP * 0.10; // 0.03i, 0.01d
+    public double hP = 0.017, hI = hP * 0.03, hD = hP * 0.01; // 0.03i, 0.01d
+    //TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;
     // code

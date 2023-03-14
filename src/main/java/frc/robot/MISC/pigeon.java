@@ -5,49 +5,45 @@
 package frc.robot.MISC;
 
 import com.ctre.phoenix.sensors.Pigeon2;
-import com.ctre.phoenix.sensors.PigeonIMU;
-
 import frc.robot.MISC.Constants.CANID;
-import frc.robot.MISC.Constants.PIGEON;
 
 /** pigeon stuff */
 public class pigeon {
-    private Pigeon2 pig = new Pigeon2(CANID.pigeonCANID, "train");
+  private Pigeon2 pig = new Pigeon2(CANID.pigeonCANID, "train");
 
-    public static pigeon getInstance() {
-        return InstanceHolder.mInstance;
-      }
-    
-      public double getPigYaw() {
-        return  pig.getYaw();
-      }
-    
-      public double getPigRoll() {
-        return  pig.getRoll();
-      }
-    
-      public double getPigYawREAL() {
-        return pig.getYaw();
-      }
-    
-      public double getPigPitch() {
-        return  pig.getPitch();
-      }
-    
-      public Pigeon2 getPig() {
-        return pig;
-      }
-    
-      public void reset() {
-        pig.setYaw(0);
-      }
-    
-      public double getAngleOfTip()
-      {
-        return Math.atan2(getPigPitch(), getPigRoll());
-      }
-    
-      private static class InstanceHolder {
-        private static final pigeon mInstance = new pigeon();
-      }
+  public static pigeon getInstance() {
+    return InstanceHolder.mInstance;
+  }
+
+  public double getPigYaw() {
+    return pig.getYaw();
+  }
+
+  public double getPigRoll() {
+    return pig.getRoll();
+  }
+
+  public double getPigYawREAL() {
+    return pig.getYaw();
+  }
+
+  public double getPigPitch() {
+    return pig.getPitch();
+  }
+
+  public Pigeon2 getPig() {
+    return pig;
+  }
+
+  public void reset() {
+    pig.setYaw(0);
+  }
+
+  public double getAngleOfTip() {
+    return Math.atan2(getPigPitch(), getPigRoll());
+  }
+
+  private static class InstanceHolder {
+    private static final pigeon mInstance = new pigeon();
+  }
 }

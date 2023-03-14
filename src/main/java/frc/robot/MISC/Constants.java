@@ -58,7 +58,7 @@ public final class Constants {
   public static class MKTURN {
     public static final double kP = 0.087;
     public static final double kI = 0; // 0.0003;
-    //TODO test i in motion magic and pid for both auto and teleop, see if it really is this
+    // TODO test i in motion magic and pid for both auto and teleop, see if it really is this
     public static final double kD = 0.00000001;
     public static final double kF = 0;
 
@@ -72,13 +72,15 @@ public final class Constants {
 
     public static final double greerRatio = 150 / 7;
   }
-//TOP LEFT AND BOTOM RIGHT NEED TO FLIPPY
+  // TOP LEFT AND BOTOM RIGHT NEED TO FLIPPY
 
   public static class MKCANCODER {
-    public static final double topLeftOffset =-167.51953125+90;   // -173.3203125+90
-    public static final double topRightOffset = 154.511718+90;
-    public static final double bottomLeftOffset = -25.7519+90;
-    public static final double bottomRightOffset =-174.55078125+90;// -174.375+90
+    public static final double topLeftOffset =
+        11.865234375 + 180; // 7.294921875-180;   // -173.3203125+90-10.810546875
+    public static final double topRightOffset = -25.83984275 + 180;
+    public static final double bottomLeftOffset = 153.0175781 - 180;
+    public static final double bottomRightOffset =
+        7.294921875 - 180; // 11.865234375-180;// -174.375+90  -5.44921875
 
     public static final double[] offset = {
       MKCANCODER.topLeftOffset,
@@ -107,11 +109,12 @@ public final class Constants {
     public static final double kI = 0;
     public static final double kD = 0;
   }
-    public static class PIGEON {
-      public static final double offsetYaw = 0;
-      public static final double pitchThreshold = 2;
-      public static final double rollThreashold = 20;
-      }
+
+  public static class PIGEON {
+    public static final double offsetYaw = 0;
+    public static final double pitchThreshold = 2;
+    public static final double rollThreashold = 20;
+  }
 
   public static class MKAPRIL {
     public static final double xkP = 0.3;
@@ -174,22 +177,22 @@ public final class Constants {
 
   public static class CANID {
     // drive motors
-    public static final int topDriveLeftCANID = 3; // 5
+    public static final int topDriveLeftCANID = 5; // 5
     public static final int topDriveRightCANID = 7;
     public static final int bottomDriveLeftCANID = 9;
-    public static final int bottomDriveRightCANID = 5; // 3
+    public static final int bottomDriveRightCANID = 3; // 3
 
     // turn motors
-    public static final int topTurnLeftCANID = 4; // 6
+    public static final int topTurnLeftCANID = 6; // 6
     public static final int topTurnRightCANID = 8;
     public static final int bottomTurnLeftCANID = 1;
-    public static final int bottomTurnRightCANID = 6; // 4
+    public static final int bottomTurnRightCANID = 4; // 4
 
     // cancoder
-    public static final int topTurnLeftCANCoderCANID = 16; // 18
+    public static final int topTurnLeftCANCoderCANID = 18; // 18
     public static final int topTurnRightCANCoderCANID = 17;
     public static final int bottomTurnLeftCANCoderCANID = 15;
-    public static final int bottomTurnRightCANCoderCANID = 18; // 16
+    public static final int bottomTurnRightCANCoderCANID = 16; // 16
     //
     public static final int intakePORT = 9;
     public static final int CLAWPORT = 15;
@@ -329,9 +332,8 @@ public final class Constants {
   }
 
   public static class LIGHTS {
-    public static final int PWMPORT = 9;
+    public static final int PWMPORT = 0;
     public static final int bufferNum = 151;
     public static final int MaxRGBValue = 60;
   }
 }
-

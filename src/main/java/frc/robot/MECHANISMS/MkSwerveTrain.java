@@ -22,7 +22,6 @@ import frc.robot.MISC.Constants.MKTURN;
 import frc.robot.MISC.DeltaAirlines;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
-
 import frc.robot.MISC.pigeon;
 
 /** The Swerve class contains everything relating to the swerve mechanism */
@@ -216,12 +215,12 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
     // SmartDashboard.putNumber("avgDistinches", vars.avgDistInches);
-  //  SmartDashboard.putNumber("mod1", vars.mod1[1]);
-   // SmartDashboard.putNumber("mod2", vars.mod1[1]);
-   // SmartDashboard.putNumber("mod3", vars.mod1[1]);
-    //SmartDashboard.putNumber("mod4", vars.mod1[1]);
+    //  SmartDashboard.putNumber("mod1", vars.mod1[1]);
+    // SmartDashboard.putNumber("mod2", vars.mod1[1]);
+    // SmartDashboard.putNumber("mod3", vars.mod1[1]);
+    // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    /* 
+    /*
         SmartDashboard.putNumber("topleftcan", tlCoder());
         SmartDashboard.putNumber("toprightcan", trCoder());
         SmartDashboard.putNumber("botleftcan", blCoder());
@@ -648,11 +647,13 @@ public class MkSwerveTrain {
     return Math.abs(err) < 0.5 && Math.abs(vars.avgVelInches) < 0.1;
   }
 
-  public double[] antiTip()
-  {
+  public double[] antiTip() {
     double setpoint = anti.calculate(-pigeon.getInstance().getPigPitch(), 0);
-    //return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) * setpoint};
-    return new double[]{-Math.cos(vars.yaw * (Math.PI/180)) * setpoint, Math.sin(vars.yaw * (Math.PI/180)) * setpoint};
+    // return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) * setpoint};
+    return new double[] {
+      -Math.cos(vars.yaw * (Math.PI / 180)) * setpoint,
+      Math.sin(vars.yaw * (Math.PI / 180)) * setpoint
+    };
   }
 
   private static class InstanceHolder {

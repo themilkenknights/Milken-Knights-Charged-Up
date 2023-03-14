@@ -31,13 +31,14 @@ public class Ramp {
       MkSwerveTrain.getInstance().setModuleTurn(45, -45, 45, -45);
     }
   }
-// Returns true when the command should end.
+  // Returns true when the command should end.
 
-public boolean isFinished() {
-  // return angle - Arm.getInstance().getArmDegrees() < 1.5;
-return Math.abs(pigeon.getInstance().getPigPitch()) <=1;
+  public boolean isFinished() {
+    // return angle - Arm.getInstance().getArmDegrees() < 1.5;
+    return Math.abs(pigeon.getInstance().getPigPitch()) <= 1;
+  }
 
-}
   private static class InstanceHolder {
     private static final Ramp mInstance = new Ramp();
-  }}
+  }
+}

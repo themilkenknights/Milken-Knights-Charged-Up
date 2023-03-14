@@ -12,7 +12,8 @@ import frc.robot.MISC.Constants.LIGHTS;
 
 /** The Lights class contains everything relating to ergabled */
 public class Lights {
-  // pigeon vlaue thing and light offset values so i dont have to create a new variable every time the
+  // pigeon vlaue thing and light offset values so i dont have to create a new variable every time
+  // the
   // function runs
   private double pigrot = 0;
   private int offset;

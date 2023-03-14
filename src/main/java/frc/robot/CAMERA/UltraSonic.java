@@ -7,7 +7,6 @@ package frc.robot.CAMERA;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MISC.Constants.MKULTRA;
 
@@ -34,7 +33,7 @@ public class UltraSonic {
 
   public void ultraSmartDashboard() {
     // SmartDashboard.putNumber("inchesrounded", Math.round(currentDistanceInches));
-    SmartDashboard.putNumber("rawvalue", rawValue);
+    // SmartDashboard.putNumber("rawvalue", rawValue);
     // SmartDashboard.putNumber("inchesdistthingy", currentDistanceInches);
   }
 

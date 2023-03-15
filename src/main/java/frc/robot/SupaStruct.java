@@ -216,7 +216,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
-        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1 && xbox.getPOV() == -1) {
+        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1){ //&& xbox.getPOV() == -1) {
       rcw = 0;
     }
 
@@ -237,7 +237,7 @@ public class SupaStruct {
     if (xbutton) {
       april.alignToTag();
 
-    } else if ((fwd != 0 || str != 0 || rcw != 0) && (xbox.getPOV() != -1)) { // +,-,+
+    } else if ((fwd != 0 || str != 0 || rcw != 0)) {//&& (xbox.getPOV() != -1)) { // +,-,+
       train.etherSwerve(
           fwd ,
           str ,
@@ -249,7 +249,7 @@ public class SupaStruct {
     } else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       fwd = train.antiTip()[1];
       str = train.antiTip()[0];
-      //train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
+      train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
     } else {
       train.stopEverything();
     }
@@ -287,7 +287,7 @@ public class SupaStruct {
     /*if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
     } else*/ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(95);
+      arm.pidArm(90);
     } else if (!rbbutton2 && lbbutton2) {
       arm.moveArm(-0.16, -0.16);
     } else if (rbbutton2 && !lbbutton2) {

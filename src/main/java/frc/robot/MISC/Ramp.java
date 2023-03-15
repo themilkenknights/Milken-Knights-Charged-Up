@@ -23,7 +23,7 @@ public class Ramp {
   }
 
   public void rampMove() {
-    double pitch = pigeon.getInstance().getPigPitch();
+    double pitch = pigeon.getInstance().getPigRoll();
     double pid = rampPID.calculate(pitch, 0);
     MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
     if (Math.abs(pitch) < 0 + MKRAMP.threshold) {

@@ -42,26 +42,21 @@ public class MathFormulas {
   */
 
   /**
-   * Calculates a curved autonomous path's radius by using the distance between
-   * the starting and
-   * ending point and the distance between the middle of the path and the height
-   * of the angular path
+   * Calculates a curved autonomous path's radius by using the distance between the starting and
+   * ending point and the distance between the middle of the path and the height of the angular path
    *
    * @param distanceA
    * @param lengthB
    * @return Radius of the path
    */
   public static double calculateCircleRadius(double distanceA, double lengthB) {
-    // return ((Math.pow(distanceA, 2) / 4) + Math.pow(lengthB, 2)) * (1 / (2 *
-    // lengthB));
+    // return ((Math.pow(distanceA, 2) / 4) + Math.pow(lengthB, 2)) * (1 / (2 * lengthB));
     return ((lengthB / 2) + ((Math.pow(distanceA, 2)) / (8 * lengthB)));
   }
 
   /**
-   * Calculates a curved autonomous path's circumference/length by using the
-   * distance between the
-   * starting and ending point and the distance between the middle of the linear
-   * path and the max
+   * Calculates a curved autonomous path's circumference/length by using the distance between the
+   * starting and ending point and the distance between the middle of the linear path and the max
    * height of the angular path
    *
    * @param distanceA
@@ -71,23 +66,21 @@ public class MathFormulas {
    */
   public static double calculateArcOfPath(double distanceA, double lengthB) {
     double radius = calculateCircleRadius(distanceA, lengthB);
-    double theta = calculateAngleOfPath(
-        distanceA, lengthB); // 2 * (Math.toDegrees((Math.asin((distanceA / (2 * radius))))));
+    double theta =
+        calculateAngleOfPath(
+            distanceA, lengthB); // 2 * (Math.toDegrees((Math.asin((distanceA / (2 * radius))))));
     // return (theta / 360) * (2 * (Constants.kPi * radius));
     return Math.toRadians(theta * radius);
   }
 
   /**
-   * Calculates a curved autonomous path's angle by using the distance between the
-   * starting and
-   * ending point and the distance between the middle of the path and the height
-   * of the angular path
+   * Calculates a curved autonomous path's angle by using the distance between the starting and
+   * ending point and the distance between the middle of the path and the height of the angular path
    *
    * @param distanceA
    * @param lengthB
-   * @return Angle of the path (how much the angular motors have to turn in order
-   *         to acheive this
-   *         path)
+   * @return Angle of the path (how much the angular motors have to turn in order to acheive this
+   *     path)
    * @see {@link #calculateCircleRadius(distanceA, lengthB)}
    */
   public static double calculateAngleOfPath(double distanceA, double lengthB) {
@@ -148,12 +141,14 @@ public class MathFormulas {
     return nativePer100MstoInchesPerSec(gimmeNative) / (1000 / dt);
   }
 
-  public static double degreesToSpark(double gimmeDeg) {
-    return gimmeDeg * (1.0 / 360.0) * (MKWRIST.greerRatio);
+  public static double degreesToSpark (double gimmeDeg)
+  {
+    return gimmeDeg * (1.0/360.0) * (MKWRIST.greerRatio);
   }
 
-  public static double sparkToDegrees(double gimmeSpark) {
-    return gimmeSpark * (1.0 / MKWRIST.greerRatio) * (360.0);
+  public static double sparkToDegrees(double gimmeSpark)
+  {
+    return gimmeSpark * (1.0/MKWRIST.greerRatio) * (360.0);
   }
 
   /**
@@ -220,12 +215,12 @@ public class MathFormulas {
       targetAngle = delta > 90 ? (targetAngle -= 180) : (targetAngle += 180);
       mod[0] = Math.abs(mod[0]) * -1;
     }
-    return new double[] { mod[0], targetAngle };
+    return new double[] {mod[0], targetAngle};
   }
 
   /**
    * @param scopeReference Current Angle
-   * @param newAngle       Target Angle
+   * @param newAngle Target Angle
    * @return Closest angle within scope
    */
   public static double placeInAppropriate0To360Scope(double scopeReference, double newAngle) {

@@ -15,7 +15,8 @@ public class pigeon {
     return InstanceHolder.mInstance;
   }
 
-  public void setPigeon() {
+  public void setPigeon()
+  {
     pig.configFactoryDefault();
   }
 

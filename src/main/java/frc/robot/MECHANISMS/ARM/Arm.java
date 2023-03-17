@@ -61,7 +61,7 @@ public class Arm {
 
   public double getArmDegrees() {
     return -(MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio)
-        + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))
+            + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))
         / 2;
   }
 
@@ -123,18 +123,14 @@ public class Arm {
     // SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
     SmartDashboard.putNumber("arms", getArm());
-    // SmartDashboard.putNumber("cancodernumbaaa",
-    // armCanCoder.getAbsolutePosition());
+    // SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
     // SmartDashboard.putNumber("degdeg", getArmDegrees());
   }
 
   /**
-   * This function assumes that the base of the arm is at the origin (0,0) and the
-   * angles are
-   * measured from the horizontal line. To account for gravity, you can add a
-   * third link that is
-   * perpendicular to the base of the arm and always points downward. You can then
-   * use the same
+   * This function assumes that the base of the arm is at the origin (0,0) and the angles are
+   * measured from the horizontal line. To account for gravity, you can add a third link that is
+   * perpendicular to the base of the arm and always points downward. You can then use the same
    * methods to calculate the angle for this third link. openai
    *
    * @param link1
@@ -148,8 +144,9 @@ public class Arm {
 
     // Use the Law of Cosines to find the angle between link1 and the horizontal
     // line
-    double link1Angle = Math.acos(
-        (Math.pow(link1, 2) + Math.pow(dist, 2) - Math.pow(link2, 2)) / (2 * link1 * dist));
+    double link1Angle =
+        Math.acos(
+            (Math.pow(link1, 2) + Math.pow(dist, 2) - Math.pow(link2, 2)) / (2 * link1 * dist));
 
     // Use the Law of Sines to find the angle between link2 and the horizontal line
     double link2Angle = Math.asin((link2 * Math.sin(link1Angle)) / dist);
@@ -160,8 +157,7 @@ public class Arm {
   }
 
   /**
-   * 3 joint arm
-   * https://www.chiefdelphi.com/t/pid-tuning-for-3-joint-arm/347116/15
+   * 3 joint arm https://www.chiefdelphi.com/t/pid-tuning-for-3-joint-arm/347116/15
    *
    * @param ang1
    * @param ang2
@@ -173,7 +169,7 @@ public class Arm {
     double x = getX(ang1, ang2, ang3, lengths);
     double y = getY(ang1, ang2, ang3, lengths);
 
-    double[] xy = { x, y };
+    double[] xy = {x, y};
     return xy;
   }
 
@@ -183,9 +179,8 @@ public class Arm {
 
     double realAng1 = 0;
     if (ang1 > 90) // if l1 is pointed backwards
-      realAng1 = 180 - ang1;
-    else
-      realAng1 = ang1;
+    realAng1 = 180 - ang1;
+    else realAng1 = ang1;
 
     double x1 = lengths[0] * Math.cos(realAng1);
     double x2 = lengths[1] * Math.cos(a);
@@ -194,9 +189,8 @@ public class Arm {
     double len = 0;
 
     if (ang1 > 90) // if l1 is pointed backwards
-      len -= x1;
-    else
-      len += x1;
+    len -= x1;
+    else len += x1;
     len += x2;
     len += x3;
 
@@ -209,9 +203,8 @@ public class Arm {
 
     double realAng1 = 0;
     if (ang1 > 90) // if l1 is pointed backwards
-      realAng1 = 180 - ang1;
-    else
-      realAng1 = ang1;
+    realAng1 = 180 - ang1;
+    else realAng1 = ang1;
 
     double y1 = lengths[0] * Math.sin(realAng1);
     double y2 = lengths[1] * Math.sin(a);
@@ -225,16 +218,16 @@ public class Arm {
       {
         len += y2;
         if (a + ang3 > 180) // if l3 is tilted up
-          len += y3;
+        len += y3;
         else // if l3 is tilted down
-          len -= y3;
+        len -= y3;
       } else // if l2 is tilted down
       {
         len -= y2;
         if (a + 180 < ang3) // if l3 is tilted up
-          len += y3;
+        len += y3;
         else // if l3 is tilted down
-          len -= y3;
+        len -= y3;
       }
     } else // if l1 is tilted forward
     {
@@ -242,16 +235,16 @@ public class Arm {
       {
         len += y2;
         if (a + ang3 > 180) // if l3 is tilted up
-          len += y3;
+        len += y3;
         else // if l3 is tilted down
-          len -= y3;
+        len -= y3;
       } else // if l2 is tilted down
       {
         len -= y2;
         if (a + 180 < ang3) // if l3 is tilted up
-          len += y3;
+        len += y3;
         else // if l3 is tilted down
-          len -= y3;
+        len -= y3;
       }
     }
 

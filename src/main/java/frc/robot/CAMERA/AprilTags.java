@@ -15,10 +15,7 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 
-/**
- * Not JuneTags. Not FebruaryTags. X is up, Y is side to side when facing
- * directly at it
- */
+/** Not JuneTags. Not FebruaryTags. X is up, Y is side to side when facing directly at it */
 public class AprilTags {
 
   private PIDController moveAprilX;
@@ -86,8 +83,8 @@ public class AprilTags {
         return result.getBestTarget().getBestCameraToTarget().getZ();
       } else if (axis == "r") {
         return (Math.toDegrees(
-            result.getBestTarget().getBestCameraToTarget().getRotation().getAngle())
-            - 180)
+                    result.getBestTarget().getBestCameraToTarget().getRotation().getAngle())
+                - 180)
             % 360;
       } else if (axis == "yaw") {
         return result.getBestTarget().getYaw();

@@ -14,90 +14,90 @@ import frc.robot.MISC.Constants.AUTO.DISTANGLE;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class SwrvLeftRight extends SequentialCommandGroup {
-    /** Creates a new Swrv. */
-    public SwrvLeftRight() {
-        // Add your commands in the addCommands() call, e.g.
-        // addCommands(new FooCommand(), new BarCommand());
-        addCommands(
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sidePos,
-                                DISTANGLE.headingele,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sideCon,
-                                DISTANGLE.headingele,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sidePos,
-                                DISTANGLE.headingtwel,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sideCon,
-                                DISTANGLE.headingtwel,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sidePos,
-                                DISTANGLE.headingthir,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sideCon,
-                                DISTANGLE.headingfif,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sidePos,
-                                DISTANGLE.headingfourt,
-                                1))
-                        .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
-                Commands.deadline(
-                        new EtherAutoCommand(
-                                DISTANGLE.distanceA,
-                                DISTANGLE.distance,
-                                ((DISTANGLE.angle)),
-                                DISTANGLE.sideCon,
-                                DISTANGLE.headingsixt,
-                                1))
-                        .withTimeout(6));
-    }
+  /** Creates a new Swrv. */
+  public SwrvLeftRight() {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sidePos,
+                    DISTANGLE.headingele,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sideCon,
+                    DISTANGLE.headingele,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sidePos,
+                    DISTANGLE.headingtwel,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sideCon,
+                    DISTANGLE.headingtwel,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sidePos,
+                    DISTANGLE.headingthir,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sideCon,
+                    DISTANGLE.headingfif,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sidePos,
+                    DISTANGLE.headingfourt,
+                    1))
+            .withTimeout(6),
+        Commands.deadline(new Turn(0)).withTimeout(1),
+        Commands.deadline(
+                new EtherAutoCommand(
+                    DISTANGLE.distanceA,
+                    DISTANGLE.distance,
+                    ((DISTANGLE.angle)),
+                    DISTANGLE.sideCon,
+                    DISTANGLE.headingsixt,
+                    1))
+            .withTimeout(6));
+  }
 }

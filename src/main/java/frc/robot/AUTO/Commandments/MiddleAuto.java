@@ -6,6 +6,7 @@ package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.AUTO.Commands.IntakeAuto;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 import frc.robot.AUTO.Commands.RampCommand;
 
@@ -18,7 +19,7 @@ public class MiddleAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        // Commands.deadline(new IntakeAuto().withTimeout(2)),
+       // Commands.deadline(new IntakeAuto().withTimeout(2)),
         Commands.deadline(new MotionMagicAuto(80, 180)),
         Commands.deadline(new RampCommand()));
   }

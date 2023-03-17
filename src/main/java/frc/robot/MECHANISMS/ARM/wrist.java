@@ -57,7 +57,8 @@ public class Wrist {
     wristMotor.set(setpoint);
   }
 
-  public void moveWristRoller(double setpoint) {
+  public void moveWristRoller(double setpoint)
+  {
     wristRoller.set(setpoint);
   }
 

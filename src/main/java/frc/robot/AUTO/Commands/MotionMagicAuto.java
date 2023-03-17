@@ -11,7 +11,6 @@ import frc.robot.MECHANISMS.MkSwerveTrain;
 public class MotionMagicAuto extends CommandBase {
   private double dist;
   private double angle;
-
   /** Creates a new MotionMagicAuto. */
   public MotionMagicAuto(double dist, double angle) {
     this.angle = angle;
@@ -34,14 +33,12 @@ public class MotionMagicAuto extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // SmartDashboard.putBoolean("isfinished",
-    // MkSwerveTrain.getInstance().isMotionMagicDone());
+    // SmartDashboard.putBoolean("isfinished", MkSwerveTrain.getInstance().isMotionMagicDone());
     return MkSwerveTrain.getInstance().isMotionMagicDone();
   }
 }

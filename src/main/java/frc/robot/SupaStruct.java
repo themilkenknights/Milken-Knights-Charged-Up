@@ -101,6 +101,7 @@ public class SupaStruct {
   private Lights mLights = Lights.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
+  
 
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
   private GenericEntry slidaa;
@@ -112,10 +113,11 @@ public class SupaStruct {
 
   public void initTele() {
     try {
-      slidaa = tab.add("slidaa", 1)
-          .withWidget(BuiltInWidgets.kNumberSlider)
-          .withProperties(Map.of("min", -1, "max", 1))
-          .getEntry();
+      slidaa =
+          tab.add("slidaa", 1)
+              .withWidget(BuiltInWidgets.kNumberSlider)
+              .withProperties(Map.of("min", -1, "max", 1))
+              .getEntry();
 
     } catch (Exception e) {
       System.out.println(
@@ -185,10 +187,11 @@ public class SupaStruct {
 
     // i dont remember how i got this lol
 
-    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-        - MathFormulas.signumAngleEdition(str, fwd))
-        + 360)
-        % 360;
+    inverseTanAngleDrive =
+        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+                    - MathFormulas.signumAngleEdition(str, fwd))
+                + 360)
+            % 360;
 
     // --------------------------------------------------------------------//
     // PIGEON RESET
@@ -203,7 +206,8 @@ public class SupaStruct {
       train.startDrive();
     }
 
-    if (pov) {
+    if(pov)
+    {
       rcw = train.moveToAngy(xbox.getPOV());
     }
 
@@ -212,7 +216,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
-        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1 && !pov) { // && xbox.getPOV() == -1) {
+        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1 && !pov){ //&& xbox.getPOV() == -1) {
       rcw = 0;
     }
 
@@ -233,10 +237,10 @@ public class SupaStruct {
     if (xbutton) {
       april.alignToTag();
 
-    } else if ((fwd != 0 || str != 0 || rcw != 0)) {// && (xbox.getPOV() != -1)) { // +,-,+
+    } else if ((fwd != 0 || str != 0 || rcw != 0)) {//&& (xbox.getPOV() != -1)) { // +,-,+
       train.etherSwerve(
-          fwd,
-          str,
+          fwd ,
+          str ,
           -rcw,
           ControlMode.PercentOutput); // +,-,+
       // TODO why is it +,+,- and not +,-,+
@@ -250,7 +254,7 @@ public class SupaStruct {
       train.stopEverything();
     }
     SmartDashboard.putNumber("rcw", xbox.getPOV());
-    SmartDashboard.putNumber("pov", xbox.getPOV());
+  SmartDashboard.putNumber("pov", xbox.getPOV());
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
@@ -270,11 +274,9 @@ public class SupaStruct {
     // ARM
     // --------------------------------------------------------------------//
 
-    /*
-     * if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-     * arm.pidArm(88);
-     * } else
-     */ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    /*if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+      arm.pidArm(88);
+    } else*/ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(90);
     } else if (!rbbutton2 && lbbutton2) {
       arm.moveArm(-0.16, -0.16);
@@ -287,15 +289,15 @@ public class SupaStruct {
     } else {
       arm.moveArm(0, 0);
     }
-    if (bbutton2) {
-      wrist.moveWristPID(0);
-    } else if (abutton2) {
+    if(bbutton2){
+    wrist.moveWristPID(0);}
+    else if (abutton2){
       wrist.moveWristPID(360);
     }
-    SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
-    SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
-    SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
+SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
+SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//
     // TELESCOPE
@@ -329,9 +331,9 @@ public class SupaStruct {
     } else if (xboxOP.getRawButton(8)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
     } else if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      // arm.pidTelescope(0);
+      //arm.pidTelescope(0);
     } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      // arm.pidTelescope(8000);
+      //arm.pidTelescope(8000);
     }
     // else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
     // {
@@ -390,10 +392,9 @@ public class SupaStruct {
       toggleLightsPressed = false;
     }
   }
-
-  // --------------------------------------------------------------------//
-  // HUMAN PLAYER ARM
-  // --------------------------------------------------------------------//
+ // --------------------------------------------------------------------//
+ // HUMAN PLAYER ARM
+ // --------------------------------------------------------------------//
   public void updateHPArmToggle() {
     if (xbutton2) {
       if (!toggleHPArmPressed) {
@@ -418,18 +419,17 @@ public class SupaStruct {
     }
   }
   /*
-   * public void updateArmMidToggle() {
-   * if (bbutton2) {
-   * if (!toggleArmMidPressed) {
-   * toggleHPArmOn = !toggleHPArmOn;
-   * 
-   * toggleArmMidPressed = true;
-   * }
-   * } else {
-   * toggleArmMidPressed = false;
-   * }
-   * }
-   */
+  public void updateArmMidToggle() {
+    if (bbutton2) {
+      if (!toggleArmMidPressed) {
+        toggleHPArmOn = !toggleHPArmOn;
+
+        toggleArmMidPressed = true;
+      }
+    } else {
+      toggleArmMidPressed = false;
+    }
+  }*/
 
   public void teleopDisabled() {
     resetpig = false;
@@ -482,7 +482,7 @@ public class SupaStruct {
 
     // SmartDashboard.putNumber("count", count);
     // SmartDashboard.putNumber(
-    // "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
+    //     "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
     // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
   }
 

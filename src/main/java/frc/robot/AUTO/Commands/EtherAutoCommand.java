@@ -26,7 +26,6 @@ public class EtherAutoCommand extends CommandBase {
     this.lengthB = lengthB;
     this.side = side;
   }
-
   // youre doing a great job - josh
   // Called when the command is initially scheduled.
   @Override

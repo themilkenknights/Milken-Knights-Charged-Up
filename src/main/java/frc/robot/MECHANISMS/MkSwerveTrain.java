@@ -246,7 +246,7 @@ public class MkSwerveTrain {
     // MKTURN.greerRatio));
     SmartDashboard.putNumber("magicangle", vars.magicAngle);
 
-    vars.yaw = pigeon.getInstance().getPigYaw();
+    vars.yaw = pigeon.getInstance().getPigYaw() % 360;
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("pigeon", vars.yaw);
     SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
@@ -476,10 +476,10 @@ public class MkSwerveTrain {
   }
 
   /** move robot to angle/heading */
-  public double moveToAngy(double setpoint) {
-    setpoint = turn.calculate(Math.abs(vars.yaw), Math.abs(setpoint % 360));
+  public double moveToAngy(double set) {
+    double setpoint = turn.calculate(Math.abs(vars.yaw), Math.abs(set % 360));
     SmartDashboard.putNumber("yaw for move to angy", Math.abs(vars.yaw));
-    SmartDashboard.putNumber("setpoint for move to angy", Math.abs(setpoint % 360)/5);
+    SmartDashboard.putNumber("setpoint for move to angy", Math.abs(set % 360));
     return setpoint;
   }
 
@@ -753,7 +753,7 @@ public class MkSwerveTrain {
 
     public variables var;
     // three degrees error babeeeee!!!!
-    public double hP = 0.017, hI = hP * 0.03, hD = hP * 0.01; // 0.03i, 0.01d
+    public double hP = 0.0043, hI = hP * 0.03, hD = hP * 0.1; // 0.03i, 0.01d
     //TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

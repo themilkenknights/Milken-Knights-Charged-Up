@@ -207,7 +207,7 @@ public class SupaStruct {
       train.startDrive();
     }
 
-    if(xbox.getPOV() != -1)
+    if(pov)
     {
       rcw = train.moveToAngy(xbox.getPOV());
     }
@@ -217,7 +217,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
-        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1){ //&& xbox.getPOV() == -1) {
+        && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1 && !pov){ //&& xbox.getPOV() == -1) {
       rcw = 0;
     }
 
@@ -255,7 +255,7 @@ public class SupaStruct {
       train.stopEverything();
     }
     SmartDashboard.putNumber("rcw", xbox.getPOV());
-  SmartDashboard.putNumber("movetoangy", train.moveToAngy(xbox.getPOV()));
+  SmartDashboard.putNumber("pov", xbox.getPOV());
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//

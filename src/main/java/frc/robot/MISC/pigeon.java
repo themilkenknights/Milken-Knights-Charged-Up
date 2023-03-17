@@ -15,6 +15,11 @@ public class pigeon {
     return InstanceHolder.mInstance;
   }
 
+  public void setPigeon()
+  {
+    pig.configFactoryDefault();
+  }
+
   public double getPigYaw() {
     return pig.getYaw();
   }

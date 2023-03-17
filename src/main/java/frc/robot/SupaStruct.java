@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
-import frc.robot.CAMERA.UltraSonic;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MECHANISMS.ARM.wrist;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MECHANISMS.armintake;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
@@ -95,13 +95,14 @@ public class SupaStruct {
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
+  private armintake Wristintake = armintake.getInstance();
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
   private Arm arm = Arm.getInstance();
-  private UltraSonic ultra = UltraSonic.getInstance();
   private Lights mLights = Lights.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
+  
 
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
   private GenericEntry slidaa;
@@ -126,6 +127,7 @@ public class SupaStruct {
     }
     pigRotate = pigeon.getInstance().getPigYaw();
     arm.setArmToCanCoder();
+    wrist.getInstance().setwrist(0);
   }
 
   public void updateTele() {
@@ -134,10 +136,8 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     train.updateSwerve();
     april.updateApril();
-    ultra.updateUltra();
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
-    ultra.ultraSmartDashboard();
     x = april.getAxis("x");
     y = april.getAxis("y");
     // yaw = april.getAxis("yaw");
@@ -161,7 +161,7 @@ public class SupaStruct {
     abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
-    bbutton = xbox.getBButtonPressed();
+    bbutton = xbox.getBButton();
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 180;
     dpadup = xbox.getPOV() == 0;
@@ -172,7 +172,7 @@ public class SupaStruct {
     abutton2 = xboxOP.getAButtonPressed();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
-    bbutton2 = xboxOP.getBButtonPressed();
+    bbutton2 = xboxOP.getBButton();
     lbbutton2 = xboxOP.getLeftBumper();
     dpaddown2 = xboxOP.getPOV() == 180;
     dpadup2 = xboxOP.getPOV() == 0;
@@ -272,16 +272,6 @@ public class SupaStruct {
       intake.toggle();
     }
     // --------------------------------------------------------------------//
-    // CLAW
-    // --------------------------------------------------------------------//
-    if (abutton2) {
-      claw.extend();
-    }
-    if (bbutton2) {
-      claw.retract();
-    }
-
-    // --------------------------------------------------------------------//
     // ARM
     // --------------------------------------------------------------------//
 
@@ -300,13 +290,14 @@ public class SupaStruct {
     } else {
       arm.moveArm(0, 0);
     }
-
-
     if(bbutton2){
-      wrist.movewrist(1.0);
-    }else{
-    wrist.movewrist.set(0);
-  }
+    wrist.getInstance().setWristPID(100);}
+    else{
+      wrist.getInstance().movewrist(0);
+    }
+SmartDashboard.putNumber("neo 550", wrist.getInstance().getwrist());
+   
+
     // --------------------------------------------------------------------//
     // TELESCOPE
     // --------------------------------------------------------------------//
@@ -400,7 +391,9 @@ public class SupaStruct {
       toggleLightsPressed = false;
     }
   }
-
+ // --------------------------------------------------------------------//
+ // HUMAN PLAYER ARM
+ // --------------------------------------------------------------------//
   public void updateHPArmToggle() {
     if (xbutton2) {
       if (!toggleHPArmPressed) {

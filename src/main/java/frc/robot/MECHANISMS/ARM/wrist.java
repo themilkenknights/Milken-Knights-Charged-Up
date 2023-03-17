@@ -1,21 +1,12 @@
 package frc.robot.MECHANISMS.ARM;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Constants.CANID;
-import frc.robot.MISC.Constants.MKARM;
-import frc.robot.MISC.Constants.MKTELE;
 import frc.robot.MISC.Constants.MKWRIST;
-import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
@@ -31,7 +22,7 @@ private SparkMaxPIDController m_pidController;
   private wrist() {
     wristpid = new PIDController(MKWRIST.kP, MKWRIST.kI, MKWRIST.kD);
     wristmotor = motor.Sparky(CANID.wristCANID);
-    m_encoder = wristmotor.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 4096);
+    m_encoder = wristmotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     /**
      * In order to use PID functionality for a controller, a SparkMaxPIDController object
      * is constructed by calling the getPIDController() method on an existing
@@ -64,12 +55,20 @@ private SparkMaxPIDController m_pidController;
 
   public double getwrist()
   {
-    return m_encoder.getPosition();
+    return m_encoder.getPosition()*MKWRIST.greerRatio ;
+  }
+
+  public double getWristSpeed()
+  {
+    return wristmotor.get();
   }
 
   public void setWristPID(double setpoint)
   {
-    m_pidController.setReference(setpoint, CANSparkMax.ControlType.kPosition);
+    m_pidController.setReference(setpoint/MKWRIST.greerRatio, CANSparkMax.ControlType.kPosition);
+  }
+  public void setwrist(double setpoint){
+    m_encoder.setPosition(setpoint);
   }
 
   /**

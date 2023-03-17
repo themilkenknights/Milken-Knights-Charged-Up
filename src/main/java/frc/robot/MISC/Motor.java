@@ -56,7 +56,7 @@ public class Motor {
   public TalonFX driveMotor(int canid) {
     TalonFX drive = new TalonFX(canid, "train");
     drive.configFactoryDefault();
-    drive.configOpenloopRamp(1);
+    drive.configOpenloopRamp(.25);
     drive.configClosedloopRamp(0);
     drive.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     drive.setNeutralMode(MKDRIVE.mode);

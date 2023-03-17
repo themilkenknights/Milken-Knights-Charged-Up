@@ -293,7 +293,7 @@ public class SupaStruct {
     if(bbutton2){
     wrist.getInstance().setWristPID(0);}
     else if (abutton2){
-      wrist.getInstance().setWristPID(10);
+      wrist.getInstance().setWristPID(360);
     }
 SmartDashboard.putNumber("getwrist", wrist.getInstance().getwrist());
 SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getInstance().getwrist()));

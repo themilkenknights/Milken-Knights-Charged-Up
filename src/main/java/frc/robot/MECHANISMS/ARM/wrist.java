@@ -7,6 +7,7 @@ import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKWRIST;
+import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
@@ -55,7 +56,7 @@ private SparkMaxPIDController m_pidController;
 
   public double getwrist()
   {
-    return m_encoder.getPosition()*MKWRIST.greerRatio ;
+    return m_encoder.getPosition() ;
   }
 
   public double getWristSpeed()
@@ -65,7 +66,12 @@ private SparkMaxPIDController m_pidController;
 
   public void setWristPID(double setpoint)
   {
-    m_pidController.setReference(setpoint/MKWRIST.greerRatio, CANSparkMax.ControlType.kPosition);
+    m_pidController.setReference(MathFormulas.degreesToSpark(setpoint), CANSparkMax.ControlType.kPosition);
+  }
+
+  public void setWristPIDROT(double setpoint)
+  {
+    m_pidController.setReference(setpoint, CANSparkMax.ControlType.kPosition);
   }
   public void setwrist(double setpoint){
     m_encoder.setPosition(setpoint);

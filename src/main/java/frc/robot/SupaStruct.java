@@ -169,7 +169,7 @@ public class SupaStruct {
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
     // OP
     xbutton2 = xboxOP.getXButton();
-    abutton2 = xboxOP.getAButtonPressed();
+    abutton2 = xboxOP.getAButton();
     rbbutton2 = xboxOP.getRightBumper();
     ybutton2 = xboxOP.getYButton();
     bbutton2 = xboxOP.getBButton();
@@ -291,12 +291,14 @@ public class SupaStruct {
       arm.moveArm(0, 0);
     }
     if(bbutton2){
-    wrist.getInstance().setWristPID(100);}
-    else{
-      wrist.getInstance().movewrist(0);
+    wrist.getInstance().setWristPID(0);}
+    else if (abutton2){
+      wrist.getInstance().setWristPID(10);
     }
-SmartDashboard.putNumber("neo 550", wrist.getInstance().getwrist());
-   
+SmartDashboard.putNumber("getwrist", wrist.getInstance().getwrist());
+SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getInstance().getwrist()));
+SmartDashboard.putNumber("setpoint pid", wrist.getInstance().getWristSpeed());
+SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//
     // TELESCOPE

@@ -103,7 +103,7 @@ public class AprilTags {
     zPID = MkSwerveTrain.getInstance().moveToAngy(90);
     if (result.hasTargets()) {
       xPID = moveAprilX.calculate(getAxis("x"), 1);
-      yPID = moveAprilX.calculate(getAxis("y"), 1);
+      yPID = moveAprilY.calculate(getAxis("y"), 1);
     } else {
       xPID = 0;
       yPID = 0;

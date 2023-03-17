@@ -6,7 +6,6 @@ package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.AUTO.Commands.IntakeAuto;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 import frc.robot.AUTO.Commands.RampCommand;
 

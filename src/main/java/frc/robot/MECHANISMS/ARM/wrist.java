@@ -1,86 +1,98 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.MECHANISMS.ARM;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
-import edu.wpi.first.math.controller.PIDController;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKWRIST;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 import com.revrobotics.SparkMaxRelativeEncoder;
 
-public class wrist {
-
+public class Wrist {
 
   private Motor motor = Motor.getInstance();
-private PIDController wristpid;
-private CANSparkMax wristmotor;
-private RelativeEncoder m_encoder;
-private SparkMaxPIDController m_pidController;
+  private CANSparkMax wristRoller;
+  private CANSparkMax wristMotor;
+  private RelativeEncoder wristEncoder;
+  private SparkMaxPIDController wristPID;
 
-  private wrist() {
-    wristpid = new PIDController(MKWRIST.kP, MKWRIST.kI, MKWRIST.kD);
-    wristmotor = motor.Sparky(CANID.wristCANID);
-    m_encoder = wristmotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+  private Wrist() {
+    wristMotor = motor.Sparky(CANID.wristMotorCANID);
+    wristRoller = motor.Sparky(CANID.wristRollerCANID);
+    wristEncoder = wristMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     /**
-     * In order to use PID functionality for a controller, a SparkMaxPIDController object
+     * In order to use PID functionality for a controller, a SparkMaxPIDController
+     * object
      * is constructed by calling the getPIDController() method on an existing
      * CANSparkMax object
      */
-    m_pidController = wristmotor.getPIDController();
-  
+    wristPID = wristMotor.getPIDController();
+
     /**
      * The PID Controller can be configured to use the analog sensor as its feedback
      * device with the method SetFeedbackDevice() and passing the PID Controller
-     * the CANAnalog object. 
+     * the CANAnalog object.
      */
-    m_pidController.setFeedbackDevice(m_encoder);
+    wristPID.setFeedbackDevice(wristEncoder);
 
-    m_pidController.setP(MKWRIST.kP);
-    m_pidController.setI(MKWRIST.kI);
-    m_pidController.setD(MKWRIST.kD);
-    m_pidController.setIZone(0);
-    m_pidController.setFF(0);
-    m_pidController.setOutputRange(-1, 1);
+    wristPID.setP(MKWRIST.kP);
+    wristPID.setI(MKWRIST.kI);
+    wristPID.setD(MKWRIST.kD);
+    wristPID.setIZone(0);
+    wristPID.setFF(0);
+    wristPID.setOutputRange(-1, 1);
   }
 
-  public static wrist getInstance() {
+  public static Wrist getInstance() {
     return InstanceHolder.mInstance;
   }
 
-  public void movewrist(double setpoint) {
-    wristmotor.set(setpoint);
+  public void moveWristMotor(double setpoint) {
+    wristMotor.set(setpoint);
   }
 
-  public double getwrist()
+  public void moveWristRoller(double setpoint)
   {
-    return m_encoder.getPosition() ;
+    wristRoller.set(setpoint);
   }
 
-  public double getWristSpeed()
-  {
-    return wristmotor.get();
+  public double getWristNative() {
+    return wristEncoder.getPosition();
   }
 
-  public void setWristPID(double setpoint)
-  {
-    m_pidController.setReference(MathFormulas.degreesToSpark(setpoint), CANSparkMax.ControlType.kPosition);
+  public double getWristMotorSpeed() {
+    return wristMotor.get();
   }
 
-  public void setWristPIDROT(double setpoint)
-  {
-    m_pidController.setReference(setpoint, CANSparkMax.ControlType.kPosition);
+  public double getWristRollerSpeed() {
+    return wristRoller.get();
   }
-  public void setwrist(double setpoint){
-    m_encoder.setPosition(setpoint);
+
+  public void moveWristPID(double setpoint) {
+    wristPID.setReference(MathFormulas.degreesToSpark(setpoint), CANSparkMax.ControlType.kPosition);
+  }
+
+  public void moveWristPIDNative(double setpoint) {
+    wristPID.setReference(setpoint, CANSparkMax.ControlType.kPosition);
+  }
+
+  public void setWristMotor(double setpoint) {
+    wristEncoder.setPosition(setpoint);
   }
 
   /**
-   * This function assumes that the base of the arm is at the origin (0,0) and the angles are
-   * measured from the horizontal line. To account for gravity, you can add a third link that is
-   * perpendicular to the base of the arm and always points downward. You can then use the same
+   * This function assumes that the base of the arm is at the origin (0,0) and the
+   * angles are
+   * measured from the horizontal line. To account for gravity, you can add a
+   * third link that is
+   * perpendicular to the base of the arm and always points downward. You can then
+   * use the same
    * methods to calculate the angle for this third link. openai
    *
    * @param link1
@@ -94,9 +106,8 @@ private SparkMaxPIDController m_pidController;
 
     // Use the Law of Cosines to find the angle between link1 and the horizontal
     // line
-    double link1Angle =
-        Math.acos(
-            (Math.pow(link1, 2) + Math.pow(dist, 2) - Math.pow(link2, 2)) / (2 * link1 * dist));
+    double link1Angle = Math.acos(
+        (Math.pow(link1, 2) + Math.pow(dist, 2) - Math.pow(link2, 2)) / (2 * link1 * dist));
 
     // Use the Law of Sines to find the angle between link2 and the horizontal line
     double link2Angle = Math.asin((link2 * Math.sin(link1Angle)) / dist);
@@ -107,7 +118,8 @@ private SparkMaxPIDController m_pidController;
   }
 
   /**
-   * 3 joint arm https://www.chiefdelphi.com/t/pid-tuning-for-3-joint-arm/347116/15
+   * 3 joint arm
+   * https://www.chiefdelphi.com/t/pid-tuning-for-3-joint-arm/347116/15
    *
    * @param ang1
    * @param ang2
@@ -119,7 +131,7 @@ private SparkMaxPIDController m_pidController;
     double x = getX(ang1, ang2, ang3, lengths);
     double y = getY(ang1, ang2, ang3, lengths);
 
-    double[] xy = {x, y};
+    double[] xy = { x, y };
     return xy;
   }
 
@@ -129,8 +141,9 @@ private SparkMaxPIDController m_pidController;
 
     double realAng1 = 0;
     if (ang1 > 90) // if l1 is pointed backwards
-    realAng1 = 180 - ang1;
-    else realAng1 = ang1;
+      realAng1 = 180 - ang1;
+    else
+      realAng1 = ang1;
 
     double x1 = lengths[0] * Math.cos(realAng1);
     double x2 = lengths[1] * Math.cos(a);
@@ -139,8 +152,9 @@ private SparkMaxPIDController m_pidController;
     double len = 0;
 
     if (ang1 > 90) // if l1 is pointed backwards
-    len -= x1;
-    else len += x1;
+      len -= x1;
+    else
+      len += x1;
     len += x2;
     len += x3;
 
@@ -153,8 +167,9 @@ private SparkMaxPIDController m_pidController;
 
     double realAng1 = 0;
     if (ang1 > 90) // if l1 is pointed backwards
-    realAng1 = 180 - ang1;
-    else realAng1 = ang1;
+      realAng1 = 180 - ang1;
+    else
+      realAng1 = ang1;
 
     double y1 = lengths[0] * Math.sin(realAng1);
     double y2 = lengths[1] * Math.sin(a);
@@ -168,16 +183,16 @@ private SparkMaxPIDController m_pidController;
       {
         len += y2;
         if (a + ang3 > 180) // if l3 is tilted up
-        len += y3;
+          len += y3;
         else // if l3 is tilted down
-        len -= y3;
+          len -= y3;
       } else // if l2 is tilted down
       {
         len -= y2;
         if (a + 180 < ang3) // if l3 is tilted up
-        len += y3;
+          len += y3;
         else // if l3 is tilted down
-        len -= y3;
+          len -= y3;
       }
     } else // if l1 is tilted forward
     {
@@ -185,16 +200,16 @@ private SparkMaxPIDController m_pidController;
       {
         len += y2;
         if (a + ang3 > 180) // if l3 is tilted up
-        len += y3;
+          len += y3;
         else // if l3 is tilted down
-        len -= y3;
+          len -= y3;
       } else // if l2 is tilted down
       {
         len -= y2;
         if (a + 180 < ang3) // if l3 is tilted up
-        len += y3;
+          len += y3;
         else // if l3 is tilted down
-        len -= y3;
+          len -= y3;
       }
     }
 
@@ -205,6 +220,6 @@ private SparkMaxPIDController m_pidController;
   // feed forward for arm
 
   private static class InstanceHolder {
-    private static final wrist mInstance = new wrist();
+    private static final Wrist mInstance = new Wrist();
   }
 }

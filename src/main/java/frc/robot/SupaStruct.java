@@ -15,10 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
-import frc.robot.MECHANISMS.ARM.wrist;
+import frc.robot.MECHANISMS.ARM.Wrist;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
-import frc.robot.MECHANISMS.armintake;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKBABY;
@@ -95,7 +94,7 @@ public class SupaStruct {
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
-  private armintake Wristintake = armintake.getInstance();
+  private Wrist wrist = Wrist.getInstance();
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
   private Arm arm = Arm.getInstance();
@@ -127,7 +126,7 @@ public class SupaStruct {
     }
     pigRotate = pigeon.getInstance().getPigYaw();
     arm.setArmToCanCoder();
-    wrist.getInstance().setwrist(0);
+    wrist.setWristMotor(0);
   }
 
   public void updateTele() {
@@ -291,13 +290,13 @@ public class SupaStruct {
       arm.moveArm(0, 0);
     }
     if(bbutton2){
-    wrist.getInstance().setWristPID(0);}
+    wrist.moveWristPID(0);}
     else if (abutton2){
-      wrist.getInstance().setWristPID(360);
+      wrist.moveWristPID(360);
     }
-SmartDashboard.putNumber("getwrist", wrist.getInstance().getwrist());
-SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getInstance().getwrist()));
-SmartDashboard.putNumber("setpoint pid", wrist.getInstance().getWristSpeed());
+SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
 SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//

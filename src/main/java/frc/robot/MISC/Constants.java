@@ -18,10 +18,11 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
   public static final double kPi = 3.14159265359;
-  public static final double[] nullPID = {0, 0, 0, 0};
- // --------------------------------------------------------------------//
- // DRIVETRAIN
- // --------------------------------------------------------------------//
+  public static final double[] nullPID = { 0, 0, 0, 0 };
+
+  // --------------------------------------------------------------------//
+  // DRIVETRAIN
+  // --------------------------------------------------------------------//
   public static class MKFALCON {
     public static final int velocityMeasAmount = 26;
     public static final int statusOneMeas = 20;
@@ -43,7 +44,7 @@ public final class Constants {
     public static final double kD = 0 * kP;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
 
     public static final NeutralMode mode = NeutralMode.Brake;
 
@@ -60,11 +61,12 @@ public final class Constants {
   public static class MKTURN {
     public static final double kP = 0.3;
     public static final double kI = 0; // 0.0003;
-    // TODO test i in motion magic and pid for both auto and teleop, see if it really is this
+    // TODO test i in motion magic and pid for both auto and teleop, see if it
+    // really is this
     public static final double kD = 0.0000000;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
 
     public static final NeutralMode mode = NeutralMode.Coast;
 
@@ -76,16 +78,16 @@ public final class Constants {
   }
 
   public static class MKCANCODER {
-    public static final double topLeftOffset =11.865234375 + 180; // 7.294921875-180;   // -173.3203125+90-10.810546875
+    public static final double topLeftOffset = 11.865234375 + 180; // 7.294921875-180; // -173.3203125+90-10.810546875
     public static final double topRightOffset = -25.83984275 + 180;
     public static final double bottomLeftOffset = 153.0175781 - 180;
-    public static final double bottomRightOffset =7.294921875 - 180; // 11.865234375-180;// -174.375+90  -5.44921875
+    public static final double bottomRightOffset = 7.294921875 - 180; // 11.865234375-180;// -174.375+90 -5.44921875
 
     public static final double[] offset = {
-      MKCANCODER.topLeftOffset,
-      MKCANCODER.topRightOffset,
-      MKCANCODER.bottomLeftOffset,
-      MKCANCODER.bottomRightOffset
+        MKCANCODER.topLeftOffset,
+        MKCANCODER.topRightOffset,
+        MKCANCODER.bottomLeftOffset,
+        MKCANCODER.bottomRightOffset
     };
 
     public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
@@ -121,9 +123,9 @@ public final class Constants {
     public static final double rcwBABY = 2; // 2 very fast
   }
 
- // --------------------------------------------------------------------//
- // APRIL TAG
- // --------------------------------------------------------------------//
+  // --------------------------------------------------------------------//
+  // APRIL TAG
+  // --------------------------------------------------------------------//
   public static class MKAPRIL {
     public static final double xkP = 0.3;
     public static final double xkI = 0;
@@ -136,18 +138,18 @@ public final class Constants {
     public static final double ykP = 0.1;
     public static final double ykI = 0;
     public static final double ykD = 0;
-    public static final Transform3d robotToCam =
-        new Transform3d(
-            new Translation3d(Units.inchesToMeters(8), 0, Units.inchesToMeters(6)),
-            new Rotation3d(
-                0, 0,
-                0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+    public static final Transform3d robotToCam = new Transform3d(
+        new Translation3d(Units.inchesToMeters(8), 0, Units.inchesToMeters(6)),
+        new Rotation3d(
+            0, 0,
+            0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
     // from center.
     public static final String cameraName = "ShoutOutToMyStove";
   }
- // --------------------------------------------------------------------//
- // AUTO RAMP
- // --------------------------------------------------------------------//
+
+  // --------------------------------------------------------------------//
+  // AUTO RAMP
+  // --------------------------------------------------------------------//
   public static class MKRAMP {
     public static final double kP = .06;
     public static final double kI = 0;
@@ -155,9 +157,9 @@ public final class Constants {
     public static final double threshold = 30;
   }
 
- // --------------------------------------------------------------------//
- // CONTROLLER PORTS
- // --------------------------------------------------------------------//
+  // --------------------------------------------------------------------//
+  // CONTROLLER PORTS
+  // --------------------------------------------------------------------//
   public static class CONTROLLERS {
     public static final int driverPort = 0;
     public static final int opPort = 1;
@@ -175,9 +177,10 @@ public final class Constants {
     public static final int bottomPOV = 180;
     public static final int leftPOV = 270;
   }
- // --------------------------------------------------------------------//
- // CANIDS
- // --------------------------------------------------------------------//
+
+  // --------------------------------------------------------------------//
+  // CANIDS
+  // --------------------------------------------------------------------//
   public static class CANID {
     // drive motors
     public static final int topDriveLeftCANID = 5; // 5
@@ -204,8 +207,8 @@ public final class Constants {
     public static final int rightarmCANID = 25;
     public static final int telescopeCANID = 26;
     public static final int telescopeCanCoderCANID = 27;
-    public static final int wristCANID=31;
-    public static final int wristroller=32;
+    public static final int wristMotorCANID = 31;
+    public static final int wristRollerCANID = 32;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -213,39 +216,42 @@ public final class Constants {
 
     public static final int pigeonCANID = 30;
   }
-// --------------------------------------------------------------------//
-// WRIST
-// --------------------------------------------------------------------//
-public static class MKWRIST {
-  public static final double greerRatio = 27.3529/1.0; // 0.01098901098;
-  public static final double kP = .11;
-  public static final double kI = 0.0;
-  public static final double kD = 0.0000;
-  public static final double kF = 0;
-  public static final double[] pidf = {kP, kI, kD, kF};
-  public static final double minA = 0.055; // 0.065;
-  public static final double maxA = 0.045;
-  public static final double maxDegreePosition = 360;
-  public static final double minDegreePosition = 0;
-  public static final double offset = 0;
 
-}
-// --------------------------------------------------------------------//
- // ARM
- // --------------------------------------------------------------------//
+  // --------------------------------------------------------------------//
+  // WRIST
+  // --------------------------------------------------------------------//
+  public static class MKWRIST {
+    public static final double greerRatio = 27.3529 / 1.0; // 0.01098901098;
+    public static final double kP = .11;
+    public static final double kI = 0.0;
+    public static final double kD = 0.0000;
+    public static final double kF = 0;
+    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double minA = 0.055; // 0.065;
+    public static final double maxA = 0.045;
+    public static final double maxDegreePosition = 360;
+    public static final double minDegreePosition = 0;
+    public static final double offset = 0;
+
+  }
+
+  // --------------------------------------------------------------------//
+  // ARM
+  // --------------------------------------------------------------------//
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
     public static final double kP = 0.002;
     public static final double kI = 0.00;
     public static final double kD = 0.0005;
     public static final double kF = 0;
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
     public static final double minA = 0.055; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;
     public static final double offset = -107.490234375;
   }
+
   public static class MKTELE {
     public static final double greerRatio = .04938272;
     public static final double maxNativePositionTelescope = 8300;
@@ -258,11 +264,12 @@ public static class MKWRIST {
     public static final double kD = 0.00;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
   }
- // --------------------------------------------------------------------//
- // INTAKE
- // --------------------------------------------------------------------//
+
+  // --------------------------------------------------------------------//
+  // INTAKE
+  // --------------------------------------------------------------------//
   public static class MKINTAKE {
     public static final NeutralMode rollerNeutralMode = NeutralMode.Coast;
 
@@ -271,7 +278,7 @@ public static class MKWRIST {
     public static final double kD = kP * 0;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
 
     public static final boolean inverted = false;
 
@@ -312,9 +319,10 @@ public static class MKWRIST {
       public static final double distance = MathFormulas.calculateArcOfPath(distanceA, lengthB);
       public static final double angle = MathFormulas.calculateAngleOfPath(distanceA, lengthB);
     }
- // --------------------------------------------------------------------//
- // WPI SWERVE
- // --------------------------------------------------------------------//
+
+    // --------------------------------------------------------------------//
+    // WPI SWERVE
+    // --------------------------------------------------------------------//
     public static final double turnSwerveControlKp = 1;
     public static final double driveSwerveControlKpY = 1;
     public static final double driveSwerveControlKpX = 1;
@@ -322,12 +330,11 @@ public static class MKWRIST {
     public static final double heightMeters = MathFormulas.inchesToMeters(MKTRAIN.heightInches / 2);
     public static final double widthMeters = MathFormulas.inchesToMeters(MKTRAIN.widthInches / 2);
 
-    public static final SwerveDriveKinematics kDriveKinematics =
-        new SwerveDriveKinematics(
-            new Translation2d(heightMeters, widthMeters),
-            new Translation2d(heightMeters, -widthMeters),
-            new Translation2d(-heightMeters, widthMeters),
-            new Translation2d(-heightMeters, -widthMeters));
+    public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
+        new Translation2d(heightMeters, widthMeters),
+        new Translation2d(heightMeters, -widthMeters),
+        new Translation2d(-heightMeters, widthMeters),
+        new Translation2d(-heightMeters, -widthMeters));
 
     // actual drive module stats
     public static final double maxModuleTurnVelo = kPi;
@@ -347,20 +354,22 @@ public static class MKWRIST {
 
     public static final double maxDriveVelo = 1;
 
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-        new TrapezoidProfile.Constraints(maxAutoTurnVelo, maxAutoTurnAccel);
+    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
+        maxAutoTurnVelo, maxAutoTurnAccel);
   }
- // --------------------------------------------------------------------//
- // ODOEMTRY
- // --------------------------------------------------------------------//
+
+  // --------------------------------------------------------------------//
+  // ODOEMTRY
+  // --------------------------------------------------------------------//
   public static class ODO {
     public static final double goalXInches = 120;
     public static final double goalYInches = 120;
     public static final double goalRadius = 60;
   }
- // --------------------------------------------------------------------//
- // LIGHTS
- // --------------------------------------------------------------------//
+
+  // --------------------------------------------------------------------//
+  // LIGHTS
+  // --------------------------------------------------------------------//
   public static class LIGHTS {
     public static final int PWMPORT = 0;
     public static final int bufferNum = 151;

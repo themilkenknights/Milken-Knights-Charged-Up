@@ -16,6 +16,7 @@ import frc.robot.CAMERA.AprilTags;
 import frc.robot.CAMERA.UltraSonic;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
+import frc.robot.MECHANISMS.ARM.wrist;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
@@ -300,6 +301,12 @@ public class SupaStruct {
       arm.moveArm(0, 0);
     }
 
+
+    if(bbutton2){
+      wrist.movewrist(1.0);
+    }else{
+    wrist.movewrist.set(0);
+  }
     // --------------------------------------------------------------------//
     // TELESCOPE
     // --------------------------------------------------------------------//

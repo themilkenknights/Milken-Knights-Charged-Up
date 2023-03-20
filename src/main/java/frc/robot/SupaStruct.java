@@ -16,6 +16,7 @@ import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
 import frc.robot.MECHANISMS.ARM.Wrist;
+import frc.robot.MECHANISMS.ARM.Wrist.MODE;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
@@ -144,7 +145,7 @@ public class SupaStruct {
     // VARIABLES
     // --------------------------------------------------------------------//
     updateLightsToggle();
-    updateHPArmToggle();
+    //updateHPArmToggle();
     fwd = (xbox.getRawAxis(DriveInput.fwd) - 0.1) / (1 - 0.1);
     fwdSignum = Math.signum(fwd) * -1;
     str = (xbox.getRawAxis(DriveInput.str) - 0.1) / (1 - 0.1);
@@ -155,7 +156,7 @@ public class SupaStruct {
     rcw = rcwX;
     // DRIVER
     xbutton = xbox.getXButton();
-    abutton = xbox.getAButtonPressed();
+    abutton = xbox.getAButton();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
     bbutton = xbox.getBButton();
@@ -287,15 +288,22 @@ public class SupaStruct {
     } else {
       arm.moveArm(0, 0);
     }
-    if(bbutton2){
-    wrist.moveWristPID(0);}
-    else if (abutton2){
-      wrist.moveWristPID(360);
+    if (xbutton2) {
+      arm.setLeft(0);
+      arm.setRight(0);
     }
-SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
-SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
-SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
+    if (bbutton2) {
+      wrist.setWristMotor(0);
+    } else if (abutton2) {
+      wrist.moveWristPID(wrist.getWristMotorGudAngle(MODE.up));
+    }
+    SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
+    SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
+    SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
+    SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+    SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
+    SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//
     // TELESCOPE
@@ -337,9 +345,8 @@ SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
     // {
 
     // }
-    else {
-
-      arm.moveTele(0);
+    else if(arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+      arm.pidTelescope(0);
     }
 
     if (xboxOP.getBButton()

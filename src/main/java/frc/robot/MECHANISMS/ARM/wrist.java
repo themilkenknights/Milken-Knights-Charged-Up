@@ -9,6 +9,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
 import frc.robot.MISC.Constants.CANID;
+import frc.robot.MISC.Constants.MKARM;
 import frc.robot.MISC.Constants.MKWRIST;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
@@ -17,6 +18,7 @@ import com.revrobotics.SparkMaxRelativeEncoder;
 public class Wrist {
 
   private Motor motor = Motor.getInstance();
+  private Arm arm = Arm.getInstance();
   private CANSparkMax wristRoller;
   private CANSparkMax wristMotor;
   private RelativeEncoder wristEncoder;
@@ -57,8 +59,7 @@ public class Wrist {
     wristMotor.set(setpoint);
   }
 
-  public void moveWristRoller(double setpoint)
-  {
+  public void moveWristRoller(double setpoint) {
     wristRoller.set(setpoint);
   }
 
@@ -86,6 +87,45 @@ public class Wrist {
     wristEncoder.setPosition(setpoint);
   }
 
+  public double getWristMotorGudAngle(MODE mode) {
+    if (arm.getArmDegrees() >= MKARM.almostStowedAngle) {
+      switch (mode) {
+        case down:
+          return -arm.getArmDegrees();
+        case out:
+          return 90 - arm.getArmDegrees();
+        case up:
+          return 180 - arm.getArmDegrees();
+        default:
+          return MKWRIST.stowedAngle;
+      }
+    } else {
+      return MKWRIST.stowedAngle;
+    }
+  }
+
+  public enum MODE {
+    out,
+    down,
+    up
+  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   /**
    * This function assumes that the base of the arm is at the origin (0,0) and the
    * angles are

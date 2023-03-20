@@ -232,7 +232,7 @@ public final class Constants {
     public static final double maxDegreePosition = 360;
     public static final double minDegreePosition = 0;
     public static final double offset = 0;
-
+    public static final double stowedAngle = 60;
   }
 
   // --------------------------------------------------------------------//
@@ -250,6 +250,7 @@ public final class Constants {
     public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;
     public static final double offset = -107.490234375;
+    public static final double almostStowedAngle = 30;
   }
 
   public static class MKTELE {

@@ -345,9 +345,12 @@ public class SupaStruct {
     // {
 
     // }
-    else if(arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.pidTelescope(0);
+    else{
+      arm.moveTele(0);
     }
+    //else if(arm.getTelescope() > MKTELE.minNativePositionTelescope) {
+      //arm.pidTelescope(0);
+    //}
 
     if (xboxOP.getBButton()
         || xboxOP.getAButton()

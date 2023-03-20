@@ -110,22 +110,6 @@ public class Wrist {
     up
   };
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   /**
    * This function assumes that the base of the arm is at the origin (0,0) and the
    * angles are

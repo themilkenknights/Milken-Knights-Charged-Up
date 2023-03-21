@@ -6,8 +6,11 @@ package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.AUTO.Commands.EtherStraightCommand;
+import frc.robot.AUTO.Commands.EtherTurnCommand;
 import frc.robot.AUTO.Commands.IntakeAuto;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
+import frc.robot.AUTO.Commands.intakedeploy;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,7 +21,15 @@ public class SideAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        Commands.deadline(new IntakeAuto().withTimeout(2)),
-        Commands.deadline(new MotionMagicAuto(155, 270)));
+        Commands.deadline(new IntakeAuto(.8).withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(185, -0.5,0, 110)),
+        Commands.deadline(new intakedeploy().withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(50, -.1, -.4, 110), new IntakeAuto(-.5).withTimeout(2)),
+        Commands.deadline(new intakedeploy().withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(30, .1, .4, 110)),
+        Commands.deadline(new EtherStraightCommand(160, 0.5,0, 0)),
+        Commands.deadline(new IntakeAuto(.7).withTimeout(1)));
+
+
   }
 }

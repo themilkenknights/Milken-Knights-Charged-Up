@@ -44,7 +44,7 @@ public class Lights {
     // For every pixel
     for (var i = 0; i < LIGHTS.bufferNum; i++) {
       timer.start();
-      buffer.setRGB(i, 255 / 3, 255 / 3, 0);
+      buffer.setRGB(i, 255 / 3, 150 / 3, 0);
       // buffertwo.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
       if (timer.get() > 0.08) {
         offset = (offset + 1) % LIGHTS.bufferNum;

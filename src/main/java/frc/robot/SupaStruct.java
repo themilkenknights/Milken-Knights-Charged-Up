@@ -156,7 +156,7 @@ public class SupaStruct {
     rcw = rcwX;
     // DRIVER
     xbutton = xbox.getXButton();
-    abutton = xbox.getAButton();
+    abutton = xbox.getAButtonPressed();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
     bbutton = xbox.getBButton();

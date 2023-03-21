@@ -211,6 +211,7 @@ public class MkSwerveTrain {
 
   public void updateSwerve() {
     DeltaAirlines.getInstance().updateDeltaTime();
+    
 
     // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
@@ -220,7 +221,7 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    
+    /* 
         SmartDashboard.putNumber("topleftcan", tlCoder());
         SmartDashboard.putNumber("toprightcan", trCoder());
         SmartDashboard.putNumber("botleftcan", blCoder());
@@ -230,7 +231,7 @@ public class MkSwerveTrain {
         SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomrightnativeTURN", MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
-    
+    */
     /*
     SmartDashboard.putNumber("topleftnativeDRIVE", (topDriveLeft.getSelectedSensorVelocity()));
     SmartDashboard.putNumber("toprightnativeDRIVE", (topDriveRight.getSelectedSensorVelocity()));
@@ -245,6 +246,8 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217,
     // MKTURN.greerRatio));
     SmartDashboard.putNumber("magicangle", vars.magicAngle);
+    SmartDashboard.putNumber("autp dist test", vars.avgDistTest);
+    SmartDashboard.putNumber("total", vars.totalDistance);
 
     vars.yaw = pigeon.getInstance().getPigYaw() % 360;
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
@@ -460,27 +463,32 @@ public class MkSwerveTrain {
       vars.mod4[0] /= vars.max;
     }
 
-    vars.mod1 = setDirection(tlDeg(), vars.mod1);
-    vars.mod2 = setDirection(trDeg(), vars.mod2);
-    vars.mod3 = setDirection(blDeg(), vars.mod3);
-    vars.mod4 = setDirection(brDeg(), vars.mod4);
+    vars.mod2 = setDirection(tlDeg(), vars.mod2);
+    vars.mod1 = setDirection(trDeg(), vars.mod1);
+    vars.mod4 = setDirection(blDeg(), vars.mod4);
+    vars.mod3 = setDirection(brDeg(), vars.mod3);
 
     // SmartDashboard.putNumber("a", vars.A);
     // SmartDashboard.putNumber("b", vars.B);
     // SmartDashboard.putNumber("c", vars.C);
     // SmartDashboard.putNumber("d", vars.D);
     // SmartDashboard.putNumber("topdrileftvelo", topDriveLeft.getSelectedSensorVelocity());
-    //
-    setModuleDrive(mode, vars.mod1[0], vars.mod2[0], vars.mod3[0], vars.mod4[0]);
-    setModuleTurn(vars.mod1[1], vars.mod2[1], vars.mod3[1], vars.mod4[1]);
+    etherRCWFinder(FWD, STR, -RCW);
+    setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
+    setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
 
   /** move robot to angle/heading */
   public double moveToAngy(double set) {
-    double setpoint = turn.calculate(Math.abs(vars.yaw), Math.abs(set % 360));
+    vars.hError = set -  Math.abs(vars.yaw);// Error = Target - Actual
+            vars.hIntegral += (vars.hError*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
+            vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
+            vars.hPreviousError = vars.hError;
+            return vars.hP*vars.hError + vars.hI*vars.hIntegral + vars.hD*vars.hDerivative;
+    /*double setpoint = turn.calculate(Math.abs(vars.yaw%360), Math.abs(set % 360));
     SmartDashboard.putNumber("yaw for move to angy", Math.abs(vars.yaw));
-    SmartDashboard.putNumber("setpoint for move to angy", Math.abs(set % 360));
-    return setpoint;
+    SmartDashboard.putNumber("setpoint for move to angy", Math.abs(set % 360));*/
+    //return setpoint;
   }
 
   /**
@@ -537,7 +545,7 @@ public class MkSwerveTrain {
     vars.totalDistance = totalDistance;
     vars.avgDistInches = 0;
     vars.distanceA = distanceA;
-
+    vars.avgDistTest=0;
     SmartDashboard.putNumber("totaldistancccee", vars.totalDistance);
   }
 
@@ -753,7 +761,7 @@ public class MkSwerveTrain {
 
     public variables var;
     // three degrees error babeeeee!!!!
-    public double hP = 0.0043, hI = hP * 0.03, hD = hP * 0.1; // 0.03i, 0.01d
+    public double hP = 0.0042, hI = 0.0000, hD = 0.0015; // 0.03i, 0.01d
     //TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

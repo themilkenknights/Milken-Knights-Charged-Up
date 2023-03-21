@@ -6,14 +6,14 @@ package frc.robot.AUTO.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.Intake;
+import frc.robot.MECHANISMS.ARM.Wrist;
 
-public class IntakeAuto extends CommandBase {
+public class clawrollers extends CommandBase {
   private double setpoint;
-
-  /** Creates a new IntakeAuto. */
-  public IntakeAuto(double setpoint) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  /** Creates a new clawrollers. */
+  public clawrollers(double setpoint) {
     this.setpoint = setpoint;
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -23,13 +23,12 @@ public class IntakeAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Intake.getInstance().rollerSet(setpoint);
+Wrist.getInstance().moveWristRoller(setpoint);
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Intake.getInstance().rollerSet(0);
+    Wrist.getInstance().moveWristRoller(0);
   }
 
   // Returns true when the command should end.

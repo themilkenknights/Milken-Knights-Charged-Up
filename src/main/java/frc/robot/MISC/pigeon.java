@@ -5,11 +5,13 @@
 package frc.robot.MISC;
 
 import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
+
 import frc.robot.MISC.Constants.CANID;
 
 /** pigeon stuff */
 public class pigeon {
-  private Pigeon2 pig = new Pigeon2(CANID.pigeonCANID, "train");
+  private WPI_Pigeon2 pig = new WPI_Pigeon2(CANID.pigeonCANID, "train");
 
   public static pigeon getInstance() {
     return InstanceHolder.mInstance;

@@ -7,30 +7,25 @@ package frc.robot.AUTO.Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.Intake;
 
-public class IntakeAuto extends CommandBase {
-  private double setpoint;
-
-  /** Creates a new IntakeAuto. */
-  public IntakeAuto(double setpoint) {
+public class intakedeploy extends CommandBase {
+  /** Creates a new intakedeploy. */
+  public intakedeploy() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.setpoint = setpoint;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    Intake.getInstance().toggle();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    Intake.getInstance().rollerSet(setpoint);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    Intake.getInstance().rollerSet(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

@@ -30,13 +30,15 @@ public class EtherStraightCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    train.etherAutoSwerve(FWD, STR, 0, ControlMode.PercentOutput);
+    train.etherAutoSwerve(FWD, STR, -train.moveToAngy(angle), ControlMode.PercentOutput);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     // SmartDashboard.putBoolean("FINISHED RAMP", true);
+    train.setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
+    train.setModuleTurn(0, 0, 0, 0);
   }
 
   // Returns true when the command should end.

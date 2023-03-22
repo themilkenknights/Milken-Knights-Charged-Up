@@ -13,12 +13,12 @@ import frc.robot.AUTO.Commands.RampCommand;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class MiddleAuto extends SequentialCommandGroup {
-  /** Creates a new SideAuto. */
+  /** Creates a new RightDoubleLow. */
   public MiddleAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-       // Commands.deadline(new IntakeAuto().withTimeout(2)),
+        // Commands.deadline(new IntakeAuto().withTimeout(2)),
         Commands.deadline(new MotionMagicAuto(80, 180)),
         Commands.deadline(new RampCommand()));
   }

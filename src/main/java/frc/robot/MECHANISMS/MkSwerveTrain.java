@@ -221,12 +221,12 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    /* 
+    
         SmartDashboard.putNumber("topleftcan", tlCoder());
         SmartDashboard.putNumber("toprightcan", trCoder());
         SmartDashboard.putNumber("botleftcan", blCoder());
         SmartDashboard.putNumber("botrightcan", brCoder());
-
+/* 
         SmartDashboard.putNumber("topleftnativeTURN", MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));

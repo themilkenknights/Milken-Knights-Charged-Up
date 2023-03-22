@@ -202,6 +202,7 @@ public class SupaStruct {
       inverseTanAngleOG = 0;
       train.vars.avgDistTest = 0;
       train.vars.avgDistInches = 0;
+      train.startTurn();
       train.startDrive();
     }
 
@@ -297,13 +298,13 @@ public class SupaStruct {
     } else if (abutton2) {
       wrist.moveWristPID(wrist.getWristMotorGudAngle(MODE.up));
     }
-    SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
-    SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
-    SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
-    SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
-    SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
-    SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
+    //SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
+    //SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
+    //SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
+    //SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+   // SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+   // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
+    //SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//
     // TELESCOPE

@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.hal.util.UncleanStatusException;
+import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticHub;
@@ -22,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.MiddleAuto;
-import frc.robot.AUTO.Commandments.SideAuto;
+import frc.robot.AUTO.Commandments.RightDoubleLow;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CANID;
@@ -31,22 +32,26 @@ import frc.robot.MISC.Odometry;
 import frc.robot.MISC.pigeon;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the
+ * name of this class or
+ * the package after creating this project, you must also update the
+ * build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
   /**
-   * This function is run when the robot is first started up and should be used for any
+   * This function is run when the robot is first started up and should be used
+   * for any
    * initialization code.
    */
   private Command m_autonomousCommand;
 
   private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
   private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
-  private ComplexWidget positionChooserTab =
-      mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
+  private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser)
+      .withWidget(BuiltInWidgets.kSplitButtonChooser);
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
@@ -58,6 +63,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("SIDES", AutoPosition.SIDES);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
@@ -110,7 +116,7 @@ public class Robot extends TimedRobot {
     Arm.getInstance().setTelescope(125);
     switch (positionChooser.getSelected()) {
       case SIDES:
-        m_autonomousCommand = new SideAuto();
+        m_autonomousCommand = new RightDoubleLow();
         break;
       case MIDDLE:
         m_autonomousCommand = new MiddleAuto();
@@ -155,11 +161,12 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
-    m_autonomousCommand = new SideAuto();
+    m_autonomousCommand = new RightDoubleLow();
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
   public void testInit() {

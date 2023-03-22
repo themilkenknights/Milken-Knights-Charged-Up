@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.net.PortForwarder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.MKAPRIL;
 import frc.robot.MISC.MathFormulas;
@@ -23,7 +24,7 @@ public class AprilTags {
 
   // Constants such as camera and target height stored. Change per robot and goal!
   private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(27.3);
-  private final double TARGET_HEIGHT_METERS = Units.feetToMeters(5);
+  private final double TARGET_HEIGHT_METERS = Units.feetToMeters(1.5);
 
   // Angle between horizontal and the camera.
   private final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
@@ -38,7 +39,7 @@ public class AprilTags {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
 
   private AprilTags() {
-    PortForwarder.add(5800, "photonvision.local", 5800);
+
 
     camera = new PhotonCamera("ShoutOutToMyStove");
 
@@ -57,6 +58,7 @@ public class AprilTags {
 
   public void updateApril() {
     result = camera.getLatestResult();
+    SmartDashboard.putNumber("distancetogoal", getAxis("x"));
   }
 
   /** Gets distance from tag */
@@ -100,10 +102,10 @@ public class AprilTags {
     double xPID;
     double yPID;
     double zPID;
-    zPID = MkSwerveTrain.getInstance().moveToAngy(90);
+    zPID = MkSwerveTrain.getInstance().moveToAngy(Math.toDegrees(Math.atan(getAxis("y")/getAxis("x"))));
     if (result.hasTargets()) {
-      xPID = moveAprilX.calculate(getAxis("x"), 1);
-      yPID = moveAprilY.calculate(getAxis("y"), 1);
+      xPID = moveAprilX.calculate(getAxis("x"), 2);
+      yPID = moveAprilY.calculate(getAxis("y"), 0);
     } else {
       xPID = 0;
       yPID = 0;
@@ -116,6 +118,7 @@ public class AprilTags {
   }
 
   public void aprilSmartDashboard() {
+    SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y")/getAxis("x"))));
     /*
      * SmartDashboard.putNumber("aprilRQANge", get2DRange());
      * SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());

@@ -80,7 +80,7 @@ public final class Constants {
   public static class MKCANCODER {
     public static final double topLeftOffset = 11.865234375 + 180; // 7.294921875-180; // -173.3203125+90-10.810546875
     public static final double topRightOffset = -25.83984275 + 180;
-    public static final double bottomLeftOffset = 153.0175781 - 180;
+    public static final double bottomLeftOffset = 153.0175781 - 16 - 180;
     public static final double bottomRightOffset = 7.294921875 - 180; // 11.865234375-180;// -174.375+90 -5.44921875
 
     public static final double[] offset = {
@@ -127,15 +127,11 @@ public final class Constants {
   // APRIL TAG
   // --------------------------------------------------------------------//
   public static class MKAPRIL {
-    public static final double xkP = 0.3;
+    public static final double xkP = 0.05;
     public static final double xkI = 0;
     public static final double xkD = 0;
 
-    public static final double zkP = 0.01;
-    public static final double zkI = 0;
-    public static final double zkD = 0.1;
-
-    public static final double ykP = 0.1;
+    public static final double ykP = 0.05;
     public static final double ykI = 0;
     public static final double ykD = 0;
     public static final Transform3d robotToCam = new Transform3d(

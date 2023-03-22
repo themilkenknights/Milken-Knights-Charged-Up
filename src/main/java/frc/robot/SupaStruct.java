@@ -100,6 +100,7 @@ public class SupaStruct {
   private Lights mLights = Lights.getInstance();
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
+  private Timer aprilTimer = new Timer();
   
 
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
@@ -111,6 +112,7 @@ public class SupaStruct {
   }
 
   public void initTele() {
+    aprilTimer.start();
     try {
       slidaa =
           tab.add("slidaa", 1)
@@ -132,8 +134,16 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
+    if(aprilTimer.get() >= 5)
+    {
+      april.updateApril();
+      aprilTimer.restart();
+    }
+
     train.updateSwerve();
-    april.updateApril();
+
+    
+
     april.aprilSmartDashboard();
     arm.updateSmartdashboard();
     x = april.getAxis("x");

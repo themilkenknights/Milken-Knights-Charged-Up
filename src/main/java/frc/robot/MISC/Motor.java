@@ -15,7 +15,6 @@ import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import frc.robot.MISC.Constants.MKCANCODER;
 import frc.robot.MISC.Constants.MKDRIVE;
 import frc.robot.MISC.Constants.MKFALCON;
@@ -134,15 +133,15 @@ public class Motor {
     return encoder;
   }
 
-  public CANSparkMax Sparky(int canid){
-    CANSparkMax sparky= new CANSparkMax(canid, MotorType.kBrushless);
+  public CANSparkMax Sparky(int canid) {
+    CANSparkMax sparky = new CANSparkMax(canid, MotorType.kBrushless);
     sparky.restoreFactoryDefaults();
     sparky.setIdleMode(CANSparkMax.IdleMode.kBrake);
     sparky.setSmartCurrentLimit(5);
     sparky.enableVoltageCompensation(11);
     return sparky;
-  };
-
+  }
+  ;
 
   private static class InstanceHolder {
     private static final Motor mInstance = new Motor();

@@ -7,7 +7,6 @@ package frc.robot.CAMERA;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.MKAPRIL;
@@ -39,7 +38,6 @@ public class AprilTags {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
 
   private AprilTags() {
-
 
     camera = new PhotonCamera("ShoutOutToMyStove");
 
@@ -102,7 +100,9 @@ public class AprilTags {
     double xPID;
     double yPID;
     double zPID;
-    zPID = MkSwerveTrain.getInstance().moveToAngy(Math.toDegrees(Math.atan(getAxis("y")/getAxis("x"))));
+    zPID =
+        MkSwerveTrain.getInstance()
+            .moveToAngy(Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
     if (result.hasTargets()) {
       xPID = moveAprilX.calculate(getAxis("x"), 2);
       yPID = moveAprilY.calculate(getAxis("y"), 0);
@@ -118,7 +118,7 @@ public class AprilTags {
   }
 
   public void aprilSmartDashboard() {
-    SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y")/getAxis("x"))));
+    SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
     /*
      * SmartDashboard.putNumber("aprilRQANge", get2DRange());
      * SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());

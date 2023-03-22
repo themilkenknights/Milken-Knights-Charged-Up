@@ -5,7 +5,6 @@
 package frc.robot.AUTO.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.ARM.Wrist;
 
 public class clawrollers extends CommandBase {
@@ -23,7 +22,7 @@ public class clawrollers extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-Wrist.getInstance().moveWristRoller(setpoint);
+    Wrist.getInstance().moveWristRoller(setpoint);
   }
   // Called once the command ends or is interrupted.
   @Override

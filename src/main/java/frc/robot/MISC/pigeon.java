@@ -6,7 +6,6 @@ package frc.robot.MISC;
 
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
-
 import frc.robot.MISC.Constants.CANID;
 
 /** pigeon stuff */
@@ -17,8 +16,7 @@ public class pigeon {
     return InstanceHolder.mInstance;
   }
 
-  public void setPigeon()
-  {
+  public void setPigeon() {
     pig.configFactoryDefault();
   }
 

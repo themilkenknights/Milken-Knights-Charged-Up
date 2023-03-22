@@ -197,7 +197,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (ybutton) {
-      //pigeon.getInstance().reset();
+      pigeon.getInstance().reset();
       povValue = 00;
       inverseTanAngleOG = 0;
       train.vars.avgDistTest = 0;

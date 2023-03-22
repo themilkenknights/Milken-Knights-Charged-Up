@@ -18,7 +18,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
   public static final double kPi = 3.14159265359;
-  public static final double[] nullPID = { 0, 0, 0, 0 };
+  public static final double[] nullPID = {0, 0, 0, 0};
 
   // --------------------------------------------------------------------//
   // DRIVETRAIN
@@ -44,7 +44,7 @@ public final class Constants {
     public static final double kD = 0 * kP;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final NeutralMode mode = NeutralMode.Brake;
 
@@ -66,7 +66,7 @@ public final class Constants {
     public static final double kD = 0.0000000;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final NeutralMode mode = NeutralMode.Coast;
 
@@ -78,16 +78,16 @@ public final class Constants {
   }
 
   public static class MKCANCODER {
-    public static final double topLeftOffset = 11.865234375 + 180; // 7.294921875-180; // -173.3203125+90-10.810546875
+    public static final double topLeftOffset = 11.865234375 + 180; 
     public static final double topRightOffset = -25.83984275 + 180;
     public static final double bottomLeftOffset = 153.0175781 - 16 - 180;
-    public static final double bottomRightOffset = 7.294921875 - 180; // 11.865234375-180;// -174.375+90 -5.44921875
+    public static final double bottomRightOffset =7.294921875 - 180; 
 
     public static final double[] offset = {
-        MKCANCODER.topLeftOffset,
-        MKCANCODER.topRightOffset,
-        MKCANCODER.bottomLeftOffset,
-        MKCANCODER.bottomRightOffset
+      MKCANCODER.topLeftOffset,
+      MKCANCODER.topRightOffset,
+      MKCANCODER.bottomLeftOffset,
+      MKCANCODER.bottomRightOffset
     };
 
     public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
@@ -134,11 +134,12 @@ public final class Constants {
     public static final double ykP = 0.05;
     public static final double ykI = 0;
     public static final double ykD = 0;
-    public static final Transform3d robotToCam = new Transform3d(
-        new Translation3d(Units.inchesToMeters(8), 0, Units.inchesToMeters(6)),
-        new Rotation3d(
-            0, 0,
-            0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+    public static final Transform3d robotToCam =
+        new Transform3d(
+            new Translation3d(Units.inchesToMeters(8), 0, Units.inchesToMeters(6)),
+            new Rotation3d(
+                0, 0,
+                0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
     // from center.
     public static final String cameraName = "ShoutOutToMyStove";
   }
@@ -222,7 +223,7 @@ public final class Constants {
     public static final double kI = 0.0;
     public static final double kD = 0.0000;
     public static final double kF = 0;
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0.055; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 360;
@@ -240,7 +241,7 @@ public final class Constants {
     public static final double kI = 0.00;
     public static final double kD = 0.0005;
     public static final double kF = 0;
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0.055; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 110;
@@ -261,7 +262,7 @@ public final class Constants {
     public static final double kD = 0.00;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
   }
 
   // --------------------------------------------------------------------//
@@ -275,7 +276,7 @@ public final class Constants {
     public static final double kD = kP * 0;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final boolean inverted = false;
 
@@ -327,11 +328,12 @@ public final class Constants {
     public static final double heightMeters = MathFormulas.inchesToMeters(MKTRAIN.heightInches / 2);
     public static final double widthMeters = MathFormulas.inchesToMeters(MKTRAIN.widthInches / 2);
 
-    public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-        new Translation2d(heightMeters, widthMeters),
-        new Translation2d(heightMeters, -widthMeters),
-        new Translation2d(-heightMeters, widthMeters),
-        new Translation2d(-heightMeters, -widthMeters));
+    public static final SwerveDriveKinematics kDriveKinematics =
+        new SwerveDriveKinematics(
+            new Translation2d(heightMeters, widthMeters),
+            new Translation2d(heightMeters, -widthMeters),
+            new Translation2d(-heightMeters, widthMeters),
+            new Translation2d(-heightMeters, -widthMeters));
 
     // actual drive module stats
     public static final double maxModuleTurnVelo = kPi;
@@ -351,8 +353,8 @@ public final class Constants {
 
     public static final double maxDriveVelo = 1;
 
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
-        maxAutoTurnVelo, maxAutoTurnAccel);
+    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
+        new TrapezoidProfile.Constraints(maxAutoTurnVelo, maxAutoTurnAccel);
   }
 
   // --------------------------------------------------------------------//

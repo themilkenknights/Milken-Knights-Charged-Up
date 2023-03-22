@@ -211,7 +211,6 @@ public class MkSwerveTrain {
 
   public void updateSwerve() {
     DeltaAirlines.getInstance().updateDeltaTime();
-    
 
     // SmartDashboard.putNumber("distancetopright", vars.posInchTR);
     // AUTO.measToPredictRatio);
@@ -221,12 +220,11 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    
-        SmartDashboard.putNumber("topleftcan", tlCoder());
-        SmartDashboard.putNumber("toprightcan", trCoder());
-        SmartDashboard.putNumber("botleftcan", blCoder());
-        SmartDashboard.putNumber("botrightcan", brCoder());
-/* 
+    SmartDashboard.putNumber("topleftcan", tlCoder());
+    SmartDashboard.putNumber("toprightcan", trCoder());
+    SmartDashboard.putNumber("botleftcan", blCoder());
+    SmartDashboard.putNumber("botrightcan", brCoder());
+    /*
         SmartDashboard.putNumber("topleftnativeTURN", MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("bottomleftnativeTURN", MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
@@ -480,15 +478,18 @@ public class MkSwerveTrain {
 
   /** move robot to angle/heading */
   public double moveToAngy(double set) {
-    vars.hError = set -  Math.abs(vars.yaw);// Error = Target - Actual
-            vars.hIntegral += (vars.hError*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
-            vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
-            vars.hPreviousError = vars.hError;
-            return vars.hP*vars.hError + vars.hI*vars.hIntegral + vars.hD*vars.hDerivative;
+    vars.hError = set - Math.abs(vars.yaw); // Error = Target - Actual
+    vars.hIntegral +=
+        (vars.hError
+            * .02); // Integral is increased by the error*time (which is .02 seconds using normal
+    // IterativeRobot)
+    vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
+    vars.hPreviousError = vars.hError;
+    return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD * vars.hDerivative;
     /*double setpoint = turn.calculate(Math.abs(vars.yaw%360), Math.abs(set % 360));
     SmartDashboard.putNumber("yaw for move to angy", Math.abs(vars.yaw));
     SmartDashboard.putNumber("setpoint for move to angy", Math.abs(set % 360));*/
-    //return setpoint;
+    // return setpoint;
   }
 
   /**
@@ -545,7 +546,7 @@ public class MkSwerveTrain {
     vars.totalDistance = totalDistance;
     vars.avgDistInches = 0;
     vars.distanceA = distanceA;
-    vars.avgDistTest=0;
+    vars.avgDistTest = 0;
     SmartDashboard.putNumber("totaldistancccee", vars.totalDistance);
   }
 
@@ -762,7 +763,7 @@ public class MkSwerveTrain {
     public variables var;
     // three degrees error babeeeee!!!!
     public double hP = 0.0042, hI = 0.0000, hD = 0.0015; // 0.03i, 0.01d
-    //TODO tune these so you dont need mkbaby for them to work
+    // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;
     // code

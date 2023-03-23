@@ -136,7 +136,7 @@ public final class Constants {
     public static final double ykD = 0;
     public static final Transform3d robotToCam =
         new Transform3d(
-            new Translation3d(Units.inchesToMeters(8), 0, Units.inchesToMeters(6)),
+            new Translation3d(Units.inchesToMeters(-8), 0, Units.inchesToMeters(32)),
             new Rotation3d(
                 0, 0,
                 0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
@@ -219,9 +219,9 @@ public final class Constants {
   // --------------------------------------------------------------------//
   public static class MKWRIST {
     public static final double greerRatio = 27.3529 / 1.0; // 0.01098901098;
-    public static final double kP = .11;
+    public static final double kP = .6;
     public static final double kI = 0.0;
-    public static final double kD = 0.0000;
+    public static final double kD = 0.00001;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
     public static final double minA = 0.055; // 0.065;
@@ -246,13 +246,13 @@ public final class Constants {
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;
-    public static final double offset = -107.490234375;
+    public static final double offset = -107.490234375-36;
     public static final double almostStowedAngle = 30;
   }
 
   public static class MKTELE {
     public static final double greerRatio = .04938272;
-    public static final double maxNativePositionTelescope = 8300;
+    public static final double maxNativePositionTelescope = 9500;
     public static final double minNativePositionTelescope = 0;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;

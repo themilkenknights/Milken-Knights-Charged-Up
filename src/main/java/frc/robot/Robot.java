@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     PortForwarder.add(5800, "photonvision.local", 5800);
-    positionChooser.setDefaultOption("SIDES", AutoPosition.RIGHTSIDEDOUBLE);
+    positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     Shuffleboard.selectTab("Match");
@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    Odometry.getInstance().updateOdometry();
+    Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
     SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());

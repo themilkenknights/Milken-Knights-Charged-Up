@@ -110,6 +110,11 @@ public class SupaStruct {
     return InstanceHolder.mInstance;
   }
 
+  public boolean getAprilEnabled()
+  {
+    return rbbutton;
+  }
+
   public void initTele() {
     aprilTimer.start();
     try {
@@ -133,22 +138,22 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
-    if(aprilTimer.get() >= 5)
+    if(rbbutton)
     {
       april.updateApril();
       aprilTimer.restart();
+      april.aprilSmartDashboard();
+          x = april.getAxis("x");
+    y = april.getAxis("y");
+    // yaw = april.getAxis("yaw");
+    rot = april.getAxis("r");
     }
 
     train.updateSwerve();
 
     
-
-    april.aprilSmartDashboard();
     arm.updateSmartdashboard();
-    x = april.getAxis("x");
-    y = april.getAxis("y");
-    // yaw = april.getAxis("yaw");
-    rot = april.getAxis("r");
+
 
     // --------------------------------------------------------------------//
     // VARIABLES
@@ -258,15 +263,15 @@ public class SupaStruct {
     } else {
       train.stopEverything();
     }
-    SmartDashboard.putNumber("rcw", xbox.getPOV());
-    SmartDashboard.putNumber("pov", xbox.getPOV());
+    //SmartDashboard.putNumber("rcw", xbox.getPOV());
+   // SmartDashboard.putNumber("pov", xbox.getPOV());
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-    if (rbbutton) {
+    if (rtrigger) {
       intake.rollerSet(-1);
 
-    } else if (lbbutton) {
+    } else if (ltrigger) {
       intake.rollerSet(1);
 
     } else {
@@ -301,15 +306,18 @@ public class SupaStruct {
     if (bbutton2) {
       wrist.setWristMotor(0);
     } else if (abutton2) {
-      wrist.moveWristPID(wrist.getWristMotorGudAngle(MODE.up));
-    }
+      wrist.moveWristPID(-135);}
+    else if(xbutton2){
+        wrist.moveWristPID(0);
+      }
+    
     // SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
-    // SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-    // SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
-    // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
-    // SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
+     SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+     SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+     SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
+     SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//
     // TELESCOPE
@@ -326,7 +334,7 @@ public class SupaStruct {
       toggleClimbDownOn = false;
       toggleClimbUpPressed = false;
       toggleClimbUpOn = false;
-      arm.pidTelescope(8000);
+      arm.pidTelescope(9500);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     } else if (toggleClimbDownOn
         && !toggleClimbUpOn
@@ -409,8 +417,8 @@ public class SupaStruct {
   // --------------------------------------------------------------------//
   // HUMAN PLAYER ARM
   // --------------------------------------------------------------------//
-  public void updateHPArmToggle() {
-    if (xbutton2) {
+ // public void updateHPArmToggle() {
+    /*if (xbutton2) {
       if (!toggleHPArmPressed) {
         toggleHPArmOn = !toggleHPArmOn;
 
@@ -420,12 +428,12 @@ public class SupaStruct {
       toggleHPArmPressed = false;
     }
   }
-
+*/
   public void updateArmUpToggle() {
     if (ybutton2) {
       if (!toggleArmUpPressed) {
         toggleArmUpOn = !toggleArmUpOn;
-
+          
         toggleArmUpPressed = true;
       }
     } else {

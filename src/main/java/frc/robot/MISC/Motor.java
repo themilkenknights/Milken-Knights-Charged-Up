@@ -136,7 +136,7 @@ public class Motor {
   public CANSparkMax Sparky(int canid) {
     CANSparkMax sparky = new CANSparkMax(canid, MotorType.kBrushless);
     sparky.restoreFactoryDefaults();
-    sparky.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    sparky.setIdleMode(CANSparkMax.IdleMode.kCoast);
     sparky.setSmartCurrentLimit(5);
     sparky.enableVoltageCompensation(11);
     return sparky;

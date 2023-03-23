@@ -94,7 +94,7 @@ public class Odometry {
     return InstanceHolder.mInstance;
   }
 
-  public void updateOdometry() {
+  public void updateOdometry(boolean enableApril) {
     // Update the pose
     m_SwerveDrivePoseEstimator.update(
         Rotation2d.fromDegrees(pigeon.getInstance().getPigYaw()),
@@ -104,7 +104,8 @@ public class Odometry {
           MkSwerveTrain.getInstance().modulePosTL(),
           MkSwerveTrain.getInstance().modulePosBR()
         });
-
+if(enableApril)
+{
     Optional<EstimatedRobotPose> result =
         austin.getEstimatedGlobalPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
     if (result.isPresent()) {
@@ -112,7 +113,7 @@ public class Odometry {
       m_SwerveDrivePoseEstimator.addVisionMeasurement(
           camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
     }
-
+  }
     mField2d.setRobotPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
   }
 

@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putBoolean("whodoneit", resetDoneDiddlyDone);
+    SmartDashboard.putBoolean("wristZero", resetDoneDiddlyDone);
     
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();

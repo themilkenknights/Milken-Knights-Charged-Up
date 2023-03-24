@@ -121,8 +121,8 @@ public class Motor {
     return intake;
   }
 
-  public CANCoder cancoder(int canid, double offset) {
-    CANCoder encoder = new CANCoder(canid, "train");
+  public CANCoder cancoder(int canid, double offset, String bus) {
+    CANCoder encoder = new CANCoder(canid, bus);
     encoder.configFactoryDefault();
     encoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
     encoder.configAbsoluteSensorRange(MKCANCODER.range);

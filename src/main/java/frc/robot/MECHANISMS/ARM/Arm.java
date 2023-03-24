@@ -28,7 +28,7 @@ public class Arm {
     tele = new PIDController(MKTELE.kP, MKTELE.kI, MKTELE.kD);
     testarm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, false);
-    armCanCoder = motor.cancoder(CANID.telescopeCanCoderCANID, MKARM.offset);
+    armCanCoder = motor.cancoder(CANID.armCanCoder, MKARM.offset,"rio");
     armCanCoder.configSensorDirection(true);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, MKARM.pidf, false);

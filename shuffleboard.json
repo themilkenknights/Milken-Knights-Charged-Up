@@ -115,19 +115,6 @@
               "_showGlyph": false
             }
           },
-          "1,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/magicangle",
-              "_title": "magicangle",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "1,4": {
             "size": [
               1,
@@ -154,19 +141,6 @@
               "_showGlyph": false
             }
           },
-          "2,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/pov",
-              "_title": "pov",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "3,0": {
             "size": [
               3,
@@ -178,9 +152,9 @@
               "_title": "photonvision_Port_1181_MJPEG_Server",
               "_glyph": 148,
               "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
+              "Crosshair/Show crosshair": false,
               "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
+              "Controls/Show controls": false,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
@@ -199,9 +173,9 @@
               "_title": "photonvision_Port_1182_MJPEG_Server",
               "_glyph": 148,
               "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
+              "Crosshair/Show crosshair": false,
               "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
+              "Controls/Show controls": false,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
@@ -216,117 +190,13 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/topleftcan",
-              "_title": "topleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/toprightcan",
-              "_title": "toprightcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/botleftcan",
-              "_title": "botleftcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/botrightcan",
-              "_title": "botrightcan",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/autp dist test",
-              "_title": "autp dist test",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/total",
-              "_title": "total",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "8,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/avgvelinches",
-              "_title": "avgvelinches",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/rcw",
-              "_title": "rcw",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/getwrist",
               "_title": "getwrist",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "5,5": {
+          "1,5": {
             "size": [
               1,
               1
@@ -339,7 +209,7 @@
               "_showGlyph": false
             }
           },
-          "6,5": {
+          "2,5": {
             "size": [
               1,
               1
@@ -348,19 +218,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/setpoint pid",
               "_title": "setpoint pid",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/degreetospark",
-              "_title": "degreetospark",
               "_glyph": 148,
               "_showGlyph": false
             }

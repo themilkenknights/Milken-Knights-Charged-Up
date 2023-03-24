@@ -54,10 +54,6 @@ public class SupaStruct {
   private boolean resetpig,
       dpadup,
       dpaddown,
-      toggleClimbUpOn,
-      toggleClimbUpPressed,
-      toggleClimbDownOn,
-      toggleClimbDownPressed,
       resetTurn,
       resetDrive,
       xbutton,
@@ -85,13 +81,25 @@ public class SupaStruct {
       toggleLightsPressed = false,
       pov, /* povToggled, */
       itsreal = false,
-      toggleArmUpOn,
-      toggleArmMidOn,
-      toggleArmUpPressed,
+      resetDoneDiddlyDone = false,
+      
+      allWrist = false,
+      allRoller = false,
+      allArm = false,
+      cone = false,
+      cube = false,
+      toggleConePressed,
+      toggleConeOn,
+      toggleCubePressed,
+      toggleCubeOn,
+      toggleArmHighPressed,
+      toggleArmHighOn,
       toggleArmMidPressed,
-      toggleHPArmOn,
-      toggleHPArmPressed,
-      resetDoneDiddlyDone = false;
+      toggleArmMidOn,
+      toggleArmLowPressed,
+      toggleArmLowOn,
+      toggleArmStowPressed,
+      toggleArmStowOn;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
@@ -438,6 +446,37 @@ Dpad up down for manual rotation up down--
       mLights.CUBE();
       SmartDashboard.putString("color", "cube");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
   }
   // SmartDashboard.putNumber("yaw", yaw);
 

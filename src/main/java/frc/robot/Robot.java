@@ -98,10 +98,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    if (!resetDoneDiddlyDone) {
-      Wrist.getInstance().moveWristMotor(0.5);
-      resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
-    }
+    SmartDashboard.putBoolean("whodoneit", resetDoneDiddlyDone);
+    
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
@@ -152,6 +150,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
+    SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
 
     System.out.println("Robot Teleop Init");
     if (m_autonomousCommand != null) {
@@ -166,6 +165,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    if (!resetDoneDiddlyDone) {
+      Wrist.getInstance().moveWristMotor(0.5);
+      resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
+      if(resetDoneDiddlyDone)
+      {
+        Wrist.getInstance().moveWristMotor(0);
+      }
+    }
     supaKoopa.updateTele();
   }
 

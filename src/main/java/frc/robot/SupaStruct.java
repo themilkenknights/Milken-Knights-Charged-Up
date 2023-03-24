@@ -349,7 +349,10 @@ Dpad up down for manual rotation up down--
       wrist.moveWristRoller(.3);
       else if(lbbutton2){
         wrist.moveWristRoller(-.3);
-      }
+      }else{
+          wrist.moveWristRoller(0);
+        }
+      
 
     // SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));

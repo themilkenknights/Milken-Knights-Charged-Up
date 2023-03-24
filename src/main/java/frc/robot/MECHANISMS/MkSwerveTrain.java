@@ -73,12 +73,12 @@ public class MkSwerveTrain {
     bottomDriveLeft = mMotor.driveMotor(CANID.bottomDriveLeftCANID);
     bottomDriveRight = mMotor.driveMotor(CANID.bottomDriveRightCANID);
 
-    topLeftCoder = mMotor.cancoder(CANID.topTurnLeftCANCoderCANID, MKCANCODER.topLeftOffset);
-    topRightCoder = mMotor.cancoder(CANID.topTurnRightCANCoderCANID, MKCANCODER.topRightOffset);
+    topLeftCoder = mMotor.cancoder(CANID.topTurnLeftCANCoderCANID, MKCANCODER.topLeftOffset,"train");
+    topRightCoder = mMotor.cancoder(CANID.topTurnRightCANCoderCANID, MKCANCODER.topRightOffset,"train");
     bottomLeftCoder =
-        mMotor.cancoder(CANID.bottomTurnLeftCANCoderCANID, MKCANCODER.bottomLeftOffset);
+        mMotor.cancoder(CANID.bottomTurnLeftCANCoderCANID, MKCANCODER.bottomLeftOffset,"train");
     bottomRightCoder =
-        mMotor.cancoder(CANID.bottomTurnRightCANCoderCANID, MKCANCODER.bottomRightOffset);
+        mMotor.cancoder(CANID.bottomTurnRightCANCoderCANID, MKCANCODER.bottomRightOffset,"train");
   }
 
   public static MkSwerveTrain getInstance() {

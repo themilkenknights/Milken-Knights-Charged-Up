@@ -203,7 +203,7 @@ public final class Constants {
     public static final int leftarmCANID = 24;
     public static final int rightarmCANID = 25;
     public static final int telescopeCANID = 26;
-    public static final int telescopeCanCoderCANID = 27;
+    public static final int armCanCoder = 27;
     public static final int wristMotorCANID = 31;
     public static final int wristRollerCANID = 32;
 
@@ -237,7 +237,7 @@ public final class Constants {
   // --------------------------------------------------------------------//
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
-    public static final double kP = 0.002;
+    public static final double kP = 0.0015;
     public static final double kI = 0.00;
     public static final double kD = 0.0005;
     public static final double kF = 0;
@@ -246,7 +246,7 @@ public final class Constants {
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;
-    public static final double offset = -107.490234375-36;
+    public static final double offset = -107.6741015625;
     public static final double almostStowedAngle = 30;
   }
 

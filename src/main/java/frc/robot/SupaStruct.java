@@ -301,10 +301,10 @@ Dpad up down for manual rotation up down--
 
     
       if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(88);
+      arm.pidArm(93);
       arm.setTelescope(6000);
      } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(100);
+      arm.pidArm(105);
       arm.setTelescope(9000);
     } else if(xbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
     arm.pidArm(30);
@@ -314,10 +314,10 @@ Dpad up down for manual rotation up down--
     arm.pidArm(0);
     arm.setTelescope(0);
 
-    }else if (!dpadleft2 && dpadright2) {
+    }else if (dpadleft2 && !dpadright2) {
       arm.moveArm(-0.16, -0.16);
 
-    } else if (dpadleft2 && !dpadright2) {
+    } else if (!dpadleft2 && dpadright2) {
       arm.moveArm(0.16, 0.16);
 
     } else {
@@ -357,26 +357,18 @@ Dpad up down for manual rotation up down--
     // SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
-     SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+     //SmartDashboard.putNumber("getwrist", wrist.getWristNative());
      SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
      SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
-     SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
+     //SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
 
     // --------------------------------------------------------------------//
     // TELESCOPE
     // --------------------------------------------------------------------//
-    if (rtrigger2 && !ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      toggleClimbDownPressed = false;
-      toggleClimbDownOn = false;
-      toggleClimbUpPressed = false;
-      toggleClimbUpOn = false;
+    if (!rtrigger2 && ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.pidTelescope(0);
       // arm.pidTelescope(MKTELE.minNativePositionTelescope);
-    } else if (!rtrigger2 && ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      toggleClimbDownPressed = false;
-      toggleClimbDownOn = false;
-      toggleClimbUpPressed = false;
-      toggleClimbUpOn = false;
+    } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.pidTelescope(9500);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     } else if (toggleClimbDownOn
@@ -393,15 +385,7 @@ Dpad up down for manual rotation up down--
       arm.setTelescope(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
     } else if (xboxOP.getRawButton(8)) {
       arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
-    } else if (dpaddown && !dpadup && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      // arm.pidTelescope(0);
-    } else if (!dpaddown && dpadup && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      // arm.pidTelescope(8000);
-    }
-    // else if(toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition)
-    // {
-
-    // }
+     }
     else {
       arm.moveTele(0);
     }
@@ -420,14 +404,15 @@ Dpad up down for manual rotation up down--
     }
 
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
+    SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
 
-    if (dpadleft2) {
+    /*if (dpadleft2) {
       odo.reset();
     }
     if (dpadright2) {
       odo.resetToPose2D(x, y, rot);
     }
-
+*/
     if (lightMode == 0) {
       mLights.off();
       SmartDashboard.putString("color", "none");

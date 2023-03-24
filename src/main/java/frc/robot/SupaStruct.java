@@ -80,6 +80,8 @@ public class SupaStruct {
       rtrigger2,
       dpadleft2,
       dpadright2,
+      dpadleft,
+      dpadright,
       toggleLightsPressed = false,
       pov, /* povToggled, */
       itsreal = false,
@@ -88,7 +90,8 @@ public class SupaStruct {
       toggleArmUpPressed,
       toggleArmMidPressed,
       toggleHPArmOn,
-      toggleHPArmPressed;
+      toggleHPArmPressed,
+      resetDoneDiddlyDone = false;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
@@ -175,6 +178,8 @@ public class SupaStruct {
     bbutton = xbox.getBButton();
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 180;
+    dpadleft = xboxOP.getPOV() == 90;
+    dpadright = xboxOP.getPOV() == 270;
     dpadup = xbox.getPOV() == 0;
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
@@ -282,35 +287,70 @@ public class SupaStruct {
     // ARM
     // --------------------------------------------------------------------//
 
-    /*
-     * if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-     * arm.pidArm(88);
-     * } else
-     */ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(90);
-    } else if (!rbbutton2 && lbbutton2) {
-      arm.moveArm(-0.16, -0.16);
-    } else if (rbbutton2 && !lbbutton2) {
-      arm.moveArm(0.16, 0.16);
-    } else if (toggleHPArmOn && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+/*RT - Cone Select
+LT - Cube Select
+RB - Cone In (Cube Out)
+LB - Cone Out (Cube In)
+Y - High --
+A - Low--
+B - Mid--
+X - Stow--
+Dpad left right for manual extension retraction-- NEW NOW ARM
+Dpad up down for manual rotation up down--
+ */
+
+    
+      if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(88);
-      // arm.pidTelescope(8000);
-      // claw.extend();
+      arm.setTelescope(6000);
+     } else if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+      arm.pidArm(100);
+      arm.setTelescope(9000);
+    } else if(xbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    arm.pidArm(30);
+    arm.setTelescope(0);
+
+  } else if(abutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    arm.pidArm(0);
+    arm.setTelescope(0);
+
+    }else if (!dpadleft2 && dpadright2) {
+      arm.moveArm(-0.16, -0.16);
+
+    } else if (dpadleft2 && !dpadright2) {
+      arm.moveArm(0.16, 0.16);
+
     } else {
       arm.moveArm(0, 0);
     }
-    if (xbutton2) {
-      arm.setLeft(0);
-      arm.setRight(0);
+    if (dpadup) {
+      if (!resetDoneDiddlyDone) {
+        Wrist.getInstance().moveWristMotor(0.2);
+        resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
+        if(resetDoneDiddlyDone)
+        {
+          Wrist.getInstance().moveWristMotor(0);
+        }
     }
-    if (bbutton2) {
-      wrist.setWristMotor(0);
-    } else if (abutton2) {
-      wrist.moveWristPID(-135);}
-    else if(xbutton2){
-        wrist.moveWristPID(0);
-      }
+  }
     
+    // --------------------------------------------------------------------//
+    // wrist
+    // --------------------------------------------------------------------//
+   if (dpadup2) {
+      wrist.setWristMotor(.2);}
+    else if(dpaddown2){
+      wrist.setWristMotor(-.2);}
+      else{
+        wrist.setWristMotor(0);
+      }
+
+      if(rbbutton2)
+      wrist.moveWristRoller(.3);
+      else if(lbbutton2){
+        wrist.moveWristRoller(-.3);
+      }
+
     // SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));

@@ -166,7 +166,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (!resetDoneDiddlyDone) {
-      Wrist.getInstance().moveWristMotor(0.5);
+      Wrist.getInstance().moveWristMotor(0.2);
       resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
       if(resetDoneDiddlyDone)
       {

@@ -100,7 +100,6 @@ public class SupaStruct {
   private Timer turntesttimertwo = new Timer();
   private double count = 0;
   private Timer aprilTimer = new Timer();
-  
 
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
   private GenericEntry slidaa;
@@ -118,11 +117,10 @@ public class SupaStruct {
   public void initTele() {
     aprilTimer.start();
     try {
-      slidaa =
-          tab.add("slidaa", 1)
-              .withWidget(BuiltInWidgets.kNumberSlider)
-              .withProperties(Map.of("min", -1, "max", 1))
-              .getEntry();
+      slidaa = tab.add("slidaa", 1)
+          .withWidget(BuiltInWidgets.kNumberSlider)
+          .withProperties(Map.of("min", -1, "max", 1))
+          .getEntry();
 
     } catch (Exception e) {
       System.out.println(
@@ -159,6 +157,7 @@ public class SupaStruct {
     // VARIABLES
     // --------------------------------------------------------------------//
     updateLightsToggle();
+    wrist.updateZeroWristMotor();
     // updateHPArmToggle();
     fwd = (xbox.getRawAxis(DriveInput.fwd) - 0.1) / (1 - 0.1);
     fwdSignum = Math.signum(fwd) * -1;
@@ -200,11 +199,10 @@ public class SupaStruct {
 
     // i dont remember how i got this lol
 
-    inverseTanAngleDrive =
-        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-                    - MathFormulas.signumAngleEdition(str, fwd))
-                + 360)
-            % 360;
+    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+        - MathFormulas.signumAngleEdition(str, fwd))
+        + 360)
+        % 360;
 
     // --------------------------------------------------------------------//
     // PIGEON RESET
@@ -284,9 +282,11 @@ public class SupaStruct {
     // ARM
     // --------------------------------------------------------------------//
 
-    /*if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
-      arm.pidArm(88);
-    } else*/ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+    /*
+     * if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
+     * arm.pidArm(88);
+     * } else
+     */ if (ybutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(90);
     } else if (!rbbutton2 && lbbutton2) {
       arm.moveArm(-0.16, -0.16);
@@ -414,6 +414,7 @@ public class SupaStruct {
       toggleLightsPressed = false;
     }
   }
+
   // --------------------------------------------------------------------//
   // HUMAN PLAYER ARM
   // --------------------------------------------------------------------//
@@ -441,17 +442,18 @@ public class SupaStruct {
     }
   }
   /*
-  public void updateArmMidToggle() {
-    if (bbutton2) {
-      if (!toggleArmMidPressed) {
-        toggleHPArmOn = !toggleHPArmOn;
-
-        toggleArmMidPressed = true;
-      }
-    } else {
-      toggleArmMidPressed = false;
-    }
-  }*/
+   * public void updateArmMidToggle() {
+   * if (bbutton2) {
+   * if (!toggleArmMidPressed) {
+   * toggleHPArmOn = !toggleHPArmOn;
+   * 
+   * toggleArmMidPressed = true;
+   * }
+   * } else {
+   * toggleArmMidPressed = false;
+   * }
+   * }
+   */
 
   public void teleopDisabled() {
     resetpig = false;
@@ -504,7 +506,7 @@ public class SupaStruct {
 
     // SmartDashboard.putNumber("count", count);
     // SmartDashboard.putNumber(
-    //     "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
+    // "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
     // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
   }
 

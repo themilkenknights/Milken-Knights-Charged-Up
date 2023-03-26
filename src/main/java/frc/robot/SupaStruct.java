@@ -85,17 +85,12 @@ public class SupaStruct {
       itsreal = false,
       resetDoneDiddlyDone = false,
       
-      allWrist = false,
-      allRoller = false,
-      allArm = false,
-      cone = false,
-      cube = false,
-      toggleConeOn,
-      toggleCubeOn,
-      toggleArmHighOn,
-      toggleArmMidOn,
-      toggleArmLowOn,
-      toggleArmStowOn;
+      toggleConeOn = false,
+      toggleCubeOn = false,
+      toggleArmHighOn = false,
+      toggleArmMidOn = false,
+      toggleArmLowOn = false,
+      toggleArmStowOn = false;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
@@ -136,7 +131,7 @@ public class SupaStruct {
     }
     pigRotate = pigeon.getInstance().getPigYaw();
     arm.setArmToCanCoder();
-    wrist.setWristMotor(0);
+
   }
 
   public void updateTele() {
@@ -303,7 +298,7 @@ Dpad left right for manual extension retraction-- NEW NOW ARM
 Dpad up down for manual rotation up down--
  */
 
-    
+    /* 
       if (bbutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
       arm.pidArm(93);
       arm.setTelescope(6000);
@@ -317,8 +312,8 @@ Dpad up down for manual rotation up down--
   } else if(abutton2 && arm.getArmDegrees() < MKARM.maxDegreePosition) {
     arm.pidArm(0);
     arm.setTelescope(0);
-
-    }else if (dpadleft2 && !dpadright2) {
+*/
+     if (dpadleft2 && !dpadright2) {
       arm.moveArm(-0.16, -0.16);
 
     } else if (!dpadleft2 && dpadright2) {
@@ -356,19 +351,18 @@ Dpad up down for manual rotation up down--
     // TELESCOPE
     // --------------------------------------------------------------------//
     if (!rtrigger2 && ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.pidTelescope(0);
+      arm.moveTele(-.4);
       // arm.pidTelescope(MKTELE.minNativePositionTelescope);
     } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      arm.pidTelescope(9500);
+      arm.moveTele(.4);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     }
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
     else {
       arm.moveTele(0);
     }
-    // else if(arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-    // arm.pidTelescope(0);
-    // }
+
+
 
    
 
@@ -383,12 +377,23 @@ Dpad up down for manual rotation up down--
     }
 */
     
-
-
-
-
-
-
+    if (rbbutton2) {
+      if(toggleConeOn) {
+    
+        //run rollers direction 1
+      }
+      else if(toggleCubeOn) {
+        //run rollers direction 2
+      }
+    } 
+    else if (lbbutton2) {
+      if(toggleConeOn) {
+        //run rollers direction 2
+      }
+      else if(toggleCubeOn) {
+        //run rollers direction 1
+      }
+    }
 
     if(xboxOP.getRawButton(7))
     {
@@ -433,43 +438,58 @@ Dpad up down for manual rotation up down--
     if(toggleArmHighOn)
     {
       //toggle hig
+      if(toggleConeOn) {
+        arm.pidArm(100);
+        wrist.setWristMotor(50);
+        //position for cone place high
+      }
+      else if(toggleCubeOn) {
+        arm.pidArm(100);
+        wrist.setWristMotor(0);
+        //position for cube place high
+      }
     }
     else if(toggleArmMidOn)
     {
       // toggle mid
-    }
+      if(toggleConeOn) {
+        arm.pidArm(90);
+        wrist.setWristMotor(50);
 
-
-    //like the button pressing above, make one for each system
-    if(dpadup2)
-    {
-      //wrist up true
-      //wrist down false
+      }
+      else if(toggleCubeOn) {
+        arm.pidArm(90);
+        wrist.setWristMotor(0);
+      }
     }
-    else if(dpaddown2)
-    {
-      //wrist down true
-      //wrist up false
+    else if(toggleArmLowOn) {
+      if(toggleConeOn) {
+        arm.pidArm(30);
+        arm.setTelescope(100);
+        wrist.setWristMotor(50);
+      }
+      else if(toggleCubeOn) {
+        arm.pidArm(30);
+        arm.setTelescope(100);
+        wrist.setWristMotor(50);
+      }
+
+    }
+    else if(toggleArmStowOn) {
+      if(toggleConeOn) {
+        arm.pidArm(0);
+        arm.setTelescope(0);
+        wrist.setWristMotor(0);
+      }
+      else if(toggleCubeOn) {
+        arm.pidArm(0);
+        arm.setTelescope(0);
+        wrist.setWristMotor(0);
+      }
+
     }
 
     //etc etc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if (lightMode == 0) {
@@ -482,7 +502,6 @@ if (lightMode == 0) {
   mLights.CUBE();
   SmartDashboard.putString("color", "cube");
 }
-
 
     
   }

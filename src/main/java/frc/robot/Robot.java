@@ -158,7 +158,7 @@ public class Robot extends TimedRobot {
     }
     train.startTrain();
     pigeon.getInstance().reset();
-    Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
+    Arm.getInstance().setTelescope(MKTELE.maxNativePositionTelescope);
     // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
     // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }
@@ -166,7 +166,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (!resetDoneDiddlyDone) {
-      Wrist.getInstance().moveWristMotor(0.2);
+      Wrist.getInstance().moveWristMotor(-0.4);
       resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
       if(resetDoneDiddlyDone)
       {

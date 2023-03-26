@@ -51,7 +51,9 @@ public class SupaStruct {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
 
-  private boolean resetpig,
+  private boolean 
+    
+      resetpig,
       dpadup,
       dpaddown,
       resetTurn,
@@ -88,17 +90,11 @@ public class SupaStruct {
       allArm = false,
       cone = false,
       cube = false,
-      toggleConePressed,
       toggleConeOn,
-      toggleCubePressed,
       toggleCubeOn,
-      toggleArmHighPressed,
       toggleArmHighOn,
-      toggleArmMidPressed,
       toggleArmMidOn,
-      toggleArmLowPressed,
       toggleArmLowOn,
-      toggleArmStowPressed,
       toggleArmStowOn;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
@@ -144,6 +140,7 @@ public class SupaStruct {
   }
 
   public void updateTele() {
+    updateLightsToggle();
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
@@ -167,7 +164,6 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // VARIABLES
     // --------------------------------------------------------------------//
-    updateLightsToggle();
     wrist.updateZeroWristMotor();
     // updateHPArmToggle();
     fwd = (xbox.getRawAxis(DriveInput.fwd) - 0.1) / (1 - 0.1);
@@ -345,21 +341,7 @@ Dpad up down for manual rotation up down--
     // --------------------------------------------------------------------//
     // wrist
     // --------------------------------------------------------------------//
-   if (dpadup2) {
-      wrist.setWristMotor(.2);}
-    else if(dpaddown2){
-      wrist.setWristMotor(-.2);}
-      else{
-        wrist.setWristMotor(0);
-      }
-
-      if(rbbutton2)
-      wrist.moveWristRoller(.3);
-      else if(lbbutton2){
-        wrist.moveWristRoller(-.3);
-      }else{
-          wrist.moveWristRoller(0);
-        }
+   
       
 
     // SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
@@ -379,21 +361,8 @@ Dpad up down for manual rotation up down--
     } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.pidTelescope(9500);
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
-    } else if (toggleClimbDownOn
-        && !toggleClimbUpOn
-        && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.moveTele(-.6);
-      // arm.pidTelescope(MKTELE.minNativePositionTelescope);
-    } else if (!toggleClimbDownOn
-        && toggleClimbUpOn
-        && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      arm.moveTele(.6);
+    }
       // arm.pidTelescope(MKTELE.maxNativePositionTelescope);
-    } else if (xboxOP.getRawButton(7)) {
-      arm.setTelescope(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
-    } else if (xboxOP.getRawButton(8)) {
-      arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
-     }
     else {
       arm.moveTele(0);
     }
@@ -401,15 +370,7 @@ Dpad up down for manual rotation up down--
     // arm.pidTelescope(0);
     // }
 
-    if (xboxOP.getBButton()
-        || xboxOP.getAButton()
-        || ybutton2
-        || rbbutton2
-        || lbbutton2
-        || rtrigger2
-        || ltrigger2) {
-      toggleHPArmOn = false;
-    }
+   
 
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
@@ -421,17 +382,55 @@ Dpad up down for manual rotation up down--
       odo.resetToPose2D(x, y, rot);
     }
 */
-    if (lightMode == 0) {
-      mLights.off();
-      SmartDashboard.putString("color", "none");
-    } else if (lightMode == 1) {
-      mLights.CONE();
-      SmartDashboard.putString("color", "cone");
-    } else if (lightMode == 2) {
-      mLights.CUBE();
-      SmartDashboard.putString("color", "cube");
+    
+
+
+
+
+
+
+
+    if(xboxOP.getRawButton(7))
+    {
+      toggleConeOn = true;
+      toggleCubeOn = false;
+    }
+    else if(xboxOP.getRawButton(8))
+    {
+      toggleConeOn = false;
+      toggleCubeOn = true;
     }
 
+    if(ybutton2)
+    {
+      toggleArmHighOn = true;
+      toggleArmMidOn = false;
+      toggleArmLowOn = false;
+      toggleArmStowOn = false;
+    }
+    else if(bbutton2)
+    {
+      toggleArmHighOn = false;
+      toggleArmMidOn = true;
+      toggleArmLowOn = false;
+      toggleArmStowOn = false;
+    }
+    else if(xbutton2)
+    {
+      toggleArmHighOn = false;
+      toggleArmMidOn = false;
+      toggleArmLowOn = true;
+      toggleArmStowOn = false;
+    }
+    else if(abutton2)
+    {
+      toggleArmHighOn = false;
+      toggleArmMidOn = false;
+      toggleArmLowOn = false;
+      toggleArmStowOn = true;
+    }
+
+    if()
 
 
 
@@ -451,14 +450,16 @@ Dpad up down for manual rotation up down--
 
 
 
-
-
-
-
-
-
-
-
+if (lightMode == 0) {
+  mLights.off();
+  SmartDashboard.putString("color", "none");
+} else if (lightMode == 1) {
+  mLights.CONE();
+  SmartDashboard.putString("color", "cone");
+} else if (lightMode == 2) {
+  mLights.CUBE();
+  SmartDashboard.putString("color", "cube");
+}
 
 
     
@@ -469,18 +470,7 @@ Dpad up down for manual rotation up down--
   // LEDS
   // --------------------------------------------------------------------//
 
-  public void updateLightsToggle() {
-    if (bbutton) {
-      if (!toggleLightsPressed) {
-        lightMode++;
-        lightMode = lightMode % 3;
-
-        toggleLightsPressed = true;
-      }
-    } else {
-      toggleLightsPressed = false;
-    }
-  }
+  
 
   // --------------------------------------------------------------------//
   // HUMAN PLAYER ARM
@@ -497,17 +487,22 @@ Dpad up down for manual rotation up down--
     }
   }
 */
-  public void updateArmUpToggle() {
-    if (ybutton2) {
-      if (!toggleArmUpPressed) {
-        toggleArmUpOn = !toggleArmUpOn;
-          
-        toggleArmUpPressed = true;
-      }
-    } else {
-      toggleArmUpPressed = false;
+
+public void updateLightsToggle() {
+  if (bbutton) {
+    if (!toggleLightsPressed) {
+      lightMode++;
+      lightMode = lightMode % 3;
+      toggleLightsPressed = true;
     }
+  } else {
+    toggleLightsPressed = false;
   }
+}
+
+
+  
+  
   /*
    * public void updateArmMidToggle() {
    * if (bbutton2) {

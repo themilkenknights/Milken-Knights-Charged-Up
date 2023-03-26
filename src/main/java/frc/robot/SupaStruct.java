@@ -430,7 +430,29 @@ Dpad up down for manual rotation up down--
       toggleArmStowOn = true;
     }
 
-    if()
+    if(toggleArmHighOn)
+    {
+      //toggle hig
+    }
+    else if(toggleArmMidOn)
+    {
+      // toggle mid
+    }
+
+
+    //like the button pressing above, make one for each system
+    if(dpadup2)
+    {
+      //wrist up true
+      //wrist down false
+    }
+    else if(dpaddown2)
+    {
+      //wrist down true
+      //wrist up false
+    }
+
+    //etc etc
 
 
 

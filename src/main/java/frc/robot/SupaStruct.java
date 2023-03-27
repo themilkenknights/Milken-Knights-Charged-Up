@@ -291,10 +291,12 @@ public class SupaStruct {
     } else if (dpaddown2) {
       wrist.moveWristMotor(.3);
       manualMoveWrist = true;
-    } else if(resetDoneDiddlyDone) {
+    } else {
       wrist.moveWristMotor(0);
       // TODO see if this setting here fucks it all up
-      //manualMoveWrist = true;
+      // TODO also see why setting movewristmotor0 here doesnt fuck up the
+      // movewristmotorspid below
+      manualMoveWrist = true;
     }
 
     if (rbbutton2) {
@@ -365,12 +367,10 @@ public class SupaStruct {
     if (xboxOP.getRawButton(8)) {
       toggleConeOn = true;
       toggleCubeOn = false;
-      manualMoveWrist = false;
 
     } else if (xboxOP.getRawButton(7)) {
       toggleConeOn = false;
       toggleCubeOn = true;
-      manualMoveWrist = false;
     }
 
     if (xboxOP.getRawButton(9)) {
@@ -411,30 +411,28 @@ public class SupaStruct {
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(116);
-        
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(250);
+        arm.pidArm(115.5);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(245);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(93.5);
-        
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(116.5);
+        arm.pidArm(93);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(117);
         }
       }
 
     } else if (toggleArmMidOn) {
       // toggle HIGH AND HP
       if (toggleConeOn) {
-        arm.pidArm(96);
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(230);
+        arm.pidArm(90);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(160);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(75);
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(25);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(75);
         }
       }
 
@@ -448,7 +446,7 @@ public class SupaStruct {
       } else if (toggleCubeOn) {
         arm.pidArm(40);
         arm.pidTelescope(5000);
-        if (!manualMoveWrist) {
+        if (manualMoveWrist) {
           wrist.moveWristPID(50);
         }
       }
@@ -456,13 +454,13 @@ public class SupaStruct {
     } else if (toggleArmStowOn) {
       if (toggleConeOn) {
         arm.pidArm(20);
-        arm.pidTelescope(0);
+        arm.pidTelescope(100);
         if (manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(20);
-        arm.pidTelescope(0);
+        arm.pidTelescope(100);
         if (manualMoveWrist) {
           wrist.moveWristPID(0);
         }
@@ -505,7 +503,6 @@ public class SupaStruct {
     SmartDashboard.putBoolean("cube", toggleCubeOn);
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
-    SmartDashboard.putBoolean("manual", manualMoveWrist);
   }
 
   public void updateLightsToggle() {

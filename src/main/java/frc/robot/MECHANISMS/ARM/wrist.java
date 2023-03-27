@@ -15,7 +15,7 @@ import frc.robot.MISC.Constants.MKWRIST;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Motor;
 
-public class wrist {
+public class Wrist {
   private DigitalInput resetLimitSwitch = new DigitalInput(9);
   private Motor motor = Motor.getInstance();
   private Arm arm = Arm.getInstance();
@@ -24,7 +24,7 @@ public class wrist {
   private RelativeEncoder wristEncoder;
   private SparkMaxPIDController wristPID;
 
-  private wrist() {
+  private Wrist() {
     wristMotor = motor.Sparky(CANID.wristMotorCANID);
     wristRoller = motor.Sparky(CANID.wristRollerCANID);
     wristEncoder = wristMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
@@ -48,7 +48,7 @@ public class wrist {
     wristPID.setOutputRange(-1, 1);
   }
 
-  public static wrist getInstance() {
+  public static Wrist getInstance() {
     return InstanceHolder.mInstance;
   }
 
@@ -245,6 +245,6 @@ public class wrist {
   // feed forward for arm
 
   private static class InstanceHolder {
-    private static final wrist mInstance = new wrist();
+    private static final Wrist mInstance = new Wrist();
   }
 }

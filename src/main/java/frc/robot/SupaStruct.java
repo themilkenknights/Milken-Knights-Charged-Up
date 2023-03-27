@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Claw;
-import frc.robot.MECHANISMS.ARM.Wrist;
+import frc.robot.MECHANISMS.ARM.wrist;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
@@ -49,9 +49,7 @@ public class SupaStruct {
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
 
-  private boolean
-
-  resetpig,
+  private boolean resetpig,
       dpadup,
       dpaddown,
       resetTurn,
@@ -82,7 +80,6 @@ public class SupaStruct {
       pov, /* povToggled, */
       itsreal = false,
       resetDoneDiddlyDone = false,
-
       toggleConeOn,
       toggleCubeOn = false,
       toggleArmHighOn = false,
@@ -92,7 +89,7 @@ public class SupaStruct {
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
-  private Wrist wrist = Wrist.getInstance();
+  private wrist Wrist = wrist.getInstance();
   private Timer turntesttimer = new Timer();
   private Claw claw = Claw.getInstance();
   private Arm arm = Arm.getInstance();
@@ -116,10 +113,11 @@ public class SupaStruct {
   public void initTele() {
     aprilTimer.start();
     try {
-      slidaa = tab.add("slidaa", 1)
-          .withWidget(BuiltInWidgets.kNumberSlider)
-          .withProperties(Map.of("min", -1, "max", 1))
-          .getEntry();
+      slidaa =
+          tab.add("slidaa", 1)
+              .withWidget(BuiltInWidgets.kNumberSlider)
+              .withProperties(Map.of("min", -1, "max", 1))
+              .getEntry();
 
     } catch (Exception e) {
       System.out.println(
@@ -128,7 +126,6 @@ public class SupaStruct {
     }
     pigRotate = pigeon.getInstance().getPigYaw();
     arm.setArmToCanCoder();
-
   }
 
   public void updateTele() {
@@ -148,7 +145,7 @@ public class SupaStruct {
 
     updateLightsToggle();
     train.updateSwerve();
-    wrist.updateZeroWristMotor();
+    Wrist.updateZeroWristMotor();
     arm.updateSmartdashboard();
 
     // --------------------------------------------------------------------//
@@ -194,10 +191,11 @@ public class SupaStruct {
 
     pov = xbox.getPOV() != -1;
 
-    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-        - MathFormulas.signumAngleEdition(str, fwd))
-        + 360)
-        % 360;
+    inverseTanAngleDrive =
+        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+                    - MathFormulas.signumAngleEdition(str, fwd))
+                + 360)
+            % 360;
 
     // --------------------------------------------------------------------//
     // PIGEON RESET
@@ -289,31 +287,31 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (dpadup2) {
-      wrist.moveWristMotor(-.4);
+      Wrist.moveWristMotor(-.4);
     } else if (dpaddown2) {
-      wrist.moveWristMotor(.4);
+      Wrist.moveWristMotor(.4);
     } else {
-      wrist.moveWristMotor(0);
+      Wrist.moveWristMotor(0);
     }
 
     if (rbbutton2) {
       if (toggleConeOn) {
-        wrist.moveWristRoller(-1);
+        Wrist.moveWristRoller(-1);
         // run rollers direction 1
       } else if (toggleCubeOn) {
-        wrist.moveWristRoller(1);
+        Wrist.moveWristRoller(1);
         // run rollers direction 2
       }
     } else if (lbbutton2) {
       if (toggleConeOn) {
-        wrist.moveWristRoller(1);
+        Wrist.moveWristRoller(1);
         // run rollers direction 2
       } else if (toggleCubeOn) {
-        wrist.moveWristRoller(-1);
+        Wrist.moveWristRoller(-1);
         // run rollers direction 1
       }
     } else {
-      wrist.moveWristRoller(0);
+      Wrist.moveWristRoller(0);
     }
 
     // --------------------------------------------------------------------//
@@ -377,7 +375,6 @@ public class SupaStruct {
       toggleArmMidOn = false;
       toggleArmLowOn = false;
       toggleArmStowOn = false;
-
     }
 
     if (bbutton2) {
@@ -405,44 +402,43 @@ public class SupaStruct {
     if (toggleArmHighOn) {
       if (toggleConeOn) {
         arm.pidArm(100);
-        wrist.moveWristPID(50);
+        Wrist.moveWristPID(50);
       } else if (toggleCubeOn) {
         arm.pidArm(100);
-        wrist.moveWristPID(0);
+        Wrist.moveWristPID(0);
       }
 
     } else if (toggleArmMidOn) {
       // toggle HIGH AND HP
       if (toggleConeOn) {
         arm.pidArm(113);
-        wrist.moveWristPID(255);
+        Wrist.moveWristPID(255);
       } else if (toggleCubeOn) {
         arm.pidArm(87);
-        wrist.moveWristPID(135);
+        Wrist.moveWristPID(135);
       }
 
     } else if (toggleArmLowOn) {
       if (toggleConeOn) {
         arm.pidArm(28);
         arm.pidTelescope(300);
-        wrist.moveWristPID(200);
+        Wrist.moveWristPID(200);
       } else if (toggleCubeOn) {
         arm.pidArm(29);
         arm.pidTelescope(5000);
-        wrist.moveWristPID(50);
+        Wrist.moveWristPID(50);
       }
 
     } else if (toggleArmStowOn) {
       if (toggleConeOn) {
         arm.pidArm(0);
         arm.pidTelescope(100);
-        wrist.moveWristPID(0);
+        Wrist.moveWristPID(0);
       } else if (toggleCubeOn) {
         arm.pidArm(0);
         arm.pidTelescope(100);
-        wrist.moveWristPID(0);
+        Wrist.moveWristPID(0);
       }
-
     }
 
     // --------------------------------------------------------------------//
@@ -470,7 +466,7 @@ public class SupaStruct {
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
     // SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(Wrist.getWristNative()));
     // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
     // SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
     SmartDashboard.putBoolean("togglearmhign", toggleArmHighOn);

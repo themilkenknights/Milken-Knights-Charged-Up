@@ -104,16 +104,15 @@ public class Odometry {
           MkSwerveTrain.getInstance().modulePosTL(),
           MkSwerveTrain.getInstance().modulePosBR()
         });
-if(enableApril)
-{
-    Optional<EstimatedRobotPose> result =
-        austin.getEstimatedGlobalPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
-    if (result.isPresent()) {
-      EstimatedRobotPose camPose = result.get();
-      m_SwerveDrivePoseEstimator.addVisionMeasurement(
-          camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
+    if (enableApril) {
+      Optional<EstimatedRobotPose> result =
+          austin.getEstimatedGlobalPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
+      if (result.isPresent()) {
+        EstimatedRobotPose camPose = result.get();
+        m_SwerveDrivePoseEstimator.addVisionMeasurement(
+            camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
+      }
     }
-  }
     mField2d.setRobotPose(m_SwerveDrivePoseEstimator.getEstimatedPosition());
   }
 

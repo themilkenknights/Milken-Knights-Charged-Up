@@ -28,7 +28,7 @@ public class Arm {
     tele = new PIDController(MKTELE.kP, MKTELE.kI, MKTELE.kD);
     testarm = new PIDController(MKARM.kP, MKARM.kI, MKARM.kD);
     telescope = motor.motor(CANID.telescopeCANID, NeutralMode.Brake, 0, MKTELE.pidf, false);
-    armCanCoder = motor.cancoder(CANID.armCanCoder, MKARM.offset,"rio");
+    armCanCoder = motor.cancoder(CANID.armCanCoder, MKARM.offset, "rio");
     armCanCoder.configSensorDirection(true);
     armLeft = motor.motor(CANID.leftarmCANID, NeutralMode.Brake, 0, MKARM.pidf, true);
     armRight = motor.motor(CANID.rightarmCANID, NeutralMode.Brake, 0, MKARM.pidf, false);
@@ -98,8 +98,10 @@ public class Arm {
 
   public void pidArm(double setpoint) {
     moveArm(
-        -arm.calculate(getArmDegrees(), setpoint) - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
-        -arm.calculate(getArmDegrees(), setpoint) - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
+        -arm.calculate(getArmDegrees(), setpoint)
+            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
+        -arm.calculate(getArmDegrees(), setpoint)
+            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
   }
 
   public double pidArmCalc(double setpoint) {
@@ -125,11 +127,11 @@ public class Arm {
     SmartDashboard.putNumber("getleftmotoroutput", armLeft.getMotorOutputPercent());
     SmartDashboard.putNumber("getrightmotoroutput", armRight.getMotorOutputPercent());
 
-    //SmartDashboard.putNumber("arms", getArm());
+    // SmartDashboard.putNumber("arms", getArm());
     SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
     SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
-    //SmartDashboard.putNumber("geterror", arm.getPositionError());
-   // SmartDashboard.putNumber("getarmpower", armLeft.getMotorOutputPercent());
+    // SmartDashboard.putNumber("geterror", arm.getPositionError());
+    // SmartDashboard.putNumber("getarmpower", armLeft.getMotorOutputPercent());
     // SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
     // SmartDashboard.putNumber("degdeg", getArmDegrees());
   }

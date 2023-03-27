@@ -23,10 +23,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.autopaths.LeftDoubleLow;
-import frc.robot.AUTO.Commandments.autopaths.RightDoubleLow;
 import frc.robot.AUTO.Commandments.autopaths.Rampauto;
+import frc.robot.AUTO.Commandments.autopaths.RightDoubleLow;
 import frc.robot.MECHANISMS.ARM.Arm;
-import frc.robot.MECHANISMS.ARM.Wrist;
+import frc.robot.MECHANISMS.ARM.wrist;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKTELE;
@@ -34,26 +34,22 @@ import frc.robot.MISC.Odometry;
 import frc.robot.MISC.pigeon;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the
- * name of this class or
- * the package after creating this project, you must also update the
- * build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
   /**
-   * This function is run when the robot is first started up and should be used
-   * for any
+   * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   private Command m_autonomousCommand;
 
   private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
   private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
-  private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser)
-      .withWidget(BuiltInWidgets.kSplitButtonChooser);
+  private ComplexWidget positionChooserTab =
+      mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
@@ -150,7 +146,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
-    SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
+    SmartDashboard.putBoolean("isreset", wrist.getInstance().getLimitSwitch());
 
     System.out.println("Robot Teleop Init");
     if (m_autonomousCommand != null) {
@@ -166,10 +162,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if (!resetDoneDiddlyDone) {
-      Wrist.getInstance().moveWristMotor(-0.4);
-      resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
+      wrist.getInstance().moveWristMotor(-0.4);
+      resetDoneDiddlyDone = wrist.getInstance().getLimitSwitch();
       if (resetDoneDiddlyDone) {
-        Wrist.getInstance().moveWristMotor(0);
+        wrist.getInstance().moveWristMotor(0);
         supaKoopa.setStartupWristToTrue();
       }
     }
@@ -184,8 +180,7 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {
-  }
+  public void disabledPeriodic() {}
 
   @Override
   public void testInit() {

@@ -78,10 +78,10 @@ public final class Constants {
   }
 
   public static class MKCANCODER {
-    public static final double topLeftOffset = 11.865234375 + 180; 
+    public static final double topLeftOffset = 11.865234375 + 180;
     public static final double topRightOffset = -25.83984275 + 180;
     public static final double bottomLeftOffset = 153.0175781 - 16 - 180;
-    public static final double bottomRightOffset =7.294921875 - 180; 
+    public static final double bottomRightOffset = 7.294921875 - 180;
 
     public static final double[] offset = {
       MKCANCODER.topLeftOffset,

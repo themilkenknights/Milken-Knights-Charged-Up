@@ -22,6 +22,5 @@ public class Rampauto extends SequentialCommandGroup {
         Commands.deadline(new EtherStraightCommand(0, -0.5, 0, 0)),
         Commands.deadline(new MotionMagicAuto(100, 180)),
         Commands.deadline(new RampCommand().withTimeout(15)));
-
   }
 }

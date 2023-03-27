@@ -73,12 +73,14 @@ public class MkSwerveTrain {
     bottomDriveLeft = mMotor.driveMotor(CANID.bottomDriveLeftCANID);
     bottomDriveRight = mMotor.driveMotor(CANID.bottomDriveRightCANID);
 
-    topLeftCoder = mMotor.cancoder(CANID.topTurnLeftCANCoderCANID, MKCANCODER.topLeftOffset,"train");
-    topRightCoder = mMotor.cancoder(CANID.topTurnRightCANCoderCANID, MKCANCODER.topRightOffset,"train");
+    topLeftCoder =
+        mMotor.cancoder(CANID.topTurnLeftCANCoderCANID, MKCANCODER.topLeftOffset, "train");
+    topRightCoder =
+        mMotor.cancoder(CANID.topTurnRightCANCoderCANID, MKCANCODER.topRightOffset, "train");
     bottomLeftCoder =
-        mMotor.cancoder(CANID.bottomTurnLeftCANCoderCANID, MKCANCODER.bottomLeftOffset,"train");
+        mMotor.cancoder(CANID.bottomTurnLeftCANCoderCANID, MKCANCODER.bottomLeftOffset, "train");
     bottomRightCoder =
-        mMotor.cancoder(CANID.bottomTurnRightCANCoderCANID, MKCANCODER.bottomRightOffset,"train");
+        mMotor.cancoder(CANID.bottomTurnRightCANCoderCANID, MKCANCODER.bottomRightOffset, "train");
   }
 
   public static MkSwerveTrain getInstance() {
@@ -220,10 +222,10 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-   // SmartDashboard.putNumber("topleftcan", tlCoder());
-    //SmartDashboard.putNumber("toprightcan", trCoder());
-    //SmartDashboard.putNumber("botleftcan", blCoder());
-    //SmartDashboard.putNumber("botrightcan", brCoder());
+    // SmartDashboard.putNumber("topleftcan", tlCoder());
+    // SmartDashboard.putNumber("toprightcan", trCoder());
+    // SmartDashboard.putNumber("botleftcan", blCoder());
+    // SmartDashboard.putNumber("botrightcan", brCoder());
     /*
         SmartDashboard.putNumber("topleftnativeTURN", MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio));
         SmartDashboard.putNumber("toprightnativeTURN", MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio));
@@ -243,14 +245,14 @@ public class MkSwerveTrain {
     // topTurnLeft.getSelectedSensorPosition());
     // SmartDashboard.putNumber("ticksforoffset", MathFormulas.nativeToDegrees(217,
     // MKTURN.greerRatio));
-   // SmartDashboard.putNumber("magicangle", vars.magicAngle);
-    //SmartDashboard.putNumber("autp dist test", vars.avgDistTest);
-   // SmartDashboard.putNumber("total", vars.totalDistance);
+    // SmartDashboard.putNumber("magicangle", vars.magicAngle);
+    // SmartDashboard.putNumber("autp dist test", vars.avgDistTest);
+    // SmartDashboard.putNumber("total", vars.totalDistance);
 
     vars.yaw = pigeon.getInstance().getPigYaw() % 360;
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
     SmartDashboard.putNumber("pigeon", vars.yaw);
- //   SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
+    //   SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
     // SmartDashboard.putNumber("avgdist", vars.avgDistInches);
 
     vars.posInchTL = MathFormulas.nativeToInches(topDriveLeft.getSelectedSensorPosition());

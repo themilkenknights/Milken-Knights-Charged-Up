@@ -118,7 +118,7 @@ public class AprilTags {
   }
 
   public void aprilSmartDashboard() {
-   // SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
+    // SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
     /*
      * SmartDashboard.putNumber("aprilRQANge", get2DRange());
      * SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());

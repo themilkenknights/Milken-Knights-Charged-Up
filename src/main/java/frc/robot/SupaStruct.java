@@ -293,6 +293,8 @@ public class SupaStruct {
       manualMoveWrist = true;
     } else {
       wrist.moveWristMotor(0);
+      //TODO see if this setting here fucks it all up
+      //TODO also see why setting movewristmotor0 here doesnt fuck up the movewristmotorspid below
       manualMoveWrist = true;
     }
 

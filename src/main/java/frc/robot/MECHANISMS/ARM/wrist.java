@@ -117,7 +117,7 @@ public class Wrist {
   }
 
   public double wristFF() {
-    return Math.sin(getWristDegree()) * (Math.sin(arm.getArmDegrees()) * MKWRIST.minA);
+    return Math.sin(getWristDegree() + arm.getArmDegrees()) * MKWRIST.minA;
   }
 
   public enum MODE {

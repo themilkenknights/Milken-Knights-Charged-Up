@@ -1,7 +1,6 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.MECHANISMS.ARM;
 
 import com.revrobotics.CANSparkMax;
@@ -35,7 +34,6 @@ public class Wrist {
      * CANSparkMax object
      */
     wristPID = wristMotor.getPIDController();
-
     /**
      * The PID Controller can be configured to use the analog sensor as its feedback
      * device with the
@@ -43,7 +41,6 @@ public class Wrist {
      * object.
      */
     wristPID.setFeedbackDevice(wristEncoder);
-
     wristPID.setP(MKWRIST.kP);
     wristPID.setI(MKWRIST.kI);
     wristPID.setD(MKWRIST.kD);
@@ -66,6 +63,10 @@ public class Wrist {
 
   public double getWristNative() {
     return wristEncoder.getPosition();
+  }
+
+  public double getWristDegree() {
+    return MathFormulas.sparkToDegrees(getWristNative());
   }
 
   public double getWristMotorSpeed() {
@@ -113,6 +114,10 @@ public class Wrist {
     } else {
       return MKWRIST.stowedAngle;
     }
+  }
+
+  public double wristFF() {
+    return Math.sin(getWristDegree()) * (Math.sin(arm.getArmDegrees()) * MKWRIST.minA);
   }
 
   public enum MODE {

@@ -91,7 +91,7 @@ public class Motor {
     motor.setInverted(inverted);
     motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
     motor.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
-    motor.configVoltageCompSaturation(10);
+    motor.configVoltageCompSaturation(11);
     motor.enableVoltageCompensation(true);
     motor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.5));
     motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.5));
@@ -112,7 +112,7 @@ public class Motor {
     intake.setInverted(inverted);
     intake.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
     intake.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
-    intake.configVoltageCompSaturation(10);
+    intake.configVoltageCompSaturation(11);
     intake.enableVoltageCompensation(true);
     // intake.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
     // intake.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
@@ -137,7 +137,7 @@ public class Motor {
     CANSparkMax sparky = new CANSparkMax(canid, MotorType.kBrushless);
     sparky.restoreFactoryDefaults();
     sparky.setIdleMode(CANSparkMax.IdleMode.kCoast);
-    sparky.setSmartCurrentLimit(5);
+    //sparky.setSmartCurrentLimit(5);
     sparky.enableVoltageCompensation(11);
     return sparky;
   }

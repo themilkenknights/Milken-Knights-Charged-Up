@@ -242,7 +242,7 @@ public class SupaStruct {
       april.alignToTag();
 
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
-      train.etherSwerve(fwd, str, -rcw/2, ControlMode.PercentOutput); // +,-,+
+      train.etherSwerve(fwd, str, -rcw / 2, ControlMode.PercentOutput); // +,-,+
     } else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       fwd = train.antiTip()[1];
       str = train.antiTip()[0];
@@ -286,10 +286,10 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (dpadup2) {
-      wrist.moveWristMotor(-.4);
+      wrist.moveWristMotor(-.3);
       manualMoveWrist = true;
     } else if (dpaddown2) {
-      wrist.moveWristMotor(.4);
+      wrist.moveWristMotor(.3);
       manualMoveWrist = true;
     } else {
       wrist.moveWristMotor(0);
@@ -411,23 +411,23 @@ public class SupaStruct {
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(113);
+        arm.pidArm(115.5);
         if (manualMoveWrist) {
-          wrist.moveWristPID(255);
+          wrist.moveWristPID(245);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(87);
+        arm.pidArm(93);
         if (manualMoveWrist) {
-          wrist.moveWristPID(135);
+          wrist.moveWristPID(117);
         }
       }
 
     } else if (toggleArmMidOn) {
       // toggle HIGH AND HP
       if (toggleConeOn) {
-        arm.pidArm(75);
+        arm.pidArm(90);
         if (manualMoveWrist) {
-          wrist.moveWristPID(75);
+          wrist.moveWristPID(160);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(75);
@@ -453,13 +453,13 @@ public class SupaStruct {
 
     } else if (toggleArmStowOn) {
       if (toggleConeOn) {
-        arm.pidArm(0);
+        arm.pidArm(20);
         arm.pidTelescope(100);
         if (manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(0);
+        arm.pidArm(20);
         arm.pidTelescope(100);
         if (manualMoveWrist) {
           wrist.moveWristPID(0);
@@ -569,7 +569,7 @@ public class SupaStruct {
     }
 
     if (fwd == 0.3 || rcw == 0.5) {
-      train.etherSwerve(fwd, 0, rcw/2, ControlMode.PercentOutput);
+      train.etherSwerve(fwd, 0, rcw / 2, ControlMode.PercentOutput);
       train.etherRCWFinder(fwd, 0, 0);
     } else {
       train.stopEverything();

@@ -98,8 +98,8 @@ public class Arm {
 
   public void pidArm(double setpoint) {
     moveArm(
-        -arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint),
-        -arm.calculate(getArmDegrees(), setpoint) - armFF(setpoint));
+        -arm.calculate(getArmDegrees(), setpoint) - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
+        -arm.calculate(getArmDegrees(), setpoint) - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
   }
 
   public double pidArmCalc(double setpoint) {
@@ -122,7 +122,14 @@ public class Arm {
     // SmartDashboard.putNumber("leftarm", getLeft());
     // SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
-    SmartDashboard.putNumber("arms", getArm());
+    SmartDashboard.putNumber("getleftmotoroutput", armLeft.getMotorOutputPercent());
+    SmartDashboard.putNumber("getrightmotoroutput", armRight.getMotorOutputPercent());
+
+    //SmartDashboard.putNumber("arms", getArm());
+    SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
+    SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
+    //SmartDashboard.putNumber("geterror", arm.getPositionError());
+   // SmartDashboard.putNumber("getarmpower", armLeft.getMotorOutputPercent());
     // SmartDashboard.putNumber("cancodernumbaaa", armCanCoder.getAbsolutePosition());
     // SmartDashboard.putNumber("degdeg", getArmDegrees());
   }

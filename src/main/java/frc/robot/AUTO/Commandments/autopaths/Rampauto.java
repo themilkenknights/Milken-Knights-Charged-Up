@@ -10,28 +10,21 @@ import frc.robot.AUTO.Commands.EtherStraightCommand;
 import frc.robot.AUTO.Commands.EtherTurnCommand;
 import frc.robot.AUTO.Commands.IntakeAuto;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
+import frc.robot.AUTO.Commands.RampCommand;
 import frc.robot.AUTO.Commands.intakedeploy;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class lowerLinkRight extends SequentialCommandGroup {
+public class Rampauto extends SequentialCommandGroup {
   /** Creates a new RightDoubleLow. */
-  public lowerLinkRight() {
+  public Rampauto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      Commands.deadline(new EtherStraightCommand(0, -0.5, 0, 0)),
-        Commands.deadline(new IntakeAuto(.8).withTimeout(.5)),
-        Commands.deadline(new EtherStraightCommand(100, -0.9, 0, 0.3)),
-        Commands.deadline(new EtherStraightCommand(79, -0.9, 0, 110), new intakedeploy().withTimeout(.6)),
-        Commands.deadline(new EtherStraightCommand(60, -.1, -.7, 110), new IntakeAuto(-.5).withTimeout(3)),
-        Commands.deadline(new intakedeploy().withTimeout(.6)),
-        Commands.deadline(new EtherStraightCommand(30, .1, .7, 110)),
-        Commands.deadline(new EtherStraightCommand(30, 0.9, 0, -.5)),
-        Commands.deadline(new EtherStraightCommand(135, 0.9, 0, -0.5)),
-        Commands.deadline(new IntakeAuto(.3).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(20, 0.5, 0, -0.5)));
+        Commands.deadline(new EtherStraightCommand(0, -0.5, 0, 0)),
+        Commands.deadline(new MotionMagicAuto(100, 180)),
+        Commands.deadline(new RampCommand().withTimeout(15)));
 
   }
 }

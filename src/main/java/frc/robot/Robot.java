@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.autopaths.LeftDoubleLow;
 import frc.robot.AUTO.Commandments.autopaths.RightDoubleLow;
-import frc.robot.AUTO.Commandments.autopaths.lowerLinkRight;
+import frc.robot.AUTO.Commandments.autopaths.Rampauto;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Wrist;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
     Shuffleboard.selectTab("Match");
     positionChooser.addOption("RIGHTDOUBLE", AutoPosition.RIGHTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    positionChooser.addOption("LOWERLINKRIGHT", AutoPosition.RIGHTLOWERLINK);
+    positionChooser.addOption("Rampauto", AutoPosition.RAMPAUTO);
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putBoolean("wristZero", resetDoneDiddlyDone);
-    
+
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
@@ -128,8 +128,8 @@ public class Robot extends TimedRobot {
       case MIDDLE:
         m_autonomousCommand = new LeftDoubleLow();
         break;
-      case RIGHTLOWERLINK:
-        m_autonomousCommand = new lowerLinkRight();
+      case RAMPAUTO:
+        m_autonomousCommand = new Rampauto();
         break;
     }
 
@@ -158,7 +158,7 @@ public class Robot extends TimedRobot {
     }
     train.startTrain();
     pigeon.getInstance().reset();
-    Arm.getInstance().setTelescope(MKTELE.maxNativePositionTelescope);
+    Arm.getInstance().setTelescope(MKTELE.minNativePositionTelescope);
     // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
     // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }
@@ -168,9 +168,9 @@ public class Robot extends TimedRobot {
     if (!resetDoneDiddlyDone) {
       Wrist.getInstance().moveWristMotor(-0.4);
       resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
-      if(resetDoneDiddlyDone)
-      {
+      if (resetDoneDiddlyDone) {
         Wrist.getInstance().moveWristMotor(0);
+        supaKoopa.setStartupWristToTrue();
       }
     }
     supaKoopa.updateTele();
@@ -201,7 +201,7 @@ public class Robot extends TimedRobot {
   public enum AutoPosition {
     LEFTSIDEDOUBLE,
     RIGHTSIDEDOUBLE,
-    RIGHTLOWERLINK,
+    RAMPAUTO,
     MIDDLE
   }
 }

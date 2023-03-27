@@ -36,7 +36,7 @@ public final class Constants {
     public static final double kA = 0.1;
     public static final double kV = 0.1;
 
-    public static final double maxNativeVelocity = 22000;
+    public static final double maxNativeVelocity = 18000;
     public static final double maxNativeAcceleration = maxNativeVelocity / 4;
 
     public static final double kP = 0.05;
@@ -120,7 +120,7 @@ public final class Constants {
   public static class MKBABY {
     public static final double fwdBABY = 1;
     public static final double strBABY = 1;
-    public static final double rcwBABY = 2; // 2 very fast
+    public static final double rcwBABY = 3; // 2 very fast
   }
 
   // --------------------------------------------------------------------//
@@ -237,12 +237,12 @@ public final class Constants {
   // --------------------------------------------------------------------//
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
-    public static final double kP = 0.0015;
+    public static final double kP = 0.0013;
     public static final double kI = 0.00;
-    public static final double kD = 0.0005;
+    public static final double kD = 0.00075;
     public static final double kF = 0;
     public static final double[] pidf = {kP, kI, kD, kF};
-    public static final double minA = 0.055; // 0.065;
+    public static final double minA = 0.045; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 110;
     public static final double minDegreePosition = -5;

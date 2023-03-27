@@ -139,7 +139,7 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
-    if(rbbutton)
+    if(xbox.getRawButton(9))
     {
       april.updateApril();
       aprilTimer.restart();
@@ -282,6 +282,9 @@ public class SupaStruct {
     if (abutton) {
       intake.toggle();
     }
+
+    
+
     // --------------------------------------------------------------------//
     // ARM
     // --------------------------------------------------------------------//
@@ -313,25 +316,34 @@ Dpad up down for manual rotation up down--
     arm.pidArm(0);
     arm.setTelescope(0);
 */
+if(resetDoneDiddlyDone)
+{
+if(dpadup2){
+  wrist.moveWristMotor(-.4);}
+  else if(dpaddown2){
+    wrist.moveWristMotor(.4);
+  }
+else 
+{
+  wrist.moveWristMotor(0);
+}
+}
+
+
+
+
      if (dpadleft2 && !dpadright2) {
       arm.moveArm(-0.16, -0.16);
 
     } else if (!dpadleft2 && dpadright2) {
       arm.moveArm(0.16, 0.16);
 
+      
+
     } else {
       arm.moveArm(0, 0);
     }
-    if (dpadup) {
-      if (!resetDoneDiddlyDone) {
-        Wrist.getInstance().moveWristMotor(0.2);
-        resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
-        if(resetDoneDiddlyDone)
-        {
-          Wrist.getInstance().moveWristMotor(0);
-        }
-    }
-  }
+   
     
     // --------------------------------------------------------------------//
     // wrist
@@ -344,9 +356,8 @@ Dpad up down for manual rotation up down--
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
      //SmartDashboard.putNumber("getwrist", wrist.getWristNative());
      SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
-     SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
+     //SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
      //SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
-
     // --------------------------------------------------------------------//
     // TELESCOPE
     // --------------------------------------------------------------------//
@@ -361,10 +372,14 @@ Dpad up down for manual rotation up down--
     else {
       arm.moveTele(0);
     }
+    
+if(xbox.getRawButton(7)){
+  arm.setTelescope(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
+}
+  else if(xbox.getRawButton(8)){
+    arm.setTelescope(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
+  }
 
-
-
-   
 
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
@@ -379,41 +394,65 @@ Dpad up down for manual rotation up down--
     
     if (rbbutton2) {
       if(toggleConeOn) {
-    
+        wrist.moveWristRoller(-1);
         //run rollers direction 1
       }
       else if(toggleCubeOn) {
+        wrist.moveWristRoller(1);
         //run rollers direction 2
       }
     } 
     else if (lbbutton2) {
       if(toggleConeOn) {
+        wrist.moveWristRoller(1);
         //run rollers direction 2
       }
       else if(toggleCubeOn) {
+        wrist.moveWristRoller(-1);
         //run rollers direction 1
       }
     }
+    else {
+      wrist.moveWristRoller(0);
+    }
 
-    if(xboxOP.getRawButton(7))
+    if(xboxOP.getRawButton(8))
     {
       toggleConeOn = true;
       toggleCubeOn = false;
+      
     }
-    else if(xboxOP.getRawButton(8))
+    else if(xboxOP.getRawButton(7))
     {
       toggleConeOn = false;
       toggleCubeOn = true;
     }
+    if(xboxOP.getRawButton(9))
+    {
+      toggleConeOn = false;
+      toggleCubeOn = false;
+      toggleArmHighOn = false;
+      toggleArmMidOn = false;
+      toggleArmLowOn = false;
+      toggleArmStowOn = false;
 
-    if(ybutton2)
+    }
+    
+    SmartDashboard.putBoolean("togglearmhign", toggleArmHighOn);
+    SmartDashboard.putBoolean("togglearmlow", toggleArmLowOn);
+    SmartDashboard.putBoolean("togglemidarm", toggleArmMidOn);
+    SmartDashboard.putBoolean("togglearmstow", toggleArmStowOn);
+    SmartDashboard.putBoolean("cone", toggleConeOn);
+    SmartDashboard.putBoolean("cube", toggleCubeOn);
+
+    if(bbutton2)
     {
       toggleArmHighOn = true;
       toggleArmMidOn = false;
       toggleArmLowOn = false;
       toggleArmStowOn = false;
     }
-    else if(bbutton2)
+    else if(ybutton2)
     {
       toggleArmHighOn = false;
       toggleArmMidOn = true;
@@ -440,51 +479,53 @@ Dpad up down for manual rotation up down--
       //toggle hig
       if(toggleConeOn) {
         arm.pidArm(100);
-        wrist.setWristMotor(50);
+        wrist.moveWristPID(50);
         //position for cone place high
       }
       else if(toggleCubeOn) {
         arm.pidArm(100);
-        wrist.setWristMotor(0);
+        wrist.moveWristPID(0);
         //position for cube place high
       }
     }
     else if(toggleArmMidOn)
     {
-      // toggle mid
+      // toggle HIGH AND HP
       if(toggleConeOn) {
-        arm.pidArm(90);
-        wrist.setWristMotor(50);
+        arm.pidArm(113);
+        wrist.moveWristPID(255);
+     
 
       }
       else if(toggleCubeOn) {
-        arm.pidArm(90);
-        wrist.setWristMotor(0);
+        arm.pidArm(87);
+        
+        wrist.moveWristPID(135);
       }
     }
     else if(toggleArmLowOn) {
       if(toggleConeOn) {
-        arm.pidArm(30);
-        arm.setTelescope(100);
-        wrist.setWristMotor(50);
+        arm.pidArm(28);
+        arm.pidTelescope(300);
+        wrist.moveWristPID(200);
       }
       else if(toggleCubeOn) {
-        arm.pidArm(30);
-        arm.setTelescope(100);
-        wrist.setWristMotor(50);
+        arm.pidArm(29);
+        arm.pidTelescope(5000);
+        wrist.moveWristPID(50);
       }
 
     }
     else if(toggleArmStowOn) {
       if(toggleConeOn) {
         arm.pidArm(0);
-        arm.setTelescope(0);
-        wrist.setWristMotor(0);
+        arm.pidTelescope(100);
+        wrist.moveWristPID(0);
       }
       else if(toggleCubeOn) {
         arm.pidArm(0);
-        arm.setTelescope(0);
-        wrist.setWristMotor(0);
+        arm.pidTelescope(100);
+        wrist.moveWristPID(0);
       }
 
     }
@@ -542,6 +583,11 @@ public void updateLightsToggle() {
 }
 
 
+public void setStartupWristToTrue()
+{
+  resetDoneDiddlyDone = true;
+}
+
   
   
   /*
@@ -565,6 +611,12 @@ public void updateLightsToggle() {
     ybutton = false;
     pov = false;
     itsreal = false;
+    toggleConeOn = false;
+    toggleCubeOn = false;
+    toggleArmHighOn = false;
+    toggleArmMidOn = false;
+    toggleArmLowOn = false;
+    toggleArmStowOn = false;
     turntesttimer.stop();
     turntesttimer.reset();
     try {

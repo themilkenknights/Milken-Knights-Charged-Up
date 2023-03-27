@@ -15,7 +15,7 @@ import frc.robot.MISC.Motor;
 
 public class Arm {
 
-  private DigitalInput resetLimitSwitch = new DigitalInput(9);
+  private DigitalInput resetLimitSwitch = new DigitalInput(8);
   private TalonFX armLeft;
   private TalonFX armRight;
   private TalonFX telescope;

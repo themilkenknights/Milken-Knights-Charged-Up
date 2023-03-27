@@ -242,7 +242,7 @@ public class SupaStruct {
       april.alignToTag();
 
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
-      train.etherSwerve(fwd, str, -rcw, ControlMode.PercentOutput); // +,-,+
+      train.etherSwerve(fwd, str, -rcw/2, ControlMode.PercentOutput); // +,-,+
     } else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       fwd = train.antiTip()[1];
       str = train.antiTip()[0];
@@ -383,13 +383,13 @@ public class SupaStruct {
       manualMoveWrist = true;
     }
 
-    if (bbutton2) {
+    if (ybutton2) {
       toggleArmHighOn = true;
       toggleArmMidOn = false;
       toggleArmLowOn = false;
       toggleArmStowOn = false;
       manualMoveWrist = false;
-    } else if (ybutton2) {
+    } else if (bbutton2) {
       toggleArmHighOn = false;
       toggleArmMidOn = true;
       toggleArmLowOn = false;
@@ -411,42 +411,42 @@ public class SupaStruct {
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(100);
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(50);
+        arm.pidArm(113);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(255);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(100);
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(0);
+        arm.pidArm(87);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(135);
         }
       }
 
     } else if (toggleArmMidOn) {
       // toggle HIGH AND HP
       if (toggleConeOn) {
-        arm.pidArm(113);
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(255);
+        arm.pidArm(75);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(75);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(87);
-        if (!manualMoveWrist) {
-          wrist.moveWristPID(135);
+        arm.pidArm(75);
+        if (manualMoveWrist) {
+          wrist.moveWristPID(75);
         }
       }
 
     } else if (toggleArmLowOn) {
       if (toggleConeOn) {
-        arm.pidArm(28);
-        arm.pidTelescope(300);
-        if (!manualMoveWrist) {
+        arm.pidArm(37);
+        arm.pidTelescope(200);
+        if (manualMoveWrist) {
           wrist.moveWristPID(200);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(29);
+        arm.pidArm(40);
         arm.pidTelescope(5000);
-        if (!manualMoveWrist) {
+        if (manualMoveWrist) {
           wrist.moveWristPID(50);
         }
       }
@@ -455,13 +455,13 @@ public class SupaStruct {
       if (toggleConeOn) {
         arm.pidArm(0);
         arm.pidTelescope(100);
-        if (!manualMoveWrist) {
+        if (manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(0);
         arm.pidTelescope(100);
-        if (!manualMoveWrist) {
+        if (manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       }
@@ -569,7 +569,7 @@ public class SupaStruct {
     }
 
     if (fwd == 0.3 || rcw == 0.5) {
-      train.etherSwerve(fwd, 0, rcw, ControlMode.PercentOutput);
+      train.etherSwerve(fwd, 0, rcw/2, ControlMode.PercentOutput);
       train.etherRCWFinder(fwd, 0, 0);
     } else {
       train.stopEverything();

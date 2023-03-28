@@ -119,7 +119,6 @@ private boolean resetDoneDiddlyDoneTELE = false;
   @Override
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
-    Arm.getInstance().setTelescopeEncoder(125);
     switch (positionChooser.getSelected()) {
       case RIGHTSIDEDOUBLE:
         m_autonomousCommand = new RightDoubleLow();
@@ -157,9 +156,6 @@ private boolean resetDoneDiddlyDoneTELE = false;
     }
     train.startTrain();
     pigeon.getInstance().reset();
-    Arm.getInstance().setTelescopeEncoder(MKTELE.minNativePositionTelescope);
-    // Arm.getInstance().setLeft(MKARM.minNativePositionTelescope);
-    // Arm.getInstance().setRight(MKARM.minNativePositionTelescope);
   }
 
   @Override
@@ -173,10 +169,10 @@ private boolean resetDoneDiddlyDoneTELE = false;
       }
     }
     if (!resetDoneDiddlyDoneTELE) {
-      Arm.getInstance().moveTele(0.6);
+      Arm.getInstance().moveTele(-0.6);
       resetDoneDiddlyDoneTELE = Arm.getInstance().getLimitSwitch();
       if (resetDoneDiddlyDoneTELE) {
-        Arm.getInstance().moveTele(0);
+        Arm.getInstance().pidTelescope(0);
         supaKoopa.setStartupTelescopeToTrue();
       }
     }

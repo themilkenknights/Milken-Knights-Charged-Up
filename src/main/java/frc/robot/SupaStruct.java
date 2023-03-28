@@ -501,20 +501,19 @@ public class SupaStruct {
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
     // SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-    // SmartDashboard.putNumber("neo 550",
-    // MathFormulas.sparkToDegrees(wrist.getWristNative()));
+     SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
     // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
     // SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
     // SmartDashboard.putBoolean("togglearmhign", toggleArmHighOn);
     // SmartDashboard.putBoolean("togglearmlow", toggleArmLowOn);
     // SmartDashboard.putBoolean("togglemidarm", toggleArmMidOn);
     // SmartDashboard.putBoolean("togglearmstow", toggleArmStowOn);
-    // SmartDashboard.putBoolean("cone", toggleConeOn);
-    // SmartDashboard.putBoolean("cube", toggleCubeOn);
+     SmartDashboard.putBoolean("cone", toggleConeOn);
+     SmartDashboard.putBoolean("cube", toggleCubeOn);
     // SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
     // SmartDashboard.putBoolean("manual", manualMoveWrist);
-
+      SmartDashboard.putBoolean("telescopezero",arm.getLimitSwitch());
     sliderArm = slidaa.getDouble(0);
   }
 

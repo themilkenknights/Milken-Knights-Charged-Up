@@ -219,7 +219,7 @@ public final class Constants {
   // --------------------------------------------------------------------//
   public static class MKWRIST {
     public static final double greerRatio = 143.0556670 / 1.0; // 0.01098901098;
-    public static final double kP = .6;
+    public static final double kP = .8;
     public static final double kI = 0.0;
     public static final double kD = 0.00001;
     public static final double kF = 0;

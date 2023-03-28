@@ -123,7 +123,7 @@ public class Arm {
   }
 
   public boolean getLimitSwitch() {
-    return resetLimitSwitch.get();
+    return !resetLimitSwitch.get();
   }
 
   public void updateZeroTelescopeMotor() {
@@ -135,12 +135,12 @@ public class Arm {
   public void updateSmartdashboard() {
     // SmartDashboard.putNumber("leftarm", getLeft());
     // SmartDashboard.putNumber("rightarm", getRight());
-    //SmartDashboard.putNumber("Telescope", getTelescope());
+    SmartDashboard.putNumber("Telescope", getTelescope());
     //SmartDashboard.putNumber("getleftmotoroutput", armLeft.getMotorOutputPercent());
     //SmartDashboard.putNumber("getrightmotoroutput", armRight.getMotorOutputPercent());
-    // SmartDashboard.putNumber("arms", getArm());
+     SmartDashboard.putNumber("arms", getArm());
     //SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
-    //SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
+    SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
     // SmartDashboard.putNumber("geterror", arm.getPositionError());
     // SmartDashboard.putNumber("getarmpower", armLeft.getMotorOutputPercent());
     // SmartDashboard.putNumber("cancodernumbaaa",

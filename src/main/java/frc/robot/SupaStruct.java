@@ -441,7 +441,7 @@ public class SupaStruct {
       } else if (toggleCubeOn) {
         arm.pidArm(75);
         if (!manualMoveWrist) {
-          wrist.moveWristPID(25);
+          wrist.moveWristPID(180);
         }
       }
 
@@ -456,7 +456,7 @@ public class SupaStruct {
         arm.pidArm(40);
         arm.pidTelescope(5000);
         if (!manualMoveWrist) {
-          wrist.moveWristPID(50);
+          wrist.moveWristPID(45);
         }
       }
 
@@ -501,19 +501,19 @@ public class SupaStruct {
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
     // SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-     SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
     // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
     // SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
     // SmartDashboard.putBoolean("togglearmhign", toggleArmHighOn);
     // SmartDashboard.putBoolean("togglearmlow", toggleArmLowOn);
     // SmartDashboard.putBoolean("togglemidarm", toggleArmMidOn);
     // SmartDashboard.putBoolean("togglearmstow", toggleArmStowOn);
-     SmartDashboard.putBoolean("cone", toggleConeOn);
-     SmartDashboard.putBoolean("cube", toggleCubeOn);
+    SmartDashboard.putBoolean("cone", toggleConeOn);
+    SmartDashboard.putBoolean("cube", toggleCubeOn);
     // SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
     // SmartDashboard.putBoolean("manual", manualMoveWrist);
-      SmartDashboard.putBoolean("telescopezero",arm.getLimitSwitch());
+    SmartDashboard.putBoolean("telescopezero", arm.getLimitSwitch());
     sliderArm = slidaa.getDouble(0);
   }
 

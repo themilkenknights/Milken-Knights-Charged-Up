@@ -330,11 +330,11 @@ public class SupaStruct {
       arm.moveArm(0.16, 0.16);
     }
 
-    if (lbbutton) {
+    else if (lbbutton) {
       arm.moveArm(sliderArm, sliderArm);
     }
 
-    if (!lbbutton && !dpadleft2 && !dpadright2) {
+    else {
       arm.moveArm(0, 0);
     }
 
@@ -346,7 +346,7 @@ public class SupaStruct {
       arm.moveTele(-.4);
     } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.moveTele(.4);
-    } else if(resetDoneDiddlyDoneTELE){
+    } else if (resetDoneDiddlyDoneTELE) {
       arm.moveTele(0);
     }
 

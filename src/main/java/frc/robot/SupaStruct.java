@@ -79,7 +79,8 @@ public class SupaStruct {
       toggleLightsPressed = false,
       pov, /* povToggled, */
       itsreal = false,
-      resetDoneDiddlyDone = false,
+      resetDoneDiddlyDoneTELE = false,
+      resetDoneDiddlyDoneWRIST = false,
       toggleConeOn,
       toggleCubeOn = false,
       toggleArmHighOn = false,
@@ -146,6 +147,7 @@ public class SupaStruct {
     updateLightsToggle();
     train.updateSwerve();
     wrist.updateZeroWristMotor();
+    arm.updateZeroTelescopeMotor();
     arm.updateSmartdashboard();
 
     // --------------------------------------------------------------------//
@@ -291,10 +293,10 @@ public class SupaStruct {
     } else if (dpaddown2) {
       wrist.moveWristMotor(.3);
       manualMoveWrist = true;
-    } else if(resetDoneDiddlyDone) {
+    } else if (resetDoneDiddlyDoneWRIST) {
       wrist.moveWristMotor(0);
       // TODO see if this setting here fucks it all up
-      //manualMoveWrist = true;
+      // manualMoveWrist = true;
     }
 
     if (rbbutton2) {
@@ -326,8 +328,13 @@ public class SupaStruct {
 
     } else if (!dpadleft2 && dpadright2) {
       arm.moveArm(0.16, 0.16);
+    }
 
-    } else {
+    if (lbbutton) {
+      arm.moveArm(sliderArm, sliderArm);
+    }
+
+    if (!lbbutton && !dpadleft2 && !dpadright2) {
       arm.moveArm(0, 0);
     }
 
@@ -339,7 +346,7 @@ public class SupaStruct {
       arm.moveTele(-.4);
     } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
       arm.moveTele(.4);
-    } else {
+    } else if(resetDoneDiddlyDoneTELE){
       arm.moveTele(0);
     }
 
@@ -412,13 +419,13 @@ public class SupaStruct {
     if (toggleArmHighOn) {
       if (toggleConeOn) {
         arm.pidArm(116);
-        
+
         if (!manualMoveWrist) {
           wrist.moveWristPID(250);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(93.5);
-        
+
         if (!manualMoveWrist) {
           wrist.moveWristPID(116.5);
         }
@@ -442,7 +449,7 @@ public class SupaStruct {
       if (toggleConeOn) {
         arm.pidArm(37);
         arm.pidTelescope(200);
-        if (manualMoveWrist) {
+        if (!manualMoveWrist) {
           wrist.moveWristPID(200);
         }
       } else if (toggleCubeOn) {
@@ -457,13 +464,13 @@ public class SupaStruct {
       if (toggleConeOn) {
         arm.pidArm(20);
         arm.pidTelescope(0);
-        if (manualMoveWrist) {
+        if (!manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(20);
         arm.pidTelescope(0);
-        if (manualMoveWrist) {
+        if (!manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       }
@@ -494,18 +501,21 @@ public class SupaStruct {
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
     // SmartDashboard.putNumber("getwrist", wrist.getWristNative());
-    SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
+    // SmartDashboard.putNumber("neo 550",
+    // MathFormulas.sparkToDegrees(wrist.getWristNative()));
     // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
     // SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
-    SmartDashboard.putBoolean("togglearmhign", toggleArmHighOn);
-    SmartDashboard.putBoolean("togglearmlow", toggleArmLowOn);
-    SmartDashboard.putBoolean("togglemidarm", toggleArmMidOn);
-    SmartDashboard.putBoolean("togglearmstow", toggleArmStowOn);
-    SmartDashboard.putBoolean("cone", toggleConeOn);
-    SmartDashboard.putBoolean("cube", toggleCubeOn);
-    SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
-    SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
-    SmartDashboard.putBoolean("manual", manualMoveWrist);
+    // SmartDashboard.putBoolean("togglearmhign", toggleArmHighOn);
+    // SmartDashboard.putBoolean("togglearmlow", toggleArmLowOn);
+    // SmartDashboard.putBoolean("togglemidarm", toggleArmMidOn);
+    // SmartDashboard.putBoolean("togglearmstow", toggleArmStowOn);
+    // SmartDashboard.putBoolean("cone", toggleConeOn);
+    // SmartDashboard.putBoolean("cube", toggleCubeOn);
+    // SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
+    // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
+    // SmartDashboard.putBoolean("manual", manualMoveWrist);
+
+    sliderArm = slidaa.getDouble(0);
   }
 
   public void updateLightsToggle() {
@@ -521,7 +531,11 @@ public class SupaStruct {
   }
 
   public void setStartupWristToTrue() {
-    resetDoneDiddlyDone = true;
+    resetDoneDiddlyDoneWRIST = true;
+  }
+
+  public void setStartupTelescopeToTrue() {
+    resetDoneDiddlyDoneTELE = true;
   }
 
   public void teleopDisabled() {

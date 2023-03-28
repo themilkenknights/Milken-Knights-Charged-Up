@@ -60,13 +60,13 @@ public class Robot extends TimedRobot {
   private Timer timer;
   private int lightMode = 0;
   private UsbCamera usbCamera;
-  private boolean resetDoneDiddlyDone = false;
+  private boolean resetDoneDiddlyDoneWRIST = false;
+private boolean resetDoneDiddlyDoneTELE = false;
 
   // Creates UsbCamera and MjpegServer [1] and connects them
 
   @Override
   public void robotInit() {
-    resetDoneDiddlyDone = false;
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
@@ -98,7 +98,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putBoolean("wristZero", resetDoneDiddlyDone);
 
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
@@ -165,12 +164,20 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    if (!resetDoneDiddlyDone) {
+    if (!resetDoneDiddlyDoneWRIST) {
       Wrist.getInstance().moveWristMotor(-0.3);
-      resetDoneDiddlyDone = Wrist.getInstance().getLimitSwitch();
-      if (resetDoneDiddlyDone) {
+      resetDoneDiddlyDoneWRIST = Wrist.getInstance().getLimitSwitch();
+      if (resetDoneDiddlyDoneWRIST) {
         Wrist.getInstance().moveWristMotor(0);
         supaKoopa.setStartupWristToTrue();
+      }
+    }
+    if (!resetDoneDiddlyDoneTELE) {
+      Arm.getInstance().moveTele(0.6);
+      resetDoneDiddlyDoneTELE = Arm.getInstance().getLimitSwitch();
+      if (resetDoneDiddlyDoneTELE) {
+        Arm.getInstance().moveTele(0);
+        supaKoopa.setStartupTelescopeToTrue();
       }
     }
     supaKoopa.updateTele();

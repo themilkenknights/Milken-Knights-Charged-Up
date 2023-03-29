@@ -15,7 +15,10 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 
-/** Not JuneTags. Not FebruaryTags. X is up, Y is side to side when facing directly at it */
+/**
+ * Not JuneTags. Not FebruaryTags. X is up, Y is side to side when facing
+ * directly at it
+ */
 public class AprilTags {
 
   private PIDController moveAprilX;
@@ -83,8 +86,8 @@ public class AprilTags {
         return result.getBestTarget().getBestCameraToTarget().getZ();
       } else if (axis == "r") {
         return (Math.toDegrees(
-                    result.getBestTarget().getBestCameraToTarget().getRotation().getAngle())
-                - 180)
+            result.getBestTarget().getBestCameraToTarget().getRotation().getAngle())
+            - 180)
             % 360;
       } else if (axis == "yaw") {
         return result.getBestTarget().getYaw();
@@ -100,9 +103,8 @@ public class AprilTags {
     double xPID;
     double yPID;
     double zPID;
-    zPID =
-        MkSwerveTrain.getInstance()
-            .moveToAngy(Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
+    zPID = MkSwerveTrain.getInstance()
+        .moveToAngy(Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
     if (result.hasTargets()) {
       xPID = moveAprilX.calculate(getAxis("x"), 2);
       yPID = moveAprilY.calculate(getAxis("y"), 0);
@@ -118,7 +120,8 @@ public class AprilTags {
   }
 
   public void aprilSmartDashboard() {
-    // SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y") / getAxis("x"))));
+    // SmartDashboard.putNumber("the angy", Math.toDegrees(Math.atan(getAxis("y") /
+    // getAxis("x"))));
     /*
      * SmartDashboard.putNumber("aprilRQANge", get2DRange());
      * SmartDashboard.putBoolean("DOYOUFUCKIGSEEEE", result.hasTargets());

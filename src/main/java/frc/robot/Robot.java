@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
-    //SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
+    // SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
     if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
       SmartDashboard.putBoolean("Enable Compressor Analog", false);
       double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
     resetDoneDiddlyDoneWRIST = false;
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
-    //SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
+    // SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
 
     System.out.println("Robot Teleop Init");
     if (m_autonomousCommand != null) {

@@ -23,7 +23,8 @@ import frc.robot.MISC.Constants.MKTURN;
 /** Add your docs here. */
 public class Motor {
 
-  private Motor() {}
+  private Motor() {
+  }
 
   public static Motor getInstance() {
     return InstanceHolder.mInstance;
@@ -114,8 +115,10 @@ public class Motor {
     intake.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
     intake.configVoltageCompSaturation(11);
     intake.enableVoltageCompensation(true);
-    // intake.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
-    // intake.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
+    // intake.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35,
+    // 60, 0.1));
+    // intake.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35,
+    // 60, 0.1));
     intake.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     intake.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
     return intake;
@@ -137,11 +140,10 @@ public class Motor {
     CANSparkMax sparky = new CANSparkMax(canid, MotorType.kBrushless);
     sparky.restoreFactoryDefaults();
     sparky.setIdleMode(Mode);
-    sparky.setSmartCurrentLimit(20,60,5700);
+    sparky.setSmartCurrentLimit(20, 60, 5700);
     sparky.enableVoltageCompensation(11);
     return sparky;
-  }
-  ;
+  };
 
   private static class InstanceHolder {
     private static final Motor mInstance = new Motor();

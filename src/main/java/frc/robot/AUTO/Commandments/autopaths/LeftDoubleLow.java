@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.EtherStraightCommand;
 import frc.robot.AUTO.Commands.IntakeAuto;
-import frc.robot.AUTO.Commands.intakedeploy;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

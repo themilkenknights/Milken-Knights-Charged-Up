@@ -25,7 +25,7 @@ public class Wrist {
 
   private Wrist() {
     wristMotor = motor.Sparky(CANID.wristMotorCANID, CANSparkMax.IdleMode.kCoast);
-    wristRoller = motor.Sparky(CANID.wristRollerCANID,CANSparkMax.IdleMode.kCoast);
+    wristRoller = motor.Sparky(CANID.wristRollerCANID, CANSparkMax.IdleMode.kCoast);
     wristEncoder = wristMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     /**
      * In order to use PID functionality for a controller, a SparkMaxPIDController

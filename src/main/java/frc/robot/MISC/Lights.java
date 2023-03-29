@@ -12,7 +12,8 @@ import frc.robot.MISC.Constants.LIGHTS;
 
 /** The Lights class contains everything relating to ergabled */
 public class Lights {
-  // pigeon vlaue thing and light offset values so i dont have to create a new variable every time
+  // pigeon vlaue thing and light offset values so i dont have to create a new
+  // variable every time
   // the
   // function runs
   private double pigrot = 0;
@@ -22,7 +23,8 @@ public class Lights {
   // private AddressableLED LEDStwo = new AddressableLED(4);
 
   private AddressableLEDBuffer buffer = new AddressableLEDBuffer(LIGHTS.bufferNum);
-  // private AddressableLEDBuffer buffertwo = new AddressableLEDBuffer(LIGHTS.bufferNum);
+  // private AddressableLEDBuffer buffertwo = new
+  // AddressableLEDBuffer(LIGHTS.bufferNum);
 
   private Timer timer = new Timer();
 

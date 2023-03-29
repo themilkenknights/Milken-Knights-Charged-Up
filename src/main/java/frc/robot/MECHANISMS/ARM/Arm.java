@@ -136,16 +136,18 @@ public class Arm {
     // SmartDashboard.putNumber("leftarm", getLeft());
     // SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
-    //SmartDashboard.putNumber("getleftmotoroutput", armLeft.getMotorOutputPercent());
-    //SmartDashboard.putNumber("getrightmotoroutput", armRight.getMotorOutputPercent());
+    // SmartDashboard.putNumber("getleftmotoroutput",
+    // armLeft.getMotorOutputPercent());
+    // SmartDashboard.putNumber("getrightmotoroutput",
+    // armRight.getMotorOutputPercent());
     // SmartDashboard.putNumber("arms", getArm());
-    //SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
+    // SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
     SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
     // SmartDashboard.putNumber("geterror", arm.getPositionError());
     // SmartDashboard.putNumber("getarmpower", armLeft.getMotorOutputPercent());
     // SmartDashboard.putNumber("cancodernumbaaa",
     // armCanCoder.getAbsolutePosition());
-    // SmartDashboard.putNumber("degdeg", getArmDegrees());
+    SmartDashboard.putNumber("arm degdeg", getArmDegrees());
   }
 
   /**

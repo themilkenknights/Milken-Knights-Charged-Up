@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
   private SupaStruct supaKoopa = SupaStruct.getInstance();
   private Timer timer;
   private int lightMode = 0;
-  private UsbCamera usbCamera;
+  private UsbCamera intakCamera;
   private boolean resetDoneDiddlyDoneWRIST = false;
   private boolean resetDoneDiddlyDoneTELE = false;
 

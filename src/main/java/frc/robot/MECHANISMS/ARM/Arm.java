@@ -144,7 +144,7 @@ public class Arm {
     // armRight.getMotorOutputPercent());
     // SmartDashboard.putNumber("arms", getArm());
     // SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
-    SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
+   // SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
     // SmartDashboard.putNumber("geterror", arm.getPositionError());
     // SmartDashboard.putNumber("getarmpower", armLeft.getMotorOutputPercent());
     // SmartDashboard.putNumber("cancodernumbaaa",

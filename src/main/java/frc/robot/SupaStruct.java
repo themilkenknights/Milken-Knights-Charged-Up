@@ -493,8 +493,11 @@ public class SupaStruct {
     } else if (lightMode == 2) {
       mLights.CUBE();
       SmartDashboard.putString("color", "cube");
-    }
-
+    }else if(lightMode == 3){
+        mLights.GROUND();
+        SmartDashboard.putString("color", "ground");
+      }
+    
     // --------------------------------------------------------------------//
     // SMARTDASHBOARD
     // --------------------------------------------------------------------//

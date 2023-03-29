@@ -113,6 +113,9 @@ public class SupaStruct {
   }
 
   public void initTele() {
+    lightMode = 0;
+    resetDoneDiddlyDoneTELE = false;
+    resetDoneDiddlyDoneWRIST = false;
     aprilTimer.start();
     try {
       slidaa = tab.add("slidaa", 1)
@@ -144,7 +147,6 @@ public class SupaStruct {
       rot = april.getAxis("r");
     }
 
-    updateLightsToggle();
     train.updateSwerve();
     wrist.updateZeroWristMotor();
     arm.updateZeroTelescopeMotor();
@@ -370,11 +372,13 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (xboxOP.getRawButton(8)) {
+      lightMode = 1;
       toggleConeOn = true;
       toggleCubeOn = false;
       manualMoveWrist = false;
 
     } else if (xboxOP.getRawButton(7)) {
+      lightMode = 2;
       toggleConeOn = false;
       toggleCubeOn = true;
       manualMoveWrist = false;
@@ -418,13 +422,13 @@ public class SupaStruct {
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(116);
+        arm.pidArm(117);
 
         if (!manualMoveWrist) {
           wrist.moveWristPID(250);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(93.5);
+        arm.pidArm(93);
 
         if (!manualMoveWrist) {
           wrist.moveWristPID(116.5);
@@ -439,9 +443,9 @@ public class SupaStruct {
           wrist.moveWristPID(230);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(75);
+        arm.pidArm(100);
         if (!manualMoveWrist) {
-          wrist.moveWristPID(180);
+          wrist.moveWristPID(117);
         }
       }
 
@@ -462,13 +466,13 @@ public class SupaStruct {
 
     } else if (toggleArmStowOn) {
       if (toggleConeOn) {
-        arm.pidArm(20);
+        arm.pidArm(0);
         arm.pidTelescope(0);
         if (!manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(20);
+        arm.pidArm(0);
         arm.pidTelescope(0);
         if (!manualMoveWrist) {
           wrist.moveWristPID(0);
@@ -510,23 +514,11 @@ public class SupaStruct {
     // SmartDashboard.putBoolean("togglearmstow", toggleArmStowOn);
     SmartDashboard.putBoolean("cone", toggleConeOn);
     SmartDashboard.putBoolean("cube", toggleCubeOn);
-    // SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
+    SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
     // SmartDashboard.putBoolean("manual", manualMoveWrist);
     SmartDashboard.putBoolean("telescopezero", arm.getLimitSwitch());
     sliderArm = slidaa.getDouble(0);
-  }
-
-  public void updateLightsToggle() {
-    if (bbutton) {
-      if (!toggleLightsPressed) {
-        lightMode++;
-        lightMode = lightMode % 3;
-        toggleLightsPressed = true;
-      }
-    } else {
-      toggleLightsPressed = false;
-    }
   }
 
   public void setStartupWristToTrue() {
@@ -550,6 +542,8 @@ public class SupaStruct {
     toggleArmMidOn = false;
     toggleArmLowOn = false;
     toggleArmStowOn = false;
+    resetDoneDiddlyDoneTELE = false;
+    resetDoneDiddlyDoneWRIST = false;
     turntesttimer.stop();
     turntesttimer.reset();
     try {

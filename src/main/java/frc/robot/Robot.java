@@ -23,8 +23,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.autopaths.LeftDoubleLow;
-import frc.robot.AUTO.Commandments.autopaths.Rampauto;
-import frc.robot.AUTO.Commandments.autopaths.RightDoubleLow;
 import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.ARM.Wrist;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -60,7 +58,7 @@ public class Robot extends TimedRobot {
   private int lightMode = 0;
   private UsbCamera usbCamera;
   private boolean resetDoneDiddlyDoneWRIST = false;
-private boolean resetDoneDiddlyDoneTELE = false;
+  private boolean resetDoneDiddlyDoneTELE = false;
 
   // Creates UsbCamera and MjpegServer [1] and connects them
 
@@ -71,9 +69,6 @@ private boolean resetDoneDiddlyDoneTELE = false;
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     Shuffleboard.selectTab("Match");
-    positionChooser.addOption("RIGHTDOUBLE", AutoPosition.RIGHTSIDEDOUBLE);
-    positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    positionChooser.addOption("Rampauto", AutoPosition.RAMPAUTO);
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
@@ -101,7 +96,7 @@ private boolean resetDoneDiddlyDoneTELE = false;
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
-    SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
+    //SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
     if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
       SmartDashboard.putBoolean("Enable Compressor Analog", false);
       double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
@@ -119,14 +114,8 @@ private boolean resetDoneDiddlyDoneTELE = false;
   public void autonomousInit() {
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
-      case RIGHTSIDEDOUBLE:
-        m_autonomousCommand = new RightDoubleLow();
-        break;
-      case MIDDLE:
+      case LEFTSIDEDOUBLE:
         m_autonomousCommand = new LeftDoubleLow();
-        break;
-      case RAMPAUTO:
-        m_autonomousCommand = new Rampauto();
         break;
     }
 
@@ -145,9 +134,11 @@ private boolean resetDoneDiddlyDoneTELE = false;
 
   @Override
   public void teleopInit() {
+    resetDoneDiddlyDoneTELE = false;
+    resetDoneDiddlyDoneWRIST = false;
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
-    SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
+    //SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
 
     System.out.println("Robot Teleop Init");
     if (m_autonomousCommand != null) {
@@ -159,22 +150,28 @@ private boolean resetDoneDiddlyDoneTELE = false;
 
   @Override
   public void teleopPeriodic() {
-    if (!resetDoneDiddlyDoneWRIST) {
-      Wrist.getInstance().moveWristMotor(-0.3);
-      resetDoneDiddlyDoneWRIST = Wrist.getInstance().getLimitSwitch();
-      if (resetDoneDiddlyDoneWRIST) {
-        Wrist.getInstance().moveWristMotor(0);
-        supaKoopa.setStartupWristToTrue();
+    SmartDashboard.putBoolean("zero tele", resetDoneDiddlyDoneTELE);
+    SmartDashboard.putBoolean("zero wrist", resetDoneDiddlyDoneWRIST);
+    if (resetDoneDiddlyDoneTELE) {
+      if (!resetDoneDiddlyDoneWRIST) {
+        Wrist.getInstance().moveWristMotor(-0.3);
+        resetDoneDiddlyDoneWRIST = Wrist.getInstance().getLimitSwitch();
+        if (resetDoneDiddlyDoneWRIST) {
+          Wrist.getInstance().moveWristMotor(0);
+          supaKoopa.setStartupWristToTrue();
+        }
       }
     }
+
     if (!resetDoneDiddlyDoneTELE) {
       Arm.getInstance().moveTele(-0.6);
       resetDoneDiddlyDoneTELE = Arm.getInstance().getLimitSwitch();
       if (resetDoneDiddlyDoneTELE) {
-        Arm.getInstance().pidTelescope(0);
+        Arm.getInstance().moveTele(0);
         supaKoopa.setStartupTelescopeToTrue();
       }
     }
+
     supaKoopa.updateTele();
   }
 
@@ -182,7 +179,6 @@ private boolean resetDoneDiddlyDoneTELE = false;
   public void disabledInit() {
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
-    m_autonomousCommand = new RightDoubleLow();
   }
 
   @Override

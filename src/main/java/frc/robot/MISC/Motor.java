@@ -133,10 +133,10 @@ public class Motor {
     return encoder;
   }
 
-  public CANSparkMax Sparky(int canid) {
+  public CANSparkMax Sparky(int canid, CANSparkMax.IdleMode Mode) {
     CANSparkMax sparky = new CANSparkMax(canid, MotorType.kBrushless);
     sparky.restoreFactoryDefaults();
-    sparky.setIdleMode(CANSparkMax.IdleMode.kCoast);
+    sparky.setIdleMode(Mode);
     sparky.setSmartCurrentLimit(20,60,5700);
     sparky.enableVoltageCompensation(11);
     return sparky;

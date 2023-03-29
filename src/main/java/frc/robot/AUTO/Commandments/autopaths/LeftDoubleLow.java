@@ -21,16 +21,6 @@ public class LeftDoubleLow extends SequentialCommandGroup {
     addCommands(
         Commands.deadline(new EtherStraightCommand(0, -0.5, 0, 0)),
         Commands.deadline(new IntakeAuto(.8).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(100, -0.5, 0, 0.3)),
-        Commands.deadline(new EtherStraightCommand(79, -0.5, 0, 110)),
-        Commands.deadline(new intakedeploy().withTimeout(1)),
-        Commands.deadline(
-            new EtherStraightCommand(60, -.1, .4, 110), new IntakeAuto(-.5).withTimeout(3)),
-        Commands.deadline(new intakedeploy().withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(30, .1, -.4, 110)),
-        Commands.deadline(new EtherStraightCommand(30, 0.5, 0, -.5)),
-        Commands.deadline(new EtherStraightCommand(135, 0.5, 0, -0.5)),
-        Commands.deadline(new IntakeAuto(.3).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(20, 0.5, 0, -0.5)));
+        Commands.deadline(new EtherStraightCommand(180, -0.5, 0, 0.3)));
   }
 }

@@ -18,7 +18,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
   public static final double kPi = 3.14159265359;
-  public static final double[] nullPID = {0, 0, 0, 0};
+  public static final double[] nullPID = { 0, 0, 0, 0 };
 
   // --------------------------------------------------------------------//
   // DRIVETRAIN
@@ -44,7 +44,7 @@ public final class Constants {
     public static final double kD = 0 * kP;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
 
     public static final NeutralMode mode = NeutralMode.Brake;
 
@@ -66,7 +66,7 @@ public final class Constants {
     public static final double kD = 0.0000000;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
 
     public static final NeutralMode mode = NeutralMode.Coast;
 
@@ -84,10 +84,10 @@ public final class Constants {
     public static final double bottomRightOffset = 7.294921875 - 180;
 
     public static final double[] offset = {
-      MKCANCODER.topLeftOffset,
-      MKCANCODER.topRightOffset,
-      MKCANCODER.bottomLeftOffset,
-      MKCANCODER.bottomRightOffset
+        MKCANCODER.topLeftOffset,
+        MKCANCODER.topRightOffset,
+        MKCANCODER.bottomLeftOffset,
+        MKCANCODER.bottomRightOffset
     };
 
     public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
@@ -134,12 +134,11 @@ public final class Constants {
     public static final double ykP = 0.05;
     public static final double ykI = 0;
     public static final double ykD = 0;
-    public static final Transform3d robotToCam =
-        new Transform3d(
-            new Translation3d(Units.inchesToMeters(-8), 0, Units.inchesToMeters(32)),
-            new Rotation3d(
-                0, 0,
-                0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+    public static final Transform3d robotToCam = new Transform3d(
+        new Translation3d(Units.inchesToMeters(-8), 0, Units.inchesToMeters(32)),
+        new Rotation3d(
+            0, 0,
+            0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
     // from center.
     public static final String cameraName = "ShoutOutToMyStove";
   }
@@ -218,12 +217,12 @@ public final class Constants {
   // WRIST
   // --------------------------------------------------------------------//
   public static class MKWRIST {
-    public static final double greerRatio = 5*5*5/1.0; // 0.01098901098;
+    public static final double greerRatio = 5 * 5 * 5 / 1.0; // 0.01098901098;
     public static final double kP = .8;
     public static final double kI = 0.0;
     public static final double kD = 0.00001;
     public static final double kF = 0;
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
     public static final double minA = 0.055; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 360;
@@ -237,11 +236,11 @@ public final class Constants {
   // --------------------------------------------------------------------//
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
-    public static final double kP = 0.002;
+    public static final double kP = 0.004;
     public static final double kI = 0.000002;
-    public static final double kD = 0.0006;
+    public static final double kD = 0.0005;
     public static final double kF = 0;
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
     public static final double minA = 0.045; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 130;
@@ -257,12 +256,12 @@ public final class Constants {
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0.0006;
+    public static final double kP = 0.00063;
     public static final double kI = 0.00;
     public static final double kD = 0.00;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
   }
 
   // --------------------------------------------------------------------//
@@ -276,7 +275,7 @@ public final class Constants {
     public static final double kD = kP * 0;
     public static final double kF = 0;
 
-    public static final double[] pidf = {kP, kI, kD, kF};
+    public static final double[] pidf = { kP, kI, kD, kF };
 
     public static final boolean inverted = false;
 
@@ -328,12 +327,11 @@ public final class Constants {
     public static final double heightMeters = MathFormulas.inchesToMeters(MKTRAIN.heightInches / 2);
     public static final double widthMeters = MathFormulas.inchesToMeters(MKTRAIN.widthInches / 2);
 
-    public static final SwerveDriveKinematics kDriveKinematics =
-        new SwerveDriveKinematics(
-            new Translation2d(heightMeters, widthMeters),
-            new Translation2d(heightMeters, -widthMeters),
-            new Translation2d(-heightMeters, widthMeters),
-            new Translation2d(-heightMeters, -widthMeters));
+    public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
+        new Translation2d(heightMeters, widthMeters),
+        new Translation2d(heightMeters, -widthMeters),
+        new Translation2d(-heightMeters, widthMeters),
+        new Translation2d(-heightMeters, -widthMeters));
 
     // actual drive module stats
     public static final double maxModuleTurnVelo = kPi;
@@ -353,8 +351,8 @@ public final class Constants {
 
     public static final double maxDriveVelo = 1;
 
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-        new TrapezoidProfile.Constraints(maxAutoTurnVelo, maxAutoTurnAccel);
+    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
+        maxAutoTurnVelo, maxAutoTurnAccel);
   }
 
   // --------------------------------------------------------------------//

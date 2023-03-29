@@ -138,7 +138,7 @@ public class Arm {
     SmartDashboard.putNumber("Telescope", getTelescope());
     //SmartDashboard.putNumber("getleftmotoroutput", armLeft.getMotorOutputPercent());
     //SmartDashboard.putNumber("getrightmotoroutput", armRight.getMotorOutputPercent());
-     SmartDashboard.putNumber("arms", getArm());
+    // SmartDashboard.putNumber("arms", getArm());
     //SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
     SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
     // SmartDashboard.putNumber("geterror", arm.getPositionError());

@@ -246,7 +246,7 @@ public class SupaStruct {
       april.alignToTag();
 
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
-      train.etherSwerve(fwd, str, -rcw / 2, ControlMode.PercentOutput); // +,-,+
+      train.etherSwerve(fwd, str, -rcw / 3, ControlMode.PercentOutput); // +,-,+
     } else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       fwd = train.antiTip()[1];
       str = train.antiTip()[0];
@@ -345,9 +345,9 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (!rtrigger2 && ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
-      arm.moveTele(-.4);
+      arm.pidTelescope(0);
     } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      arm.moveTele(.4);
+      arm.pidTelescope(9500);
     } else if (resetDoneDiddlyDoneTELE) {
       arm.moveTele(0);
     }
@@ -422,7 +422,7 @@ public class SupaStruct {
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(117);
+        arm.pidArm(116.5);
 
         if (!manualMoveWrist) {
           wrist.moveWristPID(250);
@@ -438,9 +438,9 @@ public class SupaStruct {
     } else if (toggleArmMidOn) {
       // toggle HIGH AND HP
       if (toggleConeOn) {
-        arm.pidArm(96);
+        arm.pidArm(95);
         if (!manualMoveWrist) {
-          wrist.moveWristPID(230);
+          wrist.moveWristPID(220);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(100);
@@ -451,13 +451,13 @@ public class SupaStruct {
 
     } else if (toggleArmLowOn) {
       if (toggleConeOn) {
-        arm.pidArm(37);
+        arm.pidArm(45);
         arm.pidTelescope(200);
         if (!manualMoveWrist) {
           wrist.moveWristPID(200);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(40);
+        arm.pidArm(35);
         arm.pidTelescope(5000);
         if (!manualMoveWrist) {
           wrist.moveWristPID(45);
@@ -517,7 +517,7 @@ public class SupaStruct {
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
     // SmartDashboard.putBoolean("manual", manualMoveWrist);
-    SmartDashboard.putBoolean("telescopezero", arm.getLimitSwitch());
+    // SmartDashboard.putBoolean("telescopezero", arm.getLimitSwitch());
     sliderArm = slidaa.getDouble(0);
   }
 

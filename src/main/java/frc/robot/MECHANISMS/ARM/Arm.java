@@ -118,7 +118,7 @@ public class Arm {
     moveTele(tele.calculate(getTelescope(), setpoint));
   }
 
-  // TODO arm ocillating at mid and cant get to 40. needs less power at mid and more at bottom
+  // TODO arm ocillating at mid and cant get to 40. needs less power at cube mid and cube high and more at bottom
   // TODO make ffv2 with both angle of wrist and arm with A and B
   public double armFF(double setpoint) {
     return MKARM.minA * Math.sin((Math.toRadians(getArmDegrees())));

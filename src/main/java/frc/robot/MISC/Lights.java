@@ -57,11 +57,27 @@ public class Lights {
     }
   }
 
+  
+
   public void CUBE() {
     // For every pixel
     for (var i = 0; i < LIGHTS.bufferNum; i++) {
       timer.start();
       buffer.setRGB(i, 148 / 2, 0, 211 / 2);
+      // buffertwo.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
+      if (timer.get() > 0.08) {
+        offset = (offset + 1) % LIGHTS.bufferNum;
+        timer.reset();
+        LEDS.setData(buffer);
+        // LEDStwo.setData(buffertwo);
+      }
+    }
+  }
+  public void GROUND() {
+    // For every pixel
+    for (var i = 0; i < LIGHTS.bufferNum; i++) {
+      timer.start();
+      buffer.setRGB(i, 255 / 3, 0, 0);
       // buffertwo.setRGB(i, 0, 0, LIGHTS.MaxRGBValue);
       if (timer.get() > 0.08) {
         offset = (offset + 1) % LIGHTS.bufferNum;

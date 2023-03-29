@@ -101,9 +101,9 @@ public class Arm {
   public void pidArm(double setpoint) {
     moveArm(
         -arm.calculate(getArmDegrees(), setpoint)
-            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
+            - (arm.calculate(getArmDegrees(), setpoint)) * armFFV2(setpoint),
         -arm.calculate(getArmDegrees(), setpoint)
-            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
+            - (arm.calculate(getArmDegrees(), setpoint)) * armFFV2(setpoint));
   }
 
   public double pidArmCalc(double setpoint) {
@@ -122,6 +122,10 @@ public class Arm {
     return MKARM.minA * Math.sin((Math.toRadians(getArmDegrees())));
   }
 
+  public double armFFV2(double setpoint) {
+    return MKARM.minA + (0.012 * Math.sin(Wrist.getInstance().getWristDegree()) * Math.sin(getArmDegrees()));
+  }
+
   public boolean getLimitSwitch() {
     return !resetLimitSwitch.get();
   }
@@ -136,10 +140,10 @@ public class Arm {
     // SmartDashboard.putNumber("leftarm", getLeft());
     // SmartDashboard.putNumber("rightarm", getRight());
     SmartDashboard.putNumber("Telescope", getTelescope());
-    // SmartDashboard.putNumber("getleftmotoroutput",
-    // armLeft.getMotorOutputPercent());
-    // SmartDashboard.putNumber("getrightmotoroutput",
-    // armRight.getMotorOutputPercent());
+     SmartDashboard.putNumber("getleftmotoroutput",
+    armLeft.getMotorOutputPercent());
+     SmartDashboard.putNumber("getrightmotoroutput",
+    armRight.getMotorOutputPercent());
     // SmartDashboard.putNumber("arms", getArm());
     // SmartDashboard.putNumber("setpointarm", arm.getSetpoint());
     SmartDashboard.putNumber("pidarm", arm.calculate(getArmDegrees(), arm.getSetpoint()));
@@ -148,6 +152,10 @@ public class Arm {
     // SmartDashboard.putNumber("cancodernumbaaa",
     // armCanCoder.getAbsolutePosition());
     SmartDashboard.putNumber("arm degdeg", getArmDegrees());
+    SmartDashboard.putNumber("getpid", arm.calculate(getArmDegrees(), arm.getSetpoint()));
+    SmartDashboard.putNumber("getff2", armFFV2(arm.getSetpoint()));
+    SmartDashboard.putNumber("getff", armFF(arm.getSetpoint()));
+
   }
 
   /**

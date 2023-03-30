@@ -12,13 +12,13 @@ import frc.robot.AUTO.Commands.IntakeAuto;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class LeftDoubleLow extends SequentialCommandGroup {
-  /** Creates a new RightDoubleLow. */
-  public LeftDoubleLow() {
+public class RampMiddlePosition extends SequentialCommandGroup {
+  /** Creates a new RampMiddlePosition. */
+  public RampMiddlePosition() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-        Commands.deadline(new IntakeAuto(.8).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(180, -0.5, 0, 0.3)));
+    addCommands( 
+    Commands.deadline(new IntakeAuto(.8).withTimeout(1)),
+    Commands.deadline(new EtherStraightCommand(180, -0.5, 0, 0)));
   }
 }

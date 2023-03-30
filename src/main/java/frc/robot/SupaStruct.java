@@ -393,6 +393,11 @@ public class SupaStruct {
       toggleArmStowOn = false;
       manualMoveWrist = true;
     }
+
+    if(bbutton)
+    {
+      lightMode=3;
+    }
     
 
     if (ybutton2) {

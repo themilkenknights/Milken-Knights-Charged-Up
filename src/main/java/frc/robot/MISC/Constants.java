@@ -244,19 +244,19 @@ public final class Constants {
     public static final double minA = 0.045; // 0.065;
     public static final double maxA = 0.045;
     public static final double maxDegreePosition = 130;
-    public static final double minDegreePosition = -5;
+    public static final double minDegreePosition = -20;
     public static final double offset = -107.6741015625;
     public static final double almostStowedAngle = 30;
   }
 
   public static class MKTELE {
     public static final double greerRatio = .04938272;
-    public static final double maxNativePositionTelescope = 9500;
+    public static final double maxNativePositionTelescope = 8500;
     public static final double minNativePositionTelescope = 0;
     public static final boolean isinverted = false;
     public static final NeutralMode TelescopeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0.00063;
+    public static final double kP = 0.00065;
     public static final double kI = 0.00;
     public static final double kD = 0.00;
     public static final double kF = 0;

@@ -347,7 +347,7 @@ public class SupaStruct {
     if (!rtrigger2 && ltrigger2 && arm.getTelescope() > MKTELE.minNativePositionTelescope) {
       arm.pidTelescope(0);
     } else if (rtrigger2 && !ltrigger2 && arm.getTelescope() < MKTELE.maxNativePositionTelescope) {
-      arm.pidTelescope(9500);
+      arm.pidTelescope(8500);
     } else if (resetDoneDiddlyDoneTELE) {
       arm.moveTele(0);
     }
@@ -393,6 +393,7 @@ public class SupaStruct {
       toggleArmStowOn = false;
       manualMoveWrist = true;
     }
+    
 
     if (ybutton2) {
       toggleArmHighOn = true;
@@ -422,13 +423,13 @@ public class SupaStruct {
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(116.5);
+        arm.pidArm(116);
 
         if (!manualMoveWrist) {
-          wrist.moveWristPID(250);
+          wrist.moveWristPID(255);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(93);
+        arm.pidArm(91);
 
         if (!manualMoveWrist) {
           wrist.moveWristPID(116.5);
@@ -466,7 +467,7 @@ public class SupaStruct {
 
     } else if (toggleArmStowOn) {
       if (toggleConeOn) {
-        arm.pidArm(0);
+        arm.pidArm(-15);
         arm.pidTelescope(0);
         if (!manualMoveWrist) {
           wrist.moveWristPID(0);

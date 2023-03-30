@@ -1,0 +1,10 @@
+shit we need to do (from most to least important)
+
+do high auto
+grab cube and score auto (redo feild in theater)
+try new SwerveModule but with timed skele
+fix jank april wit austonian
+fix jank pid
+fancy smartdashboard coulour
+pathplanner (do if complete everything we need to do)
+

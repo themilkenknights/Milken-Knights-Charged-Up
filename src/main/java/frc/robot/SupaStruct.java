@@ -303,10 +303,10 @@ public class SupaStruct {
 
     if (rbbutton2) {
       if (toggleConeOn) {
-        wrist.moveWristRoller(-1);
+        wrist.moveWristRoller(-.8);
         // run rollers direction 1
       } else if (toggleCubeOn) {
-        wrist.moveWristRoller(1);
+        wrist.moveWristRoller(.8);
         // run rollers direction 2
       }
     } else if (lbbutton2) {
@@ -384,7 +384,9 @@ public class SupaStruct {
       manualMoveWrist = false;
     }
 
-    if (xboxOP.getRawButton(9)) {
+    
+
+    if (bbutton) {
       toggleConeOn = false;
       toggleCubeOn = false;
       toggleArmHighOn = false;
@@ -392,13 +394,8 @@ public class SupaStruct {
       toggleArmLowOn = false;
       toggleArmStowOn = false;
       manualMoveWrist = true;
+      lightMode = 3;
     }
-
-    if(bbutton)
-    {
-      lightMode=3;
-    }
-    
 
     if (ybutton2) {
       toggleArmHighOn = true;
@@ -457,10 +454,9 @@ public class SupaStruct {
 
     } else if (toggleArmLowOn) {
       if (toggleConeOn) {
-        arm.pidArm(45);
-        arm.pidTelescope(200);
+        arm.pidArm(43);
         if (!manualMoveWrist) {
-          wrist.moveWristPID(200);
+          wrist.moveWristPID(170);
         }
       } else if (toggleCubeOn) {
         arm.pidArm(35);
@@ -499,11 +495,11 @@ public class SupaStruct {
     } else if (lightMode == 2) {
       mLights.CUBE();
       SmartDashboard.putString("color", "cube");
-    }else if(lightMode == 3){
-        mLights.GROUND();
-        SmartDashboard.putString("color", "ground");
-      }
-    
+    } else if (lightMode == 3) {
+      mLights.GROUND();
+      SmartDashboard.putString("color", "ground");
+    }
+
     // --------------------------------------------------------------------//
     // SMARTDASHBOARD
     // --------------------------------------------------------------------//

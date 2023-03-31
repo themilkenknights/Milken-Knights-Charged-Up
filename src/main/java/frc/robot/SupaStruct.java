@@ -260,10 +260,10 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (rtrigger) {
-      intake.rollerSet(-1);
+      intake.rollerSet(-.6);
 
     } else if (ltrigger) {
-      intake.rollerSet(1);
+      intake.rollerSet(.6);
 
     } else {
       intake.rollerSet(0);
@@ -303,10 +303,10 @@ public class SupaStruct {
 
     if (rbbutton2) {
       if (toggleConeOn) {
-        wrist.moveWristRoller(-.8);
+        wrist.moveWristRoller(-.7);
         // run rollers direction 1
       } else if (toggleCubeOn) {
-        wrist.moveWristRoller(.8);
+        wrist.moveWristRoller(.7);
         // run rollers direction 2
       }
     } else if (lbbutton2) {
@@ -474,7 +474,7 @@ public class SupaStruct {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(0);
+        arm.pidArm(-15);
         arm.pidTelescope(0);
         if (!manualMoveWrist) {
           wrist.moveWristPID(0);

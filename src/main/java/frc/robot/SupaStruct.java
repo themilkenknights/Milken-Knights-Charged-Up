@@ -521,7 +521,7 @@ public class SupaStruct {
     SmartDashboard.putBoolean("cube", toggleCubeOn);
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
-    // SmartDashboard.putBoolean("manual", manualMoveWrist);
+    //1 SmartDashboard.putBoolean("manual", manualMoveWrist);
     // SmartDashboard.putBoolean("telescopezero", arm.getLimitSwitch());
     sliderArm = slidaa.getDouble(0);
   }

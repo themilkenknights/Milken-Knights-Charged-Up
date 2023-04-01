@@ -87,7 +87,8 @@ public class SupaStruct {
       toggleArmMidOn = false,
       toggleArmLowOn = false,
       toggleArmStowOn = false,
-      manualMoveWrist = false;
+      manualMoveWrist = false,
+      manualMoveArm = false;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Intake intake = Intake.getInstance();
@@ -103,6 +104,7 @@ public class SupaStruct {
   private ShuffleboardTab tab = Shuffleboard.getTab("slida");
   private GenericEntry slidaa;
   private double x, y, rot;
+  private Timer pitcheck = new Timer();
 
   public static SupaStruct getInstance() {
     return InstanceHolder.mInstance;
@@ -303,10 +305,10 @@ public class SupaStruct {
 
     if (rbbutton2) {
       if (toggleConeOn) {
-        wrist.moveWristRoller(-.7);
+        wrist.moveWristRoller(-1);
         // run rollers direction 1
       } else if (toggleCubeOn) {
-        wrist.moveWristRoller(.7);
+        wrist.moveWristRoller(1);
         // run rollers direction 2
       }
     } else if (lbbutton2) {
@@ -327,9 +329,11 @@ public class SupaStruct {
 
     if (dpadleft2 && !dpadright2) {
       arm.moveArm(-0.16, -0.16);
+      manualMoveArm = true;
 
     } else if (!dpadleft2 && dpadright2) {
       arm.moveArm(0.16, 0.16);
+      manualMoveArm = true;
     }
 
     else if (lbbutton) {
@@ -352,12 +356,6 @@ public class SupaStruct {
       arm.moveTele(0);
     }
 
-    if (xbox.getRawButton(7)) {
-      arm.setTelescopeEncoder(MKTELE.minNativePositionTelescope / MKTELE.greerRatio);
-    } else if (xbox.getRawButton(8)) {
-      arm.setTelescopeEncoder(MKTELE.maxNativePositionTelescope / MKTELE.greerRatio);
-    }
-
     /*
      * if (dpadleft2) {
      * odo.reset();
@@ -376,15 +374,15 @@ public class SupaStruct {
       toggleConeOn = true;
       toggleCubeOn = false;
       manualMoveWrist = false;
+      manualMoveArm = false;
 
     } else if (xboxOP.getRawButton(7)) {
       lightMode = 2;
       toggleConeOn = false;
       toggleCubeOn = true;
       manualMoveWrist = false;
+      manualMoveArm = false;
     }
-
-    
 
     if (bbutton) {
       toggleConeOn = false;
@@ -394,6 +392,7 @@ public class SupaStruct {
       toggleArmLowOn = false;
       toggleArmStowOn = false;
       manualMoveWrist = true;
+      manualMoveArm = true;
       lightMode = 3;
     }
 
@@ -403,35 +402,43 @@ public class SupaStruct {
       toggleArmLowOn = false;
       toggleArmStowOn = false;
       manualMoveWrist = false;
+      manualMoveArm = false;
     } else if (bbutton2) {
       toggleArmHighOn = false;
       toggleArmMidOn = true;
       toggleArmLowOn = false;
       toggleArmStowOn = false;
       manualMoveWrist = false;
+      manualMoveArm = false;
     } else if (xbutton2) {
       toggleArmHighOn = false;
       toggleArmMidOn = false;
       toggleArmLowOn = true;
       toggleArmStowOn = false;
       manualMoveWrist = false;
+      manualMoveArm = false;
     } else if (abutton2) {
       toggleArmHighOn = false;
       toggleArmMidOn = false;
       toggleArmLowOn = false;
       toggleArmStowOn = true;
       manualMoveWrist = false;
+      manualMoveArm = false;
     }
 
     if (toggleArmHighOn) {
       if (toggleConeOn) {
-        arm.pidArm(116);
+        if (!manualMoveArm) {
+          arm.pidArm(116);
+        }
 
         if (!manualMoveWrist) {
           wrist.moveWristPID(255);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(91);
+        if (!manualMoveArm) {
+          arm.pidArm(91);
+        }
 
         if (!manualMoveWrist) {
           wrist.moveWristPID(116.5);
@@ -441,12 +448,16 @@ public class SupaStruct {
     } else if (toggleArmMidOn) {
       // toggle HIGH AND HP
       if (toggleConeOn) {
-        arm.pidArm(95);
+        if (!manualMoveArm) {
+          arm.pidArm(95);
+        }
         if (!manualMoveWrist) {
           wrist.moveWristPID(220);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(100);
+        if (!manualMoveArm) {
+          arm.pidArm(100);
+        }
         if (!manualMoveWrist) {
           wrist.moveWristPID(117);
         }
@@ -454,12 +465,16 @@ public class SupaStruct {
 
     } else if (toggleArmLowOn) {
       if (toggleConeOn) {
-        arm.pidArm(43);
+        if (!manualMoveArm) {
+          arm.pidArm(43);
+        }
         if (!manualMoveWrist) {
           wrist.moveWristPID(170);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(35);
+        if (!manualMoveArm) {
+          arm.pidArm(35);
+        }
         arm.pidTelescope(5000);
         if (!manualMoveWrist) {
           wrist.moveWristPID(45);
@@ -468,13 +483,17 @@ public class SupaStruct {
 
     } else if (toggleArmStowOn) {
       if (toggleConeOn) {
-        arm.pidArm(-15);
+        if (!manualMoveArm) {
+          arm.pidArm(-10);
+        }
         arm.pidTelescope(0);
         if (!manualMoveWrist) {
           wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
-        arm.pidArm(-15);
+        if (!manualMoveArm) {
+          arm.pidArm(-10);
+        }
         arm.pidTelescope(0);
         if (!manualMoveWrist) {
           wrist.moveWristPID(0);
@@ -509,7 +528,7 @@ public class SupaStruct {
     // SmartDashboard.putNumber("up", wrist.getWristMotorGudAngle(MODE.up));
     // SmartDashboard.putNumber("down", wrist.getWristMotorGudAngle(MODE.down));
     // SmartDashboard.putNumber("out", wrist.getWristMotorGudAngle(MODE.out));
-    // SmartDashboard.putNumber("getwrist", wrist.getWristNative());
+     SmartDashboard.putNumber("getwrist", wrist.getWristNative());
     SmartDashboard.putNumber("neo 550", MathFormulas.sparkToDegrees(wrist.getWristNative()));
     // SmartDashboard.putNumber("setpoint pid", wrist.getWristMotorSpeed());
     // SmartDashboard.putNumber("degreetospark", MathFormulas.degreesToSpark(100));
@@ -521,7 +540,7 @@ public class SupaStruct {
     SmartDashboard.putBoolean("cube", toggleCubeOn);
     SmartDashboard.putNumber("Armangle", arm.getArmDegrees());
     // SmartDashboard.putNumber("armcan", arm.getArmCanCoder());
-    //1 SmartDashboard.putBoolean("manual", manualMoveWrist);
+    // 1 SmartDashboard.putBoolean("manual", manualMoveWrist);
     // SmartDashboard.putBoolean("telescopezero", arm.getLimitSwitch());
     sliderArm = slidaa.getDouble(0);
   }
@@ -559,41 +578,53 @@ public class SupaStruct {
   }
 
   public void initTest() {
-    train.vars.avgDistTest = 0;
-    turntesttimer.stop();
-    turntesttimer.reset();
-    turntesttimertwo.stop();
-    turntesttimertwo.reset();
+    /*
+     * train.vars.avgDistTest = 0;
+     * turntesttimer.stop();
+     * turntesttimer.reset();
+     * turntesttimertwo.stop();
+     * turntesttimertwo.reset();
+     */
     train.startTrain();
+    arm.setArmToCanCoder();
+    resetDoneDiddlyDoneTELE = false;
+    resetDoneDiddlyDoneWRIST = false;
+    pitcheck.start();
   }
 
   // measured over predicted * predicted
   public void updateTest() {
-    double fwd = 0;
-    double rcw = 0;
-    if (xbox.getAButtonPressed()) {
-      turntesttimer.start();
+    if(pitcheck.get() < 5)
+    {
+      //train.setModuleDrive(null, fwdSignum, str, fwd, count);
     }
-    if (turntesttimer.get() > 0.00000000000000001 && turntesttimer.get() < 5) {
-      fwd = 0.3;
-    }
-    if (xbox.getRawAxis(4) > 0.1
-        && (turntesttimer.get() > 0.00000000000000001 && turntesttimer.get() < 5)) {
-      rcw = 0.5;
-      count++;
-    }
-
-    if (fwd == 0.3 || rcw == 0.5) {
-      train.etherSwerve(fwd, 0, rcw / 2, ControlMode.PercentOutput);
-      train.etherRCWFinder(fwd, 0, 0);
-    } else {
-      train.stopEverything();
-    }
-
-    // SmartDashboard.putNumber("count", count);
-    // SmartDashboard.putNumber(
-    // "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
-    // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
+    /*
+     * double fwd = 0;
+     * double rcw = 0;
+     * if (xbox.getAButtonPressed()) {
+     * turntesttimer.start();
+     * }
+     * if (turntesttimer.get() > 0.00000000000000001 && turntesttimer.get() < 5) {
+     * fwd = 0.3;
+     * }
+     * if (xbox.getRawAxis(4) > 0.1
+     * && (turntesttimer.get() > 0.00000000000000001 && turntesttimer.get() < 5)) {
+     * rcw = 0.5;
+     * count++;
+     * }
+     * 
+     * if (fwd == 0.3 || rcw == 0.5) {
+     * train.etherSwerve(fwd, 0, rcw / 2, ControlMode.PercentOutput);
+     * train.etherRCWFinder(fwd, 0, 0);
+     * } else {
+     * train.stopEverything();
+     * }
+     * 
+     * // SmartDashboard.putNumber("count", count);
+     * // SmartDashboard.putNumber(
+     * // "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
+     * // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
+     */
   }
 
   private static class InstanceHolder {

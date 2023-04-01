@@ -67,6 +67,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
+    positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     Shuffleboard.selectTab("Match");
@@ -120,6 +121,7 @@ public class Robot extends TimedRobot {
         break;
       case MIDDLE:
         m_autonomousCommand = new RampMiddlePosition();
+        break;
     }
 
     train.startTrain();
@@ -160,7 +162,7 @@ public class Robot extends TimedRobot {
         Wrist.getInstance().moveWristMotor(-0.3);
         resetDoneDiddlyDoneWRIST = Wrist.getInstance().getLimitSwitch();
         if (resetDoneDiddlyDoneWRIST) {
-          Wrist.getInstance().moveWristMotor(0);
+          Wrist.getInstance().moveWristPID(0);
           supaKoopa.setStartupWristToTrue();
         }
       }

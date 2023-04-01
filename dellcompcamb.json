@@ -144,7 +144,7 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/cone",
               "_title": "cone",
-              "_glyph": 159,
+              "_glyph": 168,
               "_showGlyph": true,
               "Colors/Color when true": "#FFFF00FF",
               "Colors/Color when false": "#8B0000FF"

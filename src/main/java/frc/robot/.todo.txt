@@ -1,5 +1,7 @@
 shit we need to do (from most to least important)
 
+pitcheck test
+see if i fixes fucked up turn mod pid
 do high and ramp auto
 grab cube and score auto (redo feild in theater)
 try new SwerveModule but with timed skele

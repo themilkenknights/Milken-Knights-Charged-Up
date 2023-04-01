@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.EtherStraightCommand;
 import frc.robot.AUTO.Commands.IntakeAuto;
+import frc.robot.AUTO.Commands.MotionMagicAuto;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,7 +19,7 @@ public class RampMiddlePosition extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( 
-    Commands.deadline(new IntakeAuto(.8).withTimeout(1)),
-    Commands.deadline(new EtherStraightCommand(180, -0.5, 0, 0)));
+    Commands.deadline(new IntakeAuto(.6).withTimeout(4)),
+    Commands.deadline(new MotionMagicAuto(90, 180)));
   }
 }

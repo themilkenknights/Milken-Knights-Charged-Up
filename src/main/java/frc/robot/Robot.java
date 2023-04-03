@@ -22,10 +22,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.AUTO.Commandments.autopaths.LeftDoubleLow;
-import frc.robot.AUTO.Commandments.autopaths.RampMiddlePosition;
-import frc.robot.MECHANISMS.ARM.Arm;
-import frc.robot.MECHANISMS.ARM.Wrist;
+//import frc.robot.AUTO.Commandments.autopaths.LeftDoubleLow;
+//import frc.robot.AUTO.Commandments.autopaths.RampMiddlePosition;
+//import frc.robot.DEFUNCT.ARM.Arm;
+//import frc.robot.DEFUNCT.ARM.Wrist;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Odometry;
@@ -58,8 +58,8 @@ public class Robot extends TimedRobot {
   private Timer timer;
   private int lightMode = 0;
   private UsbCamera intakCamera;
-  private boolean resetDoneDiddlyDoneWRIST = false;
-  private boolean resetDoneDiddlyDoneTELE = false;
+  //private boolean resetDoneDiddlyDoneWRIST = false;
+  //private boolean resetDoneDiddlyDoneTELE = false;
 
   // Creates UsbCamera and MjpegServer [1] and connects them
 
@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
+    //Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
@@ -117,10 +117,10 @@ public class Robot extends TimedRobot {
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
       case LEFTSIDEDOUBLE:
-        m_autonomousCommand = new LeftDoubleLow();
+        //m_autonomousCommand = new LeftDoubleLow();
         break;
       case MIDDLE:
-        m_autonomousCommand = new RampMiddlePosition();
+        //m_autonomousCommand = new RampMiddlePosition();
         break;
     }
 
@@ -134,13 +134,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     train.updateSwerve();
-    Arm.getInstance().updateSmartdashboard();
+    //Arm.getInstance().updateSmartdashboard();
   }
 
   @Override
   public void teleopInit() {
-    resetDoneDiddlyDoneTELE = false;
-    resetDoneDiddlyDoneWRIST = false;
+    //resetDoneDiddlyDoneTELE = false;
+    //resetDoneDiddlyDoneWRIST = false;
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
     // SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
@@ -155,6 +155,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    /* 
     SmartDashboard.putBoolean("zero tele", resetDoneDiddlyDoneTELE);
     SmartDashboard.putBoolean("zero wrist", resetDoneDiddlyDoneWRIST);
     if (resetDoneDiddlyDoneTELE) {
@@ -175,7 +176,7 @@ public class Robot extends TimedRobot {
         Arm.getInstance().moveTele(0);
         supaKoopa.setStartupTelescopeToTrue();
       }
-    }
+    }*/
 
     supaKoopa.updateTele();
   }

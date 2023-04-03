@@ -1,7 +1,8 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-package frc.robot.MECHANISMS.ARM;
+/* 
+package frc.robot.DEFUNCT.ARM;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -27,20 +28,20 @@ public class Wrist {
     wristMotor = motor.Sparky(CANID.wristMotorCANID, CANSparkMax.IdleMode.kCoast);
     wristRoller = motor.Sparky(CANID.wristRollerCANID, CANSparkMax.IdleMode.kCoast);
     wristEncoder = wristMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
-    /**
+    *//**
      * In order to use PID functionality for a controller, a SparkMaxPIDController
      * object is
      * constructed by calling the getPIDController() method on an existing
      * CANSparkMax object
-     */
-    wristPID = wristMotor.getPIDController();
+     */ 
+    //wristPID = wristMotor.getPIDController();
     /**
      * The PID Controller can be configured to use the analog sensor as its feedback
      * device with the
      * method SetFeedbackDevice() and passing the PID Controller the CANAnalog
      * object.
      */
-    wristPID.setFeedbackDevice(wristEncoder);
+    /*wristPID.setFeedbackDevice(wristEncoder);
     wristPID.setP(MKWRIST.kP);
     wristPID.setI(MKWRIST.kI);
     wristPID.setD(MKWRIST.kD);
@@ -125,7 +126,7 @@ public class Wrist {
     down,
     up
   };
-
+*/
   /**
    * This function assumes that the base of the arm is at the origin (0,0) and the
    * angles are
@@ -139,7 +140,7 @@ public class Wrist {
    * @param link2
    * @param x
    * @param y
-   */
+   *//* 
   public static void getAngles(double link1, double link2, double x, double y) {
     // Calculate the distance from the base of the arm to the target position
     double dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
@@ -156,7 +157,7 @@ public class Wrist {
     System.out.println("Link 1 angle: " + Math.toDegrees(link1Angle));
     System.out.println("Link 2 angle: " + Math.toDegrees(link2Angle));
   }
-
+*/
   /**
    * 3 joint arm
    * https://www.chiefdelphi.com/t/pid-tuning-for-3-joint-arm/347116/15
@@ -166,7 +167,7 @@ public class Wrist {
    * @param ang3
    * @param lengths
    * @return
-   */
+   *//* 
   public static double[] getXY(double ang1, double ang2, double ang3, double[] lengths) {
     double x = getX(ang1, ang2, ang3, lengths);
     double y = getY(ang1, ang2, ang3, lengths);
@@ -263,3 +264,4 @@ public class Wrist {
     private static final Wrist mInstance = new Wrist();
   }
 }
+*/

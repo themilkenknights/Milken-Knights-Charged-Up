@@ -195,16 +195,16 @@ public final class Constants {
     public static final int topTurnRightCANCoderCANID = 17;
     public static final int bottomTurnLeftCANCoderCANID = 15;
     public static final int bottomTurnRightCANCoderCANID = 16; // 16
-    //
-    public static final int intakePORT = 15;
-    public static final int CLAWPORT = 14;
-    public static final int rollerCANID = 21;
-    public static final int leftarmCANID = 24;
-    public static final int rightarmCANID = 25;
-    public static final int telescopeCANID = 26;
-    public static final int armCanCoder = 27;
-    public static final int wristMotorCANID = 31;
-    public static final int wristRollerCANID = 32;
+    
+    //public static final int intakePORT = 15;
+    //public static final int CLAWPORT = 14;
+    //public static final int rollerCANID = 21;
+    //public static final int leftarmCANID = 24;
+    //public static final int rightarmCANID = 25;
+    //public static final int telescopeCANID = 26;
+    //public static final int armCanCoder = 27;
+    //public static final int wristMotorCANID = 31;
+    //public static final int wristRollerCANID = 32;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -216,6 +216,7 @@ public final class Constants {
   // --------------------------------------------------------------------//
   // WRIST
   // --------------------------------------------------------------------//
+  /* 
   public static class MKWRIST {
     public static final double greerRatio = 5.0 * 5.0 * 5.0; // 0.01098901098;
     public static final double kP = .8;
@@ -229,11 +230,12 @@ public final class Constants {
     public static final double minDegreePosition = 0;
     public static final double offset = 0;
     public static final double stowedAngle = 60;
-  }
+  }*/
 
   // --------------------------------------------------------------------//
   // ARM
   // --------------------------------------------------------------------//
+  /* 
   public static class MKARM {
     public static final double greerRatio = 90.90909090909090; // 0.01098901098;
     public static final double kP = 0.004;
@@ -248,7 +250,7 @@ public final class Constants {
     public static final double offset = -107.6741015625;
     public static final double almostStowedAngle = 30;
   }
-
+*//* 
   public static class MKTELE {
     public static final double greerRatio = .04938272;
     public static final double maxNativePositionTelescope = 8500;
@@ -262,11 +264,12 @@ public final class Constants {
     public static final double kF = 0;
 
     public static final double[] pidf = { kP, kI, kD, kF };
-  }
+  }*/
 
   // --------------------------------------------------------------------//
   // INTAKE
   // --------------------------------------------------------------------//
+  /* 
   public static class MKINTAKE {
     public static final NeutralMode rollerNeutralMode = NeutralMode.Coast;
 
@@ -280,7 +283,7 @@ public final class Constants {
     public static final boolean inverted = false;
 
     public static final double rollerPercentSpeed = 1;
-  }
+  }*/
 
   public static class AUTO {
 

@@ -101,7 +101,7 @@ public class Motor {
     return motor;
   }
 
-  public TalonFX intake(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted) {
+  /*public TalonFX intake(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted) {
     TalonFX intake = new TalonFX(canid, "rio");
     intake.configFactoryDefault();
     intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -122,7 +122,7 @@ public class Motor {
     intake.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     intake.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
     return intake;
-  }
+  }*/
 
   public CANCoder cancoder(int canid, double offset, String bus) {
     CANCoder encoder = new CANCoder(canid, bus);

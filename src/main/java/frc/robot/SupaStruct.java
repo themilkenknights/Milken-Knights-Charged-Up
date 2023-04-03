@@ -466,10 +466,10 @@ public class SupaStruct {
     } else if (toggleArmLowOn) {
       if (toggleConeOn) {
         if (!manualMoveArm) {
-          arm.pidArm(43);
+          arm.pidArm(13);
         }
         if (!manualMoveWrist) {
-          wrist.moveWristPID(170);
+          wrist.moveWristPID(0);
         }
       } else if (toggleCubeOn) {
         if (!manualMoveArm) {

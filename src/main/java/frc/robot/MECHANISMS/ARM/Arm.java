@@ -58,13 +58,13 @@ public class Arm {
   }
 
   public double getArm() {
-    return (getRight() + getLeft()) / 2;
+    return (getRight() + getLeft()) / 2.0;
   }
 
   public double getArmDegrees() {
     return -(MathFormulas.nativeToDegrees(getLeft(), MKARM.greerRatio)
         + MathFormulas.nativeToDegrees(getRight(), MKARM.greerRatio))
-        / 2;
+        / 2.0;
   }
 
   public double getTelescope() {

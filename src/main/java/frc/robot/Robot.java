@@ -176,7 +176,7 @@ public class Robot extends TimedRobot {
         supaKoopa.setStartupTelescopeToTrue();
       }
     }
-
+*/
     supaKoopa.updateTele();
   }
 

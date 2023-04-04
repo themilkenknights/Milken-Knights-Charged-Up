@@ -388,15 +388,15 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("FWD", FWD);
     // SmartDashboard.putNumber("STR", STR);
 
-    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180 / Constants.kPi;
-    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180 / Constants.kPi;
-    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180 / Constants.kPi;
-    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180 / Constants.kPi;
+    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180.0 / Constants.kPi;
+    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180.0 / Constants.kPi;
+    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180.0 / Constants.kPi;
+    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180.0 / Constants.kPi;
 
-    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.C, 2)));
-    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.C, 2)));
+    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.C, 2.0)));
+    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.C, 2.0)));
 
     vars.max = vars.mod1[0];
     if (vars.mod2[0] > vars.max)
@@ -405,7 +405,7 @@ public class MkSwerveTrain {
       vars.max = vars.mod3[0];
     if (vars.mod4[0] > vars.max)
       vars.max = vars.mod4[0];
-    if (vars.max > 1) {
+    if (vars.max > 1.0) {
       vars.mod1[0] /= vars.max;
       vars.mod2[0] /= vars.max;
       vars.mod3[0] /= vars.max;
@@ -431,7 +431,7 @@ public class MkSwerveTrain {
 
   public void etherRCWFinder(double FWD, double STR, double RCW) {
     vars.dt = DeltaAirlines.getInstance().getDT();
-    vars.yawTest = 0;
+    vars.yawTest = 0.0;
     vars.tempTest = FWD * Math.cos(Math.toRadians(vars.yawTest)) + STR * Math.sin(Math.toRadians(vars.yawTest));
     STR = -FWD * Math.sin(Math.toRadians(vars.yawTest))
         + STR * Math.cos(Math.toRadians(vars.yawTest));
@@ -445,10 +445,10 @@ public class MkSwerveTrain {
     vars.CTest = FWD - RCW * (MKTRAIN.W / MKTRAIN.R);
     vars.DTest = FWD + RCW * (MKTRAIN.W / MKTRAIN.R);
 
-    vars.mod2Test = (Math.sqrt((Math.pow(vars.BTest, 2)) + (Math.pow(vars.CTest, 2))));
-    vars.mod1Test = (Math.sqrt((Math.pow(vars.BTest, 2)) + (Math.pow(vars.DTest, 2))));
-    vars.mod3Test = (Math.sqrt((Math.pow(vars.ATest, 2)) + (Math.pow(vars.DTest, 2))));
-    vars.mod4Test = (Math.sqrt((Math.pow(vars.ATest, 2)) + (Math.pow(vars.CTest, 2))));
+    vars.mod2Test = (Math.sqrt((Math.pow(vars.BTest, 2.0)) + (Math.pow(vars.CTest, 2.0))));
+    vars.mod1Test = (Math.sqrt((Math.pow(vars.BTest, 2.0)) + (Math.pow(vars.DTest, 2.0))));
+    vars.mod3Test = (Math.sqrt((Math.pow(vars.ATest, 2.0)) + (Math.pow(vars.DTest, 2.0))));
+    vars.mod4Test = (Math.sqrt((Math.pow(vars.ATest, 2.0)) + (Math.pow(vars.CTest, 2.0))));
 
     vars.maxTest = vars.mod1Test;
     if (vars.mod2Test > vars.maxTest)
@@ -457,7 +457,7 @@ public class MkSwerveTrain {
       vars.maxTest = vars.mod3Test;
     if (vars.mod4Test > vars.maxTest)
       vars.maxTest = vars.mod4Test;
-    if (vars.maxTest > 1) {
+    if (vars.maxTest > 1.0) {
       vars.mod1Test /= vars.maxTest;
       vars.mod2Test /= vars.maxTest;
       vars.mod3Test /= vars.maxTest;
@@ -491,15 +491,15 @@ public class MkSwerveTrain {
     vars.C = FWD - RCW * (MKTRAIN.W / MKTRAIN.R);
     vars.D = FWD + RCW * (MKTRAIN.W / MKTRAIN.R);
 
-    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180 / Constants.kPi;
-    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180 / Constants.kPi;
-    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180 / Constants.kPi;
-    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180 / Constants.kPi;
+    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180.0 / Constants.kPi;
+    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180.0 / Constants.kPi;
+    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180.0 / Constants.kPi;
+    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180.0 / Constants.kPi;
 
-    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.C, 2)));
-    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.C, 2)));
+    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.C, 2.0)));
+    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.C, 2.0)));
 
     vars.max = vars.mod1[0];
     if (vars.mod2[0] > vars.max)
@@ -630,15 +630,15 @@ public class MkSwerveTrain {
     // numbers fall short of high by 3ish inches and short of length by 4ish inches
     double calcangle = side
         * ((heading)
-            + (((-thetaTurn / 2)
+            + (((-thetaTurn / 2.0)
                 + (((vars.avgDistInches) / (vars.totalDistance)) * (thetaTurn)))));
 
     vars.RCWtemp = moveToAngy(180);
-    vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180))) / 5;
-    vars.STRauto = (Math.sin(calcangle * (Constants.kPi / 180))) / 5;
+    vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180.0))) / 5.0;
+    vars.STRauto = (Math.sin(calcangle * (Constants.kPi / 180.0))) / 5.0;
 
-    etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5, ControlMode.PercentOutput);
-    etherRCWFinder(vars.FWDauto, -vars.STRauto, 0);
+    etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5.0, ControlMode.PercentOutput);
+    etherRCWFinder(vars.FWDauto, -vars.STRauto, 0.0);
     /*
      * SmartDashboard.putNumber(
      * "avgdistsimilarity", vars.avgDistInches - (vars.avgDistTest *
@@ -728,8 +728,8 @@ public class MkSwerveTrain {
     // return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) *
     // setpoint};
     return new double[] {
-        -Math.cos(vars.yaw * (Math.PI / 180)) * setpoint,
-        Math.sin(vars.yaw * (Math.PI / 180)) * setpoint
+        -Math.cos(vars.yaw * (Math.PI / 180.0)) * setpoint,
+        Math.sin(vars.yaw * (Math.PI / 180.0)) * setpoint
     };
   }
 

@@ -4,6 +4,8 @@
 
 package frc.robot.MECHANISMS;
 
+import java.util.Map;
+
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -11,6 +13,13 @@ import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Constants;
 import frc.robot.MISC.Constants.AUTO;
@@ -47,6 +56,30 @@ public class MkSwerveTrain {
   private PIDController anti;
 
   private Motor mMotor = Motor.getInstance();
+
+  private ShuffleboardTab mTab = Shuffleboard.getTab("turnPos");
+  
+  private GenericEntry tlcoder = mTab.add("tlcoder", 0).withPosition(0,0).getEntry();
+  private GenericEntry trcoder = mTab.add("trcoder", 0).withPosition(1,0).getEntry();
+  private GenericEntry blcoder = mTab.add("blcoder", 0).withPosition(2,0).getEntry();
+  private GenericEntry brcoder = mTab.add("brcoder", 0).withPosition(3,0).getEntry();
+  
+  private GenericEntry tlnatty = mTab.add("tlnatty", 0).withPosition(0,1).getEntry();
+  private GenericEntry trnatty = mTab.add("trnatty", 0).withPosition(1,1).getEntry();
+  private GenericEntry blnatty = mTab.add("blnatty", 0).withPosition(2,1).getEntry();
+  private GenericEntry brnatty = mTab.add("brnatty", 0).withPosition(3,1).getEntry();
+
+  private GenericEntry tlerr = mTab.add("tlerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(0, 3).withSize(2,2).getEntry();
+  private GenericEntry trerr = mTab.add("trerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(2, 3).withSize(2,2).getEntry();
+  private GenericEntry blerr = mTab.add("blerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(4, 3).withSize(2,2).getEntry();
+  private GenericEntry brerr = mTab.add("brerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(6, 3).withSize(2,2).getEntry();
+
+  private GenericEntry tlset = mTab.add("tlset", 0).withPosition(0,2).getEntry();
+  private GenericEntry trset = mTab.add("trset", 0).withPosition(1,2).getEntry();
+  private GenericEntry blset = mTab.add("blset", 0).withPosition(2,2).getEntry();
+  private GenericEntry brset = mTab.add("brset", 0).withPosition(3,2).getEntry();
+
+
 
   private MkSwerveTrain() {
     vars = new variables();
@@ -219,23 +252,32 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    // SmartDashboard.putNumber("topleftcan", tlCoder());
-    // SmartDashboard.putNumber("toprightcan", trCoder());
-    // SmartDashboard.putNumber("botleftcan", blCoder());
-    // SmartDashboard.putNumber("botrightcan", brCoder());
-    /*
-     * SmartDashboard.putNumber("topleftnativeTURN",
-     * MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
-     * SmartDashboard.putNumber("toprightnativeTURN",
-     * MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
-     * SmartDashboard.putNumber("bottomleftnativeTURN",
-     * MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
-     * SmartDashboard.putNumber("bottomrightnativeTURN",
-     * MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
+     tlcoder.setDouble(((tlCoder() % 360) + 360) % 360);
+     trcoder.setDouble(((trCoder() % 360) + 360) % 360);
+     blcoder.setDouble(((blCoder() % 360) + 360) % 360);
+     brcoder.setDouble(((brCoder() % 360) + 360) % 360);
+
+     tlset.setDouble(((vars.mod2[1] % 360) + 360) % 360);
+     trset.setDouble(((vars.mod1[1] % 360) + 360) % 360);
+     blset.setDouble(((vars.mod4[1] % 360) + 360) % 360);
+     brset.setDouble(((vars.mod3[1] % 360) + 360) % 360);
+
+     tlnatty.setDouble(((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+     trnatty.setDouble(((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+     blnatty.setDouble(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+     brnatty.setDouble(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+
+     tlerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(tlCoder()));
+     trerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(trCoder()));
+     blerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(blCoder()));
+     brerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(brCoder()));
+
+
+     /*
+      SmartDashboard.putNumber("topleftnativeTURN", MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio));
+      SmartDashboard.putNumber("toprightnativeTURN",MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio));
+      SmartDashboard.putNumber("bottomleftnativeTURN",MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio));
+      SmartDashboard.putNumber("bottomrightnativeTURN",MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio));
      */
     /*
      * SmartDashboard.putNumber("topleftnativeDRIVE",
@@ -260,7 +302,7 @@ public class MkSwerveTrain {
 
     vars.yaw = pigeon.getInstance().getPigYaw() % 360;
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
-    SmartDashboard.putNumber("pigeon", vars.yaw);
+    //SmartDashboard.putNumber("pigeon", vars.yaw);
     // SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
     // SmartDashboard.putNumber("avgdist", vars.avgDistInches);
 

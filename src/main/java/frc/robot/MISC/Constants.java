@@ -60,9 +60,8 @@ public final class Constants {
 
   public static class MKTURN {
     public static final double kP = 0.3;
-    public static final double kI = 0; // 0.0003;
-    // TODO test i in motion magic and pid for both auto and teleop, see if it
-    // really is this
+    public static final double kI = 0.0003;
+    // TODO test i in motion magic and pid for both auto and teleop, see if it really is this
     public static final double kD = 0.0000000;
     public static final double kF = 0;
 
@@ -74,7 +73,7 @@ public final class Constants {
 
     public static final int scurve = 6;
 
-    public static final double greerRatio = 150 / 7;
+    public static final double greerRatio = 150.0 / 7.0;
   }
 
   public static class MKCANCODER {
@@ -90,7 +89,7 @@ public final class Constants {
         MKCANCODER.bottomRightOffset
     };
 
-    public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
+    public static final AbsoluteSensorRange range = AbsoluteSensorRange.Unsigned_0_to_360;
 
     public static final boolean inverted = false;
   }

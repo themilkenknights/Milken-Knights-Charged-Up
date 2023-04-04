@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
-    Shuffleboard.selectTab("Match");
+    //Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     SmartDashboard.putBoolean("zero tele", resetDoneDiddlyDoneTELE);
     SmartDashboard.putBoolean("zero wrist", resetDoneDiddlyDoneWRIST);
-    if (resetDoneDiddlyDoneTELE) {
+    /*if (resetDoneDiddlyDoneTELE) {
       if (!resetDoneDiddlyDoneWRIST) {
         Wrist.getInstance().moveWristMotor(-0.3);
         resetDoneDiddlyDoneWRIST = Wrist.getInstance().getLimitSwitch();

@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.hal.util.UncleanStatusException;
@@ -23,8 +22,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.RampAuto;
-import frc.robot.AUTO.Commandments.autopaths.RampMiddlePosition;
-import frc.robot.MECHANISMS.ARM.Arm;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Odometry;
@@ -57,8 +54,6 @@ public class Robot extends TimedRobot {
   private Timer timer;
   private int lightMode = 0;
   private UsbCamera intakCamera;
-  private boolean resetDoneDiddlyDoneWRIST = false;
-  private boolean resetDoneDiddlyDoneTELE = false;
 
   // Creates UsbCamera and MjpegServer [1] and connects them
 
@@ -67,7 +62,6 @@ public class Robot extends TimedRobot {
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    Arm.getInstance().getTelescopeMotor().setNeutralMode(NeutralMode.Brake);
     CameraServer.startAutomaticCapture();
     //Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
@@ -119,7 +113,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = new RampAuto();
         break;
       case MIDDLE:
-        m_autonomousCommand = new RampMiddlePosition();
+        m_autonomousCommand = null;
         break;
     }
 
@@ -133,13 +127,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     train.updateSwerve();
-    Arm.getInstance().updateSmartdashboard();
   }
 
   @Override
   public void teleopInit() {
-    resetDoneDiddlyDoneTELE = false;
-    resetDoneDiddlyDoneWRIST = false;
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
     // SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
@@ -154,28 +145,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putBoolean("zero tele", resetDoneDiddlyDoneTELE);
-    SmartDashboard.putBoolean("zero wrist", resetDoneDiddlyDoneWRIST);
-    /*if (resetDoneDiddlyDoneTELE) {
-      if (!resetDoneDiddlyDoneWRIST) {
-        Wrist.getInstance().moveWristMotor(-0.3);
-        resetDoneDiddlyDoneWRIST = Wrist.getInstance().getLimitSwitch();
-        if (resetDoneDiddlyDoneWRIST) {
-          Wrist.getInstance().moveWristPID(0);
-          supaKoopa.setStartupWristToTrue();
-        }
-      }
-    }
-
-    if (!resetDoneDiddlyDoneTELE) {
-      Arm.getInstance().moveTele(-0.6);
-      resetDoneDiddlyDoneTELE = Arm.getInstance().getLimitSwitch();
-      if (resetDoneDiddlyDoneTELE) {
-        Arm.getInstance().moveTele(0);
-        supaKoopa.setStartupTelescopeToTrue();
-      }
-    }
-*/
     supaKoopa.updateTele();
   }
 

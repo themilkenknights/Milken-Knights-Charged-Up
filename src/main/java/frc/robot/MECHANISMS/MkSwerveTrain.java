@@ -422,7 +422,7 @@ public class MkSwerveTrain {
       vars.mod4[0] = Math.signum(vars.mod4[0]) * vars.autoDist;
     }
 
-    // etherRCWFinder(FWD, -STR, RCW);
+    // etherRCWFinder(FWD, STR, RCW);
     setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
     setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
@@ -524,7 +524,7 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("d", vars.D);
     // SmartDashboard.putNumber("topdrileftvelo",
     // topDriveLeft.getSelectedSensorVelocity());
-    etherRCWFinder(FWD, STR, -RCW);
+    //etherRCWFinder(FWD, STR, RCW);
     setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
     setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
@@ -637,8 +637,8 @@ public class MkSwerveTrain {
     vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180.0))) / 5.0;
     vars.STRauto = (Math.sin(calcangle * (Constants.kPi / 180.0))) / 5.0;
 
-    etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5.0, ControlMode.PercentOutput);
-    etherRCWFinder(vars.FWDauto, -vars.STRauto, 0.0);
+    etherAutoSwerve(vars.FWDauto, vars.STRauto, vars.RCWtemp / 5.0, ControlMode.PercentOutput);
+    etherRCWFinder(vars.FWDauto, vars.STRauto, 0.0);
     /*
      * SmartDashboard.putNumber(
      * "avgdistsimilarity", vars.avgDistInches - (vars.avgDistTest *
@@ -828,7 +828,7 @@ public class MkSwerveTrain {
 
     public variables var;
     
-    public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
+    public double hP = 0.035*3, hI = 0.000, hD = 0.0024*3; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

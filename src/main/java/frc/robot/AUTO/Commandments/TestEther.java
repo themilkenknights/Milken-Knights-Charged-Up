@@ -5,24 +5,18 @@
 package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.AUTO.Commands.MotionMagicAuto;
-import frc.robot.AUTO.Commands.MoveUntilRollChange;
-import frc.robot.AUTO.Commands.RampCommand;
-import frc.robot.AUTO.Commands.MoveUntilRollChange.Condition;
+import frc.robot.AUTO.Commands.EtherStraightCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class RampAuto extends SequentialCommandGroup {
-  /** Creates a new RampAuto. */
-  public RampAuto() {
+public class TestEther extends SequentialCommandGroup {
+  /** Creates a new TestEther. */
+  public TestEther() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new MoveUntilRollChange(16,0,0.2,Condition.LESSTHAN).withTimeout(15),
-    new MoveUntilRollChange(15,0,0.1,Condition.GREATERTHAN).withTimeout(15),
-    //new MotionMagicAuto(6, 0).withTimeout(),
-    new MoveUntilRollChange(4, 0, -0.07, Condition.GREATERTHAN).withTimeout(15),
-    new RampCommand());
+      new EtherStraightCommand(20, 0.3, 0.2, 0)
+    );
   }
 }

@@ -145,7 +145,7 @@ public final class Constants {
   // AUTO RAMP
   // --------------------------------------------------------------------//
   public static class MKRAMP {
-    public static final double kP = .06;
+    public static final double kP = .007;
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double threshold = 4;

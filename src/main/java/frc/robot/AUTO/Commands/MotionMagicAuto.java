@@ -4,6 +4,8 @@
 
 package frc.robot.AUTO.Commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -35,6 +37,8 @@ public class MotionMagicAuto extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    MkSwerveTrain.getInstance().setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
+    MkSwerveTrain.getInstance().setModuleTurn(0, 0, 0, 0);
   }
 
   // Returns true when the command should end.

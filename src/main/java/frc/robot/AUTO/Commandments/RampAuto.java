@@ -6,8 +6,8 @@ package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
-import frc.robot.AUTO.Commands.MoveUntilPitchChaange;
-import frc.robot.AUTO.Commands.MoveUntilPitchChaange.Condition;
+import frc.robot.AUTO.Commands.MoveUntilRollChange;
+import frc.robot.AUTO.Commands.MoveUntilRollChange.Condition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,8 +18,9 @@ public class RampAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new MoveUntilPitchChaange(15,0,0.2,Condition.LESSTHAN).withTimeout(5),
-    new MoveUntilPitchChaange(0,0,0.3,Condition.GREATERTHAN).withTimeout(5),
-    new MotionMagicAuto(6, 0).withTimeout(2));
+    new MoveUntilRollChange(16,0,0.2,Condition.LESSTHAN).withTimeout(15),
+    new MoveUntilRollChange(15,0,0.1,Condition.GREATERTHAN).withTimeout(15),
+    //new MotionMagicAuto(6, 0).withTimeout(2));
+    new MoveUntilRollChange(4, 0, -0.07, Condition.GREATERTHAN).withTimeout(15));
   }
 }

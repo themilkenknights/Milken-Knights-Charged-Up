@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.pigeon;
 
-public class MoveUntilPitchChaange extends CommandBase {
-  /** Creates a new MoveUntilPitchChaange. */
-  private double pitch;
+public class MoveUntilRollChange extends CommandBase {
+  /** Creates a new MoveUntilRollChange. */
+  private double roll;
   private double thresh;
   private double speed;
   private double angle;
@@ -21,7 +21,7 @@ public class MoveUntilPitchChaange extends CommandBase {
   private boolean condition;
   private boolean isfinished;
 
-  public MoveUntilPitchChaange(double thresh, double angle, double speed, Condition cond) {
+  public MoveUntilRollChange(double thresh, double angle, double speed, Condition cond) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.angle = angle;
     this.speed = speed;
@@ -37,27 +37,28 @@ public class MoveUntilPitchChaange extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    roll = pigeon.getInstance().getPigRoll();
     switch (cond) {
       case LESSTHAN:
-        condition = Math.abs(pitch) <= thresh;
-        isfinished = Math.abs(pitch) > thresh;
+        condition = Math.abs(roll) <= thresh;
+        isfinished = Math.abs(roll) > thresh;
         break;
       case GREATERTHAN:
-        condition = Math.abs(pitch) >= thresh;
-        isfinished = Math.abs(pitch) < thresh;
+        condition = Math.abs(roll) >= thresh;
+        isfinished = Math.abs(roll) < thresh;
     }
-    pitch = pigeon.getInstance().getPigPitch();
-    SmartDashboard.putNumber("pitch", pitch);
+    SmartDashboard.putNumber("roll", roll);
     if (condition) {
-      MkSwerveTrain.getInstance().etherSwerve(speed, 0, MkSwerveTrain.getInstance().moveToAngy(angle),
-          ControlMode.PercentOutput);
+      MkSwerveTrain.getInstance().etherSwerve(speed, 0, 0, ControlMode.PercentOutput);//MkSwerveTrain.getInstance().moveToAngy(angle),
+          
     }
-    SmartDashboard.putBoolean("isramp auto done", isfinished);
+    SmartDashboard.putBoolean("isramp auto done: " + thresh, isfinished);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    MkSwerveTrain.getInstance().etherSwerve(0, 0, 0, ControlMode.PercentOutput);
   }
 
   // Returns true when the command should end.

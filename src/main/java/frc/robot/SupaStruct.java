@@ -20,11 +20,9 @@ import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKTELE;
-import frc.robot.MISC.Constants.PIGEON;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
-import frc.robot.MISC.Ramp;
 import frc.robot.MISC.pigeon;
 import java.util.Map;
 

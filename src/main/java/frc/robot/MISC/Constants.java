@@ -60,7 +60,7 @@ public final class Constants {
 
   public static class MKTURN {
     public static final double kP = 0.3;
-    public static final double kI = 0.0003;
+    public static final double kI = 0;//0.0003;
     // TODO test i in motion magic and pid for both auto and teleop, see if it really is this
     public static final double kD = 0.0000000;
     public static final double kF = 0;
@@ -77,10 +77,10 @@ public final class Constants {
   }
 
   public static class MKCANCODER {
-    public static final double topLeftOffset = 11.865234375 + 180;
-    public static final double topRightOffset = -25.83984275 + 180;
-    public static final double bottomLeftOffset = 153.0175781 - 16 - 180;
-    public static final double bottomRightOffset = 7.294921875 - 180;
+    public static final double topLeftOffset = -348.837890625;//11.865234375 + 180;
+    public static final double topRightOffset = -24.345703125;//-25.83984275 + 180;
+    public static final double bottomLeftOffset = -209.091796875;//153.0175781 - 16 - 180;
+    public static final double bottomRightOffset = -353.05664062;//7.294921875 - 180;
 
     public static final double[] offset = {
         MKCANCODER.topLeftOffset,
@@ -102,8 +102,6 @@ public final class Constants {
     public static final double heightInches = 24; // 28 was the old drive train
 
     public static final double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
-
-    public static final double hP = 0.001, hI = 0.0001, hD = hP * 0.1;
 
     public static final double kP = 2;
     public static final double kI = 0;

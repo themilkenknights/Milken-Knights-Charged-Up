@@ -267,10 +267,10 @@ public class MkSwerveTrain {
      blnatty.setDouble(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
      brnatty.setDouble(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
 
-     tlerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(tlCoder()));
-     trerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(trCoder()));
-     blerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(blCoder()));
-     brerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - Math.abs(brCoder()));
+     tlerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod2[1] % 360) + 360) % 360);
+     trerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod1[1] % 360) + 360) % 360);
+     blerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod4[1] % 360) + 360) % 360);
+     brerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod3[1] % 360) + 360) % 360);
 
 
      /*
@@ -533,20 +533,22 @@ public class MkSwerveTrain {
 
   /** move robot to angle/heading */
   public double moveToAngy(double set) {
+    /* 
     vars.hError = set - Math.abs(vars.yaw); // Error = Target - Actual
     vars.hIntegral += (vars.hError
         * .02); // Integral is increased by the error*time (which is .02 seconds using normal
     // IterativeRobot)
     vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
     vars.hPreviousError = vars.hError;
-    return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD * vars.hDerivative;
-    /*
-     * double setpoint = turn.calculate(Math.abs(vars.yaw%360), Math.abs(set %
-     * 360));
-     * SmartDashboard.putNumber("yaw for move to angy", Math.abs(vars.yaw));
-     * SmartDashboard.putNumber("setpoint for move to angy", Math.abs(set % 360));
-     */
-    // return setpoint;
+    return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD * vars.hDerivative;*/
+    
+      double setpoint = turn.calculate(Math.abs(((vars.yaw % 360) + 360) % 360), Math.abs(((set % 360) + 360) % 360));
+      //SmartDashboard.putNumber("err for move to angy", turn.getPositionError());
+      //SmartDashboard.putNumber("closest angle", MathFormulas.closestAngle(Math.abs(((vars.yaw % 360) + 360) % 360),  Math.abs(((set % 360) + 360) % 360)));
+      SmartDashboard.putNumber("yaw for move to angy", Math.abs(((vars.yaw % 360) + 360) % 360));
+      SmartDashboard.putNumber("setpoint for move to angy",  Math.abs(((set % 360) + 360) % 360));
+    
+     return -setpoint;
   }
 
   /**
@@ -827,8 +829,8 @@ public class MkSwerveTrain {
     public double avgDeg;
 
     public variables var;
-    // three degrees error babeeeee!!!!
-    public double hP = 0.0042, hI = 0.0000, hD = 0.0015; // 0.03i, 0.01d
+    
+    public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

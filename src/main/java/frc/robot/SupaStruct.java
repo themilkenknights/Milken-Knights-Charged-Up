@@ -248,7 +248,7 @@ public class SupaStruct {
       april.alignToTag();
 
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
-      train.etherSwerve(fwd, str, -rcw / 3.0, ControlMode.PercentOutput); // +,-,+
+      train.etherSwerve(fwd, str, rcw / 3.0, ControlMode.PercentOutput); // +,-,+
     } /*else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
       //fwd = train.antiTip()[1];
       //str = train.antiTip()[0];

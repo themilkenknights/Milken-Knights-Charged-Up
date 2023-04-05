@@ -5,39 +5,41 @@
 package frc.robot.AUTO.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.MECHANISMS.ARM.Claw;
+import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.Turn;
 
-public class ClawCommand extends CommandBase {
-  /** Creates a new ClawCommand. */
-  private boolean state;
+public class TurnCommand extends CommandBase {
+  /** Creates a new Turn. */
+  private double angle;
 
-  public ClawCommand(boolean state) {
-    this.state = state;
+  public TurnCommand(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.angle = angle;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Turn.getInstance().setTurnAuto(angle);
+    System.out.println("start turn");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (state)
-      Claw.getInstance().retract();
-    else
-      Claw.getInstance().extend();
+    MkSwerveTrain.getInstance().setModuleTurn(angle, angle, angle, angle);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    MkSwerveTrain.getInstance().stopEverything();
+    System.out.println("end turn");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Turn.getInstance().isFinished();
   }
 }

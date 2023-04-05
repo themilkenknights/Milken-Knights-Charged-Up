@@ -60,28 +60,28 @@ public final class Constants {
 
   public static class MKTURN {
     public static final double kP = 0.3;
-    public static final double kI = 0; // 0.0003;
-    // TODO test i in motion magic and pid for both auto and teleop, see if it
-    // really is this
+    public static final double kI = 0;//0.0003;
+    // TODO test i in motion magic and pid for both auto and teleop, see if it really is this
     public static final double kD = 0.0000000;
     public static final double kF = 0;
 
     public static final double[] pidf = { kP, kI, kD, kF };
 
+    //TODO jack u want this?
     public static final NeutralMode mode = NeutralMode.Coast;
 
     public static final boolean inverted = true;
 
     public static final int scurve = 6;
 
-    public static final double greerRatio = 150 / 7;
+    public static final double greerRatio = 150.0 / 7.0;
   }
 
   public static class MKCANCODER {
-    public static final double topLeftOffset = 11.865234375 + 180;
-    public static final double topRightOffset = -25.83984275 + 180;
-    public static final double bottomLeftOffset = 153.0175781 - 16 - 180;
-    public static final double bottomRightOffset = 7.294921875 - 180;
+    public static final double topLeftOffset = -348.837890625;//11.865234375 + 180;
+    public static final double topRightOffset = -24.345703125;//-25.83984275 + 180;
+    public static final double bottomLeftOffset = -209.091796875;//153.0175781 - 16 - 180;
+    public static final double bottomRightOffset = -353.05664062;//7.294921875 - 180;
 
     public static final double[] offset = {
         MKCANCODER.topLeftOffset,
@@ -90,7 +90,7 @@ public final class Constants {
         MKCANCODER.bottomRightOffset
     };
 
-    public static final AbsoluteSensorRange range = AbsoluteSensorRange.Signed_PlusMinus180;
+    public static final AbsoluteSensorRange range = AbsoluteSensorRange.Unsigned_0_to_360;
 
     public static final boolean inverted = false;
   }
@@ -103,8 +103,6 @@ public final class Constants {
     public static final double heightInches = 24; // 28 was the old drive train
 
     public static final double R = Math.sqrt(Math.pow(L, 2) + Math.pow(W, 2));
-
-    public static final double hP = 0.001, hI = 0.0001, hD = hP * 0.1;
 
     public static final double kP = 2;
     public static final double kI = 0;
@@ -150,7 +148,7 @@ public final class Constants {
     public static final double kP = .06;
     public static final double kI = 0;
     public static final double kD = 0;
-    public static final double threshold = 30;
+    public static final double threshold = 4;
   }
 
   // --------------------------------------------------------------------//

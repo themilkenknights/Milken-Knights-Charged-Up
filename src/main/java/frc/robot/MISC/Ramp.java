@@ -6,6 +6,7 @@ package frc.robot.MISC;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.MKRAMP;
 
@@ -22,15 +23,19 @@ public class Ramp {
     rampPID = new PIDController(MKRAMP.kP, MKRAMP.kI, MKRAMP.kD);
   }
 
-  public void rampMove() {
+  public void rampMove(double angle) {
     double pitch = pigeon.getInstance().getPigRoll();
     double pid = rampPID.calculate(pitch, 0);
-    MkSwerveTrain.getInstance().etherSwerve(pid, 0, 0, ControlMode.PercentOutput);
-    if (Math.abs(pitch) < 0 + MKRAMP.threshold) {
+    SmartDashboard.putNumber("pitch", pitch);
+    SmartDashboard.putNumber("pid", pid);
+    MkSwerveTrain.getInstance().etherSwerve(MathFormulas.limit(pid, -0.5, 0.5), 0, MkSwerveTrain.getInstance().moveToAngy(angle), ControlMode.PercentOutput);
+    if (Math.abs(pitch) < MKRAMP.threshold) {
       // TODO see if this good
       MkSwerveTrain.getInstance().setModuleTurn(45, -45, 45, -45);
     }
   }
+
+  
   // Returns true when the command should end.
 
   public boolean isFinished() {

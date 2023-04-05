@@ -1,0 +1,25 @@
+make new tab
+ex:
+private ShuffleboardTab mTab = Shuffleboard.getTab("turnPos");
+
+make entries
+ex:
+private GenericEntry tlcoder = mTab.add("tlcoder", 0).getEntry();
+
+properties
+private GenericEntry tlcoder = mTab.add("tlcoder", 0).withSize(width,height).getEntry();
+private GenericEntry tlcoder = mTab.add("tlcoder", 0).withPosition(column,row).getEntry();
+private GenericEntry tlcoder = mTab.add("tlcoder", 0).withProperties(Map.of("somethingInEntryProperties", -10, "somethingInEntryProperties", 10)).getEntry();
+private GenericEntry tlcoder = mTab.add("tlcoder", 0).withWidget().getEntry(BuiltInWidgets.kSomething);
+
+you can mix and match properties in one giant line
+ex:
+private GenericEntry tlerr = mTab.add("tlerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(0, 3).withSize(2,2).getEntry();
+
+updating entries (in updating function that runs in supastruct)
+ex:
+update()
+{
+    tlcoder.setDouble(45325982);
+    something.setSomething(balls);
+}

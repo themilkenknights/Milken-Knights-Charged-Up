@@ -7,7 +7,7 @@ package frc.robot.AUTO.Commandments;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.EtherAutoCommand;
-import frc.robot.AUTO.Commands.Turn;
+import frc.robot.AUTO.Commands.TurnCommand;
 import frc.robot.MISC.Constants.AUTO.DISTANGLE;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -19,7 +19,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -29,7 +29,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingele,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -39,7 +39,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingele,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -49,7 +49,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingtwel,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -59,7 +59,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingtwel,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -69,7 +69,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingthir,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -79,7 +79,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingfif,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -89,7 +89,7 @@ public class SwrvLeftRight extends SequentialCommandGroup {
                                 DISTANGLE.headingfourt,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,

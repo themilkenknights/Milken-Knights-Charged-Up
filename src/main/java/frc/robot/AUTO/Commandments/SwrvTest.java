@@ -7,7 +7,7 @@ package frc.robot.AUTO.Commandments;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.EtherAutoCommand;
-import frc.robot.AUTO.Commands.Turn;
+import frc.robot.AUTO.Commands.TurnCommand;
 import frc.robot.MISC.Constants.AUTO.DISTANGLE;
 import frc.robot.MISC.MathFormulas;
 
@@ -20,7 +20,7 @@ public class SwrvTest extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -30,7 +30,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 360,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 50,
@@ -40,7 +40,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 -90,
                                 -1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -50,7 +50,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 -360,
                                 -1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 50,
@@ -60,7 +60,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 90,
                                 -1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 50,
@@ -70,7 +70,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 -90,
                                 1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,
@@ -80,7 +80,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 180,
                                 -1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 50,
@@ -90,7 +90,7 @@ public class SwrvTest extends SequentialCommandGroup {
                                 -90,
                                 -1))
                         .withTimeout(6),
-                Commands.deadline(new Turn(0)).withTimeout(1),
+                Commands.deadline(new TurnCommand(0)).withTimeout(1),
                 Commands.deadline(
                         new EtherAutoCommand(
                                 DISTANGLE.distanceA,

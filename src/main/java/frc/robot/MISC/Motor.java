@@ -56,8 +56,8 @@ public class Motor {
   public TalonFX driveMotor(int canid) {
     TalonFX drive = new TalonFX(canid, "train");
     drive.configFactoryDefault();
-    drive.configOpenloopRamp(.3);
-    drive.configClosedloopRamp(.3);
+    //drive.configOpenloopRamp(.3);
+    //drive.configClosedloopRamp(.3);
     drive.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     drive.setNeutralMode(MKDRIVE.mode);
     drive.config_kP(0, MKDRIVE.kP);
@@ -99,29 +99,6 @@ public class Motor {
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
     return motor;
-  }
-
-  public TalonFX intake(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted) {
-    TalonFX intake = new TalonFX(canid, "rio");
-    intake.configFactoryDefault();
-    intake.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    intake.setNeutralMode(mode);
-    intake.config_kP(pidslot, pidf[0]);
-    intake.config_kI(pidslot, pidf[1]);
-    intake.config_kD(pidslot, pidf[2]);
-    intake.config_kF(pidslot, pidf[3]);
-    intake.setInverted(inverted);
-    intake.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_100Ms);
-    intake.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
-    intake.configVoltageCompSaturation(11);
-    intake.enableVoltageCompensation(true);
-    // intake.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35,
-    // 60, 0.1));
-    // intake.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35,
-    // 60, 0.1));
-    intake.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
-    intake.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
-    return intake;
   }
 
   public CANCoder cancoder(int canid, double offset, String bus) {

@@ -87,8 +87,8 @@ public class AprilTags {
       } else if (axis == "r") {
         return (Math.toDegrees(
             result.getBestTarget().getBestCameraToTarget().getRotation().getAngle())
-            - 180)
-            % 360;
+            - 180.0)
+            % 360.0;
       } else if (axis == "yaw") {
         return result.getBestTarget().getYaw();
       } else {

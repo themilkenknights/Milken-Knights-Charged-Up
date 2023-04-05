@@ -4,6 +4,8 @@
 
 package frc.robot.MECHANISMS;
 
+import java.util.Map;
+
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -11,6 +13,10 @@ import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Constants;
 import frc.robot.MISC.Constants.AUTO;
@@ -47,6 +53,30 @@ public class MkSwerveTrain {
   private PIDController anti;
 
   private Motor mMotor = Motor.getInstance();
+
+  private ShuffleboardTab mTab = Shuffleboard.getTab("turnPos");
+  
+  private GenericEntry tlcoder = mTab.add("tlcoder", 0).withPosition(0,0).getEntry();
+  private GenericEntry trcoder = mTab.add("trcoder", 0).withPosition(1,0).getEntry();
+  private GenericEntry blcoder = mTab.add("blcoder", 0).withPosition(2,0).getEntry();
+  private GenericEntry brcoder = mTab.add("brcoder", 0).withPosition(3,0).getEntry();
+  
+  private GenericEntry tlnatty = mTab.add("tlnatty", 0).withPosition(0,1).getEntry();
+  private GenericEntry trnatty = mTab.add("trnatty", 0).withPosition(1,1).getEntry();
+  private GenericEntry blnatty = mTab.add("blnatty", 0).withPosition(2,1).getEntry();
+  private GenericEntry brnatty = mTab.add("brnatty", 0).withPosition(3,1).getEntry();
+
+  private GenericEntry tlerr = mTab.add("tlerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(0, 3).withSize(2,2).getEntry();
+  private GenericEntry trerr = mTab.add("trerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(2, 3).withSize(2,2).getEntry();
+  private GenericEntry blerr = mTab.add("blerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(4, 3).withSize(2,2).getEntry();
+  private GenericEntry brerr = mTab.add("brerr", 0).withWidget(BuiltInWidgets.kGraph).withProperties(Map.of("Lower bound", -10, "Upper bound", 10)).withPosition(6, 3).withSize(2,2).getEntry();
+
+  private GenericEntry tlset = mTab.add("tlset", 0).withPosition(0,2).getEntry();
+  private GenericEntry trset = mTab.add("trset", 0).withPosition(1,2).getEntry();
+  private GenericEntry blset = mTab.add("blset", 0).withPosition(2,2).getEntry();
+  private GenericEntry brset = mTab.add("brset", 0).withPosition(3,2).getEntry();
+
+
 
   private MkSwerveTrain() {
     vars = new variables();
@@ -208,6 +238,7 @@ public class MkSwerveTrain {
   }
 
   public void updateSwerve() {
+    SmartDashboard.putNumber("roll", pigeon.getInstance().getPigRoll());
     DeltaAirlines.getInstance().updateDeltaTime();
     
 
@@ -219,23 +250,32 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("mod3", vars.mod1[1]);
     // SmartDashboard.putNumber("mod4", vars.mod1[1]);
 
-    // SmartDashboard.putNumber("topleftcan", tlCoder());
-    // SmartDashboard.putNumber("toprightcan", trCoder());
-    // SmartDashboard.putNumber("botleftcan", blCoder());
-    // SmartDashboard.putNumber("botrightcan", brCoder());
-    /*
-     * SmartDashboard.putNumber("topleftnativeTURN",
-     * MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
-     * SmartDashboard.putNumber("toprightnativeTURN",
-     * MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
-     * SmartDashboard.putNumber("bottomleftnativeTURN",
-     * MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
-     * SmartDashboard.putNumber("bottomrightnativeTURN",
-     * MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),
-     * MKTURN.greerRatio));
+     tlcoder.setDouble(((tlCoder() % 360) + 360) % 360);
+     trcoder.setDouble(((trCoder() % 360) + 360) % 360);
+     blcoder.setDouble(((blCoder() % 360) + 360) % 360);
+     brcoder.setDouble(((brCoder() % 360) + 360) % 360);
+
+     tlset.setDouble(((vars.mod2[1] % 360) + 360) % 360);
+     trset.setDouble(((vars.mod1[1] % 360) + 360) % 360);
+     blset.setDouble(((vars.mod4[1] % 360) + 360) % 360);
+     brset.setDouble(((vars.mod3[1] % 360) + 360) % 360);
+
+     tlnatty.setDouble(((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+     trnatty.setDouble(((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+     blnatty.setDouble(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+     brnatty.setDouble(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360);
+
+     tlerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod2[1] % 360) + 360) % 360);
+     trerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod1[1] % 360) + 360) % 360);
+     blerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod4[1] % 360) + 360) % 360);
+     brerr.setDouble(Math.abs(((MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio) % 360) + 360) % 360) - ((vars.mod3[1] % 360) + 360) % 360);
+
+
+     /*
+      SmartDashboard.putNumber("topleftnativeTURN", MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio));
+      SmartDashboard.putNumber("toprightnativeTURN",MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio));
+      SmartDashboard.putNumber("bottomleftnativeTURN",MathFormulas.nativeToDegrees(bottomTurnLeft.getSelectedSensorPosition(),MKTURN.greerRatio));
+      SmartDashboard.putNumber("bottomrightnativeTURN",MathFormulas.nativeToDegrees(bottomTurnRight.getSelectedSensorPosition(),MKTURN.greerRatio));
      */
     /*
      * SmartDashboard.putNumber("topleftnativeDRIVE",
@@ -260,7 +300,7 @@ public class MkSwerveTrain {
 
     vars.yaw = pigeon.getInstance().getPigYaw() % 360;
     // SmartDashboard.putBoolean("idsone", isMotionMagicDone());
-    SmartDashboard.putNumber("pigeon", vars.yaw);
+    //SmartDashboard.putNumber("pigeon", vars.yaw);
     // SmartDashboard.putNumber("avgvelinches", vars.avgVelInches);
     // SmartDashboard.putNumber("avgdist", vars.avgDistInches);
 
@@ -346,15 +386,15 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("FWD", FWD);
     // SmartDashboard.putNumber("STR", STR);
 
-    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180 / Constants.kPi;
-    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180 / Constants.kPi;
-    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180 / Constants.kPi;
-    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180 / Constants.kPi;
+    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180.0 / Constants.kPi;
+    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180.0 / Constants.kPi;
+    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180.0 / Constants.kPi;
+    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180.0 / Constants.kPi;
 
-    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.C, 2)));
-    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.C, 2)));
+    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.C, 2.0)));
+    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.C, 2.0)));
 
     vars.max = vars.mod1[0];
     if (vars.mod2[0] > vars.max)
@@ -363,7 +403,7 @@ public class MkSwerveTrain {
       vars.max = vars.mod3[0];
     if (vars.mod4[0] > vars.max)
       vars.max = vars.mod4[0];
-    if (vars.max > 1) {
+    if (vars.max > 1.0) {
       vars.mod1[0] /= vars.max;
       vars.mod2[0] /= vars.max;
       vars.mod3[0] /= vars.max;
@@ -389,7 +429,7 @@ public class MkSwerveTrain {
 
   public void etherRCWFinder(double FWD, double STR, double RCW) {
     vars.dt = DeltaAirlines.getInstance().getDT();
-    vars.yawTest = 0;
+    vars.yawTest = 0.0;
     vars.tempTest = FWD * Math.cos(Math.toRadians(vars.yawTest)) + STR * Math.sin(Math.toRadians(vars.yawTest));
     STR = -FWD * Math.sin(Math.toRadians(vars.yawTest))
         + STR * Math.cos(Math.toRadians(vars.yawTest));
@@ -403,10 +443,10 @@ public class MkSwerveTrain {
     vars.CTest = FWD - RCW * (MKTRAIN.W / MKTRAIN.R);
     vars.DTest = FWD + RCW * (MKTRAIN.W / MKTRAIN.R);
 
-    vars.mod2Test = (Math.sqrt((Math.pow(vars.BTest, 2)) + (Math.pow(vars.CTest, 2))));
-    vars.mod1Test = (Math.sqrt((Math.pow(vars.BTest, 2)) + (Math.pow(vars.DTest, 2))));
-    vars.mod3Test = (Math.sqrt((Math.pow(vars.ATest, 2)) + (Math.pow(vars.DTest, 2))));
-    vars.mod4Test = (Math.sqrt((Math.pow(vars.ATest, 2)) + (Math.pow(vars.CTest, 2))));
+    vars.mod2Test = (Math.sqrt((Math.pow(vars.BTest, 2.0)) + (Math.pow(vars.CTest, 2.0))));
+    vars.mod1Test = (Math.sqrt((Math.pow(vars.BTest, 2.0)) + (Math.pow(vars.DTest, 2.0))));
+    vars.mod3Test = (Math.sqrt((Math.pow(vars.ATest, 2.0)) + (Math.pow(vars.DTest, 2.0))));
+    vars.mod4Test = (Math.sqrt((Math.pow(vars.ATest, 2.0)) + (Math.pow(vars.CTest, 2.0))));
 
     vars.maxTest = vars.mod1Test;
     if (vars.mod2Test > vars.maxTest)
@@ -415,7 +455,7 @@ public class MkSwerveTrain {
       vars.maxTest = vars.mod3Test;
     if (vars.mod4Test > vars.maxTest)
       vars.maxTest = vars.mod4Test;
-    if (vars.maxTest > 1) {
+    if (vars.maxTest > 1.0) {
       vars.mod1Test /= vars.maxTest;
       vars.mod2Test /= vars.maxTest;
       vars.mod3Test /= vars.maxTest;
@@ -449,15 +489,15 @@ public class MkSwerveTrain {
     vars.C = FWD - RCW * (MKTRAIN.W / MKTRAIN.R);
     vars.D = FWD + RCW * (MKTRAIN.W / MKTRAIN.R);
 
-    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180 / Constants.kPi;
-    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180 / Constants.kPi;
-    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180 / Constants.kPi;
-    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180 / Constants.kPi;
+    vars.mod2[1] = Math.atan2(vars.B, vars.C) * 180.0 / Constants.kPi;
+    vars.mod1[1] = Math.atan2(vars.B, vars.D) * 180.0 / Constants.kPi;
+    vars.mod3[1] = Math.atan2(vars.A, vars.D) * 180.0 / Constants.kPi;
+    vars.mod4[1] = Math.atan2(vars.A, vars.C) * 180.0 / Constants.kPi;
 
-    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.C, 2)));
-    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.D, 2)));
-    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2)) + (Math.pow(vars.C, 2)));
+    vars.mod2[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.C, 2.0)));
+    vars.mod1[0] = Math.sqrt((Math.pow(vars.B, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod3[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.D, 2.0)));
+    vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.C, 2.0)));
 
     vars.max = vars.mod1[0];
     if (vars.mod2[0] > vars.max)
@@ -491,20 +531,22 @@ public class MkSwerveTrain {
 
   /** move robot to angle/heading */
   public double moveToAngy(double set) {
+    /* 
     vars.hError = set - Math.abs(vars.yaw); // Error = Target - Actual
     vars.hIntegral += (vars.hError
         * .02); // Integral is increased by the error*time (which is .02 seconds using normal
     // IterativeRobot)
     vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
     vars.hPreviousError = vars.hError;
-    return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD * vars.hDerivative;
-    /*
-     * double setpoint = turn.calculate(Math.abs(vars.yaw%360), Math.abs(set %
-     * 360));
-     * SmartDashboard.putNumber("yaw for move to angy", Math.abs(vars.yaw));
-     * SmartDashboard.putNumber("setpoint for move to angy", Math.abs(set % 360));
-     */
-    // return setpoint;
+    return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD * vars.hDerivative;*/
+    
+      double setpoint = turn.calculate(Math.abs(((vars.yaw % 360) + 360) % 360), Math.abs(((set % 360) + 360) % 360));
+      //SmartDashboard.putNumber("err for move to angy", turn.getPositionError());
+      //SmartDashboard.putNumber("closest angle", MathFormulas.closestAngle(Math.abs(((vars.yaw % 360) + 360) % 360),  Math.abs(((set % 360) + 360) % 360)));
+      SmartDashboard.putNumber("yaw for move to angy", Math.abs(((vars.yaw % 360) + 360) % 360));
+      SmartDashboard.putNumber("setpoint for move to angy",  Math.abs(((set % 360) + 360) % 360));
+    
+     return -setpoint;
   }
 
   /**
@@ -588,15 +630,15 @@ public class MkSwerveTrain {
     // numbers fall short of high by 3ish inches and short of length by 4ish inches
     double calcangle = side
         * ((heading)
-            + (((-thetaTurn / 2)
+            + (((-thetaTurn / 2.0)
                 + (((vars.avgDistInches) / (vars.totalDistance)) * (thetaTurn)))));
 
     vars.RCWtemp = moveToAngy(180);
-    vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180))) / 5;
-    vars.STRauto = (Math.sin(calcangle * (Constants.kPi / 180))) / 5;
+    vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180.0))) / 5.0;
+    vars.STRauto = (Math.sin(calcangle * (Constants.kPi / 180.0))) / 5.0;
 
-    etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5, ControlMode.PercentOutput);
-    etherRCWFinder(vars.FWDauto, -vars.STRauto, 0);
+    etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5.0, ControlMode.PercentOutput);
+    etherRCWFinder(vars.FWDauto, -vars.STRauto, 0.0);
     /*
      * SmartDashboard.putNumber(
      * "avgdistsimilarity", vars.avgDistInches - (vars.avgDistTest *
@@ -686,8 +728,8 @@ public class MkSwerveTrain {
     // return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) *
     // setpoint};
     return new double[] {
-        -Math.cos(vars.yaw * (Math.PI / 180)) * setpoint,
-        Math.sin(vars.yaw * (Math.PI / 180)) * setpoint
+        -Math.cos(vars.yaw * (Math.PI / 180.0)) * setpoint,
+        Math.sin(vars.yaw * (Math.PI / 180.0)) * setpoint
     };
   }
 
@@ -785,8 +827,8 @@ public class MkSwerveTrain {
     public double avgDeg;
 
     public variables var;
-    // three degrees error babeeeee!!!!
-    public double hP = 0.0042, hI = 0.0000, hD = 0.0015; // 0.03i, 0.01d
+    
+    public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

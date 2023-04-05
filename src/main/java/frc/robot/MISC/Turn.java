@@ -2,15 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.AUTO.Commands;
+package frc.robot.MISC;
 
 import frc.robot.MECHANISMS.MkSwerveTrain;
 
 /** Add your docs here. */
-public class TurnAuto {
+public class Turn {
   private double angle;
 
-  public static TurnAuto getInstance() {
+  public static Turn getInstance() {
     return InstanceHolder.mInstance;
   }
 
@@ -27,6 +27,6 @@ public class TurnAuto {
   }
 
   private static class InstanceHolder {
-    private static final TurnAuto mInstance = new TurnAuto();
+    private static final Turn mInstance = new Turn();
   }
 }

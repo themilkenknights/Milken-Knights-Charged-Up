@@ -24,6 +24,7 @@ import frc.robot.MISC.Constants.PIGEON;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
+import frc.robot.MISC.Ramp;
 import frc.robot.MISC.pigeon;
 import java.util.Map;
 
@@ -246,7 +247,8 @@ public class SupaStruct {
 
     if (xbutton) {
       april.alignToTag();
-
+    } else if (rbbutton) {
+      //Ramp.getInstance().rampMove(0);
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
       train.etherSwerve(fwd, str, rcw / 3.0, ControlMode.PercentOutput); // +,-,+
     } /*else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {

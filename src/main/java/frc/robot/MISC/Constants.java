@@ -67,6 +67,7 @@ public final class Constants {
 
     public static final double[] pidf = { kP, kI, kD, kF };
 
+    //TODO jack u want this?
     public static final NeutralMode mode = NeutralMode.Coast;
 
     public static final boolean inverted = true;
@@ -147,7 +148,7 @@ public final class Constants {
     public static final double kP = .06;
     public static final double kI = 0;
     public static final double kD = 0;
-    public static final double threshold = 30;
+    public static final double threshold = 4;
   }
 
   // --------------------------------------------------------------------//

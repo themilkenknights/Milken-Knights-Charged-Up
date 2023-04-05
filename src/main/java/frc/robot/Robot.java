@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AUTO.Commandments.RampAuto;
 import frc.robot.AUTO.Commandments.autopaths.LeftDoubleLow;
 import frc.robot.AUTO.Commandments.autopaths.RampMiddlePosition;
 import frc.robot.MECHANISMS.ARM.Arm;
@@ -117,7 +118,7 @@ public class Robot extends TimedRobot {
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
       case LEFTSIDEDOUBLE:
-        m_autonomousCommand = new LeftDoubleLow();
+        m_autonomousCommand = new RampAuto();
         break;
       case MIDDLE:
         m_autonomousCommand = new RampMiddlePosition();

@@ -6,12 +6,13 @@ package frc.robot.AUTO.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.Turn;
 
-public class Turn extends CommandBase {
+public class TurnCommand extends CommandBase {
   /** Creates a new Turn. */
   private double angle;
 
-  public Turn(double angle) {
+  public TurnCommand(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.angle = angle;
   }
@@ -19,7 +20,7 @@ public class Turn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    TurnAuto.getInstance().setTurnAuto(angle);
+    Turn.getInstance().setTurnAuto(angle);
     System.out.println("start turn");
   }
 
@@ -39,6 +40,6 @@ public class Turn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return TurnAuto.getInstance().isFinished();
+    return Turn.getInstance().isFinished();
   }
 }

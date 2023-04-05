@@ -14,36 +14,60 @@ import frc.robot.MISC.pigeon;
 public class MoveUntilPitchChaange extends CommandBase {
   /** Creates a new MoveUntilPitchChaange. */
   private double pitch;
+  private double thresh;
+  private double speed;
   private double angle;
-  public MoveUntilPitchChaange(double angle) {
-    // Use addRequirements() here to declare subsystem dependencies.
-  this.angle = angle;
-  }
+  private Condition cond;
+  private boolean condition;
+  private boolean isfinished;
 
+  public MoveUntilPitchChaange(double thresh, double angle, double speed, Condition cond) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.angle = angle;
+    this.speed = speed;
+    this.thresh = thresh;
+    this.cond = cond;
+  }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    switch (cond) {
+      case LESSTHAN:
+        condition = Math.abs(pitch) <= thresh;
+        isfinished = Math.abs(pitch) > thresh;
+        break;
+      case GREATERTHAN:
+        condition = Math.abs(pitch) >= thresh;
+        isfinished = Math.abs(pitch) < thresh;
+    }
     pitch = pigeon.getInstance().getPigPitch();
     SmartDashboard.putNumber("pitch", pitch);
-    if(Math.abs(pitch)<=4.2)
-    {
-      MkSwerveTrain.getInstance().etherSwerve(0.2, 0, MkSwerveTrain.getInstance().moveToAngy(angle), ControlMode.PercentOutput);
+    if (condition) {
+      MkSwerveTrain.getInstance().etherSwerve(speed, 0, MkSwerveTrain.getInstance().moveToAngy(angle),
+          ControlMode.PercentOutput);
     }
-    SmartDashboard.putBoolean("isramp auto done", Math.abs(pitch) > 4.2);
+    SmartDashboard.putBoolean("isramp auto done", isfinished);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(pitch) > 4.2;
+    return isfinished;
   }
+
+  public enum Condition {
+    GREATERTHAN,
+    LESSTHAN
+  };
 }

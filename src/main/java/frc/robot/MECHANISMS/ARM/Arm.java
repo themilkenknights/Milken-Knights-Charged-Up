@@ -1,4 +1,4 @@
-/*package frc.robot.DEFUNCT.ARM;
+package frc.robot.MECHANISMS.ARM;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -151,7 +151,7 @@ public class Arm {
     // armCanCoder.getAbsolutePosition());
     SmartDashboard.putNumber("arm degdeg", getArmDegrees());
   }
-*/
+
   /**
    * This function assumes that the base of the arm is at the origin (0,0) and the
    * angles are
@@ -165,7 +165,7 @@ public class Arm {
    * @param link2
    * @param x
    * @param y
-   *//*
+   */
   public static void getAngles(double link1, double link2, double x, double y) {
     // Calculate the distance from the base of the arm to the target position
     double dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
@@ -182,7 +182,7 @@ public class Arm {
     System.out.println("Link 1 angle: " + Math.toDegrees(link1Angle));
     System.out.println("Link 2 angle: " + Math.toDegrees(link2Angle));
   }
-*/
+
   /**
    * 3 joint arm
    * https://www.chiefdelphi.com/t/pid-tuning-for-3-joint-arm/347116/15
@@ -192,7 +192,7 @@ public class Arm {
    * @param ang3
    * @param lengths
    * @return
-   *//* 
+   */
   public static double[] getXY(double ang1, double ang2, double ang3, double[] lengths) {
     double x = getX(ang1, ang2, ang3, lengths);
     double y = getY(ang1, ang2, ang3, lengths);
@@ -289,4 +289,3 @@ public class Arm {
     private static final Arm mInstance = new Arm();
   }
 }
-*/

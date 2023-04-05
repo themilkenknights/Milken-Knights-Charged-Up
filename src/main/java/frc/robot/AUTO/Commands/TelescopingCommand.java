@@ -1,8 +1,8 @@
-package frc.robot.DEFUNCT;
-/* 
+package frc.robot.AUTO.Commands;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.DEFUNCT.ARM.Arm;
+import frc.robot.MECHANISMS.ARM.Arm;
 
 public class TelescopingCommand extends CommandBase {
 
@@ -37,4 +37,3 @@ public class TelescopingCommand extends CommandBase {
     return Math.abs(angle - Arm.getInstance().getTelescope()) < 100;
   }
 }
-*/

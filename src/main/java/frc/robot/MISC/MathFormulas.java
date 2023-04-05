@@ -7,7 +7,7 @@ package frc.robot.MISC;
 import edu.wpi.first.math.util.Units;
 import frc.robot.MISC.Constants.MKDRIVE;
 import frc.robot.MISC.Constants.MKFALCON;
-//import frc.robot.MISC.Constants.MKWRIST;
+import frc.robot.MISC.Constants.MKWRIST;
 
 /** all MK math formulas */
 public class MathFormulas {
@@ -141,13 +141,13 @@ public class MathFormulas {
     return nativePer100MstoInchesPerSec(gimmeNative) / (1000 / dt);
   }
 
-  /*public static double degreesToSpark(double gimmeDeg) {
+  public static double degreesToSpark(double gimmeDeg) {
     return gimmeDeg * (1.0 / 360.0) * (MKWRIST.greerRatio);
   }
 
   public static double sparkToDegrees(double gimmeSpark) {
     return gimmeSpark * (1.0 / MKWRIST.greerRatio) * (360.0);
-  }*/
+  }
 
   /**
    * "Get the closest angle between the given angles."

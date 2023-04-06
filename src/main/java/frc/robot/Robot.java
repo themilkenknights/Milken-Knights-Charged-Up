@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.RampAuto;
+import frc.robot.AUTO.Commandments.TestEther;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Odometry;
@@ -113,7 +114,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = new RampAuto();
         break;
       case MIDDLE:
-        m_autonomousCommand = null;
+        m_autonomousCommand = new TestEther();
         break;
     }
 
@@ -150,6 +151,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    m_autonomousCommand = null;
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
   }

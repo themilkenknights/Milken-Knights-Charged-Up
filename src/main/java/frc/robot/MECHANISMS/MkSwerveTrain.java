@@ -476,6 +476,7 @@ public class MkSwerveTrain {
   }
 
   public void etherAutoSwerve(double FWD, double STR, double RCW, ControlMode mode) {
+    etherRCWFinder(FWD, STR, RCW);
     vars.temp = FWD * Math.cos(Math.toRadians(vars.yaw)) + STR * Math.sin(Math.toRadians(vars.yaw));
     STR = -FWD * Math.sin(Math.toRadians(vars.yaw)) + STR * Math.cos(Math.toRadians(vars.yaw));
     FWD = vars.temp;
@@ -524,7 +525,7 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("d", vars.D);
     // SmartDashboard.putNumber("topdrileftvelo",
     // topDriveLeft.getSelectedSensorVelocity());
-    //etherRCWFinder(FWD, STR, RCW);
+   
     setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
     setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
@@ -604,11 +605,11 @@ public class MkSwerveTrain {
     }
   }
 
-  public void setEtherAuto(double totalDistance, double distanceA, double radius) {
-    vars.autoDist = MathFormulas.inchesToNative(totalDistance);
-    vars.totalDistance = totalDistance;
+  public void setEtherAuto(double Distance, double disteA, double radius) {
+    vars.autoDist = MathFormulas.inchesToNative(Distance);
+    vars.totalDistance = Distance;
     vars.avgDistInches = 0;
-    vars.distanceA = distanceA;
+    vars.distanceA = disteA;
     vars.avgDistTest = 0;
     // SmartDashboard.putNumber("totaldistancccee", vars.totalDistance);
   }
@@ -828,7 +829,8 @@ public class MkSwerveTrain {
 
     public variables var;
     
-    public double hP = 0.035*3, hI = 0.000, hD = 0.0024*3; // 0.03i, 0.01d
+    public double hP = 0.025, hI = 0.000, hD = 0.0019; // 0.03i, 0.01d
+    // div rcw by 3 public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

@@ -108,6 +108,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    System.out.println("i am auito  initialzies");
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
       case LEFTSIDEDOUBLE:

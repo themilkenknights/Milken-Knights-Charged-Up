@@ -25,14 +25,17 @@ public class EtherStraightCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    SmartDashboard.putBoolean("FINISHED RAMP", false);
     train.startDrive();
     train.setEtherAuto(dist, 0, 0);
+    //System.out.println("are you finished in init: " + train.isFinished());
+    //System.out.println("Test dist: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
+    //System.out.println("total dist: " + MkSwerveTrain.getInstance().vars.totalDistance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //SmartDashboard.putBoolean("FINISHED RAMP", train.isFinished());
     SmartDashboard.putNumber("testdist", MkSwerveTrain.getInstance().vars.avgDistTest);
     SmartDashboard.putNumber("totaldist", MkSwerveTrain.getInstance().vars.totalDistance);
     train.etherAutoSwerve(FWD, STR, 0, ControlMode.PercentOutput);
@@ -41,14 +44,21 @@ public class EtherStraightCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("FINISHED RAMP", true);
+    //System.out.println(train.isFinished());
+    //MkSwerveTrain.getInstance().etherSwerve(0, 0, 0, ControlMode.PercentOutput);
     train.setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
-    train.setModuleTurn(0, 0, 0, 0);
+    //train.setModuleTurn(0, 0, 0, 0);
+    //train.setEtherAuto(dist, 0, 0);
+    //train.resetRCWFinder();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //System.out.println("mod2test" + MkSwerveTrain.getInstance().vars.mod2Test);
+    //System.out.println("atest" + MkSwerveTrain.getInstance().vars.ATest);
+    //System.out.println("Test dist isfinished: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
+    //System.out.println("total dist isfinished: " + MkSwerveTrain.getInstance().vars.totalDistance);
     return train.isFinished();
   }
 }

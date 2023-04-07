@@ -172,6 +172,10 @@ public class SupaStruct {
 
     if (pov) {
       rcw = train.moveToAngy(xbox.getPOV());
+      /*if(rcw < 0.1 && (fwd < 0.1 && str < 0.1))
+      {
+        rcw = 0;
+      }*/
     }
 
     // --------------------------------------------------------------------//

@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.MathFormulas;
 
 public class EtherStraightCommand extends CommandBase {
   private double dist, FWD, STR, angle;
@@ -38,7 +39,7 @@ public class EtherStraightCommand extends CommandBase {
     //SmartDashboard.putBoolean("FINISHED RAMP", train.isFinished());
     SmartDashboard.putNumber("testdist", MkSwerveTrain.getInstance().vars.avgDistTest);
     SmartDashboard.putNumber("totaldist", MkSwerveTrain.getInstance().vars.totalDistance);
-    train.etherAutoSwerve(FWD, STR, 0, ControlMode.PercentOutput);
+    train.etherAutoSwerve(FWD, STR, MathFormulas.limit(train.moveToAngy(angle),-0.3,0.3), ControlMode.PercentOutput);
   }
 
   // Called once the command ends or is interrupted.

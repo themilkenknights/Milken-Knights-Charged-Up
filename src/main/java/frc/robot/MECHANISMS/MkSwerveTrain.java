@@ -506,7 +506,7 @@ public class MkSwerveTrain {
   }
 
   public void etherAutoSwerve(double FWD, double STR, double RCW, ControlMode mode) {
-    etherRCWFinder(FWD, STR, RCW);
+    etherRCWFinder(FWD, STR, 0);
     vars.temp = FWD * Math.cos(Math.toRadians(vars.yaw)) + STR * Math.sin(Math.toRadians(vars.yaw));
     STR = -FWD * Math.sin(Math.toRadians(vars.yaw)) + STR * Math.cos(Math.toRadians(vars.yaw));
     FWD = vars.temp;
@@ -859,7 +859,7 @@ public class MkSwerveTrain {
 
     public variables var;
     
-    public double hP = 0.027, hI = 0.000, hD = 0.0023; // 0.03i, 0.01d
+    public double hP = 0.020, hI = 0.000, hD = 0.0020; // 0.03i, 0.01d
     // div rcw by 3 public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015

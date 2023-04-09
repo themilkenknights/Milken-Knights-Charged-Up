@@ -859,7 +859,7 @@ public class MkSwerveTrain {
 
     public variables var;
     
-    public double hP = 0.020, hI = 0.000, hD = 0.0020; // 0.03i, 0.01d
+    public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // div rcw by 3 public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015

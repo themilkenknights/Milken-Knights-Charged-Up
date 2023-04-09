@@ -50,7 +50,7 @@ public class MoveUntilRollChange extends CommandBase {
     SmartDashboard.putNumber("roll", roll);
     SmartDashboard.putBoolean("condition", condition);
     if (condition) {
-      MkSwerveTrain.getInstance().etherSwerve(speed, 0, MkSwerveTrain.getInstance().moveToAngy(angle), ControlMode.PercentOutput);//MkSwerveTrain.getInstance().moveToAngy(angle),
+      MkSwerveTrain.getInstance().etherSwerve(speed, 0, MkSwerveTrain.getInstance().moveToAngy(angle)/3, ControlMode.PercentOutput);//MkSwerveTrain.getInstance().moveToAngy(angle),
           
     }
     SmartDashboard.putBoolean("isramp auto done: " + thresh, isfinished);

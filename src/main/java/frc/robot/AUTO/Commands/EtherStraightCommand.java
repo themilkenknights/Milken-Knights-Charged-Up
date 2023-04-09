@@ -39,7 +39,7 @@ public class EtherStraightCommand extends CommandBase {
     //SmartDashboard.putBoolean("FINISHED RAMP", train.isFinished());
     SmartDashboard.putNumber("testdist", MkSwerveTrain.getInstance().vars.avgDistTest);
     SmartDashboard.putNumber("totaldist", MkSwerveTrain.getInstance().vars.totalDistance);
-    train.etherAutoSwerve(FWD, STR, MathFormulas.limit(train.moveToAngy(angle),-0.3,0.3), ControlMode.PercentOutput);
+    train.etherAutoSwerve(FWD, STR, train.moveToAngy(angle)/3, ControlMode.PercentOutput);
   }
 
   // Called once the command ends or is interrupted.

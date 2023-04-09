@@ -23,7 +23,7 @@ public class RampAuto extends SequentialCommandGroup {
     new MoveUntilRollChange(-15,0,0.2,Condition.LESSTHAN).withTimeout(15),
     new MoveUntilRollChange(7, 0, 0.2, Condition.LESSTHAN).withTimeout(15),
     new MoveUntilRollChange(0, 0, 0.2, Condition.GREATERTHAN).withTimeout(15),
-    new MotionMagicAuto(10, 0).withTimeout(4),
+    new MotionMagicAuto(15, 0).withTimeout(4),
     new MoveUntilRollChange(9,0,-0.2,Condition.LESSTHAN).withTimeout(15),
     new MoveUntilRollChange(7,0,-0.1,Condition.GREATERTHAN).withTimeout(15),
     new MoveUntilRollChange(4, 0, 0.07, Condition.GREATERTHAN).withTimeout(15),

@@ -80,8 +80,8 @@ public class Motor {
     return drive;
   }
 
-  public TalonFX motor(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted) {
-    TalonFX motor = new TalonFX(canid, "rio");
+  public TalonFX motor(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted, String canbus) {
+    TalonFX motor = new TalonFX(canid, canbus);
     motor.configFactoryDefault();
     motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     motor.setNeutralMode(mode);

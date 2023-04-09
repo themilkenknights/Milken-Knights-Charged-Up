@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
+import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Lights;
@@ -36,6 +37,7 @@ public class SupaStruct {
       lightMode = 0;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
+  private Intake intake = Intake.getInstance();
 
   private boolean resetpig,
       dpadup,
@@ -84,6 +86,7 @@ public class SupaStruct {
   public boolean getAprilEnabled() {
     return rbbutton;
   }
+  // TODO why this enable april??
 
   public void initTele() {
     lightMode = 0;
@@ -107,6 +110,7 @@ public class SupaStruct {
     }
 
     train.updateSwerve();
+    intake.updateIntake();
 
     // --------------------------------------------------------------------//
     // VARIABLES
@@ -123,7 +127,7 @@ public class SupaStruct {
 
     // DRIVER
     xbutton = xbox.getXButton();
-    abutton = xbox.getAButtonPressed();
+    abutton = xbox.getAButton();
     rbbutton = xbox.getRightBumper();
     ybutton = xbox.getYButton();
     bbutton = xbox.getBButton();
@@ -170,17 +174,43 @@ public class SupaStruct {
       train.startDrive();
     }
 
-    if (pov) {
-      rcw = train.moveToAngy(xbox.getPOV())/3;
-      /*if(rcw < 0.1 && (fwd < 0.1 && str < 0.1))
-      {
-        rcw = 0;
-      }*/
+    // --------------------------------------------------------------------//
+    // INTAKE
+    // --------------------------------------------------------------------//
+
+    if (ltrigger && !rtrigger) {
+      intake.moveBottomIntakePercentOutput(xbox.getLeftTriggerAxis());
+    } else if (rtrigger && !ltrigger) {
+      intake.moveBottomIntakePercentOutput(-xbox.getRightTriggerAxis());
+    } else if (abutton && !xbutton) {
+      SmartDashboard.putBoolean("imhere", true);
+      intake.moveBottomIntakePID(0);
+    } else if (xbutton && !abutton) {
+      intake.moveBottomIntakePID(20000);
+    } else if (!abutton && !xbutton && !ltrigger && !rtrigger) {
+      intake.stopBottomIntakePercentOutput();
+      SmartDashboard.putBoolean("imhere", false);
     }
+
+    if (bbutton) {
+      intake.setBottomLeftEncoder(0);
+      intake.setBottomRightEncoder(0);
+    }
+
 
     // --------------------------------------------------------------------//
     // DRIVE STATEMENTS
     // --------------------------------------------------------------------//
+
+    if (pov) {
+      rcw = train.moveToAngy(xbox.getPOV()) / 3;
+      /*
+       * if(rcw < 0.1 && (fwd < 0.1 && str < 0.1))
+       * {
+       * rcw = 0;
+       * }
+       */
+    }
 
     if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
         && Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1
@@ -202,17 +232,20 @@ public class SupaStruct {
       str = 0;
     }
 
-    if (xbutton) {
-      april.alignToTag();
-    } else if (rbbutton) {
-      //Ramp.getInstance().rampMove(0);
+    /*
+     * if (xbutton) {
+     * april.alignToTag();
+     * }
+     */ if (rbbutton) {
+      // Ramp.getInstance().rampMove(0);
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
       train.etherSwerve(fwd, str, rcw, ControlMode.PercentOutput); // +,-,+
-    } /*else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
-      //fwd = train.antiTip()[1];
-      //str = train.antiTip()[0];
-      //train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
-    */ else {
+    } /*
+       * else if (pigeon.getInstance().getPigPitch() > PIGEON.pitchThreshold) {
+       * //fwd = train.antiTip()[1];
+       * //str = train.antiTip()[0];
+       * //train.etherSwerve(fwd, -str, 0, ControlMode.PercentOutput);
+       */ else {
       train.stopEverything();
     }
 
@@ -267,9 +300,8 @@ public class SupaStruct {
 
   // measured over predicted * predicted
   public void updateTest() {
-    if(pitcheck.get() < 5)
-    {
-      //train.setModuleDrive(null, fwdSignum, str, fwd, count);
+    if (pitcheck.get() < 5) {
+      // train.setModuleDrive(null, fwdSignum, str, fwd, count);
     }
     /*
      * double fwd = 0;

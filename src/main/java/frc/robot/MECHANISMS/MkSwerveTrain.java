@@ -54,7 +54,7 @@ public class MkSwerveTrain {
 
   private Motor mMotor = Motor.getInstance();
 
-  private ShuffleboardTab mTab = Shuffleboard.getTab("turnPos");
+  private ShuffleboardTab mTab = Shuffleboard.getTab("mkswervetrain");
   
   private GenericEntry tlcoder = mTab.add("tlcoder", 0).withPosition(0,0).getEntry();
   private GenericEntry trcoder = mTab.add("trcoder", 0).withPosition(1,0).getEntry();

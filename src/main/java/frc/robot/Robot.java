@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -22,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.RampAuto;
+import frc.robot.AUTO.Commandments.TestEther;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Odometry;
@@ -51,11 +51,7 @@ public class Robot extends TimedRobot {
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
-  private Timer timer;
-  private int lightMode = 0;
   private UsbCamera intakCamera;
-
-  // Creates UsbCamera and MjpegServer [1] and connects them
 
   @Override
   public void robotInit() {
@@ -63,7 +59,7 @@ public class Robot extends TimedRobot {
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     CameraServer.startAutomaticCapture();
-    //Shuffleboard.selectTab("Match");
+    // Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
 
@@ -78,8 +74,6 @@ public class Robot extends TimedRobot {
     } catch (UncleanStatusException ex) {
       DriverStation.reportError("Error creating Solenoid", ex.getStackTrace());
     }
-    timer = new Timer();
-    timer.start();
 
     train.startTrain();
     pigeon.getInstance().reset();
@@ -87,7 +81,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
@@ -107,13 +100,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    System.out.println("i am auito  initialzies");
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
       case LEFTSIDEDOUBLE:
         m_autonomousCommand = new RampAuto();
         break;
       case MIDDLE:
-        m_autonomousCommand = null;
+        m_autonomousCommand = new TestEther();
         break;
     }
 
@@ -133,7 +127,6 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     Shuffleboard.selectTab("SmartDashboard");
     supaKoopa.initTele();
-    // SmartDashboard.putBoolean("isreset", Wrist.getInstance().getLimitSwitch());
 
     System.out.println("Robot Teleop Init");
     if (m_autonomousCommand != null) {
@@ -150,6 +143,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    m_autonomousCommand = null;
     System.out.println("Robot disabled");
     supaKoopa.teleopDisabled();
   }

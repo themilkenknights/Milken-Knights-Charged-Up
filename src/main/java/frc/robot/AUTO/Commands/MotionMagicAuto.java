@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 
 public class MotionMagicAuto extends CommandBase {
+  private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private double dist;
   private double angle;
 
@@ -24,28 +25,28 @@ public class MotionMagicAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    MkSwerveTrain.getInstance().setMotionMagic(dist, angle);
+    train.setMotionMagic(dist, angle);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    MkSwerveTrain.getInstance().updateMotionMagic();
+    train.updateMotionMagic();
     SmartDashboard.putBoolean("Is finished", MkSwerveTrain.getInstance().isMotionMagicDone());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    MkSwerveTrain.getInstance().setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
-    MkSwerveTrain.getInstance().setModuleTurn(0, 0, 0, 0);
+    train.setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
+    train.setModuleTurn(0, 0, 0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     // SmartDashboard.putBoolean("isfinished",
-    // MkSwerveTrain.getInstance().isMotionMagicDone());
-    return MkSwerveTrain.getInstance().isMotionMagicDone();
+      // MkSwerveTrain.getInstance().isMotionMagicDone());
+    return train.isMotionMagicDone();
   }
 }

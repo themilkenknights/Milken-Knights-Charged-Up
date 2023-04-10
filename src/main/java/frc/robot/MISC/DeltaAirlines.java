@@ -7,6 +7,7 @@ package frc.robot.MISC;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** Handles all dt related activities */
 public class DeltaAirlines {
@@ -23,7 +24,7 @@ public class DeltaAirlines {
     loopCounter++;
     double time = Timer.getFPGATimestamp();
     dt = (time - lastTime) * 1e3;
-    // SmartDashboard.putNumber("Loop Dt", dt);
+    SmartDashboard.putNumber("Loop Dt", dt);
     lastTime = time;
 
     if (dt > 22) {

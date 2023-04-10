@@ -5,6 +5,7 @@
 package frc.robot.AUTO.Commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 
@@ -25,25 +26,37 @@ public class EtherStraightCommand extends CommandBase {
   public void initialize() {
     train.startDrive();
     train.setEtherAuto(dist, 0, 0);
+    //System.out.println("are you finished in init: " + train.isFinished());
+    //System.out.println("Test dist: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
+    //System.out.println("total dist: " + MkSwerveTrain.getInstance().vars.totalDistance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    train.etherAutoSwerve(FWD, STR, -train.moveToAngy(angle), ControlMode.PercentOutput);
+    SmartDashboard.putNumber("testdist", MkSwerveTrain.getInstance().vars.avgDistTest);
+    SmartDashboard.putNumber("totaldist", MkSwerveTrain.getInstance().vars.totalDistance);
+    train.etherAutoSwerve(FWD, STR, train.moveToAngy(angle)/3, ControlMode.PercentOutput);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // SmartDashboard.putBoolean("FINISHED RAMP", true);
+    //System.out.println(train.isFinished());
+    //MkSwerveTrain.getInstance().etherSwerve(0, 0, 0, ControlMode.PercentOutput);
     train.setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
-    train.setModuleTurn(0, 0, 0, 0);
+    //train.setModuleTurn(0, 0, 0, 0);
+    //train.setEtherAuto(dist, 0, 0);
+    //train.resetRCWFinder();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //System.out.println("mod2test" + MkSwerveTrain.getInstance().vars.mod2Test);
+    //System.out.println("atest" + MkSwerveTrain.getInstance().vars.ATest);
+    //System.out.println("Test dist isfinished: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
+    //System.out.println("total dist isfinished: " + MkSwerveTrain.getInstance().vars.totalDistance);
     return train.isFinished();
   }
 }

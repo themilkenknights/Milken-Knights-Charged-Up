@@ -54,7 +54,7 @@ public class MkSwerveTrain {
 
   private Motor mMotor = Motor.getInstance();
 
-  private ShuffleboardTab mTab = Shuffleboard.getTab("turnPos");
+  private ShuffleboardTab mTab = Shuffleboard.getTab("mkswervetrain");
   
   private GenericEntry tlcoder = mTab.add("tlcoder", 0).withPosition(0,0).getEntry();
   private GenericEntry trcoder = mTab.add("trcoder", 0).withPosition(1,0).getEntry();
@@ -422,18 +422,40 @@ public class MkSwerveTrain {
       vars.mod4[0] = Math.signum(vars.mod4[0]) * vars.autoDist;
     }
 
-    // etherRCWFinder(FWD, -STR, RCW);
+    // etherRCWFinder(FWD, STR, RCW);
     setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
     setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
 
+  public void resetRCWFinder()
+  {
+    vars.ATest = 0;
+    vars.BTest = 0;
+    vars.CTest = 0;
+    vars.DTest = 0;
+
+    vars.mod1Test = 0;
+    vars.mod2Test = 0;
+    vars.mod3Test = 0;
+    vars.mod4Test = 0;
+  }
+
   public void etherRCWFinder(double FWD, double STR, double RCW) {
     vars.dt = DeltaAirlines.getInstance().getDT();
+    if(vars.dt > 21)
+    {
+      vars.dt = 20;
+    }
     vars.yawTest = 0.0;
     vars.tempTest = FWD * Math.cos(Math.toRadians(vars.yawTest)) + STR * Math.sin(Math.toRadians(vars.yawTest));
     STR = -FWD * Math.sin(Math.toRadians(vars.yawTest))
         + STR * Math.cos(Math.toRadians(vars.yawTest));
     FWD = vars.tempTest;
+
+    //System.out.println("FWD" + FWD);
+    //System.out.println("STR" + STR);
+    //System.out.println("RCW" + RCW);
+
 
     // SmartDashboard.putNumber("FWD", FWD);
     // SmartDashboard.putNumber("STR", STR);
@@ -443,10 +465,14 @@ public class MkSwerveTrain {
     vars.CTest = FWD - RCW * (MKTRAIN.W / MKTRAIN.R);
     vars.DTest = FWD + RCW * (MKTRAIN.W / MKTRAIN.R);
 
+    //System.out.println("mod2test1" + vars.mod2Test);
+
     vars.mod2Test = (Math.sqrt((Math.pow(vars.BTest, 2.0)) + (Math.pow(vars.CTest, 2.0))));
     vars.mod1Test = (Math.sqrt((Math.pow(vars.BTest, 2.0)) + (Math.pow(vars.DTest, 2.0))));
     vars.mod3Test = (Math.sqrt((Math.pow(vars.ATest, 2.0)) + (Math.pow(vars.DTest, 2.0))));
     vars.mod4Test = (Math.sqrt((Math.pow(vars.ATest, 2.0)) + (Math.pow(vars.CTest, 2.0))));
+
+    //System.out.println("mod2test2" + vars.mod2Test);
 
     vars.maxTest = vars.mod1Test;
     if (vars.mod2Test > vars.maxTest)
@@ -462,10 +488,14 @@ public class MkSwerveTrain {
       vars.mod4Test /= vars.maxTest;
     }
 
+    //System.out.println("mod2test3" + vars.mod2Test);
+    //System.out.println("dt" + vars.dt);
     vars.mod2Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod2Test, vars.dt);
     vars.mod1Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod1Test, vars.dt);
     vars.mod3Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod3Test, vars.dt);
     vars.mod4Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod4Test, vars.dt);
+    //System.out.println("dt" + vars.dt);
+    //System.out.println("mod2test4" + vars.mod2Test);
 
     vars.avgDistTest = (vars.avgDistTest
         + ((Math.abs(vars.mod1Test)
@@ -476,6 +506,7 @@ public class MkSwerveTrain {
   }
 
   public void etherAutoSwerve(double FWD, double STR, double RCW, ControlMode mode) {
+    etherRCWFinder(FWD, STR, 0);
     vars.temp = FWD * Math.cos(Math.toRadians(vars.yaw)) + STR * Math.sin(Math.toRadians(vars.yaw));
     STR = -FWD * Math.sin(Math.toRadians(vars.yaw)) + STR * Math.cos(Math.toRadians(vars.yaw));
     FWD = vars.temp;
@@ -524,7 +555,7 @@ public class MkSwerveTrain {
     // SmartDashboard.putNumber("d", vars.D);
     // SmartDashboard.putNumber("topdrileftvelo",
     // topDriveLeft.getSelectedSensorVelocity());
-    etherRCWFinder(FWD, STR, -RCW);
+    //SmartDashboard.putNumber("mod1[0]", vars.mod1[0]);
     setModuleDrive(mode, vars.mod2[0], vars.mod1[0], vars.mod4[0], vars.mod3[0]);
     setModuleTurn(vars.mod2[1], vars.mod1[1], vars.mod4[1], vars.mod3[1]);
   }
@@ -604,11 +635,11 @@ public class MkSwerveTrain {
     }
   }
 
-  public void setEtherAuto(double totalDistance, double distanceA, double radius) {
-    vars.autoDist = MathFormulas.inchesToNative(totalDistance);
-    vars.totalDistance = totalDistance;
+  public void setEtherAuto(double Distance, double disteA, double radius) {
+    vars.autoDist = MathFormulas.inchesToNative(Distance);
+    vars.totalDistance = Distance;
     vars.avgDistInches = 0;
-    vars.distanceA = distanceA;
+    vars.distanceA = disteA;
     vars.avgDistTest = 0;
     // SmartDashboard.putNumber("totaldistancccee", vars.totalDistance);
   }
@@ -637,8 +668,8 @@ public class MkSwerveTrain {
     vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180.0))) / 5.0;
     vars.STRauto = (Math.sin(calcangle * (Constants.kPi / 180.0))) / 5.0;
 
-    etherAutoSwerve(vars.FWDauto, -vars.STRauto, vars.RCWtemp / 5.0, ControlMode.PercentOutput);
-    etherRCWFinder(vars.FWDauto, -vars.STRauto, 0.0);
+    etherAutoSwerve(vars.FWDauto, vars.STRauto, vars.RCWtemp / 5.0, ControlMode.PercentOutput);
+    etherRCWFinder(vars.FWDauto, vars.STRauto, 0.0);
     /*
      * SmartDashboard.putNumber(
      * "avgdistsimilarity", vars.avgDistInches - (vars.avgDistTest *
@@ -829,6 +860,7 @@ public class MkSwerveTrain {
     public variables var;
     
     public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
+    // div rcw by 3 public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

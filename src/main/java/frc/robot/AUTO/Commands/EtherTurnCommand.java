@@ -26,7 +26,7 @@ public class EtherTurnCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    train.etherSwerve(0, 0, train.moveToAngy(angle), ControlMode.PercentOutput);
+    train.etherSwerve(0, 0, train.moveToAngy(angle)/3, ControlMode.PercentOutput);
     // SmartDashboard.putNumber("move to angy", train.moveToAngy(angle));
   }
 

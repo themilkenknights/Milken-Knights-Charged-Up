@@ -40,16 +40,17 @@ public class MoveUntilRollChange extends CommandBase {
     roll = pigeon.getInstance().getPigRoll();
     switch (cond) {
       case LESSTHAN:
-        condition = Math.abs(roll) <= thresh;
-        isfinished = Math.abs(roll) > thresh;
+        condition = roll <= thresh;
+        isfinished = roll > thresh;
         break;
       case GREATERTHAN:
-        condition = Math.abs(roll) >= thresh;
-        isfinished = Math.abs(roll) < thresh;
+        condition = roll >= thresh;
+        isfinished = roll < thresh;
     }
     SmartDashboard.putNumber("roll", roll);
+    SmartDashboard.putBoolean("condition", condition);
     if (condition) {
-      MkSwerveTrain.getInstance().etherSwerve(speed, 0, 0, ControlMode.PercentOutput);//MkSwerveTrain.getInstance().moveToAngy(angle),
+      MkSwerveTrain.getInstance().etherSwerve(speed, 0, MkSwerveTrain.getInstance().moveToAngy(angle)/3, ControlMode.PercentOutput);//MkSwerveTrain.getInstance().moveToAngy(angle),
           
     }
     SmartDashboard.putBoolean("isramp auto done: " + thresh, isfinished);

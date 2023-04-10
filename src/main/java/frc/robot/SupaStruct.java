@@ -34,7 +34,9 @@ public class SupaStruct {
       inverseTanAngleDrive,
       povValue,
       pigRotate = 0,
-      lightMode = 0;
+      lightMode = 0,
+      leftYaxis,
+      rightYaxis;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private Odometry odo = Odometry.getInstance();
   private Intake intake = Intake.getInstance();
@@ -68,7 +70,9 @@ public class SupaStruct {
       dpadright,
       toggleLightsPressed = false,
       pov, /* povToggled, */
-      itsreal = false;
+      itsreal = false,
+      intakeBottomDeploy,
+      intakeTopDeploy;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Timer turntesttimer = new Timer();
@@ -152,6 +156,10 @@ public class SupaStruct {
     dpadright2 = xboxOP.getPOV() == 270;
     ltrigger2 = Math.abs(xboxOP.getRawAxis(2)) > 0.1;
     rtrigger2 = Math.abs(xboxOP.getRawAxis(3)) > 0.1;
+    leftYaxis = (xboxOP.getRawAxis(1) - 0.1) / (1 - 0.1);
+    rightYaxis = (xboxOP.getRawAxis(5) - 0.1) / (1 - 0.1);
+    intakeBottomDeploy = leftYaxis > 0.1;
+    intakeTopDeploy = rightYaxis > 0.1;
 
     pov = xbox.getPOV() != -1;
 
@@ -183,13 +191,11 @@ public class SupaStruct {
     } else if (rtrigger && !ltrigger) {
       intake.moveBottomIntakePercentOutput(-xbox.getRightTriggerAxis());
     } else if (abutton && !xbutton) {
-      SmartDashboard.putBoolean("imhere", true);
       intake.moveBottomIntakePID(0);
     } else if (xbutton && !abutton) {
       intake.moveBottomIntakePID(20000);
     } else if (!abutton && !xbutton && !ltrigger && !rtrigger) {
       intake.stopBottomIntakePercentOutput();
-      SmartDashboard.putBoolean("imhere", false);
     }
 
     if (bbutton) {
@@ -197,6 +203,27 @@ public class SupaStruct {
       intake.setBottomRightEncoder(0);
     }
 
+    if (intakeBottomDeploy) {
+      // deploy bottom
+      // rollers bottom
+    } else {
+      // stow bottom
+      // stop rollers bottom
+    }
+
+    if (intakeTopDeploy) {
+      // deploy top
+      // rollers top
+    } else {
+      // stow bottom
+      // stop rollers bottom
+    }
+
+    if (ltrigger2) {
+      // all rollers out one way
+    } else if (rtrigger2) {
+      // all rollers out other way
+    }
 
     // --------------------------------------------------------------------//
     // DRIVE STATEMENTS

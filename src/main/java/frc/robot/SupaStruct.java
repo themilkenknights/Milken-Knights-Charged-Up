@@ -202,12 +202,14 @@ public class SupaStruct {
       intake.stopBottomIntakePercentOutput();
     }
 */
+SmartDashboard.putNumber("bottomintakepos", intake.getBottomLeftPositionNative());
+SmartDashboard.putNumber("TOPINTAKEPOS", intake.getTopLeftPositionNative());
 if(xbutton){
   intake.moveBottomIntakePID(0);
 }else if(xbutton){
-  intake.moveBottomIntakePID(500);
+  intake.moveBottomIntakePID(1000);
 }
-SmartDashboard.putNumber("bottomintakepos", intake.getBottomPositionNative());
+
     if (bbutton) {
       intake.setBottomLeftEncoder(0);
       intake.setBottomRightEncoder(0);

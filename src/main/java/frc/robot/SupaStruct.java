@@ -201,20 +201,22 @@ public class SupaStruct {
     } else if (!abutton && !xbutton && !ltrigger && !rtrigger && resetDoneDiddlyDoneBOTTOM) {
       intake.stopBottomIntakePercentOutput();
     }
+    // SmartDashboard.putNumber("getrightmotoroutput",
+    // armRight.getMotorOutputPercent());
 */
 SmartDashboard.putNumber("bottomintakepos", intake.getBottomLeftPositionNative());
 SmartDashboard.putNumber("TOPINTAKEPOS", intake.getTopLeftPositionNative());
-if(xbutton){
+if(abutton){
   intake.moveBottomIntakePID(0);
 }else if(xbutton){
-  intake.moveBottomIntakePID(1000);
+  intake.moveBottomIntakePID(500);
 }
 
     if (bbutton) {
       intake.setBottomLeftEncoder(0);
       intake.setBottomRightEncoder(0);
     }
-
+/* 
     if (intakeBottomDeploy) {
       // deploy bottom
       // rollers bottom
@@ -236,7 +238,7 @@ if(xbutton){
     } else if (rtrigger2) {
       // all rollers out other way
     }
-
+*/
     // --------------------------------------------------------------------//
     // DRIVE STATEMENTS
     // --------------------------------------------------------------------//

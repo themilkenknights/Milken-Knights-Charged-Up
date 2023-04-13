@@ -227,8 +227,8 @@ public final class Constants {
     public static final boolean bottomLeftInverted = true;
     public static final boolean bottomRightInverted = false;
 
-    public static final double rollerPercentSpeed = .4;
-    public static final double intakePercentSpeed = .4;
+    public static final double rollerPercentSpeed = .7;
+    public static final double intakePercentSpeed = .7;
 
     public static final double greerRatio = 1.0/40.0;
 

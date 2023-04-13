@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.MISC.Motor;
 import frc.robot.MISC.Constants.CANID;
 import frc.robot.MISC.Constants.MKINTAKE;
@@ -74,12 +75,22 @@ public class Intake {
         bottomLeft.set(ControlMode.PercentOutput, setpoint);
         bottomRight.set(ControlMode.PercentOutput, setpoint);
     }
-
     public void moveBottomIntakePID(double setpoint) {
         bottomLeft.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
         bottomRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
     }
 
+    
+/*public void pidArm(double setpoint) {
+    moveArm(
+        -arm.calculate(getArmDegrees(), setpoint)
+            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
+        -arm.calculate(getArmDegrees(), setpoint)
+            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
+  }
+  // SmartDashboard.putNumber("getrightmotoroutput",
+    // armRight.getMotorOutputPercent());
+ */
     public void moveTopIntakePercentOutput(double setpoint) {
         topLeft.set(ControlMode.PercentOutput, setpoint);
         topRight.set(ControlMode.PercentOutput, setpoint);

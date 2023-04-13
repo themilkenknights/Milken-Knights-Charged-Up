@@ -198,7 +198,7 @@ public class SupaStruct {
       intake.moveBottomIntakePID(0);
     } else if (xbutton && !abutton) {
       intake.moveBottomIntakePID(20000);
-    } else if (!abutton && !xbutton && !ltrigger && !rtrigger && resetDoneDiddlyDoneBOTTOM) {
+    } else if (!abutton && !xbutton && !ltrigger && !rtrigger && resetDoneDiddlyDoneBOTTOM) {  //   <--- did it here as well, when everything controlling intake in comment is not active
       intake.stopBottomIntakePercentOutput();
     }
     // SmartDashboard.putNumber("getrightmotoroutput",
@@ -215,6 +215,11 @@ if(abutton){
     if (bbutton) {
       intake.setBottomLeftEncoder(0);
       intake.setBottomRightEncoder(0);
+    }
+
+    if (!xbutton && !abutton && resetDoneDiddlyDoneBOTTOM) // <--- when everything that controls intake is not active
+    {
+      intake.stopBottomIntakePercentOutput(); //  <--- should only have one of these, since multiple would cause it to stop in multiple places (if you want it to stop more than one certain case fine, but idk)
     }
 /* 
     if (intakeBottomDeploy) {

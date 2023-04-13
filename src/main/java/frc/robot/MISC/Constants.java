@@ -222,7 +222,7 @@ public final class Constants {
 
     public static final double[] pidf = { kP, kI, kD, kF };
 
-    public static final boolean topLeftInverted = false;
+    public static final boolean topLeftInverted = true;
     public static final boolean topRightInverted = false;
     public static final boolean bottomLeftInverted = true;
     public static final boolean bottomRightInverted = false;

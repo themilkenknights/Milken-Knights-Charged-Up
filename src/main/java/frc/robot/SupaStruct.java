@@ -72,7 +72,9 @@ public class SupaStruct {
       pov, /* povToggled, */
       itsreal = false,
       intakeBottomDeploy,
-      intakeTopDeploy;
+      intakeTopDeploy,
+      resetDoneDiddlyDoneBOTTOM,
+      resetDoneDiddlyDoneTOP;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Timer turntesttimer = new Timer();
@@ -93,6 +95,8 @@ public class SupaStruct {
   // TODO why this enable april??
 
   public void initTele() {
+    zeroIntake(Side.Top);
+    zeroIntake(Side.Bottom);
     lightMode = 0;
     aprilTimer.start();
     pigRotate = pigeon.getInstance().getPigYaw();
@@ -194,7 +198,7 @@ public class SupaStruct {
       intake.moveBottomIntakePID(0);
     } else if (xbutton && !abutton) {
       intake.moveBottomIntakePID(20000);
-    } else if (!abutton && !xbutton && !ltrigger && !rtrigger) {
+    } else if (!abutton && !xbutton && !ltrigger && !rtrigger && resetDoneDiddlyDoneBOTTOM) {
       intake.stopBottomIntakePercentOutput();
     }
 
@@ -358,6 +362,40 @@ public class SupaStruct {
      * // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
      */
   }
+
+
+
+
+
+
+  public void zeroIntake(Side side) {
+    switch (side) {
+      case Top:
+        if (!resetDoneDiddlyDoneTOP) {
+          intake.moveTopIntakePercentOutput(-0.6);
+          resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();
+          if (resetDoneDiddlyDoneTOP) {
+            intake.stopTopIntakePercentOutput();
+          }
+        }
+        break;
+
+      case Bottom:
+        if (!resetDoneDiddlyDoneBOTTOM) {
+          intake.moveBottomIntakePercentOutput(-0.6);
+          resetDoneDiddlyDoneBOTTOM = intake.getBottomSwitchEnabled();
+          if (resetDoneDiddlyDoneBOTTOM) {
+            intake.stopBottomIntakePercentOutput();
+          }
+        }
+        break;
+    }
+  }
+
+  public enum Side {
+    Top,
+    Bottom
+  };
 
   private static class InstanceHolder {
     private static final SupaStruct mInstance = new SupaStruct();

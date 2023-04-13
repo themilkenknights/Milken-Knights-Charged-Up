@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.MISC.Motor;
@@ -20,6 +21,10 @@ public class Intake {
     private Motor motor = Motor.getInstance();
 
     private PIDController bottomIntake;
+    private PIDController topIntake;
+
+    private DigitalInput bottomSwitch;
+    private DigitalInput topSwitch;
 
     private ShuffleboardTab mTab = Shuffleboard.getTab("intake");
 
@@ -49,9 +54,17 @@ public class Intake {
                 MKINTAKE.bottomLeftInverted, "train");
         bottomRight = motor.motor(CANID.bottomRightIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
                 MKINTAKE.bottomRightInverted, "train");
+        topLeft = motor.motor(CANID.topLeftIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
+                MKINTAKE.topLeftInverted, "train");
+        topRight = motor.motor(CANID.topRightIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
+                MKINTAKE.topRightInverted, "train");
 
         bottomIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
-    }
+        topIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
+
+        bottomSwitch = new DigitalInput(9);
+        topSwitch = new DigitalInput(8);
+    }   
 
     public static Intake getInstance() {
         return InstanceHolder.mInstance;
@@ -67,9 +80,24 @@ public class Intake {
         bottomRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
     }
 
+    public void moveTopIntakePercentOutput(double setpoint) {
+        topLeft.set(ControlMode.PercentOutput, setpoint);
+        topRight.set(ControlMode.PercentOutput, setpoint);
+    }
+
+    public void moveTopIntakePID(double setpoint) {
+        topLeft.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
+        topRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
+    }
+
     public void stopBottomIntakePercentOutput() {
         bottomLeft.set(ControlMode.PercentOutput, 0);
         bottomRight.set(ControlMode.PercentOutput, 0);
+    }
+
+    public void stopTopIntakePercentOutput() {
+        topLeft.set(ControlMode.PercentOutput, 0);
+        topRight.set(ControlMode.PercentOutput, 0);
     }
 
     public double getBottomLeftPositionNative() {
@@ -84,12 +112,40 @@ public class Intake {
         return (getBottomLeftPositionNative() + getBottomRightPositionNative()) / 2;
     }
 
+    public boolean getBottomSwitchEnabled() {
+        return bottomSwitch.get();
+    }
+
+    public double getTopLeftPositionNative() {
+        return topLeft.getSelectedSensorPosition();
+    }
+
+    public double getTopRightPositionNative() {
+        return topRight.getSelectedSensorPosition();
+    }
+
+    public double getTopPositionNative() {
+        return (getTopLeftPositionNative() + getTopRightPositionNative()) / 2;
+    }
+
+    public boolean getTopSwitchEnabled() {
+        return topSwitch.get();
+    }
+
     public void setBottomLeftEncoder(double setpoint) {
         bottomLeft.setSelectedSensorPosition(setpoint);
     }
 
     public void setBottomRightEncoder(double setpoint) {
         bottomRight.setSelectedSensorPosition(setpoint);
+    }
+
+    public void setTopLeftEncoder(double setpoint) {
+        topLeft.setSelectedSensorPosition(setpoint);
+    }
+
+    public void setTopRightEncoder(double setpoint) {
+        topRight.setSelectedSensorPosition(setpoint);
     }
 
     public void updateIntake() {

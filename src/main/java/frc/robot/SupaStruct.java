@@ -372,7 +372,7 @@ public class SupaStruct {
     switch (side) {
       case Top:
         if (!resetDoneDiddlyDoneTOP) {
-          intake.moveTopIntakePercentOutput(-0.6);
+          intake.moveTopIntakePercentOutput(0.6);
           resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();
           if (resetDoneDiddlyDoneTOP) {
             intake.stopTopIntakePercentOutput();
@@ -382,7 +382,7 @@ public class SupaStruct {
 
       case Bottom:
         if (!resetDoneDiddlyDoneBOTTOM) {
-          intake.moveBottomIntakePercentOutput(-0.6);
+          intake.moveBottomIntakePercentOutput(0.6);
           resetDoneDiddlyDoneBOTTOM = intake.getBottomSwitchEnabled();
           if (resetDoneDiddlyDoneBOTTOM) {
             intake.stopBottomIntakePercentOutput();

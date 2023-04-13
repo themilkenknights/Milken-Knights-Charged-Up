@@ -29,15 +29,15 @@ public class Intake {
 
     private ShuffleboardTab mTab = Shuffleboard.getTab("intake");
 
-    private GenericEntry tlIntake = mTab.add("tlIntake", 0).withPosition(0, 0).getEntry();
-    private GenericEntry trIntake = mTab.add("trIntake", 0).withPosition(1, 0).getEntry();
-    private GenericEntry blIntake = mTab.add("blIntake", 0).withPosition(2, 0).getEntry();
-    private GenericEntry brIntake = mTab.add("brIntake", 0).withPosition(3, 0).getEntry();
+    public GenericEntry tlIntake = mTab.add("tlIntake", 0).withPosition(0, 0).getEntry();
+    public GenericEntry trIntake = mTab.add("trIntake", 0).withPosition(1, 0).getEntry();
+    public GenericEntry blIntake = mTab.add("blIntake", 0).withPosition(2, 0).getEntry();
+    public GenericEntry brIntake = mTab.add("brIntake", 0).withPosition(3, 0).getEntry();
 
-    private GenericEntry tloutput = mTab.add("tloutput", 0).withPosition(0, 1).getEntry();
-    private GenericEntry troutput = mTab.add("troutput", 0).withPosition(1, 1).getEntry();
-    private GenericEntry bloutput = mTab.add("bloutput", 0).withPosition(2, 1).getEntry();
-    private GenericEntry broutput = mTab.add("broutput", 0).withPosition(3, 1).getEntry();
+    public GenericEntry tloutput = mTab.add("tloutput", 0).withPosition(0, 1).getEntry();
+    public GenericEntry troutput = mTab.add("troutput", 0).withPosition(1, 1).getEntry();
+    public GenericEntry bloutput = mTab.add("bloutput", 0).withPosition(2, 1).getEntry();
+    public GenericEntry broutput = mTab.add("broutput", 0).withPosition(3, 1).getEntry();
 
     private GenericEntry topPID = mTab.add("topPID", 0).withPosition(1, 2).getEntry();
     private GenericEntry bottomPID = mTab.add("bottomPID", 0).withPosition(2, 2).getEntry();

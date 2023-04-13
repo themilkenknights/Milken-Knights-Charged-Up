@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
@@ -206,6 +207,10 @@ public class SupaStruct {
 */
 SmartDashboard.putNumber("bottomintakepos", intake.getBottomLeftPositionNative());
 SmartDashboard.putNumber("TOPINTAKEPOS", intake.getTopLeftPositionNative());
+
+SmartDashboard.putNumber("bottomIntakeDegrees", MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
+// ^^^^^ for degrees
+
 if(abutton){
   intake.moveBottomIntakePID(0);
 }else if(xbutton){

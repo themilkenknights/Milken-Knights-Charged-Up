@@ -111,7 +111,7 @@ public final class Constants {
   }
 
   public static class PIGEON {
-    public static final double offsetYaw = 0;
+    public static final double offsetYaw = 180;
     public static final double pitchThreshold = 2;
     public static final double rollThreashold = 20;
   }

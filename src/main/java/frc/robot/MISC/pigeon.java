@@ -7,6 +7,7 @@ package frc.robot.MISC;
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import frc.robot.MISC.Constants.CANID;
+import frc.robot.MISC.Constants.PIGEON;
 
 /** pigeon stuff */
 public class pigeon {

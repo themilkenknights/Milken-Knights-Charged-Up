@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AUTO.Commandments.LeftSideAuto;
 import frc.robot.AUTO.Commandments.RampAuto;
 import frc.robot.AUTO.Commandments.TestEther;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -51,14 +52,12 @@ public class Robot extends TimedRobot {
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
-  private UsbCamera intakCamera;
 
   @Override
   public void robotInit() {
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    CameraServer.startAutomaticCapture();
     // Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
@@ -107,7 +106,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = new RampAuto();
         break;
       case MIDDLE:
-        m_autonomousCommand = new TestEther();
+        m_autonomousCommand = new LeftSideAuto();
         break;
     }
 

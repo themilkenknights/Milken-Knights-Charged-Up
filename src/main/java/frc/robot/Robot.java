@@ -125,6 +125,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     Shuffleboard.selectTab("SmartDashboard");
+    
     supaKoopa.initTele();
 
     System.out.println("Robot Teleop Init");
@@ -138,6 +139,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     supaKoopa.updateTele();
+    
   }
 
   @Override

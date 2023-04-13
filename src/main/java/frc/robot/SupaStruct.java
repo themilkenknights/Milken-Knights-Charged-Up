@@ -95,15 +95,15 @@ public class SupaStruct {
   // TODO why this enable april??
 
   public void initTele() {
-    zeroIntake(Side.Top);
-    zeroIntake(Side.Bottom);
+  
     lightMode = 0;
     aprilTimer.start();
     pigRotate = pigeon.getInstance().getPigYaw();
   }
 
   public void updateTele() {
-
+    zeroIntake(Side.Top);
+    zeroIntake(Side.Bottom);
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
@@ -189,11 +189,11 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-
+/* 
     if (ltrigger && !rtrigger) {
-      intake.moveBottomIntakePercentOutput(xbox.getLeftTriggerAxis());
+      intake.moveBottomIntakePercentOutput(-xbox.getLeftTriggerAxis());
     } else if (rtrigger && !ltrigger) {
-      intake.moveBottomIntakePercentOutput(-xbox.getRightTriggerAxis());
+      intake.moveBottomIntakePercentOutput(xbox.getRightTriggerAxis());
     } else if (abutton && !xbutton) {
       intake.moveBottomIntakePID(0);
     } else if (xbutton && !abutton) {
@@ -201,7 +201,13 @@ public class SupaStruct {
     } else if (!abutton && !xbutton && !ltrigger && !rtrigger && resetDoneDiddlyDoneBOTTOM) {
       intake.stopBottomIntakePercentOutput();
     }
-
+*/
+if(xbutton){
+  intake.moveBottomIntakePID(0);
+}else if(xbutton){
+  intake.moveBottomIntakePID(500);
+}
+SmartDashboard.putNumber("bottomintakepos", intake.getBottomPositionNative());
     if (bbutton) {
       intake.setBottomLeftEncoder(0);
       intake.setBottomRightEncoder(0);
@@ -301,7 +307,8 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // SMARTDASHBOARD
     // --------------------------------------------------------------------//
-
+    SmartDashboard.putBoolean("toptriggered", intake.getTopSwitchEnabled());
+    SmartDashboard.putBoolean("bottomtriggered", intake.getBottomSwitchEnabled());
   }
 
   public void teleopDisabled() {
@@ -327,6 +334,7 @@ public class SupaStruct {
      */
     train.startTrain();
     pitcheck.start();
+    
   }
 
   // measured over predicted * predicted
@@ -371,20 +379,25 @@ public class SupaStruct {
   public void zeroIntake(Side side) {
     switch (side) {
       case Top:
+     
         if (!resetDoneDiddlyDoneTOP) {
-          intake.moveTopIntakePercentOutput(0.6);
+          intake.moveTopIntakePercentOutput(0.1);
           resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();
           if (resetDoneDiddlyDoneTOP) {
+            intake.setTopLeftEncoder(0);
+            intake.setTopRightEncoder(0);
             intake.stopTopIntakePercentOutput();
           }
         }
         break;
-
+        
       case Bottom:
         if (!resetDoneDiddlyDoneBOTTOM) {
-          intake.moveBottomIntakePercentOutput(0.6);
+          intake.moveBottomIntakePercentOutput(-0.1);
           resetDoneDiddlyDoneBOTTOM = intake.getBottomSwitchEnabled();
           if (resetDoneDiddlyDoneBOTTOM) {
+            intake.setBottomLeftEncoder(0);
+            intake.setBottomRightEncoder(0);
             intake.stopBottomIntakePercentOutput();
           }
         }

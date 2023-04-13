@@ -51,13 +51,13 @@ public class Intake {
 
     private Intake() {
         bottomLeft = motor.motor(CANID.bottomLeftIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
-                MKINTAKE.bottomLeftInverted, "train");
+                MKINTAKE.bottomLeftInverted, "rio");
         bottomRight = motor.motor(CANID.bottomRightIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
-                MKINTAKE.bottomRightInverted, "train");
+                MKINTAKE.bottomRightInverted, "rio");
         topLeft = motor.motor(CANID.topLeftIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
-                MKINTAKE.topLeftInverted, "train");
+                MKINTAKE.topLeftInverted, "rio");
         topRight = motor.motor(CANID.topRightIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
-                MKINTAKE.topRightInverted, "train");
+                MKINTAKE.topRightInverted, "rio");
 
         bottomIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
         topIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);

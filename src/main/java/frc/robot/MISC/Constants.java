@@ -196,8 +196,8 @@ public final class Constants {
     public static final int bottomTurnRightCANCoderCANID = 16; // 16
 
     // intakes
-    public static final int topLeftIntakeCANID = 999;
-    public static final int topRightIntakeCANID = 999;
+    public static final int topLeftIntakeCANID = 57;
+    public static final int topRightIntakeCANID = 62;
     public static final int bottomLeftIntakeCANID = 60;
     public static final int bottomRightIntakeCANID = 61;
 
@@ -227,10 +227,10 @@ public final class Constants {
     public static final boolean bottomLeftInverted = true;
     public static final boolean bottomRightInverted = false;
 
-    public static final double rollerPercentSpeed = 1;
-    public static final double intakePercentSpeed = 1;
+    public static final double rollerPercentSpeed = .4;
+    public static final double intakePercentSpeed = .4;
 
-    public static final double greerRatio = 40;
+    public static final double greerRatio = 1.0/40.0;
 
     public static final double topOutNative = 69420;
     public static final double bottomOutNative = 69420;

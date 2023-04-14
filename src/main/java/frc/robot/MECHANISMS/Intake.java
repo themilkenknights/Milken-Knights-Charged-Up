@@ -44,7 +44,8 @@ public class Intake {
 
     private TalonFX topLeft;
     private TalonFX topRight;
-
+    private TalonFX toprollers;
+    private TalonFX bottomrollers;
     private TalonFX bottomLeft;
     private TalonFX bottomRight;
     // positive is up, negative is down
@@ -59,7 +60,10 @@ public class Intake {
                 MKINTAKE.topLeftInverted, "rio");
         topRight = motor.motor(CANID.topRightIntakeCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
                 MKINTAKE.topRightInverted, "rio");
-
+        toprollers = motor.motor(CANID.toprollersCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
+                MKINTAKE.topRightInverted, "rio");
+        bottomrollers = motor.motor(CANID.bottomrollersCANID, MKINTAKE.intakeNeutralMode, 0, MKINTAKE.pidf,
+                MKINTAKE.topRightInverted, "rio");
         bottomIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
         topIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
 
@@ -91,11 +95,17 @@ public class Intake {
   // SmartDashboard.putNumber("getrightmotoroutput",
     // armRight.getMotorOutputPercent());
  */
-    public void moveTopIntakePercentOutput(double setpoint) {
-        topLeft.set(ControlMode.PercentOutput, setpoint);
-        topRight.set(ControlMode.PercentOutput, setpoint);
-    }
+public void moveTopIntakePercentOutput(double setpoint) {
+    topLeft.set(ControlMode.PercentOutput, setpoint);
+    topRight.set(ControlMode.PercentOutput, setpoint);
+}
 
+public void movetoprollers (double setpoint) {
+    toprollers.set(ControlMode.PercentOutput, setpoint);
+}
+public void movebottomrollers (double setpoint) {
+    bottomrollers.set(ControlMode.PercentOutput, setpoint);
+}
     public void moveTopIntakePID(double setpoint) {
         topLeft.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
         topRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));

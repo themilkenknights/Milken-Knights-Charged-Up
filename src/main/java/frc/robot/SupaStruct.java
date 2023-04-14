@@ -192,40 +192,45 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-    /*
-     * if (ltrigger && !rtrigger) {
-     * intake.moveBottomIntakePercentOutput(-xbox.getLeftTriggerAxis());
-     * } else if (rtrigger && !ltrigger) {
-     * intake.moveBottomIntakePercentOutput(xbox.getRightTriggerAxis());
-     * } else if (abutton && !xbutton) {
-     * intake.moveBottomIntakePID(0);
-     * } else if (xbutton && !abutton) {
-     * intake.moveBottomIntakePID(20000);
-     * } else if (!abutton && !xbutton && !ltrigger && !rtrigger &&
-     * resetDoneDiddlyDoneBOTTOM) { // <--- did it here as well, when everything
-     * controlling intake in comment is not active
-     * intake.stopBottomIntakePercentOutput();
-     * }
-     * // SmartDashboard.putNumber("getrightmotoroutput",
-     * // armRight.getMotorOutputPercent());
-     */
+    
+      if (ltrigger && !rtrigger) {
+      intake.movetoprollers(.6);
+      } else if (rtrigger && !ltrigger) {
+        intake.movebottomrollers(-.6);
+       }
+        else if (ltrigger && rtrigger){
+          intake.movebottomrollers(0);
+          intake.movetoprollers(0);
+        
+      } else if (abutton && !xbutton) {
+      intake.moveBottomIntakePID(0);
+    } else if (xbutton && !abutton) {
+      intake.moveBottomIntakePID(20000);
+      } else if (!abutton && !xbutton && !ltrigger && !rtrigger && bbutton &&
+      resetDoneDiddlyDoneBOTTOM) { // <--- did it here as well, when everything
+     // controlling intake in comment is not active
+      intake.stopBottomIntakePercentOutput();
+      }
+      // SmartDashboard.putNumber("getrightmotoroutput",
+     // armRight.getMotorOutputPercent());
+     
     SmartDashboard.putNumber("bottomintakepos", intake.getBottomLeftPositionNative());
     SmartDashboard.putNumber("TOPINTAKEPOS", intake.getTopLeftPositionNative());
 
     SmartDashboard.putNumber("bottomIntakeDegrees",
         MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
     // ^^^^^ for degrees
-
+/* 
     if (abutton) {
       intake.moveTopIntakePID(0);
       intake.moveBottomIntakePID(0);
     } else if (xbutton) {
-      intake.moveTopIntakePID(-1500);
+      intake.moveTopIntakePID(1500);
     } else if (bbutton) {
       intake.moveBottomIntakePID(1500);
     }
-
-    if (!xbutton && !abutton && bbutton && resetDoneDiddlyDoneTOP) // <--- when everything that controls intake is not
+*/
+    /*if (!xbutton && !abutton && bbutton && resetDoneDiddlyDoneTOP) // <--- when everything that controls intake is not
                                                                    // active
     {
       intake.stopTopIntakePercentOutput();

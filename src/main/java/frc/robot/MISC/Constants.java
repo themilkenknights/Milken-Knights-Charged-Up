@@ -200,6 +200,9 @@ public final class Constants {
     public static final int topRightIntakeCANID = 62;
     public static final int bottomLeftIntakeCANID = 60;
     public static final int bottomRightIntakeCANID = 61;
+    public static final int toprollersCANID = 59;
+    public static final int bottomrollersCANID = 58;
+
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -230,7 +233,7 @@ public final class Constants {
     public static final double rollerPercentSpeed = .7;
     public static final double intakePercentSpeed = .7;
 
-    public static final double greerRatio = 20.0/ 18.0/ 44.0 /1.0;
+    public static final double greerRatio = 20.0/ 18.0/ 45.0 /1.0;
 
     public static final double topOutNative = 0;
     public static final double bottomOutNative = 0;

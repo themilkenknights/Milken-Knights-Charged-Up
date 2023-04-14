@@ -167,6 +167,7 @@ public class Intake {
         broutput.setDouble(bottomRight.getMotorOutputPercent());
 
         bottomPID.setDouble(bottomIntake.calculate(getBottomPositionNative(), bottomIntake.getSetpoint()));
+        topPID.setDouble(topIntake.calculate(getTopPositionNative(), topIntake.getSetpoint()));
     }
 
     private static class InstanceHolder {

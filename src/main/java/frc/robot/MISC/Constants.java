@@ -230,10 +230,10 @@ public final class Constants {
     public static final double rollerPercentSpeed = .7;
     public static final double intakePercentSpeed = .7;
 
-    public static final double greerRatio = 1.0/40.0;
+    public static final double greerRatio = 20.0/ 18.0/ 44.0 /1.0;
 
-    public static final double topOutNative = 69420;
-    public static final double bottomOutNative = 69420;
+    public static final double topOutNative = 0;
+    public static final double bottomOutNative = 0;
   }
 
   public static class AUTO {

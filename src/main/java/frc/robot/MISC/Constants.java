@@ -203,7 +203,6 @@ public final class Constants {
     public static final int toprollersCANID = 59;
     public static final int bottomrollersCANID = 58;
 
-
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
     public static final int revpdhCANID = 23; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -218,9 +217,9 @@ public final class Constants {
     public static final NeutralMode rollerNeutralMode = NeutralMode.Coast;
     public static final NeutralMode intakeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0.0001;
+    public static final double kP = 0.000001;
     public static final double kI = 0;
-    public static final double kD = 0.00007;
+    public static final double kD = 0.007;
     public static final double kF = 0;
 
     public static final double[] pidf = { kP, kI, kD, kF };
@@ -233,7 +232,7 @@ public final class Constants {
     public static final double rollerPercentSpeed = .7;
     public static final double intakePercentSpeed = .7;
 
-    public static final double greerRatio = 20.0/ 18.0/ 45.0 /1.0;
+    public static final double greerRatio = 20.0 / 18.0 / 45.0 / 1.0;
 
     public static final double topOutNative = 0;
     public static final double bottomOutNative = 0;

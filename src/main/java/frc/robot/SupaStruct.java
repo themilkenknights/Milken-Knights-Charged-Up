@@ -192,53 +192,63 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-    
-      if (ltrigger && !rtrigger) {
-      intake.movetoprollers(.6);
-      } else if (rtrigger && !ltrigger) {
-        intake.movebottomrollers(-.6);
-       }
-        else if (ltrigger && rtrigger){
-          intake.movebottomrollers(0);
-          intake.movetoprollers(0);
-        
-      } else if (abutton && !xbutton) {
-      intake.moveBottomIntakePID(0);
+
+    if (ltrigger && !rtrigger) {
+      intake.movetoprollers(.69);
+    } else if (rtrigger && !ltrigger) {
+      intake.movebottomrollers(.69);
+    } else if (!rbbutton && lbbutton) {
+      intake.movetoprollers(-.69);
+    } else if (rbbutton && !lbbutton) {
+      intake.movebottomrollers(-.69);
+    } else {
+      intake.movebottomrollers(0);
+      intake.movetoprollers(0);
+
+    }
+    if (abutton && !xbutton) {
+      intake.moveTopIntakePID(0);
     } else if (xbutton && !abutton) {
-      intake.moveBottomIntakePID(20000);
-      } else if (!abutton && !xbutton && !ltrigger && !rtrigger && bbutton &&
-      resetDoneDiddlyDoneBOTTOM) { // <--- did it here as well, when everything
-     // controlling intake in comment is not active
+      intake.moveTopIntakePID(-20000);
+    } else if (!abutton && !xbutton && !bbutton &&
+        resetDoneDiddlyDoneBOTTOM && resetDoneDiddlyDoneTOP) { // <--- did it here as well, when everything
+      // controlling intake in comment is not active
       intake.stopBottomIntakePercentOutput();
-      }
-      // SmartDashboard.putNumber("getrightmotoroutput",
-     // armRight.getMotorOutputPercent());
-     
-    SmartDashboard.putNumber("bottomintakepos", intake.getBottomLeftPositionNative());
-    SmartDashboard.putNumber("TOPINTAKEPOS", intake.getTopLeftPositionNative());
+      intake.stopTopIntakePercentOutput();
+    }
+    // SmartDashboard.putNumber("getrightmotoroutput",
+    // armRight.getMotorOutputPercent());
+
+    SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
+    SmartDashboard.putNumber("bottomright", intake.getBottomRightPositionNative());
+    SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
+    SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
 
     SmartDashboard.putNumber("bottomIntakeDegrees",
         MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
     // ^^^^^ for degrees
-/* 
-    if (abutton) {
-      intake.moveTopIntakePID(0);
-      intake.moveBottomIntakePID(0);
-    } else if (xbutton) {
-      intake.moveTopIntakePID(1500);
-    } else if (bbutton) {
-      intake.moveBottomIntakePID(1500);
-    }
-*/
-    /*if (!xbutton && !abutton && bbutton && resetDoneDiddlyDoneTOP) // <--- when everything that controls intake is not
-                                                                   // active
-    {
-      intake.stopTopIntakePercentOutput();
-      intake.stopBottomIntakePercentOutput(); // <--- should only have one of these, since multiple would cause it to
-                                              // stop in multiple places (if you want it to stop more than one certain
-                                              // case fine, but idk)
-    }
     /*
+     * if (abutton) {
+     * intake.moveTopIntakePID(0);
+     * intake.moveBottomIntakePID(0);
+     * } else if (xbutton) {
+     * intake.moveTopIntakePID(1500);
+     * } else if (bbutton) {
+     * intake.moveBottomIntakePID(1500);
+     * }
+     */
+    /*
+     * if (!xbutton && !abutton && bbutton && resetDoneDiddlyDoneTOP) // <--- when
+     * everything that controls intake is not
+     * // active
+     * {
+     * intake.stopTopIntakePercentOutput();
+     * intake.stopBottomIntakePercentOutput(); // <--- should only have one of
+     * these, since multiple would cause it to
+     * // stop in multiple places (if you want it to stop more than one certain
+     * // case fine, but idk)
+     * }
+     * /*
      * if (intakeBottomDeploy) {
      * // deploy bottom
      * // rollers bottom
@@ -402,7 +412,7 @@ public class SupaStruct {
       case Top:
 
         if (!resetDoneDiddlyDoneTOP) {
-          intake.moveTopIntakePercentOutput(0.1);
+          intake.moveTopIntakePercentOutput(0.25);
           resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();
           if (resetDoneDiddlyDoneTOP) {
             intake.setTopLeftEncoder(0);
@@ -414,7 +424,7 @@ public class SupaStruct {
 
       case Bottom:
         if (!resetDoneDiddlyDoneBOTTOM) {
-          intake.moveBottomIntakePercentOutput(-0.1);
+          intake.moveBottomIntakePercentOutput(-0.25);
           resetDoneDiddlyDoneBOTTOM = intake.getBottomSwitchEnabled();
           if (resetDoneDiddlyDoneBOTTOM) {
             intake.setBottomLeftEncoder(0);

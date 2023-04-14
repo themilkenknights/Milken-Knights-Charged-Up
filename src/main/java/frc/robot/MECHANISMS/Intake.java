@@ -66,10 +66,9 @@ public class Intake {
                 MKINTAKE.topRightInverted, "rio");
         bottomIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
         topIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
-
         bottomSwitch = new DigitalInput(9);
         topSwitch = new DigitalInput(8);
-    }   
+    }
 
     public static Intake getInstance() {
         return InstanceHolder.mInstance;
@@ -79,33 +78,36 @@ public class Intake {
         bottomLeft.set(ControlMode.PercentOutput, setpoint);
         bottomRight.set(ControlMode.PercentOutput, setpoint);
     }
+
     public void moveBottomIntakePID(double setpoint) {
         bottomLeft.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
         bottomRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
     }
 
-    
-/*public void pidArm(double setpoint) {
-    moveArm(
-        -arm.calculate(getArmDegrees(), setpoint)
-            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
-        -arm.calculate(getArmDegrees(), setpoint)
-            - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
-  }
-  // SmartDashboard.putNumber("getrightmotoroutput",
-    // armRight.getMotorOutputPercent());
- */
-public void moveTopIntakePercentOutput(double setpoint) {
-    topLeft.set(ControlMode.PercentOutput, setpoint);
-    topRight.set(ControlMode.PercentOutput, setpoint);
-}
+    /*
+     * public void pidArm(double setpoint) {
+     * moveArm(
+     * -arm.calculate(getArmDegrees(), setpoint)
+     * - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)),
+     * -arm.calculate(getArmDegrees(), setpoint)
+     * - (Math.signum(arm.calculate(getArmDegrees(), setpoint)) * armFF(setpoint)));
+     * }
+     * // SmartDashboard.putNumber("getrightmotoroutput",
+     * // armRight.getMotorOutputPercent());
+     */
+    public void moveTopIntakePercentOutput(double setpoint) {
+        topLeft.set(ControlMode.PercentOutput, setpoint);
+        topRight.set(ControlMode.PercentOutput, setpoint);
+    }
 
-public void movetoprollers (double setpoint) {
-    toprollers.set(ControlMode.PercentOutput, setpoint);
-}
-public void movebottomrollers (double setpoint) {
-    bottomrollers.set(ControlMode.PercentOutput, setpoint);
-}
+    public void movetoprollers(double setpoint) {
+        toprollers.set(ControlMode.PercentOutput, setpoint);
+    }
+
+    public void movebottomrollers(double setpoint) {
+        bottomrollers.set(ControlMode.PercentOutput, setpoint);
+    }
+
     public void moveTopIntakePID(double setpoint) {
         topLeft.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
         topRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));

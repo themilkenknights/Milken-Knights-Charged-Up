@@ -116,11 +116,15 @@ public class Intake {
     public void stopBottomIntakePercentOutput() {
         bottomLeft.set(ControlMode.PercentOutput, 0);
         bottomRight.set(ControlMode.PercentOutput, 0);
+        bottomrollers.set(ControlMode.PercentOutput, 0);
+    
     }
 
     public void stopTopIntakePercentOutput() {
         topLeft.set(ControlMode.PercentOutput, 0);
         topRight.set(ControlMode.PercentOutput, 0);
+        toprollers.set(ControlMode.PercentOutput, 0);
+
     }
 
     public double getBottomLeftPositionNative() {

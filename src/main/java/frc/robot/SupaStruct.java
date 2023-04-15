@@ -192,28 +192,31 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
-
-    if (ltrigger && !rtrigger) {
-      intake.movebottomrollers(.9);
-    } else if (rtrigger && !ltrigger) {
-      intake.movetoprollers(.9);
-
-    } else if (!rbbutton && lbbutton) {
-      intake.movebottomrollers(-.9);
-
-    } else if (rbbutton && !lbbutton) {
-      intake.movetoprollers(-.9);
-
-    } else {
-      intake.movebottomrollers(0);
-      intake.movetoprollers(0);
-
-    }
+    /*
+     * if (ltrigger && !rtrigger) {
+     * intake.movetoprollers(.9);
+     * } else if (rtrigger && !ltrigger) {
+     * intake.movebottomrollers(.9);
+     * 
+     * } else if (!rbbutton && lbbutton) {
+     * intake.movebottomrollers(-.9);
+     * 
+     * } else if (rbbutton && !lbbutton) {
+     * intake.movetoprollers(-.9);
+     * 
+     * } else {
+     * intake.movebottomrollers(0);
+     * intake.movetoprollers(0);
+     * 
+     * }
+     */
     if (abutton && !xbutton) {
       intake.moveTopIntakePID(500);
     } else if (xbutton && !abutton) {
       intake.moveTopIntakePID(-36000);
-    } else if (!abutton && !xbutton && resetDoneDiddlyDoneTOP) { // <--- did it here as well, when everything
+      intake.movetoprollers(.9);
+    } else if (!abutton && !xbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneTOP) { // <--- did it here as well,
+                                                                                           // when everything
       // controlling intake in comment is not active
 
       intake.stopTopIntakePercentOutput();
@@ -223,7 +226,9 @@ public class SupaStruct {
       intake.moveBottomIntakePID(-500);
     } else if (bbutton && !abutton) {
       intake.moveBottomIntakePID(36000);
-    } else if (!abutton && !bbutton && resetDoneDiddlyDoneBOTTOM) { // <--- did it here as well, when everything
+      intake.movebottomrollers(.9);
+    } else if (!abutton && !bbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
+                                                                                             //  well, when everything
       // controlling intake in comment is not active
 
       intake.stopBottomIntakePercentOutput();

@@ -81,7 +81,7 @@ public final class Constants {
   public static class MKCANCODER {
     public static final double topLeftOffset = -348.837890625;// 11.865234375 + 180;
     public static final double topRightOffset = -24.345703125;// -25.83984275 + 180;
-    public static final double bottomLeftOffset = -209.091796875;// 153.0175781 - 16 - 180;
+    public static final double bottomLeftOffset = -128.14453125+180;//-209.091796875;// 153.0175781 - 16 - 180;
     public static final double bottomRightOffset = -353.05664062;// 7.294921875 - 180;
 
     public static final double[] offset = {
@@ -192,7 +192,7 @@ public final class Constants {
     // cancoder
     public static final int topTurnLeftCANCoderCANID = 18; // 18
     public static final int topTurnRightCANCoderCANID = 17;
-    public static final int bottomTurnLeftCANCoderCANID = 15;
+    public static final int bottomTurnLeftCANCoderCANID = 15;//BAD
     public static final int bottomTurnRightCANCoderCANID = 16; // 16
 
     // intakes

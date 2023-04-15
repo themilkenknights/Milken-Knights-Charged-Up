@@ -109,8 +109,8 @@ public class Intake {
     }
 
     public void moveTopIntakePID(double setpoint) {
-        topLeft.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
-        topRight.set(ControlMode.PercentOutput, bottomIntake.calculate(getBottomPositionNative(), setpoint));
+        topLeft.set(ControlMode.PercentOutput, topIntake.calculate(getTopPositionNative(), setpoint));
+        topRight.set(ControlMode.PercentOutput, topIntake.calculate(getTopPositionNative(), setpoint));
     }
 
     public void stopBottomIntakePercentOutput() {

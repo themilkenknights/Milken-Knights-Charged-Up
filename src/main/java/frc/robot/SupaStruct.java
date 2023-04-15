@@ -194,30 +194,40 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
 
     if (ltrigger && !rtrigger) {
-      intake.movetoprollers(.69);
+      intake.movebottomrollers(.9);
     } else if (rtrigger && !ltrigger) {
-      intake.movebottomrollers(.69);
+      intake.movetoprollers(.9);
+
     } else if (!rbbutton && lbbutton) {
-      intake.movetoprollers(-.69);
+      intake.movebottomrollers(-.9);
+
     } else if (rbbutton && !lbbutton) {
-      intake.movebottomrollers(-.69);
+      intake.movetoprollers(-.9);
+
     } else {
       intake.movebottomrollers(0);
       intake.movetoprollers(0);
 
     }
     if (abutton && !xbutton) {
-      intake.moveTopIntakePID(0);
+      intake.moveTopIntakePID(500);
     } else if (xbutton && !abutton) {
-      intake.moveTopIntakePID(-20000);
-    } else if (!abutton && !xbutton && !bbutton &&
-        resetDoneDiddlyDoneBOTTOM && resetDoneDiddlyDoneTOP) { // <--- did it here as well, when everything
+      intake.moveTopIntakePID(-36000);
+    } else if (!abutton && !xbutton && resetDoneDiddlyDoneTOP) { // <--- did it here as well, when everything
       // controlling intake in comment is not active
-      intake.stopBottomIntakePercentOutput();
+
       intake.stopTopIntakePercentOutput();
     }
-    // SmartDashboard.putNumber("getrightmotoroutput",
-    // armRight.getMotorOutputPercent());
+
+    if (abutton && !bbutton) {
+      intake.moveBottomIntakePID(-500);
+    } else if (bbutton && !abutton) {
+      intake.moveBottomIntakePID(36000);
+    } else if (!abutton && !bbutton && resetDoneDiddlyDoneBOTTOM) { // <--- did it here as well, when everything
+      // controlling intake in comment is not active
+
+      intake.stopBottomIntakePercentOutput();
+    }
 
     SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
     SmartDashboard.putNumber("bottomright", intake.getBottomRightPositionNative());

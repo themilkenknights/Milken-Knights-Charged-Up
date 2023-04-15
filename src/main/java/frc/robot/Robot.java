@@ -82,20 +82,9 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
-    // SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
-    if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
-      SmartDashboard.putBoolean("Enable Compressor Analog", false);
-      double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
-      double maxPressure = SmartDashboard.getNumber("Maximum Pressure (PSI)", 120.0);
-      m_ph.enableCompressorAnalog(minPressure, maxPressure);
-    }
-    if (SmartDashboard.getBoolean("Disable Compressor", false)) {
-      SmartDashboard.putBoolean("Disable Compressor", false);
-      m_ph.disableCompressor();
       CommandScheduler.getInstance().run();
     }
-  }
+  
 
   @Override
   public void autonomousInit() {

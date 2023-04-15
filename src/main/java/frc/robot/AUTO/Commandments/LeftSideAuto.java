@@ -4,8 +4,10 @@
 
 package frc.robot.AUTO.Commandments;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.EtherStraightCommand;
+import frc.robot.AUTO.Commands.TopIntakeCOMMAND;
 import frc.robot.AUTO.Commands.BottomIntakeCOMMAND;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,7 +18,12 @@ public class LeftSideAuto extends SequentialCommandGroup {
   public LeftSideAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new EtherStraightCommand(170, -0.4, 0, 180),
-    new BottomIntakeCOMMAND(0, 20000).withTimeout(3));
+    addCommands(
+        Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(360, -0.7, 0, 0), new TopIntakeCOMMAND(.8, -39000).withTimeout(6)),
+        Commands.deadline(new TopIntakeCOMMAND(.8, -39000).withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(325, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
+        Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(2), new TopIntakeCOMMAND(.8, 0).withTimeout(2)),
+        Commands.deadline(new EtherStraightCommand(250, -0.6, -.1, 0)));
   }
 }

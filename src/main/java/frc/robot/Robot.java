@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AUTO.Commandments.BumpSide;
 import frc.robot.AUTO.Commandments.LeftSideAuto;
 import frc.robot.AUTO.Commandments.RampAuto;
 import frc.robot.AUTO.Commandments.TestEther;
@@ -58,6 +59,7 @@ public class Robot extends TimedRobot {
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
+    positionChooser.addOption("BUMO", AutoPosition.BUMP);
     // Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
@@ -93,8 +95,11 @@ public class Robot extends TimedRobot {
       case MIDDLE:
         m_autonomousCommand = new RampAuto();
         break;
-      case LEFTSIDEDOUBLE:
+        case LEFTSIDEDOUBLE:
         m_autonomousCommand = new LeftSideAuto();
+        break;
+        case BUMP:
+        m_autonomousCommand = new BumpSide();
         break;
     }
 
@@ -156,6 +161,7 @@ public class Robot extends TimedRobot {
     LEFTSIDEDOUBLE,
     RIGHTSIDEDOUBLE,
     RAMPAUTO,
-    MIDDLE
+    MIDDLE,
+    BUMP
   }
 }

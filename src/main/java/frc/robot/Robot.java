@@ -80,7 +80,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
       CommandScheduler.getInstance().run();
     }
@@ -91,10 +90,10 @@ public class Robot extends TimedRobot {
     System.out.println("i am auito  initialzies");
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
-      case LEFTSIDEDOUBLE:
+      case MIDDLE:
         m_autonomousCommand = new RampAuto();
         break;
-      case MIDDLE:
+      case LEFTSIDEDOUBLE:
         m_autonomousCommand = new LeftSideAuto();
         break;
     }

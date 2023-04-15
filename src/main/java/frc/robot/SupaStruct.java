@@ -90,9 +90,6 @@ public class SupaStruct {
     return InstanceHolder.mInstance;
   }
 
-  public boolean getAprilEnabled() {
-    return rbbutton;
-  }
   // TODO why this enable april??
 
   public void initTele() {
@@ -210,28 +207,49 @@ public class SupaStruct {
      * 
      * }
      */
-    if (abutton && !xbutton) {
-      intake.moveTopIntakePID(500);
-    } else if (xbutton && !abutton) {
-      intake.moveTopIntakePID(-36000);
+    if (rtrigger) {
+      intake.movetoprollers(-.9);
+      intake.movebottomrollers(.9);
+    } else if (ltrigger) {
+      intake.movebottomrollers(-.9);
       intake.movetoprollers(.9);
-    } else if (!abutton && !xbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneTOP) { // <--- did it here as well,
-                                                                                           // when everything
+    } else {
+      intake.movebottomrollers(0);
+      intake.movetoprollers(0);
+    }
+
+    if (abutton && !rbbutton) {
+      intake.moveTopIntakePID(0);
+    } else if (rbbutton && !abutton) {
+      intake.moveTopIntakePID(-38000);
+      intake.movetoprollers(.9);
+    } else if (!abutton && !rbbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneTOP) { // <--- did it here as well,
+                                                                                            // when everything
       // controlling intake in comment is not active
 
       intake.stopTopIntakePercentOutput();
+
     }
 
-    if (abutton && !bbutton) {
-      intake.moveBottomIntakePID(-500);
-    } else if (bbutton && !abutton) {
-      intake.moveBottomIntakePID(36000);
+    if (xbutton) {
+      resetDoneDiddlyDoneBOTTOM = false;
+      resetDoneDiddlyDoneTOP = false;
+      zeroIntake(Side.Top);
+      zeroIntake(Side.Bottom);
+    }
+
+    if (abutton && !lbbutton) {
+      intake.moveBottomIntakePID(-0);
+    } else if (lbbutton && !abutton) {
+      intake.moveBottomIntakePID(38000);
+
       intake.movebottomrollers(.9);
-    } else if (!abutton && !bbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
-                                                                                             //  well, when everything
+    } else if (!abutton && !lbbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
+                                                                                               // well, when everything
       // controlling intake in comment is not active
 
       intake.stopBottomIntakePercentOutput();
+
     }
 
     SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
@@ -324,7 +342,7 @@ public class SupaStruct {
      * if (xbutton) {
      * april.alignToTag();
      * }
-     */ if (rbbutton) {
+     */ if (xbox.getRawButton(8)) {
       // Ramp.getInstance().rampMove(0);
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
       train.etherSwerve(fwd, str, rcw, ControlMode.PercentOutput); // +,-,+

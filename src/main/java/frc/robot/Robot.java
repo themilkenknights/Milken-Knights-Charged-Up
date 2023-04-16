@@ -101,6 +101,7 @@ public class Robot extends TimedRobot {
         case BUMP:
         m_autonomousCommand = new BumpSide();
         break;
+
     }
 
     train.startTrain();
@@ -165,3 +166,12 @@ public class Robot extends TimedRobot {
     BUMP
   }
 }
+/*
+ *  resetDoneDiddlyDoneTOP = false;
+    resetDoneDiddlyDoneBOTTOM = false;
+  }
+
+  public void updateTele() {
+    zeroIntake(Side.Top);
+    zeroIntake(Side.Bottom);
+ */

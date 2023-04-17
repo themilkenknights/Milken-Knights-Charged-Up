@@ -20,10 +20,10 @@ public class LeftSideAuto extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(360, -0.7, 0, 0), new TopIntakeCOMMAND(.8, -39000).withTimeout(6)),
+        Commands.deadline(new EtherStraightCommand(358, -0.7, 0, 0), new TopIntakeCOMMAND(.8, -39000).withTimeout(6)),
         Commands.deadline(new TopIntakeCOMMAND(.8, -39000).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(325, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
+        Commands.deadline(new EtherStraightCommand(327, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
         Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(2), new TopIntakeCOMMAND(.8, 0).withTimeout(2)),
-        Commands.deadline(new EtherStraightCommand(250, -0.6, -.1, 0)));
+        Commands.deadline(new EtherStraightCommand(3, -0.6, -.1, 0)));
   }
 }

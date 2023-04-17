@@ -57,8 +57,6 @@ public class Lights {
     }
   }
 
-  
-
   public void CUBE() {
     // For every pixel
     for (var i = 0; i < LIGHTS.bufferNum; i++) {
@@ -73,6 +71,7 @@ public class Lights {
       }
     }
   }
+
   public void GROUND() {
     // For every pixel
     for (var i = 0; i < LIGHTS.bufferNum; i++) {

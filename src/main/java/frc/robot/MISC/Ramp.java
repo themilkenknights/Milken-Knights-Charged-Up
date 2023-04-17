@@ -28,14 +28,14 @@ public class Ramp {
     double pid = rampPID.calculate(pitch, 0);
     SmartDashboard.putNumber("pitch", pitch);
     SmartDashboard.putNumber("pid", pid);
-    MkSwerveTrain.getInstance().etherSwerve(MathFormulas.limit(pid, -0.5, 0.5), 0,0, ControlMode.PercentOutput);
+    MkSwerveTrain.getInstance()
+        .etherSwerve(MathFormulas.limit(pid, -0.5, 0.5), 0, 0, ControlMode.PercentOutput);
     if (Math.abs(pitch) < MKRAMP.threshold) {
       // TODO see if this good
       MkSwerveTrain.getInstance().setModuleTurn(0, 0, 0, 0);
     }
   }
 
-  
   // Returns true when the command should end.
 
   public boolean isFinished() {

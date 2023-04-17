@@ -5,7 +5,6 @@
 package frc.robot.AUTO.Commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -14,6 +13,7 @@ import frc.robot.MISC.pigeon;
 public class MoveUntilRollChange extends CommandBase {
   /** Creates a new MoveUntilRollChange. */
   private double roll;
+
   private double thresh;
   private double speed;
   private double angle;
@@ -31,8 +31,7 @@ public class MoveUntilRollChange extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -50,8 +49,12 @@ public class MoveUntilRollChange extends CommandBase {
     SmartDashboard.putNumber("roll", roll);
     SmartDashboard.putBoolean("condition", condition);
     if (condition) {
-      MkSwerveTrain.getInstance().etherSwerve(speed, 0, MkSwerveTrain.getInstance().moveToAngy(angle)/3, ControlMode.PercentOutput);//MkSwerveTrain.getInstance().moveToAngy(angle),
-          
+      MkSwerveTrain.getInstance()
+          .etherSwerve(
+              speed,
+              0,
+              MkSwerveTrain.getInstance().moveToAngy(angle) / 3,
+              ControlMode.PercentOutput); // MkSwerveTrain.getInstance().moveToAngy(angle),
     }
     SmartDashboard.putBoolean("isramp auto done: " + thresh, isfinished);
   }

@@ -17,8 +17,6 @@ public class TestEther extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new EtherTurnCommand(180).withTimeout(2.5),
-      new EtherStraightCommand(100, 0.4, 0, 270)
-    );
+        new EtherTurnCommand(180).withTimeout(2.5), new EtherStraightCommand(100, 0.4, 0, 270));
   }
 }

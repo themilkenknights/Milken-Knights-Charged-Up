@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
-import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
+import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.Odometry;
@@ -167,10 +167,11 @@ public class SupaStruct {
 
     pov = xbox.getPOV() != -1;
 
-    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-        - MathFormulas.signumAngleEdition(str, fwd))
-        + 360)
-        % 360;
+    inverseTanAngleDrive =
+        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+                    - MathFormulas.signumAngleEdition(str, fwd))
+                + 360)
+            % 360;
 
     // --------------------------------------------------------------------//
     // PIGEON RESET
@@ -194,17 +195,17 @@ public class SupaStruct {
      * intake.movetoprollers(.9);
      * } else if (rtrigger && !ltrigger) {
      * intake.movebottomrollers(.9);
-     * 
+     *
      * } else if (!rbbutton && lbbutton) {
      * intake.movebottomrollers(-.9);
-     * 
+     *
      * } else if (rbbutton && !lbbutton) {
      * intake.movetoprollers(-.9);
-     * 
+     *
      * } else {
      * intake.movebottomrollers(0);
      * intake.movetoprollers(0);
-     * 
+     *
      * }
      */
     if (rtrigger) {
@@ -223,12 +224,15 @@ public class SupaStruct {
     } else if (rbbutton && !abutton) {
       intake.moveTopIntakePID(-38000);
       intake.movetoprollers(.9);
-    } else if (!abutton && !rbbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneTOP) { // <--- did it here as well,
-                                                                                            // when everything
+    } else if (!abutton
+        && !rbbutton
+        && !rtrigger
+        && !ltrigger
+        && resetDoneDiddlyDoneTOP) { // <--- did it here as well,
+      // when everything
       // controlling intake in comment is not active
 
       intake.stopTopIntakePercentOutput();
-
     }
 
     if (xbutton) {
@@ -244,12 +248,15 @@ public class SupaStruct {
       intake.moveBottomIntakePID(38000);
 
       intake.movebottomrollers(.9);
-    } else if (!abutton && !lbbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
-                                                                                               // well, when everything
+    } else if (!abutton
+        && !lbbutton
+        && !rtrigger
+        && !ltrigger
+        && resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
+      // well, when everything
       // controlling intake in comment is not active
 
       intake.stopBottomIntakePercentOutput();
-
     }
 
     SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
@@ -257,7 +264,8 @@ public class SupaStruct {
     SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
     SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
 
-    SmartDashboard.putNumber("bottomIntakeDegrees",
+    SmartDashboard.putNumber(
+        "bottomIntakeDegrees",
         MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
     // ^^^^^ for degrees
     /*
@@ -289,7 +297,7 @@ public class SupaStruct {
      * // stow bottom
      * // stop rollers bottom
      * }
-     * 
+     *
      * if (intakeTopDeploy) {
      * // deploy top
      * // rollers top
@@ -297,7 +305,7 @@ public class SupaStruct {
      * // stow bottom
      * // stop rollers bottom
      * }
-     * 
+     *
      * if (ltrigger2) {
      * // all rollers out one way
      * } else if (rtrigger2) {
@@ -403,7 +411,6 @@ public class SupaStruct {
      */
     train.startTrain();
     pitcheck.start();
-
   }
 
   // measured over predicted * predicted
@@ -425,14 +432,14 @@ public class SupaStruct {
      * rcw = 0.5;
      * count++;
      * }
-     * 
+     *
      * if (fwd == 0.3 || rcw == 0.5) {
      * train.etherSwerve(fwd, 0, rcw / 2, ControlMode.PercentOutput);
      * train.etherRCWFinder(fwd, 0, 0);
      * } else {
      * train.stopEverything();
      * }
-     * 
+     *
      * // SmartDashboard.putNumber("count", count);
      * // SmartDashboard.putNumber(
      * // "meastopredictratio", train.vars.avgDistInches / train.vars.avgDistTest);
@@ -443,7 +450,6 @@ public class SupaStruct {
   public void zeroIntake(Side side) {
     switch (side) {
       case Top:
-
         if (!resetDoneDiddlyDoneTOP) {
           intake.moveTopIntakePercentOutput(0.25);
           resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();

@@ -10,6 +10,7 @@ import frc.robot.MECHANISMS.Intake;
 public class TopIntakeCOMMAND extends CommandBase {
   /** Creates a new IntakeCommand. */
   private double intakeState;
+
   private double rollerSpeed;
   private Intake intake = Intake.getInstance();
 
@@ -21,8 +22,7 @@ public class TopIntakeCOMMAND extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

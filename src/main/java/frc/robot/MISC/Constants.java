@@ -18,7 +18,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
   public static final double kPi = 3.14159265359;
-  public static final double[] nullPID = { 0, 0, 0, 0 };
+  public static final double[] nullPID = {0, 0, 0, 0};
 
   // --------------------------------------------------------------------//
   // DRIVETRAIN
@@ -44,7 +44,7 @@ public final class Constants {
     public static final double kD = 0 * kP;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final NeutralMode mode = NeutralMode.Brake;
 
@@ -60,13 +60,13 @@ public final class Constants {
 
   public static class MKTURN {
     public static final double kP = 0.3;
-    public static final double kI = 0;// 0.0003;
+    public static final double kI = 0; // 0.0003;
     // TODO test i in motion magic and pid for both auto and teleop, see if it
     // really is this
     public static final double kD = 0.0000000;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     // TODO jack u want this?
     public static final NeutralMode mode = NeutralMode.Brake;
@@ -79,16 +79,17 @@ public final class Constants {
   }
 
   public static class MKCANCODER {
-    public static final double topLeftOffset = -348.837890625;// 11.865234375 + 180;
-    public static final double topRightOffset = -24.345703125;// -25.83984275 + 180;
-    public static final double bottomLeftOffset = -128.14453125+180;//-209.091796875;// 153.0175781 - 16 - 180;
-    public static final double bottomRightOffset = -353.05664062;// 7.294921875 - 180;
+    public static final double topLeftOffset = -348.837890625; // 11.865234375 + 180;
+    public static final double topRightOffset = -24.345703125; // -25.83984275 + 180;
+    public static final double bottomLeftOffset =
+        -128.14453125 + 180; // -209.091796875;// 153.0175781 - 16 - 180;
+    public static final double bottomRightOffset = -353.05664062; // 7.294921875 - 180;
 
     public static final double[] offset = {
-        MKCANCODER.topLeftOffset,
-        MKCANCODER.topRightOffset,
-        MKCANCODER.bottomLeftOffset,
-        MKCANCODER.bottomRightOffset
+      MKCANCODER.topLeftOffset,
+      MKCANCODER.topRightOffset,
+      MKCANCODER.bottomLeftOffset,
+      MKCANCODER.bottomRightOffset
     };
 
     public static final AbsoluteSensorRange range = AbsoluteSensorRange.Unsigned_0_to_360;
@@ -133,11 +134,12 @@ public final class Constants {
     public static final double ykP = 0.05;
     public static final double ykI = 0;
     public static final double ykD = 0;
-    public static final Transform3d robotToCam = new Transform3d(
-        new Translation3d(Units.inchesToMeters(-8), 0, Units.inchesToMeters(32)),
-        new Rotation3d(
-            0, 0,
-            0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+    public static final Transform3d robotToCam =
+        new Transform3d(
+            new Translation3d(Units.inchesToMeters(-8), 0, Units.inchesToMeters(32)),
+            new Rotation3d(
+                0, 0,
+                0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
     // from center.
     public static final String cameraName = "ShoutOutToMyStove";
   }
@@ -192,7 +194,7 @@ public final class Constants {
     // cancoder
     public static final int topTurnLeftCANCoderCANID = 18; // 18
     public static final int topTurnRightCANCoderCANID = 17;
-    public static final int bottomTurnLeftCANCoderCANID = 15;//BAD
+    public static final int bottomTurnLeftCANCoderCANID = 15; // BAD
     public static final int bottomTurnRightCANCoderCANID = 16; // 16
 
     // intakes
@@ -204,7 +206,7 @@ public final class Constants {
     public static final int bottomrollersCANID = 58;
 
     // revh ph
-    public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
+
     public static final int revpdhCANID = 23; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
 
     public static final int pigeonCANID = 30;
@@ -222,7 +224,7 @@ public final class Constants {
     public static final double kD = 0.0000;
     public static final double kF = 0;
 
-    public static final double[] pidf = { kP, kI, kD, kF };
+    public static final double[] pidf = {kP, kI, kD, kF};
 
     public static final boolean topLeftInverted = true;
     public static final boolean topRightInverted = false;
@@ -283,11 +285,12 @@ public final class Constants {
     public static final double heightMeters = MathFormulas.inchesToMeters(MKTRAIN.heightInches / 2);
     public static final double widthMeters = MathFormulas.inchesToMeters(MKTRAIN.widthInches / 2);
 
-    public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-        new Translation2d(heightMeters, widthMeters),
-        new Translation2d(heightMeters, -widthMeters),
-        new Translation2d(-heightMeters, widthMeters),
-        new Translation2d(-heightMeters, -widthMeters));
+    public static final SwerveDriveKinematics kDriveKinematics =
+        new SwerveDriveKinematics(
+            new Translation2d(heightMeters, widthMeters),
+            new Translation2d(heightMeters, -widthMeters),
+            new Translation2d(-heightMeters, widthMeters),
+            new Translation2d(-heightMeters, -widthMeters));
 
     // actual drive module stats
     public static final double maxModuleTurnVelo = kPi;
@@ -307,8 +310,8 @@ public final class Constants {
 
     public static final double maxDriveVelo = 1;
 
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
-        maxAutoTurnVelo, maxAutoTurnAccel);
+    public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
+        new TrapezoidProfile.Constraints(maxAutoTurnVelo, maxAutoTurnAccel);
   }
 
   // --------------------------------------------------------------------//

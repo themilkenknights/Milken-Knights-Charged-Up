@@ -41,22 +41,21 @@ public class PhotonCameraWrapper {
 
   public PhotonCameraWrapper() throws IOException {
     photonCamera = new PhotonCamera(Constants.MKAPRIL.cameraName);
-    final AprilTagFieldLayout apriltagfieldlayout = AprilTagFieldLayout
-        .loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
+    final AprilTagFieldLayout apriltagfieldlayout =
+        AprilTagFieldLayout.loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
     // Create pose estimator
-    photonPoseEstimator = new PhotonPoseEstimator(
-        apriltagfieldlayout,
-        PoseStrategy.CLOSEST_TO_REFERENCE_POSE,
-        photonCamera,
-        Constants.MKAPRIL.robotToCam);
+    photonPoseEstimator =
+        new PhotonPoseEstimator(
+            apriltagfieldlayout,
+            PoseStrategy.CLOSEST_TO_REFERENCE_POSE,
+            photonCamera,
+            Constants.MKAPRIL.robotToCam);
   }
 
   /**
    * @param estimatedRobotPose The current best guess at robot pose
-   * @return A pair of the fused camera observations to a single Pose2d on the
-   *         field, and the time
-   *         of the observation. Assumes a planar field and the robot is always
-   *         firmly on the ground
+   * @return A pair of the fused camera observations to a single Pose2d on the field, and the time
+   *     of the observation. Assumes a planar field and the robot is always firmly on the ground
    */
   public Optional<EstimatedRobotPose> getEstimatedGlobalPose(Pose2d prevEstimatedRobotPose) {
     photonPoseEstimator.setReferencePose(prevEstimatedRobotPose);

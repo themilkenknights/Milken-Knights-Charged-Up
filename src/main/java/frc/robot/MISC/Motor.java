@@ -13,8 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.MISC.Constants.MKCANCODER;
 import frc.robot.MISC.Constants.MKDRIVE;
 import frc.robot.MISC.Constants.MKFALCON;
@@ -23,8 +21,7 @@ import frc.robot.MISC.Constants.MKTURN;
 /** Add your docs here. */
 public class Motor {
 
-  private Motor() {
-  }
+  private Motor() {}
 
   public static Motor getInstance() {
     return InstanceHolder.mInstance;
@@ -80,7 +77,8 @@ public class Motor {
     return drive;
   }
 
-  public TalonFX motor(int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted, String canbus) {
+  public TalonFX motor(
+      int canid, NeutralMode mode, int pidslot, double[] pidf, boolean inverted, String canbus) {
     TalonFX motor = new TalonFX(canid, canbus);
     motor.configFactoryDefault();
     motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -112,15 +110,6 @@ public class Motor {
 
     return encoder;
   }
-
-  public CANSparkMax Sparky(int canid, CANSparkMax.IdleMode Mode) {
-    CANSparkMax sparky = new CANSparkMax(canid, MotorType.kBrushless);
-    sparky.restoreFactoryDefaults();
-    sparky.setIdleMode(Mode);
-    sparky.setSmartCurrentLimit(20, 60, 5700);
-    sparky.enableVoltageCompensation(11);
-    return sparky;
-  };
 
   private static class InstanceHolder {
     private static final Motor mInstance = new Motor();

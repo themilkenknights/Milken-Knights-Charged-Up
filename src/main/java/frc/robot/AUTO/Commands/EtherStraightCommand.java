@@ -26,9 +26,9 @@ public class EtherStraightCommand extends CommandBase {
   public void initialize() {
     train.startDrive();
     train.setEtherAuto(dist, 0, 0);
-    //System.out.println("are you finished in init: " + train.isFinished());
-    //System.out.println("Test dist: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
-    //System.out.println("total dist: " + MkSwerveTrain.getInstance().vars.totalDistance);
+    // System.out.println("are you finished in init: " + train.isFinished());
+    // System.out.println("Test dist: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
+    // System.out.println("total dist: " + MkSwerveTrain.getInstance().vars.totalDistance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,27 +36,28 @@ public class EtherStraightCommand extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("testdist", MkSwerveTrain.getInstance().vars.avgDistTest);
     SmartDashboard.putNumber("totaldist", MkSwerveTrain.getInstance().vars.totalDistance);
-    train.etherAutoSwerve(FWD, STR, train.moveToAngy(angle)/3, ControlMode.PercentOutput);
+    train.etherAutoSwerve(FWD, STR, train.moveToAngy(angle) / 3, ControlMode.PercentOutput);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //System.out.println(train.isFinished());
-    //MkSwerveTrain.getInstance().etherSwerve(0, 0, 0, ControlMode.PercentOutput);
+    // System.out.println(train.isFinished());
+    // MkSwerveTrain.getInstance().etherSwerve(0, 0, 0, ControlMode.PercentOutput);
     train.setModuleDrive(ControlMode.PercentOutput, 0, 0, 0, 0);
-    //train.setModuleTurn(0, 0, 0, 0);
-    //train.setEtherAuto(dist, 0, 0);
-    //train.resetRCWFinder();
+    // train.setModuleTurn(0, 0, 0, 0);
+    // train.setEtherAuto(dist, 0, 0);
+    // train.resetRCWFinder();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //System.out.println("mod2test" + MkSwerveTrain.getInstance().vars.mod2Test);
-    //System.out.println("atest" + MkSwerveTrain.getInstance().vars.ATest);
-    //System.out.println("Test dist isfinished: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
-    //System.out.println("total dist isfinished: " + MkSwerveTrain.getInstance().vars.totalDistance);
+    // System.out.println("mod2test" + MkSwerveTrain.getInstance().vars.mod2Test);
+    // System.out.println("atest" + MkSwerveTrain.getInstance().vars.ATest);
+    // System.out.println("Test dist isfinished: " +  MkSwerveTrain.getInstance().vars.avgDistTest);
+    // System.out.println("total dist isfinished: " +
+    // MkSwerveTrain.getInstance().vars.totalDistance);
     return train.isFinished();
   }
 }

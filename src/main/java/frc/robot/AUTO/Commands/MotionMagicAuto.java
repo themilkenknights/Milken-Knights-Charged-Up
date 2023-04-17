@@ -5,7 +5,6 @@
 package frc.robot.AUTO.Commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -46,7 +45,7 @@ public class MotionMagicAuto extends CommandBase {
   @Override
   public boolean isFinished() {
     // SmartDashboard.putBoolean("isfinished",
-      // MkSwerveTrain.getInstance().isMotionMagicDone());
+    // MkSwerveTrain.getInstance().isMotionMagicDone());
     return train.isMotionMagicDone();
   }
 }

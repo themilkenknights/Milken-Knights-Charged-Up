@@ -17,7 +17,8 @@ public class EtherAutoCommand extends CommandBase {
   private double side;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
 
-  public EtherAutoCommand(double distanceA, double lengthB, double dist, double ang, double heading, double side) {
+  public EtherAutoCommand(
+      double distanceA, double lengthB, double dist, double ang, double heading, double side) {
     this.totalDistance = dist;
     this.thetaTurn = ang;
     this.distanceA = distanceA;

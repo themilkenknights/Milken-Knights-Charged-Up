@@ -5,52 +5,41 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.BumpSide;
 import frc.robot.AUTO.Commandments.LeftSideAuto;
 import frc.robot.AUTO.Commandments.RampAuto;
-import frc.robot.AUTO.Commandments.TestEther;
 import frc.robot.MECHANISMS.MkSwerveTrain;
-import frc.robot.MISC.Constants.CANID;
-import frc.robot.MISC.Odometry;
 import frc.robot.MISC.pigeon;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the
- * name of this class or
- * the package after creating this project, you must also update the
- * build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
   /**
-   * This function is run when the robot is first started up and should be used
-   * for any
+   * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   private Command m_autonomousCommand;
 
   private SendableChooser<AutoPosition> positionChooser = new SendableChooser<>();
   private ShuffleboardTab mTab = Shuffleboard.getTab("Match");
-  private ComplexWidget positionChooserTab = mTab.add("Auto Chooser", positionChooser)
-      .withWidget(BuiltInWidgets.kSplitButtonChooser);
-  PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
+  private ComplexWidget positionChooserTab =
+      mTab.add("Auto Chooser", positionChooser).withWidget(BuiltInWidgets.kSplitButtonChooser);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
 
@@ -60,6 +49,9 @@ public class Robot extends TimedRobot {
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     positionChooser.addOption("BUMO", AutoPosition.BUMP);
+    CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
+
     // Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
@@ -83,9 +75,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-      CommandScheduler.getInstance().run();
-    }
-  
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void autonomousInit() {
@@ -95,10 +86,10 @@ public class Robot extends TimedRobot {
       case MIDDLE:
         m_autonomousCommand = new RampAuto();
         break;
-        case LEFTSIDEDOUBLE:
+      case LEFTSIDEDOUBLE:
         m_autonomousCommand = new LeftSideAuto();
         break;
-        case BUMP:
+      case BUMP:
         m_autonomousCommand = new BumpSide();
         break;
     }
@@ -118,7 +109,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     Shuffleboard.selectTab("SmartDashboard");
-    
+
     supaKoopa.initTele();
 
     System.out.println("Robot Teleop Init");
@@ -132,7 +123,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     supaKoopa.updateTele();
-    
   }
 
   @Override
@@ -143,8 +133,7 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {
-  }
+  public void disabledPeriodic() {}
 
   @Override
   public void testInit() {

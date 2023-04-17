@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CAMERA.AprilTags;
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
@@ -72,7 +73,9 @@ public class SupaStruct {
       pov, /* povToggled, */
       itsreal = false,
       intakeBottomDeploy,
-      intakeTopDeploy;
+      intakeTopDeploy,
+      resetDoneDiddlyDoneBOTTOM,
+      resetDoneDiddlyDoneTOP;
   private boolean isRCWrunningWithpig = false;
   private AprilTags april = AprilTags.getInstance();
   private Timer turntesttimer = new Timer();
@@ -87,19 +90,20 @@ public class SupaStruct {
     return InstanceHolder.mInstance;
   }
 
-  public boolean getAprilEnabled() {
-    return rbbutton;
-  }
   // TODO why this enable april??
 
   public void initTele() {
+
     lightMode = 0;
     aprilTimer.start();
     pigRotate = pigeon.getInstance().getPigYaw();
+    resetDoneDiddlyDoneTOP = false;
+    resetDoneDiddlyDoneBOTTOM = false;
   }
 
   public void updateTele() {
-
+    zeroIntake(Side.Top);
+    zeroIntake(Side.Bottom);
     // --------------------------------------------------------------------//
     // UPDATES
     // --------------------------------------------------------------------//
@@ -185,46 +189,121 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // INTAKE
     // --------------------------------------------------------------------//
+    /*
+     * if (ltrigger && !rtrigger) {
+     * intake.movetoprollers(.9);
+     * } else if (rtrigger && !ltrigger) {
+     * intake.movebottomrollers(.9);
+     * 
+     * } else if (!rbbutton && lbbutton) {
+     * intake.movebottomrollers(-.9);
+     * 
+     * } else if (rbbutton && !lbbutton) {
+     * intake.movetoprollers(-.9);
+     * 
+     * } else {
+     * intake.movebottomrollers(0);
+     * intake.movetoprollers(0);
+     * 
+     * }
+     */
+    if (rtrigger) {
+      intake.movetoprollers(-.9);
+      intake.movebottomrollers(.9);
+    } else if (ltrigger) {
+      intake.movebottomrollers(-.9);
+      intake.movetoprollers(.9);
+    } else {
+      intake.movebottomrollers(0);
+      intake.movetoprollers(0);
+    }
 
-    if (ltrigger && !rtrigger) {
-      intake.moveBottomIntakePercentOutput(xbox.getLeftTriggerAxis());
-    } else if (rtrigger && !ltrigger) {
-      intake.moveBottomIntakePercentOutput(-xbox.getRightTriggerAxis());
-    } else if (abutton && !xbutton) {
-      intake.moveBottomIntakePID(0);
-    } else if (xbutton && !abutton) {
-      intake.moveBottomIntakePID(20000);
-    } else if (!abutton && !xbutton && !ltrigger && !rtrigger) {
+    if (abutton && !rbbutton) {
+      intake.moveTopIntakePID(0);
+    } else if (rbbutton && !abutton) {
+      intake.moveTopIntakePID(-38000);
+      intake.movetoprollers(.9);
+    } else if (!abutton && !rbbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneTOP) { // <--- did it here as well,
+                                                                                            // when everything
+      // controlling intake in comment is not active
+
+      intake.stopTopIntakePercentOutput();
+
+    }
+
+    if (xbutton) {
+      resetDoneDiddlyDoneBOTTOM = false;
+      resetDoneDiddlyDoneTOP = false;
+      zeroIntake(Side.Top);
+      zeroIntake(Side.Bottom);
+    }
+
+    if (abutton && !lbbutton) {
+      intake.moveBottomIntakePID(-0);
+    } else if (lbbutton && !abutton) {
+      intake.moveBottomIntakePID(38000);
+
+      intake.movebottomrollers(.9);
+    } else if (!abutton && !lbbutton && !rtrigger && !ltrigger && resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
+                                                                                               // well, when everything
+      // controlling intake in comment is not active
+
       intake.stopBottomIntakePercentOutput();
+
     }
 
-    if (bbutton) {
-      intake.setBottomLeftEncoder(0);
-      intake.setBottomRightEncoder(0);
-    }
+    SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
+    SmartDashboard.putNumber("bottomright", intake.getBottomRightPositionNative());
+    SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
+    SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
 
-    if (intakeBottomDeploy) {
-      // deploy bottom
-      // rollers bottom
-    } else {
-      // stow bottom
-      // stop rollers bottom
-    }
-
-    if (intakeTopDeploy) {
-      // deploy top
-      // rollers top
-    } else {
-      // stow bottom
-      // stop rollers bottom
-    }
-
-    if (ltrigger2) {
-      // all rollers out one way
-    } else if (rtrigger2) {
-      // all rollers out other way
-    }
-
+    SmartDashboard.putNumber("bottomIntakeDegrees",
+        MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
+    // ^^^^^ for degrees
+    /*
+     * if (abutton) {
+     * intake.moveTopIntakePID(0);
+     * intake.moveBottomIntakePID(0);
+     * } else if (xbutton) {
+     * intake.moveTopIntakePID(1500);
+     * } else if (bbutton) {
+     * intake.moveBottomIntakePID(1500);
+     * }
+     */
+    /*
+     * if (!xbutton && !abutton && bbutton && resetDoneDiddlyDoneTOP) // <--- when
+     * everything that controls intake is not
+     * // active
+     * {
+     * intake.stopTopIntakePercentOutput();
+     * intake.stopBottomIntakePercentOutput(); // <--- should only have one of
+     * these, since multiple would cause it to
+     * // stop in multiple places (if you want it to stop more than one certain
+     * // case fine, but idk)
+     * }
+     * /*
+     * if (intakeBottomDeploy) {
+     * // deploy bottom
+     * // rollers bottom
+     * } else {
+     * // stow bottom
+     * // stop rollers bottom
+     * }
+     * 
+     * if (intakeTopDeploy) {
+     * // deploy top
+     * // rollers top
+     * } else {
+     * // stow bottom
+     * // stop rollers bottom
+     * }
+     * 
+     * if (ltrigger2) {
+     * // all rollers out one way
+     * } else if (rtrigger2) {
+     * // all rollers out other way
+     * }
+     */
     // --------------------------------------------------------------------//
     // DRIVE STATEMENTS
     // --------------------------------------------------------------------//
@@ -263,7 +342,7 @@ public class SupaStruct {
      * if (xbutton) {
      * april.alignToTag();
      * }
-     */ if (rbbutton) {
+     */ if (xbox.getRawButton(8)) {
       // Ramp.getInstance().rampMove(0);
     } else if ((fwd != 0 || str != 0 || rcw != 0)) {
       train.etherSwerve(fwd, str, rcw, ControlMode.PercentOutput); // +,-,+
@@ -297,7 +376,8 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // SMARTDASHBOARD
     // --------------------------------------------------------------------//
-
+    SmartDashboard.putBoolean("toptriggered", intake.getTopSwitchEnabled());
+    SmartDashboard.putBoolean("bottomtriggered", intake.getBottomSwitchEnabled());
   }
 
   public void teleopDisabled() {
@@ -323,6 +403,7 @@ public class SupaStruct {
      */
     train.startTrain();
     pitcheck.start();
+
   }
 
   // measured over predicted * predicted
@@ -358,6 +439,40 @@ public class SupaStruct {
      * // SmartDashboard.putNumber("delta", train.vars.avgDistTest);
      */
   }
+
+  public void zeroIntake(Side side) {
+    switch (side) {
+      case Top:
+
+        if (!resetDoneDiddlyDoneTOP) {
+          intake.moveTopIntakePercentOutput(0.25);
+          resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();
+          if (resetDoneDiddlyDoneTOP) {
+            intake.setTopLeftEncoder(0);
+            intake.setTopRightEncoder(0);
+            intake.stopTopIntakePercentOutput();
+          }
+        }
+        break;
+
+      case Bottom:
+        if (!resetDoneDiddlyDoneBOTTOM) {
+          intake.moveBottomIntakePercentOutput(-0.25);
+          resetDoneDiddlyDoneBOTTOM = intake.getBottomSwitchEnabled();
+          if (resetDoneDiddlyDoneBOTTOM) {
+            intake.setBottomLeftEncoder(0);
+            intake.setBottomRightEncoder(0);
+            intake.stopBottomIntakePercentOutput();
+          }
+        }
+        break;
+    }
+  }
+
+  public enum Side {
+    Top,
+    Bottom
+  };
 
   private static class InstanceHolder {
     private static final SupaStruct mInstance = new SupaStruct();

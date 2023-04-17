@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.AUTO.Commandments.BumpSide;
+import frc.robot.AUTO.Commandments.LeftSideAuto;
 import frc.robot.AUTO.Commandments.RampAuto;
 import frc.robot.AUTO.Commandments.TestEther;
 import frc.robot.MECHANISMS.MkSwerveTrain;
@@ -51,14 +53,13 @@ public class Robot extends TimedRobot {
   PneumaticHub m_ph = new PneumaticHub(CANID.revphCANID);
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
   private SupaStruct supaKoopa = SupaStruct.getInstance();
-  private UsbCamera intakCamera;
 
   @Override
   public void robotInit() {
     PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    CameraServer.startAutomaticCapture();
+    positionChooser.addOption("BUMO", AutoPosition.BUMP);
     // Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
@@ -81,33 +82,24 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    Odometry.getInstance().updateOdometry(supaKoopa.getAprilEnabled());
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Pressure", m_ph.getPressure(0));
-    // SmartDashboard.putBoolean("Compressor Running", m_ph.getCompressor());
-    if (SmartDashboard.getBoolean("Enable Compressor Analog", false)) {
-      SmartDashboard.putBoolean("Enable Compressor Analog", false);
-      double minPressure = SmartDashboard.getNumber("Minimum Pressure (PSI)", 0.0);
-      double maxPressure = SmartDashboard.getNumber("Maximum Pressure (PSI)", 120.0);
-      m_ph.enableCompressorAnalog(minPressure, maxPressure);
-    }
-    if (SmartDashboard.getBoolean("Disable Compressor", false)) {
-      SmartDashboard.putBoolean("Disable Compressor", false);
-      m_ph.disableCompressor();
       CommandScheduler.getInstance().run();
     }
-  }
+  
 
   @Override
   public void autonomousInit() {
     System.out.println("i am auito  initialzies");
     train.vars.avgDistTest = 0;
     switch (positionChooser.getSelected()) {
-      case LEFTSIDEDOUBLE:
+      case MIDDLE:
         m_autonomousCommand = new RampAuto();
         break;
-      case MIDDLE:
-        m_autonomousCommand = new TestEther();
+        case LEFTSIDEDOUBLE:
+        m_autonomousCommand = new LeftSideAuto();
+        break;
+        case BUMP:
+        m_autonomousCommand = new BumpSide();
         break;
     }
 
@@ -126,6 +118,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     Shuffleboard.selectTab("SmartDashboard");
+    
     supaKoopa.initTele();
 
     System.out.println("Robot Teleop Init");
@@ -139,6 +132,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     supaKoopa.updateTele();
+    
   }
 
   @Override
@@ -167,6 +161,7 @@ public class Robot extends TimedRobot {
     LEFTSIDEDOUBLE,
     RIGHTSIDEDOUBLE,
     RAMPAUTO,
-    MIDDLE
+    MIDDLE,
+    BUMP
   }
 }

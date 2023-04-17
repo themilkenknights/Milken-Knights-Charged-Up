@@ -81,7 +81,7 @@ public final class Constants {
   public static class MKCANCODER {
     public static final double topLeftOffset = -348.837890625;// 11.865234375 + 180;
     public static final double topRightOffset = -24.345703125;// -25.83984275 + 180;
-    public static final double bottomLeftOffset = -209.091796875;// 153.0175781 - 16 - 180;
+    public static final double bottomLeftOffset = -128.14453125+180;//-209.091796875;// 153.0175781 - 16 - 180;
     public static final double bottomRightOffset = -353.05664062;// 7.294921875 - 180;
 
     public static final double[] offset = {
@@ -111,7 +111,7 @@ public final class Constants {
   }
 
   public static class PIGEON {
-    public static final double offsetYaw = 0;
+    public static final double offsetYaw = 180;
     public static final double pitchThreshold = 2;
     public static final double rollThreashold = 20;
   }
@@ -192,14 +192,16 @@ public final class Constants {
     // cancoder
     public static final int topTurnLeftCANCoderCANID = 18; // 18
     public static final int topTurnRightCANCoderCANID = 17;
-    public static final int bottomTurnLeftCANCoderCANID = 15;
+    public static final int bottomTurnLeftCANCoderCANID = 15;//BAD
     public static final int bottomTurnRightCANCoderCANID = 16; // 16
 
     // intakes
-    public static final int topLeftIntakeCANID = 999;
-    public static final int topRightIntakeCANID = 999;
+    public static final int topLeftIntakeCANID = 57;
+    public static final int topRightIntakeCANID = 62;
     public static final int bottomLeftIntakeCANID = 60;
     public static final int bottomRightIntakeCANID = 61;
+    public static final int toprollersCANID = 59;
+    public static final int bottomrollersCANID = 58;
 
     // revh ph
     public static final int revphCANID = 2; // MUST MAKE SURE IT IS ON RIO NOT CANIVORE
@@ -215,25 +217,25 @@ public final class Constants {
     public static final NeutralMode rollerNeutralMode = NeutralMode.Coast;
     public static final NeutralMode intakeNeutralMode = NeutralMode.Brake;
 
-    public static final double kP = 0.0001;
-    public static final double kI = 0;
-    public static final double kD = 0.00007;
+    public static final double kP = 0.00002;
+    public static final double kI = 0.0000001;
+    public static final double kD = 0.0000;
     public static final double kF = 0;
 
     public static final double[] pidf = { kP, kI, kD, kF };
 
-    public static final boolean topLeftInverted = false;
+    public static final boolean topLeftInverted = true;
     public static final boolean topRightInverted = false;
     public static final boolean bottomLeftInverted = true;
     public static final boolean bottomRightInverted = false;
 
-    public static final double rollerPercentSpeed = 1;
-    public static final double intakePercentSpeed = 1;
+    public static final double rollerPercentSpeed = .7;
+    public static final double intakePercentSpeed = .7;
 
-    public static final double greerRatio = 40;
+    public static final double greerRatio = 20.0 / 18.0 / 45.0;
 
-    public static final double topOutNative = 69420;
-    public static final double bottomOutNative = 69420;
+    public static final double topOutNative = 0;
+    public static final double bottomOutNative = 0;
   }
 
   public static class AUTO {

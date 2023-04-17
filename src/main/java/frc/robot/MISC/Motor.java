@@ -31,7 +31,7 @@ public class Motor {
   }
 
   public TalonFX turnMotor(int canid) {
-    TalonFX turn = new TalonFX(canid, "train");
+    TalonFX turn = new TalonFX(canid, "rio");
     turn.configFactoryDefault();
     turn.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     turn.setNeutralMode(MKTURN.mode);
@@ -46,18 +46,18 @@ public class Motor {
     turn.enableVoltageCompensation(true);
     turn.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     turn.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
-    turn.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.1));
+    turn.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 32, 60, 0.5));
     // true, const currlimit, peak limit, how many sec
-    turn.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.1));
+    turn.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 32, 60, 0.5));
 
     return turn;
   }
 
   public TalonFX driveMotor(int canid) {
-    TalonFX drive = new TalonFX(canid, "train");
+    TalonFX drive = new TalonFX(canid, "rio");
     drive.configFactoryDefault();
-    //drive.configOpenloopRamp(.3);
-    //drive.configClosedloopRamp(.3);
+    // drive.configOpenloopRamp(.3);
+    // drive.configClosedloopRamp(.3);
     drive.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     drive.setNeutralMode(MKDRIVE.mode);
     drive.config_kP(0, MKDRIVE.kP);
@@ -74,8 +74,8 @@ public class Motor {
     drive.configMotionCruiseVelocity(MKDRIVE.maxNativeVelocity);
     drive.configMotionAcceleration(MKDRIVE.maxNativeAcceleration);
     drive.configMotionSCurveStrength(MKDRIVE.scurve);
-    drive.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.5));
-    drive.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.5));
+    drive.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 32, 50, 0.1));
+    drive.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 32, 50, 0.1));
 
     return drive;
   }
@@ -94,8 +94,8 @@ public class Motor {
     motor.configVelocityMeasurementWindow(MKFALCON.velocityMeasAmount);
     motor.configVoltageCompSaturation(11);
     motor.enableVoltageCompensation(true);
-    motor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 60, 0.5));
-    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 60, 0.5));
+    motor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 50, 0.1));
+    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 35, 50, 0.1));
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, MKFALCON.statusOneMeas);
     motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, MKFALCON.statusTwoMeas);
     return motor;

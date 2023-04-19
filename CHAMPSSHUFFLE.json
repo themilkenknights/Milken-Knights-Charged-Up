@@ -1,4 +1,5 @@
 {
+  "tabPane": [
     {
       "title": "SmartDashboard",
       "autoPopulate": true,
@@ -19,8 +20,6 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/toptriggered",
               "_title": "toptriggered",
-              "_glyph": 148,
-              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -34,8 +33,6 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/bottomtriggered",
               "_title": "bottomtriggered",
-              "_glyph": 148,
-              "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -49,8 +46,6 @@
               "_type": "Camera Stream",
               "_source0": "camera_server://USB Camera 0",
               "_title": "Bottom CAM",
-              "_glyph": 148,
-              "_showGlyph": false,
               "Crosshair/Show crosshair": false,
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": false,
@@ -70,8 +65,6 @@
               "_type": "Camera Stream",
               "_source0": "camera_server://USB Camera 1",
               "_title": "TOP CAMERA",
-              "_glyph": 148,
-              "_showGlyph": false,
               "Crosshair/Show crosshair": false,
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": false,
@@ -80,6 +73,17 @@
               "fps": -1,
               "imageWidth": 0,
               "imageHeight": 0
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/roll",
+              "_title": "roll"
             }
           }
         }

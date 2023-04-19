@@ -259,14 +259,12 @@ public class SupaStruct {
       intake.stopBottomIntakePercentOutput();
     }
 
-    SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
-    SmartDashboard.putNumber("bottomright", intake.getBottomRightPositionNative());
-    SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
-    SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
+    //SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
+    //SmartDashboard.putNumber("bottomright", intake.getBottomRightPositionNative());
+    //SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
+    //SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
 
-    SmartDashboard.putNumber(
-        "bottomIntakeDegrees",
-        MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
+    //SmartDashboard.putNumber("bottomIntakeDegrees", MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
     // ^^^^^ for degrees
     /*
      * if (abutton) {

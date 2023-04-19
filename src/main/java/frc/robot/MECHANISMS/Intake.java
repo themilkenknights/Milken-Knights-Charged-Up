@@ -101,7 +101,7 @@ public class Intake {
     bottomIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
     topIntake = new PIDController(MKINTAKE.kP, MKINTAKE.kI, MKINTAKE.kD);
     bottomSwitch = new DigitalInput(9);
-    topSwitch = new DigitalInput(8);
+    topSwitch = new DigitalInput(6);
   }
 
   public static Intake getInstance() {

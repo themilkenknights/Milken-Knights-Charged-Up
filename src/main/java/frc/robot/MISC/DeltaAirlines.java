@@ -24,7 +24,7 @@ public class DeltaAirlines {
     loopCounter++;
     double time = Timer.getFPGATimestamp();
     dt = (time - lastTime) * 1e3;
-    SmartDashboard.putNumber("Loop Dt", dt);
+    //SmartDashboard.putNumber("Loop Dt", dt);
     lastTime = time;
 
     if (dt > 22) {

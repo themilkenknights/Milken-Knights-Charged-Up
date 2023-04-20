@@ -15,19 +15,17 @@ import frc.robot.AUTO.Commands.BottomIntakeCOMMAND;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class BumpSide extends SequentialCommandGroup {
-    /** Creates a new LeftSideAuto. */
-    public BumpSide() {
-        // Add your commands in the addCommands() call, e.g.
-        // addCommands(new FooCommand(), new BarCommand());
+        /** Creates a new LeftSideAuto. */
+        public BumpSide() {
+                // Add your commands in the addCommands() call, e.g.
+                // addCommands(new FooCommand(), new BarCommand());
         addCommands(
-                Commands.deadline(new ResetIntakeCommand()),
-                Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(1)),
-                Commands.deadline(new EtherStraightCommand(360, -0.7, -.03, 0),
-                        new TopIntakeCOMMAND(.8, -36700).withTimeout(6)),
-                Commands.deadline(new TopIntakeCOMMAND(.8, -36700).withTimeout(1)),
-                Commands.deadline(new EtherStraightCommand(325, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
-                Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(2),
-                        new TopIntakeCOMMAND(.8, 0).withTimeout(2)),
-                Commands.deadline(new EtherStraightCommand(5, -0.6, 0, 0)));
-    }
+        Commands.deadline(new ResetIntakeCommand()),
+        Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(360, -0.7, -.03, 0), new TopIntakeCOMMAND(.8, -36700).withTimeout(6)),
+        Commands.deadline(new TopIntakeCOMMAND(.8, -36700).withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(380, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
+        Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(2), new TopIntakeCOMMAND(1, 0).withTimeout(2)), 
+        Commands.deadline(new EtherStraightCommand(5, -0.6, 0, 0)));
+        }
 }

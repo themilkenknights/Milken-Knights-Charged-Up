@@ -20,12 +20,12 @@ public class RampAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new TopIntakeCOMMAND(-.8, 0).withTimeout(2),
+        new TopIntakeCOMMAND(-1, 0).withTimeout(1),
         new MoveUntilRollChange(-16, 0, 0.2, Condition.GREATERTHAN).withTimeout(15),
         new MoveUntilRollChange(-15, 0, 0.2, Condition.LESSTHAN).withTimeout(15),
         new MoveUntilRollChange(7, 0, 0.2, Condition.LESSTHAN).withTimeout(15),
         new MoveUntilRollChange(0, 0, 0.2, Condition.GREATERTHAN).withTimeout(15),
-        new MotionMagicAuto(15, 0).withTimeout(4),
+        new MotionMagicAuto(15, 0).withTimeout(2),
         new MoveUntilRollChange(9, 0, -0.2, Condition.LESSTHAN).withTimeout(15),
         new MoveUntilRollChange(7, 0, -0.2, Condition.GREATERTHAN).withTimeout(15),
         new MoveUntilRollChange(4, 0, 0.07, Condition.GREATERTHAN).withTimeout(15),

@@ -8,21 +8,20 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.CAMERA.AprilTags;
+
 import frc.robot.MECHANISMS.Intake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.Constants.CONTROLLERS.DriveInput;
 import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
-import frc.robot.MISC.Odometry;
 import frc.robot.MISC.pigeon;
 
 /** Robot stuff in here */
 public class SupaStruct {
 
   private XboxController xbox = new XboxController(0);
-  private XboxController xboxOP = new XboxController(1);
+
   private double fwd,
       fwdSignum,
       str,
@@ -39,7 +38,6 @@ public class SupaStruct {
       leftYaxis,
       rightYaxis;
   private MkSwerveTrain train = MkSwerveTrain.getInstance();
-  private Odometry odo = Odometry.getInstance();
   private Intake intake = Intake.getInstance();
 
   private boolean resetpig,
@@ -77,7 +75,7 @@ public class SupaStruct {
       resetDoneDiddlyDoneBOTTOM,
       resetDoneDiddlyDoneTOP;
   private boolean isRCWrunningWithpig = false;
-  private AprilTags april = AprilTags.getInstance();
+
   private Timer turntesttimer = new Timer();
   private Lights mLights = Lights.getInstance();
   private Timer turntesttimertwo = new Timer();
@@ -108,13 +106,7 @@ public class SupaStruct {
     // UPDATES
     // --------------------------------------------------------------------//
     if (xbox.getRawButton(9)) {
-      april.updateApril();
-      aprilTimer.restart();
-      april.aprilSmartDashboard();
-      x = april.getAxis("x");
-      y = april.getAxis("y");
-      // yaw = april.getAxis("yaw");
-      rot = april.getAxis("r");
+
     }
 
     train.updateSwerve();
@@ -132,7 +124,6 @@ public class SupaStruct {
     // Todo see if making this x breaks it
     rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
     rcw = rcwX;
-
     // DRIVER
     xbutton = xbox.getXButton();
     abutton = xbox.getAButton();
@@ -141,27 +132,11 @@ public class SupaStruct {
     bbutton = xbox.getBButton();
     lbbutton = xbox.getLeftBumper();
     dpaddown = xbox.getPOV() == 180;
-    dpadleft = xboxOP.getPOV() == 90;
-    dpadright = xboxOP.getPOV() == 270;
     dpadup = xbox.getPOV() == 0;
     ltrigger = Math.abs(xbox.getRawAxis(2)) > 0.1;
     rtrigger = Math.abs(xbox.getRawAxis(3)) > 0.1;
 
     // OP
-    xbutton2 = xboxOP.getXButton();
-    abutton2 = xboxOP.getAButton();
-    rbbutton2 = xboxOP.getRightBumper();
-    ybutton2 = xboxOP.getYButton();
-    bbutton2 = xboxOP.getBButton();
-    lbbutton2 = xboxOP.getLeftBumper();
-    dpaddown2 = xboxOP.getPOV() == 180;
-    dpadup2 = xboxOP.getPOV() == 0;
-    dpadleft2 = xboxOP.getPOV() == 90;
-    dpadright2 = xboxOP.getPOV() == 270;
-    ltrigger2 = Math.abs(xboxOP.getRawAxis(2)) > 0.1;
-    rtrigger2 = Math.abs(xboxOP.getRawAxis(3)) > 0.1;
-    leftYaxis = (xboxOP.getRawAxis(1) - 0.1) / (1 - 0.1);
-    rightYaxis = (xboxOP.getRawAxis(5) - 0.1) / (1 - 0.1);
     intakeBottomDeploy = leftYaxis > 0.1;
     intakeTopDeploy = rightYaxis > 0.1;
 
@@ -208,11 +183,11 @@ public class SupaStruct {
      * }
      */
     if (rtrigger) {
-      intake.movetoprollers(-.9);
-      intake.movebottomrollers(.9);
+      intake.movetoprollers(-1);
+      intake.movebottomrollers(1);
     } else if (ltrigger) {
-      intake.movebottomrollers(-.9);
-      intake.movetoprollers(.9);
+      intake.movebottomrollers(-1);
+      intake.movetoprollers(1);
     } else {
       intake.movebottomrollers(0);
       intake.movetoprollers(0);
@@ -228,7 +203,7 @@ public class SupaStruct {
       intake.moveTopIntakePID(0);
     } else if (rbbutton && !abutton) {
       intake.moveTopIntakePID(-36700);
-      intake.movetoprollers(.9);
+      intake.movetoprollers(1);
     } else if (!abutton
         && !rbbutton
         && !rtrigger
@@ -245,7 +220,7 @@ public class SupaStruct {
     } else if (lbbutton && !abutton) {
       intake.moveBottomIntakePID(36700);
 
-      intake.movebottomrollers(.9);
+      intake.movebottomrollers(1);
     } else if (!abutton
         && !lbbutton
         && !rtrigger

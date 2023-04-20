@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.AUTO.Commandments.BumpSide;
 import frc.robot.AUTO.Commandments.LeftSideAuto;
 import frc.robot.AUTO.Commandments.RampAuto;
+import frc.robot.AUTO.Commandments.TestResetIntake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
 import frc.robot.MISC.pigeon;
 
@@ -46,12 +47,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     PortForwarder.add(5800, "photonvision.local", 5800);
-    positionChooser.setDefaultOption("LEFTDOUBLE", AutoPosition.LEFTSIDEDOUBLE);
+    positionChooser.setDefaultOption("DOUBLESIDE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    positionChooser.addOption("BUMO", AutoPosition.BUMP);
+    positionChooser.addOption("BUMP", AutoPosition.BUMP);
     CameraServer.startAutomaticCapture();
     CameraServer.startAutomaticCapture();
-
+   
     // Shuffleboard.selectTab("Match");
     // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
     // SmartDashboard.setDefaultBoolean("Disable Compressor", false);

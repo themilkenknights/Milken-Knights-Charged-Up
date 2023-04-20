@@ -7,6 +7,7 @@ package frc.robot.AUTO.Commandments;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.AUTO.Commands.EtherStraightCommand;
+import frc.robot.AUTO.Commands.ResetIntakeCommand;
 import frc.robot.AUTO.Commands.TopIntakeCOMMAND;
 import frc.robot.AUTO.Commands.BottomIntakeCOMMAND;
 
@@ -19,10 +20,11 @@ public class BumpSide extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(
+                Commands.deadline(new ResetIntakeCommand()),
                 Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(1)),
                 Commands.deadline(new EtherStraightCommand(360, -0.7, -.03, 0),
-                        new TopIntakeCOMMAND(.8, -39000).withTimeout(6)),
-                Commands.deadline(new TopIntakeCOMMAND(.8, -39000).withTimeout(1)),
+                        new TopIntakeCOMMAND(.8, -36700).withTimeout(6)),
+                Commands.deadline(new TopIntakeCOMMAND(.8, -36700).withTimeout(1)),
                 Commands.deadline(new EtherStraightCommand(325, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
                 Commands.deadline(new BottomIntakeCOMMAND(-.8, 0).withTimeout(2),
                         new TopIntakeCOMMAND(.8, 0).withTimeout(2)),

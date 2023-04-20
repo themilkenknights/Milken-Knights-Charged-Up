@@ -46,7 +46,7 @@ public class MoveUntilRollChange extends CommandBase {
         condition = roll >= thresh;
         isfinished = roll < thresh;
     }
-    SmartDashboard.putNumber("roll", roll);
+    //SmartDashboard.putNumber("roll", roll);
     SmartDashboard.putBoolean("condition", condition);
     if (condition) {
       MkSwerveTrain.getInstance()

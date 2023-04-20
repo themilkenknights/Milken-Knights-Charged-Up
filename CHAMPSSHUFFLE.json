@@ -11,7 +11,7 @@
         "vgap": 20.0,
         "titleType": 0,
         "tiles": {
-          "7,2": {
+          "7,1": {
             "size": [
               1,
               1
@@ -24,7 +24,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "7,1": {
+          "7,0": {
             "size": [
               1,
               1
@@ -73,17 +73,6 @@
               "fps": -1,
               "imageWidth": 0,
               "imageHeight": 0
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/roll",
-              "_title": "roll"
             }
           }
         }

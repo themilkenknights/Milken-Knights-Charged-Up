@@ -167,11 +167,10 @@ public class SupaStruct {
 
     pov = xbox.getPOV() != -1;
 
-    inverseTanAngleDrive =
-        ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
-                    - MathFormulas.signumAngleEdition(str, fwd))
-                + 360)
-            % 360;
+    inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
+        - MathFormulas.signumAngleEdition(str, fwd))
+        + 360)
+        % 360;
 
     // --------------------------------------------------------------------//
     // PIGEON RESET
@@ -219,10 +218,16 @@ public class SupaStruct {
       intake.movetoprollers(0);
     }
 
+    if (bbutton) {
+      resetDoneDiddlyDoneTOP = false;
+      resetDoneDiddlyDoneBOTTOM = false;
+
+    }
+
     if (abutton && !rbbutton) {
       intake.moveTopIntakePID(0);
     } else if (rbbutton && !abutton) {
-      intake.moveTopIntakePID(-38000);
+      intake.moveTopIntakePID(-36700);
       intake.movetoprollers(.9);
     } else if (!abutton
         && !rbbutton
@@ -235,17 +240,10 @@ public class SupaStruct {
       intake.stopTopIntakePercentOutput();
     }
 
-    if (xbutton) {
-      resetDoneDiddlyDoneBOTTOM = false;
-      resetDoneDiddlyDoneTOP = false;
-      zeroIntake(Side.Top);
-      zeroIntake(Side.Bottom);
-    }
-
     if (abutton && !lbbutton) {
       intake.moveBottomIntakePID(-0);
     } else if (lbbutton && !abutton) {
-      intake.moveBottomIntakePID(38000);
+      intake.moveBottomIntakePID(36700);
 
       intake.movebottomrollers(.9);
     } else if (!abutton
@@ -259,12 +257,15 @@ public class SupaStruct {
       intake.stopBottomIntakePercentOutput();
     }
 
-    //SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
-    //SmartDashboard.putNumber("bottomright", intake.getBottomRightPositionNative());
-    //SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
-    //SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
+    // SmartDashboard.putNumber("bottomleft", intake.getBottomLeftPositionNative());
+    // SmartDashboard.putNumber("bottomright",
+    // intake.getBottomRightPositionNative());
+    // SmartDashboard.putNumber("TOPLEFT", intake.getTopLeftPositionNative());
+    // SmartDashboard.putNumber("TOPRIGHT", intake.getTopRightPositionNative());
 
-    //SmartDashboard.putNumber("bottomIntakeDegrees", MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(), MKINTAKE.greerRatio));
+    // SmartDashboard.putNumber("bottomIntakeDegrees",
+    // MathFormulas.nativeToDegrees(intake.getBottomLeftPositionNative(),
+    // MKINTAKE.greerRatio));
     // ^^^^^ for degrees
     /*
      * if (abutton) {
@@ -364,21 +365,21 @@ public class SupaStruct {
     // --------------------------------------------------------------------//
     // LEDS
     // --------------------------------------------------------------------//
-
-    if (lightMode == 0) {
-      mLights.off();
-      SmartDashboard.putString("color", "none");
-    } else if (lightMode == 1) {
-      mLights.CONE();
-      SmartDashboard.putString("color", "cone");
-    } else if (lightMode == 2) {
-      mLights.CUBE();
-      SmartDashboard.putString("color", "cube");
-    } else if (lightMode == 3) {
-      mLights.GROUND();
-      SmartDashboard.putString("color", "ground");
-    }
-
+    /*
+     * if (lightMode == 0) {
+     * mLights.off();
+     * SmartDashboard.putString("color", "none");
+     * } else if (lightMode == 1) {
+     * mLights.CONE();
+     * SmartDashboard.putString("color", "cone");
+     * } else if (lightMode == 2) {
+     * mLights.CUBE();
+     * SmartDashboard.putString("color", "cube");
+     * } else if (lightMode == 3) {
+     * mLights.GROUND();
+     * SmartDashboard.putString("color", "ground");
+     * }
+     */
     // --------------------------------------------------------------------//
     // SMARTDASHBOARD
     // --------------------------------------------------------------------//
@@ -449,7 +450,7 @@ public class SupaStruct {
     switch (side) {
       case Top:
         if (!resetDoneDiddlyDoneTOP) {
-          intake.moveTopIntakePercentOutput(0.25);
+          intake.moveTopIntakePercentOutput(0.15);
           resetDoneDiddlyDoneTOP = intake.getTopSwitchEnabled();
           if (resetDoneDiddlyDoneTOP) {
             intake.setTopLeftEncoder(0);
@@ -461,7 +462,7 @@ public class SupaStruct {
 
       case Bottom:
         if (!resetDoneDiddlyDoneBOTTOM) {
-          intake.moveBottomIntakePercentOutput(-0.25);
+          intake.moveBottomIntakePercentOutput(-0.15);
           resetDoneDiddlyDoneBOTTOM = intake.getBottomSwitchEnabled();
           if (resetDoneDiddlyDoneBOTTOM) {
             intake.setBottomLeftEncoder(0);
@@ -471,6 +472,19 @@ public class SupaStruct {
         }
         break;
     }
+  }
+
+  public void setResetDoneDiddlyDone(boolean top, boolean bottom) {
+    resetDoneDiddlyDoneBOTTOM = bottom;
+    resetDoneDiddlyDoneTOP = top;
+  }
+
+  public boolean getResetDoneDiddlyDoneTOP() {
+    return resetDoneDiddlyDoneTOP;
+  }
+
+  public boolean getResetDoneDiddlyDoneBOTTOM() {
+    return resetDoneDiddlyDoneBOTTOM;
   }
 
   public enum Side {

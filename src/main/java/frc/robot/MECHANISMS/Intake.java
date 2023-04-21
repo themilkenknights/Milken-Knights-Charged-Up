@@ -212,7 +212,8 @@ public class Intake {
   public void updateIntake() {
     blIntake.setDouble(getBottomLeftPositionNative());
     brIntake.setDouble(getBottomRightPositionNative());
-
+    tlIntake.setDouble(getTopLeftPositionNative());
+    trIntake.setDouble(getTopRightPositionNative());
     bloutput.setDouble(bottomLeft.getMotorOutputPercent());
     broutput.setDouble(bottomRight.getMotorOutputPercent());
 

@@ -54,7 +54,7 @@ public final class Constants {
 
     public static final double greerRatio = 6.75;
 
-    public static final double wheelDiameterInches = 3.5;
+    public static final double wheelDiameterInches = 4;
     public static final double wheelCircumference = wheelDiameterInches * kPi;
   }
 
@@ -147,7 +147,7 @@ public final class Constants {
   // AUTO RAMP
   // --------------------------------------------------------------------//
   public static class MKRAMP {
-    public static final double kP = .007;
+    public static final double kP = .0075;
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double threshold = 4;

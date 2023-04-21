@@ -19,13 +19,13 @@ public class BumpSide extends SequentialCommandGroup {
         public BumpSide() {
                 // Add your commands in the addCommands() call, e.g.
                 // addCommands(new FooCommand(), new BarCommand());
-        addCommands(
+addCommands(
         Commands.deadline(new ResetIntakeCommand()),
         Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(360, -0.7, -.03, 0), new TopIntakeCOMMAND(.8, -36700).withTimeout(6)),
+        Commands.deadline(new EtherStraightCommand(200, -0.7, 0, 0), new TopIntakeCOMMAND(.8, -36700).withTimeout(6)),
         Commands.deadline(new TopIntakeCOMMAND(.8, -36700).withTimeout(1)),
-        Commands.deadline(new EtherStraightCommand(380, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
-        Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(2), new TopIntakeCOMMAND(1, 0).withTimeout(2)), 
+        Commands.deadline(new EtherStraightCommand(195, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
+        Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(2), new TopIntakeCOMMAND(1, 0).withTimeout(2)),
         Commands.deadline(new EtherStraightCommand(5, -0.6, 0, 0)));
         }
 }

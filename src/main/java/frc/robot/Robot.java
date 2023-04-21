@@ -46,36 +46,17 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    PortForwarder.add(5800, "photonvision.local", 5800);
     positionChooser.setDefaultOption("DOUBLESIDE", AutoPosition.LEFTSIDEDOUBLE);
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     positionChooser.addOption("BUMP", AutoPosition.BUMP);
-    CameraServer.startAutomaticCapture();
-    CameraServer.startAutomaticCapture();
-   
-    // Shuffleboard.selectTab("Match");
-    // SmartDashboard.setDefaultBoolean("Enable Compressor Analog", false);
-    // SmartDashboard.setDefaultBoolean("Disable Compressor", false);
-
-    // Add number inputs for minimum and maximum pressure
-    // SmartDashboard.setDefaultNumber("Minimum Pressure (PSI)", 100.0);
-    // SmartDashboard.setDefaultNumber("Maximum Pressure (PSI)", 120.0);
     System.out.println("Robot enabled");
-    // Starts recording to data log
-    DataLogManager.start();
-    try {
-
-    } catch (UncleanStatusException ex) {
-      DriverStation.reportError("Error creating Solenoid", ex.getStackTrace());
-    }
-
+   
     train.startTrain();
     pigeon.getInstance().reset();
   }
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run();
     CommandScheduler.getInstance().run();
   }
 

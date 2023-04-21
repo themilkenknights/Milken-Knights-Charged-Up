@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Shuffleboard.selectTab("SmartDashboard");
+    //Shuffleboard.selectTab("SmartDashboard");
 
     supaKoopa.initTele();
 

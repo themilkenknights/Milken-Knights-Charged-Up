@@ -65,34 +65,30 @@ public class MkSwerveTrain {
   private GenericEntry blnatty = mTab.add("blnatty", 0).withPosition(2, 1).getEntry();
   private GenericEntry brnatty = mTab.add("brnatty", 0).withPosition(3, 1).getEntry();
 
-  private GenericEntry tlerr =
-      mTab.add("tlerr", 0)
-          .withWidget(BuiltInWidgets.kGraph)
-          .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
-          .withPosition(0, 3)
-          .withSize(2, 2)
-          .getEntry();
-  private GenericEntry trerr =
-      mTab.add("trerr", 0)
-          .withWidget(BuiltInWidgets.kGraph)
-          .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
-          .withPosition(2, 3)
-          .withSize(2, 2)
-          .getEntry();
-  private GenericEntry blerr =
-      mTab.add("blerr", 0)
-          .withWidget(BuiltInWidgets.kGraph)
-          .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
-          .withPosition(4, 3)
-          .withSize(2, 2)
-          .getEntry();
-  private GenericEntry brerr =
-      mTab.add("brerr", 0)
-          .withWidget(BuiltInWidgets.kGraph)
-          .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
-          .withPosition(6, 3)
-          .withSize(2, 2)
-          .getEntry();
+  private GenericEntry tlerr = mTab.add("tlerr", 0)
+      .withWidget(BuiltInWidgets.kGraph)
+      .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
+      .withPosition(0, 3)
+      .withSize(2, 2)
+      .getEntry();
+  private GenericEntry trerr = mTab.add("trerr", 0)
+      .withWidget(BuiltInWidgets.kGraph)
+      .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
+      .withPosition(2, 3)
+      .withSize(2, 2)
+      .getEntry();
+  private GenericEntry blerr = mTab.add("blerr", 0)
+      .withWidget(BuiltInWidgets.kGraph)
+      .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
+      .withPosition(4, 3)
+      .withSize(2, 2)
+      .getEntry();
+  private GenericEntry brerr = mTab.add("brerr", 0)
+      .withWidget(BuiltInWidgets.kGraph)
+      .withProperties(Map.of("Lower bound", -10, "Upper bound", 10))
+      .withPosition(6, 3)
+      .withSize(2, 2)
+      .getEntry();
 
   private GenericEntry tlset = mTab.add("tlset", 0).withPosition(0, 2).getEntry();
   private GenericEntry trset = mTab.add("trset", 0).withPosition(1, 2).getEntry();
@@ -108,8 +104,8 @@ public class MkSwerveTrain {
     vars.mod2 = new double[2];
     vars.mod3 = new double[2];
     vars.mod4 = new double[2];
-    vars.pointOne = new double[] {1, 10};
-    vars.pointTwo = new double[] {1, 13};
+    vars.pointOne = new double[] { 1, 10 };
+    vars.pointTwo = new double[] { 1, 13 };
 
     turn = new PIDController(vars.hP, vars.hI, vars.hD);
     turn.enableContinuousInput(0, 360);
@@ -127,12 +123,9 @@ public class MkSwerveTrain {
     bottomDriveRight = mMotor.driveMotor(CANID.bottomDriveRightCANID);
 
     topLeftCoder = mMotor.cancoder(CANID.topTurnLeftCANCoderCANID, MKCANCODER.topLeftOffset, "rio");
-    topRightCoder =
-        mMotor.cancoder(CANID.topTurnRightCANCoderCANID, MKCANCODER.topRightOffset, "rio");
-    bottomLeftCoder =
-        mMotor.cancoder(CANID.bottomTurnLeftCANCoderCANID, MKCANCODER.bottomLeftOffset, "rio");
-    bottomRightCoder =
-        mMotor.cancoder(CANID.bottomTurnRightCANCoderCANID, MKCANCODER.bottomRightOffset, "rio");
+    topRightCoder = mMotor.cancoder(CANID.topTurnRightCANCoderCANID, MKCANCODER.topRightOffset, "rio");
+    bottomLeftCoder = mMotor.cancoder(CANID.bottomTurnLeftCANCoderCANID, MKCANCODER.bottomLeftOffset, "rio");
+    bottomRightCoder = mMotor.cancoder(CANID.bottomTurnRightCANCoderCANID, MKCANCODER.bottomRightOffset, "rio");
   }
 
   public static MkSwerveTrain getInstance() {
@@ -289,58 +282,58 @@ public class MkSwerveTrain {
 
     tlnatty.setDouble(
         ((MathFormulas.nativeToDegrees(topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
-                    % 360)
-                + 360)
+            % 360)
+            + 360)
             % 360);
     trnatty.setDouble(
         ((MathFormulas.nativeToDegrees(topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
-                    % 360)
-                + 360)
+            % 360)
+            + 360)
             % 360);
     blnatty.setDouble(
         ((MathFormulas.nativeToDegrees(
-                        bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
-                    % 360)
-                + 360)
+            bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
+            % 360)
+            + 360)
             % 360);
     brnatty.setDouble(
         ((MathFormulas.nativeToDegrees(
-                        bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
-                    % 360)
-                + 360)
+            bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
+            % 360)
+            + 360)
             % 360);
 
     tlerr.setDouble(
         Math.abs(
-                ((MathFormulas.nativeToDegrees(
-                                topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
-                            % 360)
-                        + 360)
-                    % 360)
+            ((MathFormulas.nativeToDegrees(
+                topTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
+                % 360)
+                + 360)
+                % 360)
             - ((vars.mod2[1] % 360) + 360) % 360);
     trerr.setDouble(
         Math.abs(
-                ((MathFormulas.nativeToDegrees(
-                                topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
-                            % 360)
-                        + 360)
-                    % 360)
+            ((MathFormulas.nativeToDegrees(
+                topTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
+                % 360)
+                + 360)
+                % 360)
             - ((vars.mod1[1] % 360) + 360) % 360);
     blerr.setDouble(
         Math.abs(
-                ((MathFormulas.nativeToDegrees(
-                                bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
-                            % 360)
-                        + 360)
-                    % 360)
+            ((MathFormulas.nativeToDegrees(
+                bottomTurnLeft.getSelectedSensorPosition(), MKTURN.greerRatio)
+                % 360)
+                + 360)
+                % 360)
             - ((vars.mod4[1] % 360) + 360) % 360);
     brerr.setDouble(
         Math.abs(
-                ((MathFormulas.nativeToDegrees(
-                                bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
-                            % 360)
-                        + 360)
-                    % 360)
+            ((MathFormulas.nativeToDegrees(
+                bottomTurnRight.getSelectedSensorPosition(), MKTURN.greerRatio)
+                % 360)
+                + 360)
+                % 360)
             - ((vars.mod3[1] % 360) + 360) % 360);
 
     yaw.setDouble(vars.yaw);
@@ -388,15 +381,13 @@ public class MkSwerveTrain {
     vars.degBL = blDeg();
     vars.degBR = brDeg();
 
-    vars.avgDistInches =
-        (Math.abs(vars.posInchTL)
-                + Math.abs(vars.posInchTR)
-                + Math.abs(vars.posInchBL)
-                + Math.abs(vars.posInchBR))
-            / 4.0;
+    vars.avgDistInches = (Math.abs(vars.posInchTL)
+        + Math.abs(vars.posInchTR)
+        + Math.abs(vars.posInchBL)
+        + Math.abs(vars.posInchBR))
+        / 4.0;
     vars.avgVelInches = (vars.velInchTL + vars.velInchTR + vars.velInchBL + vars.velInchBR) / 4.0;
-    vars.avgVelNative =
-        (vars.velNativeTL + vars.velNativeTR + vars.velNativeBL + vars.velNativeBR) / 4.0;
+    vars.avgVelNative = (vars.velNativeTL + vars.velNativeTR + vars.velNativeBL + vars.velNativeBR) / 4.0;
     vars.avgDeg = (vars.degTL + vars.degTR + vars.degBL + vars.degBR) / 4.0;
   }
 
@@ -431,7 +422,8 @@ public class MkSwerveTrain {
    * "https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383">this
    * thread</a> for more information.
    *
-   * <p>Note - this function uses 180 minus yaw due to the positioning of our pigeon.
+   * <p>
+   * Note - this function uses 180 minus yaw due to the positioning of our pigeon.
    *
    * @param FWD Forward axis of controller
    * @param STR Strafe axis of controller
@@ -462,9 +454,12 @@ public class MkSwerveTrain {
     vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.C, 2.0)));
 
     vars.max = vars.mod1[0];
-    if (vars.mod2[0] > vars.max) vars.max = vars.mod2[0];
-    if (vars.mod3[0] > vars.max) vars.max = vars.mod3[0];
-    if (vars.mod4[0] > vars.max) vars.max = vars.mod4[0];
+    if (vars.mod2[0] > vars.max)
+      vars.max = vars.mod2[0];
+    if (vars.mod3[0] > vars.max)
+      vars.max = vars.mod3[0];
+    if (vars.mod4[0] > vars.max)
+      vars.max = vars.mod4[0];
     if (vars.max > 1.0) {
       vars.mod1[0] /= vars.max;
       vars.mod2[0] /= vars.max;
@@ -507,11 +502,9 @@ public class MkSwerveTrain {
       vars.dt = 20;
     }
     vars.yawTest = 0.0;
-    vars.tempTest =
-        FWD * Math.cos(Math.toRadians(vars.yawTest)) + STR * Math.sin(Math.toRadians(vars.yawTest));
-    STR =
-        -FWD * Math.sin(Math.toRadians(vars.yawTest))
-            + STR * Math.cos(Math.toRadians(vars.yawTest));
+    vars.tempTest = FWD * Math.cos(Math.toRadians(vars.yawTest)) + STR * Math.sin(Math.toRadians(vars.yawTest));
+    STR = -FWD * Math.sin(Math.toRadians(vars.yawTest))
+        + STR * Math.cos(Math.toRadians(vars.yawTest));
     FWD = vars.tempTest;
 
     // System.out.println("FWD" + FWD);
@@ -536,9 +529,12 @@ public class MkSwerveTrain {
     // System.out.println("mod2test2" + vars.mod2Test);
 
     vars.maxTest = vars.mod1Test;
-    if (vars.mod2Test > vars.maxTest) vars.maxTest = vars.mod2Test;
-    if (vars.mod3Test > vars.maxTest) vars.maxTest = vars.mod3Test;
-    if (vars.mod4Test > vars.maxTest) vars.maxTest = vars.mod4Test;
+    if (vars.mod2Test > vars.maxTest)
+      vars.maxTest = vars.mod2Test;
+    if (vars.mod3Test > vars.maxTest)
+      vars.maxTest = vars.mod3Test;
+    if (vars.mod4Test > vars.maxTest)
+      vars.maxTest = vars.mod4Test;
     if (vars.maxTest > 1.0) {
       vars.mod1Test /= vars.maxTest;
       vars.mod2Test /= vars.maxTest;
@@ -548,24 +544,19 @@ public class MkSwerveTrain {
 
     // System.out.println("mod2test3" + vars.mod2Test);
     // System.out.println("dt" + vars.dt);
-    vars.mod2Test =
-        MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod2Test, vars.dt);
-    vars.mod1Test =
-        MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod1Test, vars.dt);
-    vars.mod3Test =
-        MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod3Test, vars.dt);
-    vars.mod4Test =
-        MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod4Test, vars.dt);
+    vars.mod2Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod2Test, vars.dt);
+    vars.mod1Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod1Test, vars.dt);
+    vars.mod3Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod3Test, vars.dt);
+    vars.mod4Test = MathFormulas.nativePer100MsToInches(MKDRIVE.maxNativeVelocity * vars.mod4Test, vars.dt);
     // System.out.println("dt" + vars.dt);
     // System.out.println("mod2test4" + vars.mod2Test);
 
-    vars.avgDistTest =
-        (vars.avgDistTest
-            + ((Math.abs(vars.mod1Test)
-                    + Math.abs(vars.mod2Test)
-                    + Math.abs(vars.mod3Test)
-                    + Math.abs(vars.mod4Test))
-                / 4.0));
+    vars.avgDistTest = (vars.avgDistTest
+        + ((Math.abs(vars.mod1Test)
+            + Math.abs(vars.mod2Test)
+            + Math.abs(vars.mod3Test)
+            + Math.abs(vars.mod4Test))
+            / 4.0));
   }
 
   public void etherAutoSwerve(double FWD, double STR, double RCW, ControlMode mode) {
@@ -576,7 +567,7 @@ public class MkSwerveTrain {
 
     // SmartDashboard.putNumber("FWDreal", FWD);
     // SmartDashboard.putNumber("STRreal", STR);
-    // SmartDashboard.putNumber("RCWreal", RCW);
+    //SmartDashboard.putNumber("RCWreal", RCW);
 
     vars.A = STR - RCW * (MKTRAIN.L / MKTRAIN.R);
     vars.B = STR + RCW * (MKTRAIN.L / MKTRAIN.R);
@@ -594,9 +585,12 @@ public class MkSwerveTrain {
     vars.mod4[0] = Math.sqrt((Math.pow(vars.A, 2.0)) + (Math.pow(vars.C, 2.0)));
 
     vars.max = vars.mod1[0];
-    if (vars.mod2[0] > vars.max) vars.max = vars.mod2[0];
-    if (vars.mod3[0] > vars.max) vars.max = vars.mod3[0];
-    if (vars.mod4[0] > vars.max) vars.max = vars.mod4[0];
+    if (vars.mod2[0] > vars.max)
+      vars.max = vars.mod2[0];
+    if (vars.mod3[0] > vars.max)
+      vars.max = vars.mod3[0];
+    if (vars.mod4[0] > vars.max)
+      vars.max = vars.mod4[0];
     if (vars.max > 1) {
       vars.mod1[0] /= vars.max;
       vars.mod2[0] /= vars.max;
@@ -623,20 +617,23 @@ public class MkSwerveTrain {
   /** move robot to angle/heading */
   public double moveToAngy(double set) {
     /*
-    vars.hError = set - Math.abs(vars.yaw); // Error = Target - Actual
-    vars.hIntegral += (vars.hError
-        * .02); // Integral is increased by the error*time (which is .02 seconds using normal
-    // IterativeRobot)
-    vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
-    vars.hPreviousError = vars.hError;
-    return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD * vars.hDerivative;*/
+     * vars.hError = set - Math.abs(vars.yaw); // Error = Target - Actual
+     * vars.hIntegral += (vars.hError
+     * .02); // Integral is increased by the error*time (which is .02 seconds using
+     * normal
+     * // IterativeRobot)
+     * vars.hDerivative = (vars.hError - vars.hPreviousError) / .02;
+     * vars.hPreviousError = vars.hError;
+     * return vars.hP * vars.hError + vars.hI * vars.hIntegral + vars.hD *
+     * vars.hDerivative;
+     */
 
-    double setpoint =
-        turn.calculate(
-            Math.abs(((vars.yaw % 360) + 360) % 360), Math.abs(((set % 360) + 360) % 360));
+    double setpoint = turn.calculate(
+        Math.abs(((vars.yaw % 360) + 360) % 360), Math.abs(((set % 360) + 360) % 360));
     // SmartDashboard.putNumber("err for move to angy", turn.getPositionError());
-    // SmartDashboard.putNumber("closest angle", MathFormulas.closestAngle(Math.abs(((vars.yaw %
-    // 360) + 360) % 360),  Math.abs(((set % 360) + 360) % 360)));
+    // SmartDashboard.putNumber("closest angle",
+    // MathFormulas.closestAngle(Math.abs(((vars.yaw %
+    // 360) + 360) % 360), Math.abs(((set % 360) + 360) % 360)));
     SmartDashboard.putNumber("yaw for move to angy", Math.abs(((vars.yaw % 360) + 360) % 360));
     SmartDashboard.putNumber("setpoint for move to angy", Math.abs(((set % 360) + 360) % 360));
 
@@ -644,12 +641,15 @@ public class MkSwerveTrain {
   }
 
   /**
-   * decides whether a driving motor should flip based on where the angular motor's setpoint is.
+   * decides whether a driving motor should flip based on where the angular
+   * motor's setpoint is.
    *
    * @param position position of the motor
    * @param setpoint setpoint for the motor
-   * @return returns best angle of travel for the angular motor, as well as the flip value for the
-   *     driving motor (as an array so it can return two things in one instead of two seperatly)
+   * @return returns best angle of travel for the angular motor, as well as the
+   *         flip value for the
+   *         driving motor (as an array so it can return two things in one instead
+   *         of two seperatly)
    * @author team 6624
    */
   public static double[] setDirection(double pos, double[] mod) {
@@ -661,22 +661,25 @@ public class MkSwerveTrain {
     // if the closest angle to setpoint is shorter
     if (Math.abs(setpointAngle) <= Math.abs(setpointAngleFlipped)) {
       // unflip the motor direction use the setpoint
-      return new double[] {mod[0], (currentAngle + setpointAngle)};
+      return new double[] { mod[0], (currentAngle + setpointAngle) };
     }
     // if the closest angle to setpoint + 180 is shorter
     else {
       // flip the motor direction and use the setpoint + 180
-      return new double[] {Math.abs(mod[0]) * -1, (currentAngle + setpointAngleFlipped)};
+      return new double[] { Math.abs(mod[0]) * -1, (currentAngle + setpointAngleFlipped) };
     }
   }
 
   /**
-   * decides whether a driving motor should flip based on where the angular motor's setpoint is.
+   * decides whether a driving motor should flip based on where the angular
+   * motor's setpoint is.
    *
    * @param position position of the motor
    * @param setpoint setpoint for the motor
-   * @return returns best angle of travel for the angular motor, as well as the flip value for the
-   *     driving motor (as an array so it can return two things in one instead of two seperatly)
+   * @return returns best angle of travel for the angular motor, as well as the
+   *         flip value for the
+   *         driving motor (as an array so it can return two things in one instead
+   *         of two seperatly)
    * @author team 6624
    */
   public static double setDirectionAuto(double pos, double setpoint) {
@@ -702,23 +705,24 @@ public class MkSwerveTrain {
   }
 
   /**
-   * Using the {@link #swerveAutonomousEther} and motion magic, an autonomous angled path of motion
+   * Using the {@link #swerveAutonomousEther} and motion magic, an autonomous
+   * angled path of motion
    * can be achieved
    *
    * @param totalDistance Length of curved path
-   * @param thetaTurn Angle of curved path
-   * @param RCWauto [-1, 1] For spinny, 0 for no spinny
-   * @param mode Curve or Straight
-   * @param turny Specific or Infinite
-   * @param turnyAuto (if using specific for turny) angle that robot tries to keep when moving
+   * @param thetaTurn     Angle of curved path
+   * @param RCWauto       [-1, 1] For spinny, 0 for no spinny
+   * @param mode          Curve or Straight
+   * @param turny         Specific or Infinite
+   * @param turnyAuto     (if using specific for turny) angle that robot tries to
+   *                      keep when moving
    */
   public void etherAutoUpdate(double thetaTurn, double heading, double side) {
     // numbers fall short of high by 3ish inches and short of length by 4ish inches
-    double calcangle =
-        side
-            * ((heading)
-                + (((-thetaTurn / 2.0)
-                    + (((vars.avgDistInches) / (vars.totalDistance)) * (thetaTurn)))));
+    double calcangle = side
+        * ((heading)
+            + (((-thetaTurn / 2.0)
+                + (((vars.avgDistInches) / (vars.totalDistance)) * (thetaTurn)))));
 
     vars.RCWtemp = moveToAngy(180);
     vars.FWDauto = (-1 * Math.cos(calcangle * (Constants.kPi / 180.0))) / 5.0;
@@ -744,8 +748,7 @@ public class MkSwerveTrain {
   }
 
   public boolean isFinished() {
-    return Math.abs(vars.avgDistTest * AUTO.measToPredictRatio)
-        >= Math.abs(vars.totalDistance) - 0.1;
+    return Math.abs(vars.avgDistTest * AUTO.measToPredictRatio) >= Math.abs(vars.totalDistance) - 0.1;
   }
 
   public void setEtherTurn(double angle) {
@@ -760,7 +763,7 @@ public class MkSwerveTrain {
    * Check the TalonFX function for an error and print a message
    *
    * @param TalonFX
-   * @param message to print
+   * @param message  to print
    * @param printAll flag to print all (true) or just errors (false)
    * @return 1 for error and 0 for no error
    * @author
@@ -816,8 +819,8 @@ public class MkSwerveTrain {
     // return new double[]{Math.cos(vars.yaw) * setpoint, Math.sin(vars.yaw) *
     // setpoint};
     return new double[] {
-      -Math.cos(vars.yaw * (Math.PI / 180.0)) * setpoint,
-      Math.sin(vars.yaw * (Math.PI / 180.0)) * setpoint
+        -Math.cos(vars.yaw * (Math.PI / 180.0)) * setpoint,
+        Math.sin(vars.yaw * (Math.PI / 180.0)) * setpoint
     };
   }
 
@@ -917,7 +920,8 @@ public class MkSwerveTrain {
     public variables var;
 
     public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
-    // div rcw by 3 public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i, 0.01d
+    // div rcw by 3 public double hP = 0.035, hI = 0.000, hD = 0.0024; // 0.03i,
+    // 0.01d
     // TODO tune these so you dont need mkbaby for them to work
     // 0.015
     public double hIntegral, hDerivative, hPreviousError, hError;

@@ -16,6 +16,7 @@ import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.pigeon;
+import frc.robot.MISC.vision;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -98,6 +99,7 @@ public class SupaStruct {
 
 		train.updateSwerve();
 		intake.updateIntake();
+		vision.UpdateVision();
 
 		// --------------------------------------------------------------------//
 		// VARIABLES

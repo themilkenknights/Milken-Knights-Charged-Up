@@ -96,6 +96,10 @@ public final class Constants {
     public static final boolean inverted = false;
   }
 
+  public static class VISION {
+    public static final int kLimelightPipeline = 0;   
+  }
+
   public static class MKTRAIN {
     public static final double L = 26.75;
     public static final double W = 18.75;

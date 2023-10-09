@@ -99,7 +99,7 @@ public class SupaStruct {
 
 		train.updateSwerve();
 		intake.updateIntake();
-		vision.UpdateVision();
+		
 
 		// --------------------------------------------------------------------//
 		// VARIABLES
@@ -129,7 +129,7 @@ public class SupaStruct {
 		intakeBottomDeploy = leftYaxis > 0.1;
 		intakeTopDeploy = rightYaxis > 0.1;
 
-		pov = xbox.getPOV() != -1;
+		//pov = xbox.getPOV() != -1;
 
 		inverseTanAngleDrive = ((((((Math.toDegrees(Math.atan(fwd / str)) + 360)) + (MathFormulas.signumV4(str))) % 360)
 				- MathFormulas.signumAngleEdition(str, fwd))
@@ -150,6 +150,9 @@ public class SupaStruct {
 			train.startDrive();
 		}
 
+		if (dpaddown){
+			vision.UpdateVision();
+		}
 		// --------------------------------------------------------------------//
 		// INTAKE
 		// --------------------------------------------------------------------//
@@ -277,24 +280,16 @@ public class SupaStruct {
 		 */
 		// --------------------------------------------------------------------//
 		// DRIVE STATEMENTS
-		// --------------------------------------------------------------------//
+	// --------------------------------------------------------------------//
 
-		if (pov) {
-			rcw = train.moveToAngy(xbox.getPOV()) / 3;
-			/*
-			 * if(rcw < 0.1 && (fwd < 0.1 && str < 0.1))
-			 * {
-			 * rcw = 0;
-			 * }
-			 */
-		}
+		
 
 		if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1
 				&& Math.abs(xbox.getRawAxis(DriveInput.rcwX)) < 0.1
 				&& !pov) { // && xbox.getPOV() == -1) {
 			rcw = 0;
 		}
-
+		
 		if (Math.abs(xbox.getRawAxis(DriveInput.rcwY)) < 0.1) {
 			rcwY = 0;
 		}

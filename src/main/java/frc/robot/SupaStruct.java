@@ -16,7 +16,7 @@ import frc.robot.MISC.Constants.MKINTAKE;
 import frc.robot.MISC.Lights;
 import frc.robot.MISC.MathFormulas;
 import frc.robot.MISC.pigeon;
-import frc.robot.MISC.vision;
+import frc.robot.MISC.Vision;
 
 /** Robot stuff in here */
 public class SupaStruct {
@@ -99,6 +99,7 @@ public class SupaStruct {
 
 		train.updateSwerve();
 		intake.updateIntake();
+
 		
 
 		// --------------------------------------------------------------------//
@@ -150,9 +151,7 @@ public class SupaStruct {
 			train.startDrive();
 		}
 
-		if (dpaddown){
-			vision.UpdateVision();
-		}
+		
 		// --------------------------------------------------------------------//
 		// INTAKE
 		// --------------------------------------------------------------------//
@@ -205,6 +204,10 @@ public class SupaStruct {
 			// controlling intake in comment is not active
 
 			intake.stopTopIntakePercentOutput();
+		}
+
+		if(dpaddown){
+			Vision.updateVision();
 		}
 
 		if (abutton && !lbbutton) {

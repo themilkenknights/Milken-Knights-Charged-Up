@@ -50,9 +50,10 @@ public class Robot extends TimedRobot {
     positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
     positionChooser.addOption("BUMP", AutoPosition.BUMP);
     System.out.println("Robot enabled");
-   
     train.startTrain();
     pigeon.getInstance().reset();
+
+    
   }
 
   @Override

@@ -22,8 +22,8 @@ public class LeftSideAuto extends SequentialCommandGroup {
     addCommands(
         Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(1)),
         Commands.deadline(new ResetIntakeCommand()),
-        Commands.deadline(new EtherStraightCommand(195, -0.7, 0, 0), new TopIntakeCOMMAND(1, -36700).withTimeout(6)),
-        Commands.deadline(new TopIntakeCOMMAND(1, -36700).withTimeout(1)),
+        Commands.deadline(new EtherStraightCommand(195, -0.7, 0, 0), new TopIntakeCOMMAND(1, -36000).withTimeout(6)),
+        Commands.deadline(new TopIntakeCOMMAND(1, -36000).withTimeout(1)),
         Commands.deadline(new EtherStraightCommand(195, 0.6, 0, 0), new TopIntakeCOMMAND(0, 0).withTimeout(5)),
         Commands.deadline(new BottomIntakeCOMMAND(-1, 0).withTimeout(2), new TopIntakeCOMMAND(1, 0).withTimeout(2)),
         Commands.deadline(new EtherStraightCommand(3, -0.6, -.1, 0)));

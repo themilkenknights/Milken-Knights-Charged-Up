@@ -194,7 +194,7 @@ public class SupaStruct {
 		if (abutton && !rbbutton) {
 			intake.moveTopIntakePID(0);
 		} else if (rbbutton && !abutton) {
-			intake.moveTopIntakePID(-36700);
+			intake.moveTopIntakePID(-36900);
 			intake.movetoprollers(1);
 		} else if (!abutton
 				&& !rbbutton
@@ -214,7 +214,7 @@ public class SupaStruct {
 		if (abutton && !lbbutton) {
 			intake.moveBottomIntakePID(-0);
 		} else if (lbbutton && !abutton) {
-			intake.moveBottomIntakePID(36700);
+			intake.moveBottomIntakePID(36900);
 
 			intake.movebottomrollers(1);
 		} else if (!abutton

@@ -99,6 +99,7 @@ public class SupaStruct {
 
 		train.updateSwerve();
 		intake.updateIntake();
+		Vision.updateVision();
 
 		
 

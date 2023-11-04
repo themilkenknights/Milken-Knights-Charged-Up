@@ -22,6 +22,7 @@ import frc.robot.AUTO.Commandments.LeftSideAuto;
 import frc.robot.AUTO.Commandments.RampAuto;
 import frc.robot.AUTO.Commandments.TestResetIntake;
 import frc.robot.MECHANISMS.MkSwerveTrain;
+import frc.robot.MISC.SwerveDrivePoseEstimator;
 import frc.robot.MISC.pigeon;
 
 /**
@@ -52,6 +53,7 @@ public class Robot extends TimedRobot {
     System.out.println("Robot enabled");
     train.startTrain();
     pigeon.getInstance().reset();
+    CameraServer.startAutomaticCapture();
 
     
   }
@@ -59,6 +61,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    //SwerveDrivePoseEstimator(kinematics,pigeon.getInstance(),)
   }
 
   @Override

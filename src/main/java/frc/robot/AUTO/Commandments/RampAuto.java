@@ -5,6 +5,7 @@
 package frc.robot.AUTO.Commandments;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.AUTO.Commands.BottomIntakeCOMMAND;
 import frc.robot.AUTO.Commands.MotionMagicAuto;
 import frc.robot.AUTO.Commands.MoveUntilRollChange;
 import frc.robot.AUTO.Commands.RampCommand;
@@ -21,16 +22,16 @@ public class RampAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new ResetIntakeCommand(),
-        new TopIntakeCOMMAND(-1, 0).withTimeout(1),
-        new MoveUntilRollChange(-16, 0, 0.23, Condition.GREATERTHAN).withTimeout(15),
-        new MoveUntilRollChange(-15, 0, 0.23, Condition.LESSTHAN).withTimeout(15),
-        new MoveUntilRollChange(7, 0, 0.23, Condition.LESSTHAN).withTimeout(15),
-        new MoveUntilRollChange(0, 0, 0.23, Condition.GREATERTHAN).withTimeout(15),
-        new MotionMagicAuto(15, 0).withTimeout(2),
-        new MoveUntilRollChange(6, 0, -0.23, Condition.LESSTHAN).withTimeout(15),
-        new MoveUntilRollChange(5, 0, -0.23, Condition.GREATERTHAN).withTimeout(15),
-        new MoveUntilRollChange(4, 0, 0.07, Condition.GREATERTHAN).withTimeout(15),
+       new ResetIntakeCommand(),
+        new TopIntakeCOMMAND(-1, 0).withTimeout(2),
+        new MoveUntilRollChange(-16, 0, 0.2, Condition.GREATERTHAN).withTimeout(10),
+        new MoveUntilRollChange(-15, 0, 0.2, Condition.LESSTHAN).withTimeout(10),
+        new MoveUntilRollChange(7, 0, 0.2, Condition.LESSTHAN).withTimeout(10),
+        new MoveUntilRollChange(0, 0, 0.2, Condition.GREATERTHAN).withTimeout(10),
+        new MotionMagicAuto(15, 0).withTimeout(4),
+        new MoveUntilRollChange(9, 0, -0.2, Condition.LESSTHAN).withTimeout(10),
+        new MoveUntilRollChange(7, 0, -0.2, Condition.GREATERTHAN).withTimeout(10),
+        new MoveUntilRollChange(4, 0, 0.07, Condition.GREATERTHAN).withTimeout(10),
         new RampCommand());
   }
 }

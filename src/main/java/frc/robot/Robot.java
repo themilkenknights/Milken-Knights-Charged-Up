@@ -48,8 +48,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     positionChooser.setDefaultOption("DOUBLESIDE", AutoPosition.LEFTSIDEDOUBLE);
-    positionChooser.addOption("MIDDLE", AutoPosition.MIDDLE);
-    //positionChooser.addOption("BUMP", AutoPosition.BUMP);
+    positionChooser.addOption("AUTOBALANCE", AutoPosition.MIDDLE);
+    positionChooser.addOption("MiddleSHOOT", AutoPosition.BUMP);
     System.out.println("Robot enabled");
     train.startTrain();
     pigeon.getInstance().reset();
@@ -76,9 +76,9 @@ public class Robot extends TimedRobot {
       case LEFTSIDEDOUBLE:
         m_autonomousCommand = new LeftSideAuto();
         break;
-     // case BUMP:
-       // m_autonomousCommand = new BumpSide();
-        //break;
+      case BUMP:
+        m_autonomousCommand = new BumpSide();
+        break;
     }
 
     train.startTrain();

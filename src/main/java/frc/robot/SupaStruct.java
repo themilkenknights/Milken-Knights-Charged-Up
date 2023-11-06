@@ -47,6 +47,7 @@ public class SupaStruct {
 			resetTurn,
 			resetDrive,
 			xbutton,
+			menubutton,
 			ybutton,
 			rbbutton,
 			bbutton,
@@ -116,6 +117,7 @@ public class SupaStruct {
 		rcwX = (xbox.getRawAxis(DriveInput.rcwX) - 0.1) / (1 - 0.1);
 		rcw = rcwX;
 		// DRIVER
+		menubutton = xbox.getRawButton(8);
 		xbutton = xbox.getXButton();
 		abutton = xbox.getAButton();
 		rbbutton = xbox.getRightBumper();
@@ -195,11 +197,16 @@ public class SupaStruct {
 			intake.moveTopIntakePID(0);
 		} else if (rbbutton && !abutton) {
 			intake.moveTopIntakePID(-36900);
-			intake.movetoprollers(1);
-		} else if (!abutton
+			intake.movetoprollers(1);}
+			else if (menubutton && !rbbutton && !abutton){
+			intake.moveTopIntakePID(-42000);
+			intake.movetoprollers(1);}
+		
+		else if (!abutton
 				&& !rbbutton
 				&& !rtrigger
 				&& !ltrigger
+				&& !menubutton
 				&& resetDoneDiddlyDoneTOP) { // <--- did it here as well,
 			// when everything
 			// controlling intake in comment is not active
@@ -215,12 +222,16 @@ public class SupaStruct {
 			intake.moveBottomIntakePID(-0);
 		} else if (lbbutton && !abutton) {
 			intake.moveBottomIntakePID(36900);
-
 			intake.movebottomrollers(1);
+		} else if (xbutton && !lbbutton && !abutton){
+			intake.moveBottomIntakePID(42000);
+			intake.movebottomrollers(1);
+
 		} else if (!abutton
 				&& !lbbutton
 				&& !rtrigger
 				&& !ltrigger
+				&& !xbutton
 				&& resetDoneDiddlyDoneBOTTOM) { // <--- did it here a
 			// well, when everything
 			// controlling intake in comment is not active
